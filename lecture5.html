@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 5: LC Circuit Oscillations</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+        }
+        .nav-btn {
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-btn:hover { text-decoration: underline; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
+
+        h1 {
+            font-size: 24px;
+            color: #111827;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        .demo-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card h3 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1e293b;
+        }
+        .demo-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid canvas {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .controls-bar {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .controls-bar label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .controls-bar input[type=range] {
+            accent-color: #2563eb;
+        }
+
+        .topic-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .topic-block:target {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .topic-block h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .topic-block ul { margin: 0; padding-left: 20px; }
+        .topic-block li {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-block li:hover {
+            background-color: #f0f7ff;
+            border-color: #93c5fd;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        mjx-container {
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        mjx-container:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="lecture4.html" class="nav-btn">← Prev: Lecture 4</a>
+            <a href="index.html" class="nav-btn">Course Directory</a>
+            <a href="lecture6.html" class="nav-btn">Next: Lecture 6 →</a>
+        </nav>
+
+        <h1>Lecture 5: LC Circuit Oscillations</h1>
+
+        <!-- Interactive Visual Demo: LC Circuit Animation & Charge/Current Plot -->
+        <div class="demo-card">
+            <h3>Interactive Physics Visualizer: LC Circuit &amp; Phase Relationships ($q$, $i$, $V_L$)</h3>
+            <div class="demo-grid">
+                <canvas id="lcCircuitCanvas" width="380" height="260"></canvas>
+                <canvas id="lcPlotCanvas" width="460" height="260"></canvas>
+            </div>
+            <div class="controls-bar">
+                <label>
+                    LC Freq $\omega_0$: <span id="lcOmegaVal">2.5</span> rad/s
+                    <input type="range" id="lcOmegaSlider" min="1.0" max="5.0" step="0.2" value="2.5">
+                </label>
+                <label style="margin-left: 10px;">
+                    <input type="checkbox" id="chkCharge" checked> Charge / $V_C$ ($0^\circ$)
+                </label>
+                <label>
+                    <input type="checkbox" id="chkCurrent" checked> Current $i(t)$ ($+90^\circ$)
+                </label>
+                <label>
+                    <input type="checkbox" id="chkInductor" checked> Inductor $V_L(t)$ ($180^\circ$)
+                </label>
+            </div>
+        </div>
+
+        <!-- Topic 5.1 -->
+        <div id="topic-5-1" class="topic-block">
+            <h2>Topic 5.1: Differential Equations &amp; Natural Frequency</h2>
+            <ul>
+                <li><span class="eq-label">KVL Loop Equation:</span> $$-\frac{q}{C} - L\frac{di}{dt} = 0 \implies L\frac{d^2q}{dt^2} + \frac{1}{C}q = 0 \quad \left(\text{since } i = \frac{dq}{dt}\right)$$</li>
+                <li><span class="eq-label">Standard Form:</span> $$\frac{d^2q}{dt^2} + \frac{1}{LC} q = 0$$</li>
+                <li><span class="eq-label">Natural Angular Frequency:</span> $$\omega_0 = \frac{1}{\sqrt{LC}}$$</li>
+                <li><span class="eq-label">Charge Solution:</span> $$q(t) = q_0 \cos(\omega_0 t + \phi)$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 5.2 -->
+        <div id="topic-5-2" class="topic-block">
+            <h2>Topic 5.2: LC Circuit Energy Conservation</h2>
+            <ul>
+                <li><span class="eq-label">Total Electrical Energy ($E$):</span> $$E = U_E + U_B = \frac{1}{2C} q^2 + \frac{1}{2} L i^2 = \text{constant}$$</li>
+                <li><span class="eq-label">Energy Conservation Proof:</span> $$\frac{dE}{dt} = \frac{d}{dt}\left(\frac{1}{2C} q^2 + \frac{1}{2} L i^2\right) = 0 \implies \frac{q}{C}\frac{dq}{dt} + L i \frac{di}{dt} = 0 \implies \ddot{q} + \frac{1}{LC} q = 0$$</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script for LC Circuit Animation & Plot -->
+    <script>
+        const cCanvas = document.getElementById('lcCircuitCanvas');
+        const cCtx = cCanvas.getContext('2d');
+        const cpCanvas = document.getElementById('lcPlotCanvas');
+        const cpCtx = cpCanvas.getContext('2d');
+
+        const omegaSlider = document.getElementById('lcOmegaSlider');
+        const chkCharge = document.getElementById('chkCharge');
+        const chkCurrent = document.getElementById('chkCurrent');
+        const chkInductor = document.getElementById('chkInductor');
+
+        let time = 0;
+        let chargePhase = 0;
+
+        function renderL5() {
+            const omega = parseFloat(omegaSlider.value);
+            document.getElementById('lcOmegaVal').innerText = omega.toFixed(1);
+
+            time += 0.02;
+
+            const q = Math.cos(omega * time);
+            const i_val = -Math.sin(omega * time);
+
+            // Smooth charge movement in loop (proportional to current)
+            chargePhase += i_val * 0.008;
+
+            // Render LC Circuit Diagram
+            const cw = cCanvas.width;
+            const ch = cCanvas.height;
+
+            cCtx.clearRect(0, 0, cw, ch);
+
+            // Wire Rectangle
+            cCtx.strokeStyle = '#334155';
+            cCtx.lineWidth = 3;
+            cCtx.strokeRect(60, 50, 260, 160);
+
+            // Clear gaps for Capacitor (Left) and Inductor (Right)
+            cCtx.clearRect(50, 100, 20, 60);
+            cCtx.clearRect(310, 100, 20, 60);
+
+            // Capacitor Plates (Left)
+            cCtx.fillStyle = '#0284c7';
+            cCtx.fillRect(50, 110, 20, 4);
+            cCtx.fillRect(50, 146, 20, 4);
+
+            // Capacitor Charge +/- signs
+            cCtx.font = '12px sans-serif';
+            if (q > 0.1) {
+                cCtx.fillStyle = '#ef4444';
+                cCtx.fillText('+++++', 40, 105);
+                cCtx.fillStyle = '#2563eb';
+                cCtx.fillText('-----', 40, 162);
+            } else if (q < -0.1) {
+                cCtx.fillStyle = '#2563eb';
+                cCtx.fillText('-----', 40, 105);
+                cCtx.fillStyle = '#ef4444';
+                cCtx.fillText('+++++', 40, 162);
+            }
+
+            // Inductor Coils (Right)
+            cCtx.strokeStyle = '#f59e0b';
+            cCtx.lineWidth = 2.5;
+            cCtx.beginPath();
+            for (let k = 0; k < 4; k++) {
+                cCtx.arc(320, 115 + k * 10, 8, -Math.PI/2, Math.PI/2);
+            }
+            cCtx.stroke();
+
+            // Smooth Moving Charge Particles in Loop
+            cCtx.fillStyle = '#2563eb';
+            const numDots = 10;
+            for (let d = 0; d < numDots; d++) {
+                const pos = ((d / numDots + chargePhase) % 1 + 1) % 1;
+                let dotX, dotY;
+                if (pos < 0.3) {
+                    dotX = 60 + (pos / 0.3) * 260; dotY = 50;
+                } else if (pos < 0.5) {
+                    dotX = 320; dotY = 50 + ((pos - 0.3) / 0.2) * 160;
+                } else if (pos < 0.8) {
+                    dotX = 320 - ((pos - 0.5) / 0.3) * 260; dotY = 210;
+                } else {
+                    dotX = 60; dotY = 210 - ((pos - 0.8) / 0.2) * 160;
+                }
+                cCtx.beginPath();
+                cCtx.arc(dotX, dotY, 4, 0, 2 * Math.PI);
+                cCtx.fill();
+            }
+
+            cCtx.fillStyle = '#1e293b';
+            cCtx.font = '12px sans-serif';
+            cCtx.fillText('Capacitor C', 25, 130);
+            cCtx.fillText('Inductor L', 250, 130);
+
+            // Render Plot Canvas (Phase relationships of q, i, V_L)
+            const pw = cpCanvas.width;
+            const ph = cpCanvas.height;
+            const pcy = ph / 2;
+
+            cpCtx.clearRect(0, 0, pw, ph);
+
+            cpCtx.strokeStyle = '#cbd5e1';
+            cpCtx.lineWidth = 1;
+            cpCtx.beginPath();
+            cpCtx.moveTo(0, pcy); cpCtx.lineTo(pw, pcy);
+            cpCtx.stroke();
+
+            // 1. Charge q(t) / V_C - Blue (0 deg)
+            if (chkCharge.checked) {
+                cpCtx.strokeStyle = '#0284c7';
+                cpCtx.lineWidth = 2;
+                cpCtx.beginPath();
+                for (let px = 0; px < pw; px++) {
+                    const tv = time - (pw - px) * 0.015;
+                    const q_val = 65 * Math.cos(omega * tv);
+                    const py = pcy - q_val;
+                    if (px === 0) cpCtx.moveTo(px, py);
+                    else cpCtx.lineTo(px, py);
+                }
+                cpCtx.stroke();
+            }
+
+            // 2. Current i(t) - Red (+90 deg lead)
+            if (chkCurrent.checked) {
+                cpCtx.strokeStyle = '#ef4444';
+                cpCtx.lineWidth = 2;
+                cpCtx.beginPath();
+                for (let px = 0; px < pw; px++) {
+                    const tv = time - (pw - px) * 0.015;
+                    const i_val_p = -65 * Math.sin(omega * tv);
+                    const py = pcy - i_val_p;
+                    if (px === 0) cpCtx.moveTo(px, py);
+                    else cpCtx.lineTo(px, py);
+                }
+                cpCtx.stroke();
+            }
+
+            // 3. Inductor Voltage V_L(t) - Amber (180 deg opposite phase)
+            if (chkInductor.checked) {
+                cpCtx.strokeStyle = '#f59e0b';
+                cpCtx.lineWidth = 2;
+                cpCtx.setLineDash([4, 3]);
+                cpCtx.beginPath();
+                for (let px = 0; px < pw; px++) {
+                    const tv = time - (pw - px) * 0.015;
+                    const vl_val = -65 * Math.cos(omega * tv);
+                    const py = pcy - vl_val;
+                    if (px === 0) cpCtx.moveTo(px, py);
+                    else cpCtx.lineTo(px, py);
+                }
+                cpCtx.stroke();
+                cpCtx.setLineDash([]);
+            }
+
+            // Phase Legend
+            let legendOffset = 10;
+            cpCtx.font = '11px sans-serif';
+            if (chkCharge.checked) {
+                cpCtx.fillStyle = '#0284c7';
+                cpCtx.fillText('— q(t) [0°]', legendOffset, 20);
+                legendOffset += 85;
+            }
+            if (chkCurrent.checked) {
+                cpCtx.fillStyle = '#ef4444';
+                cpCtx.fillText('— i(t) [+90°]', legendOffset, 20);
+                legendOffset += 90;
+            }
+            if (chkInductor.checked) {
+                cpCtx.fillStyle = '#f59e0b';
+                cpCtx.fillText('--- V_L(t) [180°]', legendOffset, 20);
+            }
+
+            requestAnimationFrame(renderL5);
+        }
+
+        renderL5();
+    </script>
+</body>
+</html>

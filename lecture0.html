@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 0: Mathematical Foundations &amp; Prerequisites</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+        }
+        .nav-btn {
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-btn:hover { text-decoration: underline; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
+
+        h1 {
+            font-size: 24px;
+            color: #111827;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        .demo-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card h3 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1e293b;
+        }
+        .demo-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid canvas {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .controls-bar {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .controls-bar label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .controls-bar input[type=range] {
+            accent-color: #2563eb;
+        }
+
+        .topic-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .topic-block:target {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .topic-block h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .topic-block ul { margin: 0; padding-left: 20px; }
+        .topic-block li {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-block li:hover {
+            background-color: #f0f7ff;
+            border-color: #93c5fd;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        mjx-container {
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        mjx-container:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-btn">← Back to Course Directory</a>
+            <span class="nav-title">Lecture 0 (Prerequisites)</span>
+            <a href="lecture1.html" class="nav-btn">Next: Lecture 1 →</a>
+        </nav>
+
+        <h1>Lecture 0: Mathematical Foundations &amp; Prerequisites</h1>
+
+        <!-- Topic 0.1 -->
+        <div id="topic-0-1" class="topic-block">
+            <h2>Topic 0.1: Quadratic Equations &amp; Root Finding</h2>
+            <ul>
+                <li><span class="eq-label">Standard Quadratic Equation:</span> $$a x^2 + b x + c = 0$$</li>
+                <li><span class="eq-label">Quadratic Formula for Roots:</span> $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</li>
+                <li><span class="eq-label">Auxiliary Polynomial for ODE ($p^2 + \beta p + \omega_0^2 = 0$):</span> $$p = -\frac{\beta}{2} \pm \sqrt{\frac{\beta^2}{4} - \omega_0^2}$$</li>
+                <li><span class="eq-label">Discriminant Classification ($\Delta = \frac{\beta^2}{4} - \omega_0^2$):</span>
+                    $$\Delta &gt; 0 \implies \text{Two distinct real roots (Overdamped)}$$
+                    $$\Delta = 0 \implies \text{Repeated real root } p = -\frac{\beta}{2} \text{ (Critically Damped)}$$
+                    $$\Delta &lt; 0 \implies \text{Complex conjugate pair } p = -\frac{\beta}{2} \pm i\omega \text{ (Underdamped)}$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 0.2 -->
+        <div id="topic-0-2" class="topic-block">
+            <h2>Topic 0.2: Trigonometric Foundations &amp; Euler's Formula</h2>
+            <ul>
+                <li><span class="eq-label">Euler's Formula:</span> $$e^{i\theta} = \cos\theta + i\sin\theta$$</li>
+                <li><span class="eq-label">Polar Form of Complex Number:</span> $$z = a + ib = R e^{i\theta} \quad \left(R = \sqrt{a^2 + b^2}, \quad \theta = \tan^{-1}\left(\frac{b}{a}\right)\right)$$</li>
+                <li><span class="eq-label">Linear Combination of Sine &amp; Cosine to Single Harmonic Phase Form:</span>
+                    $$A \cos\omega t + B \sin\omega t = R \cos(\omega t - \phi)$$
+                    $$\text{where } R = \sqrt{A^2 + B^2}, \quad \phi = \tan^{-1}\left(\frac{B}{A}\right)$$
+                </li>
+                <li><span class="eq-label">Cosine Phase Expansion:</span> $$\cos(\omega t + \phi) = \cos(\omega t)\cos\phi - \sin(\omega t)\sin\phi$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 0.3 -->
+        <div id="topic-0-3" class="topic-block">
+            <h2>Topic 0.3: The Ansatz Technique (Trial Solutions for ODEs)</h2>
+            <ul>
+                <li><span class="eq-label">Exponential Trial Solution (Ansatz):</span> $$x(t) = C e^{p t}$$</li>
+                <li><span class="eq-label">Derivatives of Exponential Ansatz:</span> $$\frac{dx}{dt} = p C e^{p t}, \quad \frac{d^2x}{dt^2} = p^2 C e^{p t}$$</li>
+                <li><span class="eq-label">Substitution into Linear ODE ($\frac{d^2x}{dt^2} + \omega_0^2 x = 0$):</span>
+                    $$p^2 C e^{pt} + \omega_0^2 C e^{pt} = 0 \implies p^2 + \omega_0^2 = 0 \implies p = \pm i\omega_0$$
+                </li>
+                <li><span class="eq-label">Polynomial-Exponential Ansatz for Repeated Roots ($\Delta = 0$):</span> $$x(t) = (C_1 + C_2 t) e^{p t}$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 0.4 -->
+        <div id="topic-0-4" class="topic-block">
+            <h2>Topic 0.4: Useful Trigonometric Identities</h2>
+            <ul>
+                <li><span class="eq-label">Pythagorean Identity:</span> $$\sin^2 A + \cos^2 A = 1$$</li>
+                <li><span class="eq-label">Negative Angle Identities:</span> $$\sin(-A) = -\sin A, \quad \cos(-A) = \cos A, \quad \tan(-A) = -\tan A$$</li>
+                <li><span class="eq-label">Angle Sum &amp; Difference Identities:</span>
+                    $$\sin(A \pm B) = \sin A \cos B \pm \cos A \sin B$$
+                    $$\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$$
+                    $$\tan(A \pm B) = \frac{\tan A \pm \tan B}{1 \mp \tan A \tan B}$$
+                </li>
+                <li><span class="eq-label">Cofunction &amp; Double Angle Identities:</span>
+                    $$\sin\left(\frac{\pi}{2} - A\right) = \cos A$$
+                    $$\sin(2A) = 2\sin A\cos A$$
+                    $$\cos(2A) = \cos^2 A - \sin^2 A = 1 - 2\sin^2 A$$
+                    $$\tan(2A) = \frac{2\tan A}{1 - \tan^2 A}$$
+                </li>
+                <li><span class="eq-label">Sum-to-Product Identities:</span>
+                    $$\sin A + \sin B = 2\sin\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$$
+                    $$\sin A - \sin B = 2\cos\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)$$
+                    $$\cos A + \cos B = 2\cos\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$$
+                    $$\cos A - \cos B = -2\sin\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)$$
+                </li>
+                <li><span class="eq-label">Product-to-Sum Identities:</span>
+                    $$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$$
+                    $$\cos A \cos B = \frac{1}{2}[\cos(A-B) + \cos(A+B)]$$
+                    $$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$$
+                    $$\cos A \sin B = \frac{1}{2}[\sin(A+B) - \sin(A-B)]$$
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

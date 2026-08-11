@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 1: SHM using Complex Numbers</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+        }
+        .nav-btn {
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-btn:hover { text-decoration: underline; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
+
+        h1 {
+            font-size: 24px;
+            color: #111827;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        /* Interactive Demo Card */
+        .demo-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card h3 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1e293b;
+        }
+        .demo-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid canvas {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .controls-bar {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .controls-bar label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .controls-bar input[type=range] {
+            accent-color: #2563eb;
+        }
+
+        .topic-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .topic-block:target {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .topic-block h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .topic-block ul { margin: 0; padding-left: 20px; }
+        .topic-block li {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-block li:hover {
+            background-color: #f0f7ff;
+            border-color: #93c5fd;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        mjx-container {
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        mjx-container:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+
+        /* Minimal White Theme Math Solution Modal */
+        .math-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .math-modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .math-popup-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -45%) scale(0.96);
+            z-index: 9999;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 28px 32px;
+            width: 92%;
+            max-width: 660px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(226, 232, 240, 0.8);
+            pointer-events: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .math-popup-window.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .math-popup-title {
+            font-weight: 700;
+            font-size: 17px;
+            color: #0f172a;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .math-popup-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .math-popup-badge {
+            font-size: 11px;
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .math-popup-close-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .math-popup-close-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+        }
+
+        .math-popup-body {
+            color: #334155;
+        }
+
+        .math-popup-body strong {
+            color: #0f172a;
+        }
+
+        .math-popup-body p {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .math-popup-body ol, .math-popup-body ul {
+            padding-left: 22px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+        }
+
+        .math-popup-body li {
+            margin-bottom: 10px;
+        }
+
+        .math-popup-body .formula-highlight {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            margin: 14px 0;
+            font-size: 14px;
+            box-shadow: inset 0 0 0 1px #e2e8f0;
+        }
+
+        /* Clickable Math Cards */
+        .hover-math-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .hover-math-card:hover {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 6px 18px rgba(2, 132, 199, 0.16);
+            transform: translateY(-2px);
+        }
+
+        .hover-math-card::after {
+            content: "👆 Click for Detailed Steps";
+            position: absolute;
+            right: 14px;
+            top: 14px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #0284c7;
+            background: #e0f2fe;
+            padding: 4px 10px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .hover-math-card:hover::after {
+            background: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+        }
+
+        .worked-exercise-box {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+
+        .exercise-result-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="lecture0.html" class="nav-btn">← Prev: Lecture 0</a>
+            <span class="nav-title">Lecture 1 of 7</span>
+            <a href="lecture2.html" class="nav-btn">Next: Lecture 2 →</a>
+        </nav>
+
+        <h1>Lecture 1: Simple Harmonic Motion (SHM) using Complex Numbers</h1>
+
+        <!-- Topic 1.1 -->
+        <div id="topic-1-1" class="topic-block">
+            <h2>Topic 1.1: Periodic Motion &amp; Waveforms</h2>
+            <ul>
+                <li>
+                    <span class="eq-label">General Mathematical Expression for Periodic Motion (Fourier Series):</span>
+                    $$x(t) = \sum \left( a_n \cos(n\omega t) + b_n \sin(n\omega t) \right)$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 1.2 -->
+        <div id="topic-1-2" class="topic-block">
+            <h2>Topic 1.2: Hooke's Law &amp; Newtonian Equations of Motion</h2>
+            <ul>
+                <li><span class="eq-label">Hooke’s Law (Restoring Force):</span> $$\vec{F} = -k\vec{x}$$</li>
+                <li><span class="eq-label">Newton’s Second Law for Mass-Spring System:</span> $$\vec{F} = m\vec{a} = -k\vec{x}$$</li>
+                <li><span class="eq-label">Acceleration as Function of Displacement:</span> $$\vec{a} = -\frac{k}{m}\vec{x}$$</li>
+                <li><span class="eq-label">Second-Order Differential Equation for SHM:</span> $$\frac{d^2\vec{x}}{dt^2} = -\frac{k}{m}\vec{x}$$</li>
+                <li><span class="eq-label">Standard Form ($\omega^2 = \frac{k}{m}$):</span> $$\frac{d^2x}{dt^2} = -\omega^2 x$$</li>
+            </ul>
+
+            <!-- Diagram for Topic 1.2 -->
+            <div class="demo-card" style="margin-top: 24px;">
+                <h3 style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                    <span>Diagram: Mass-Spring System &amp; Vector Directions in Hooke's Law</span>
+                    <span style="font-size: 12px; font-weight: 500; background: #e2e8f0; color: #475569; padding: 4px 10px; border-radius: 12px;">Static Vector Diagram</span>
+                </h3>
+
+                <div style="width: 100%; overflow-x: auto; text-align: center;">
+                    <svg viewBox="0 0 850 680" style="max-width: 100%; height: auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1;">
+                        <defs>
+                            <!-- Vector Arrow Markers -->
+                            <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+                            </marker>
+                            <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+                            </marker>
+                            <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+                            </marker>
+
+                            <!-- Wall Hatching Pattern -->
+                            <pattern id="wall-hatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                                <line x1="0" y1="0" x2="0" y2="8" stroke="#94a3b8" stroke-width="2"/>
+                            </pattern>
+
+                            <!-- Mass Shadow -->
+                            <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                <feDropShadow dx="2" dy="3" stdDeviation="2" flood-opacity="0.15"/>
+                            </filter>
+
+                            <linearGradient id="massGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#2563eb"/>
+                                <stop offset="100%" stop-color="#1d4ed8"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Legend Header Bar -->
+                        <rect x="30" y="12" width="790" height="36" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+                        <text x="45" y="34" font-size="13" font-weight="700" fill="#334155">Vector Legend:</text>
+                        
+                        <line x1="165" y1="30" x2="195" y2="30" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+                        <text x="203" y="34" font-size="12" fill="#1d4ed8" font-weight="700">Displacement (x)</text>
+
+                        <line x1="340" y1="30" x2="370" y2="30" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+                        <text x="378" y="34" font-size="12" fill="#b91c1c" font-weight="700">Restoring Force (F = -kx)</text>
+
+                        <line x1="575" y1="30" x2="605" y2="30" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow-purple)"/>
+                        <text x="613" y="34" font-size="12" fill="#6b21a8" font-weight="700">Acceleration (a = -(k/m)x)</text>
+
+                        <!-- Global Equilibrium Line (x = 0) -->
+                        <line x1="400" y1="55" x2="400" y2="580" stroke="#64748b" stroke-dasharray="6,4" stroke-width="2"/>
+                        <rect x="330" y="58" width="140" height="20" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+                        <text x="400" y="72" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">Equilibrium Axis (x = 0)</text>
+
+                        <!-- ================= CASE 1: STRETCHED (x > 0) ================= -->
+                        <text x="40" y="90" font-size="14" font-weight="700" fill="#0f172a">1. Stretched Position (x &gt; 0)</text>
+                        <!-- Surface & Wall -->
+                        <line x1="80" y1="220" x2="620" y2="220" stroke="#475569" stroke-width="2.5"/>
+                        <rect x="60" y="145" width="20" height="75" fill="url(#wall-hatch)" stroke="#64748b" stroke-width="1.5"/>
+                        <line x1="80" y1="145" x2="80" y2="220" stroke="#334155" stroke-width="2.5"/>
+                        
+                        <!-- Spring (Stretched) -->
+                        <path d="M 80.0 192.0 L 95.0 192.0 L 116.0 178.0 L 137.0 206.0 L 158.0 178.0 L 179.0 206.0 L 200.0 178.0 L 221.0 206.0 L 242.0 178.0 L 263.0 206.0 L 284.0 178.0 L 305.0 206.0 L 326.0 178.0 L 347.0 206.0 L 368.0 178.0 L 389.0 206.0 L 410.0 178.0 L 431.0 206.0 L 452.0 178.0 L 473.0 206.0 L 494.0 178.0 L 515.0 206.0 L 515.0 192.0 L 530.0 192.0" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        
+                        <!-- Mass Block -->
+                        <rect x="530" y="165" width="70" height="55" rx="6" fill="url(#massGrad)" stroke="#1e3a8a" stroke-width="1.5" filter="url(#shadow)"/>
+                        <text x="565" y="200" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">m</text>
+                        
+                        <!-- Vector 1: Displacement x -->
+                        <text x="482" y="103" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">+x (Displacement Right)</text>
+                        <line x1="400" y1="110" x2="565" y2="110" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+                        
+                        <!-- Vector 2: Restoring Force F -->
+                        <text x="497" y="131" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="middle">F = -kx (Force Left)</text>
+                        <line x1="565" y1="138" x2="430" y2="138" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+                        
+                        <!-- Vector 3: Acceleration a -->
+                        <text x="510" y="159" font-size="12" font-weight="700" fill="#6b21a8" text-anchor="middle">a = -(k/m)x (Accel. Left)</text>
+                        <line x1="565" y1="166" x2="455" y2="166" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow-purple)"/>
+                        
+                        <!-- Annotation Card -->
+                        <rect x="640" y="150" width="170" height="66" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+                        <text x="650" y="170" font-size="12" font-weight="700" fill="#0f172a">Stretched (x &gt; 0)</text>
+                        <text x="650" y="186" font-size="11" fill="#475569">• x points Right (+)</text>
+                        <text x="650" y="202" font-size="11" font-weight="700" fill="#b91c1c">• F &amp; a point Left (-)</text>
+
+
+                        <!-- ================= CASE 2: EQUILIBRIUM (x = 0) ================= -->
+                        <text x="40" y="250" font-size="14" font-weight="700" fill="#0f172a">2. Equilibrium Position (x = 0)</text>
+                        <!-- Surface & Wall -->
+                        <line x1="80" y1="360" x2="620" y2="360" stroke="#475569" stroke-width="2.5"/>
+                        <rect x="60" y="285" width="20" height="75" fill="url(#wall-hatch)" stroke="#64748b" stroke-width="1.5"/>
+                        <line x1="80" y1="285" x2="80" y2="360" stroke="#334155" stroke-width="2.5"/>
+                        
+                        <!-- Spring (Natural Length L0) -->
+                        <path d="M 80.0 332.0 L 95.0 332.0 L 107.8 318.0 L 120.5 346.0 L 133.2 318.0 L 146.0 346.0 L 158.8 318.0 L 171.5 346.0 L 184.2 318.0 L 197.0 346.0 L 209.8 318.0 L 222.5 346.0 L 235.2 318.0 L 248.0 346.0 L 260.8 318.0 L 273.5 346.0 L 286.2 318.0 L 299.0 346.0 L 311.8 318.0 L 324.5 346.0 L 337.2 318.0 L 350.0 346.0 L 350.0 332.0 L 365.0 332.0" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        
+                        <!-- Mass Block (Centered at x=400) -->
+                        <rect x="365" y="305" width="70" height="55" rx="6" fill="url(#massGrad)" stroke="#1e3a8a" stroke-width="1.5" filter="url(#shadow)"/>
+                        <text x="400" y="340" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">m</text>
+                        
+                        <!-- Annotation Card -->
+                        <rect x="640" y="290" width="170" height="66" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+                        <text x="650" y="310" font-size="12" font-weight="700" fill="#0f172a">Equilibrium (x = 0)</text>
+                        <text x="650" y="326" font-size="11" fill="#475569">• Spring at rest (L = L₀)</text>
+                        <text x="650" y="342" font-size="11" font-weight="700" fill="#16a34a">• Net Force F = 0, a = 0</text>
+
+
+                        <!-- ================= CASE 3: COMPRESSED (x < 0) ================= -->
+                        <text x="40" y="390" font-size="14" font-weight="700" fill="#0f172a">3. Compressed Position (x &lt; 0)</text>
+                        <!-- Surface & Wall -->
+                        <line x1="80" y1="500" x2="620" y2="500" stroke="#475569" stroke-width="2.5"/>
+                        <rect x="60" y="425" width="20" height="75" fill="url(#wall-hatch)" stroke="#64748b" stroke-width="1.5"/>
+                        <line x1="80" y1="425" x2="80" y2="500" stroke="#334155" stroke-width="2.5"/>
+                        
+                        <!-- Spring (Compressed) -->
+                        <path d="M 80.0 472.0 L 95.0 472.0 L 99.5 458.0 L 104.0 486.0 L 108.5 458.0 L 113.0 486.0 L 117.5 438.0 L 122.0 486.0 L 126.5 458.0 L 131.0 486.0 L 135.5 458.0 L 140.0 486.0 L 144.5 458.0 L 149.0 486.0 L 153.5 458.0 L 158.0 486.0 L 162.5 458.0 L 167.0 486.0 L 171.5 458.0 L 176.0 486.0 L 180.5 458.0 L 185.0 486.0 L 185.0 472.0 L 200.0 472.0" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        
+                        <!-- Mass Block -->
+                        <rect x="200" y="445" width="70" height="55" rx="6" fill="url(#massGrad)" stroke="#1e3a8a" stroke-width="1.5" filter="url(#shadow)"/>
+                        <text x="235" y="480" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">m</text>
+                        
+                        <!-- Vector 1: Displacement x -->
+                        <text x="317" y="383" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">-x (Displacement Left)</text>
+                        <line x1="400" y1="390" x2="235" y2="390" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+                        
+                        <!-- Vector 2: Restoring Force F -->
+                        <text x="302" y="411" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="middle">F = -k(-x) = +kx (Force Right)</text>
+                        <line x1="235" y1="418" x2="370" y2="418" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+                        
+                        <!-- Vector 3: Acceleration a -->
+                        <text x="290" y="439" font-size="12" font-weight="700" fill="#6b21a8" text-anchor="middle">a = +(k/m)x (Accel. Right)</text>
+                        <line x1="235" y1="446" x2="345" y2="446" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow-purple)"/>
+                        
+                        <!-- Annotation Card -->
+                        <rect x="640" y="430" width="170" height="66" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+                        <text x="650" y="450" font-size="12" font-weight="700" fill="#0f172a">Compressed (x &lt; 0)</text>
+                        <text x="650" y="466" font-size="11" fill="#475569">• x points Left (-)</text>
+                        <text x="650" y="482" font-size="11" font-weight="700" fill="#b91c1c">• F &amp; a point Right (+)</text>
+
+                        <!-- ================= BOTTOM SUMMARY BANNER ================= -->
+                        <rect x="30" y="590" width="790" height="65" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+                        <text x="45" y="612" font-size="13" font-weight="700" fill="#1e40af">Core Physical Relationship (Hooke's Law &amp; Newton's 2nd Law):</text>
+                        <text x="45" y="631" font-size="12" fill="#1e3a8a">
+                            Hooke's Law <tspan font-weight="700" fill="#dc2626">F = -kx</tspan> defines a restoring force that always opposes displacement <tspan font-weight="700" fill="#2563eb">x</tspan>.
+                        </text>
+                        <text x="45" y="646" font-size="12" fill="#1e3a8a">
+                            Newton's 2nd Law yields the SHM equation: <tspan font-weight="700" fill="#7c3aed">d²x/dt² = -(k/m)x = -ω²x</tspan>, driving the mass back toward equilibrium (x = 0).
+                        </text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 1.3 -->
+        <div id="topic-1-3" class="topic-block">
+            <h2>Topic 1.3: Physical Parameters of Oscillation</h2>
+            <ul>
+                <li><span class="eq-label">Angular Frequency ($\omega$):</span> $$\omega = \sqrt{\frac{k}{m}}$$</li>
+                <li><span class="eq-label">Oscillation Period ($T$):</span> $$T = \frac{2\pi}{\omega} = \frac{1}{f} = 2\pi\sqrt{\frac{m}{k}}$$</li>
+                <li><span class="eq-label">Frequency ($f$):</span> $$f = \frac{1}{T} = \frac{\omega}{2\pi} = \frac{1}{2\pi}\sqrt{\frac{k}{m}}$$</li>
+                <li><span class="eq-label">Natural Frequency ($\omega_0$) &amp; Period ($T$):</span> $$\omega_0 = \sqrt{\frac{k}{m}}, \quad T = 2\pi\sqrt{\frac{m}{k}}$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 1.4 -->
+        <div id="topic-1-4" class="topic-block">
+            <h2>Topic 1.4: Simple Harmonic Motion (SHM) Waveforms &amp; Solutions</h2>
+            <ul>
+                <li><span class="eq-label">General Displacement Solution:</span> $$x(t) = A \cos(\omega t + \phi)$$</li>
+                <li><span class="eq-label">Displacement Waveform ($\phi = \pi/2$):</span> $$x(t) = A \sin(\omega t)$$</li>
+                <li><span class="eq-label">Derivative Verification Steps:</span>
+                    $$\frac{d}{dt} x(t) = -A\omega \sin(\omega t + \phi)$$
+                    $$\frac{d^2}{dt^2} x(t) = -A\omega^2 \cos(\omega t + \phi) = -\omega^2 x(t)$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 1.5 -->
+        <div id="topic-1-5" class="topic-block">
+            <h2>Topic 1.5: Velocity &amp; Acceleration Relations in SHM</h2>
+            <ul>
+                <li><span class="eq-label">Linear Velocity on Reference Circle:</span> $$v = r\omega$$</li>
+                <li><span class="eq-label">Maximum Linear Velocity ($v_{\max}$):</span> $$v_{\max} = A\omega$$</li>
+                <li><span class="eq-label">Instantaneous Velocity ($v(t)$):</span>
+                    $$v(t) = \frac{dx(t)}{dt} = -A\omega \sin(\omega t + \phi)$$
+                    $$v(t) = -v_{\max} \sin(\omega t) \quad (\text{when } \phi = 0)$$
+                </li>
+                <li><span class="eq-label">Centripetal Acceleration of Rotating Peg:</span> $$a_c = \frac{v_{\max}^2}{A} = \frac{A^2\omega^2}{A}$$</li>
+                <li><span class="eq-label">Maximum Acceleration ($a_{\max}$):</span> $$a_{\max} = A\omega^2$$</li>
+                <li><span class="eq-label">Instantaneous Acceleration ($a(t)$):</span>
+                    $$a(t) = \frac{d^2x(t)}{dt^2} = \frac{dv(t)}{dt} = -A\omega^2 \cos(\omega t + \phi)$$
+                    $$a(t) = A\omega^2 \cos(\omega t + \phi + \pi)$$
+                </li>
+                <li><span class="eq-label">Acceleration Mapped to Displacement ($x$):</span> $$a(x) = -\omega^2 x$$</li>
+            </ul>
+        <!-- Topic 1.6 -->
+        <div id="topic-1-6" class="topic-block">
+            <h2>Topic 1.6: Complex Numbers &amp; Euler's Relations</h2>
+            <ul>
+                <li><span class="eq-label">Standard Complex Representation:</span> $$z = a + jb \quad \text{or} \quad z = a + ib$$</li>
+                <li><span class="eq-label">Imaginary Unit Identity:</span> $$j^2 = -1 \quad \text{or} \quad i^2 = -1$$</li>
+                <li><span class="eq-label">Polar Form of Complex Number:</span> $$z = a + ib = |z|e^{i\theta} \quad \left(|z| = \sqrt{a^2 + b^2}, \quad \tan\theta = \frac{b}{a}\right)$$</li>
+                <li><span class="eq-label">Taylor Series Expansions:</span>
+                    $$f(x) = f(0) + xf'(0) + \frac{x^2}{2!}f''(0) + \dots$$
+                    $$\cos\theta = 1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \dots$$
+                    $$i\sin\theta = i\theta - \frac{i\theta^3}{3!} + \dots$$
+                    $$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \dots$$
+                    $$e^{i\theta} = 1 + i\theta - \frac{\theta^2}{2!} - \frac{i\theta^3}{3!} + \frac{\theta^4}{4!} + \dots$$
+                </li>
+                <li><span class="eq-label">Euler's Relation:</span> $$e^{i\theta} = \cos\theta + i\sin\theta$$</li>
+                <li><span class="eq-label">Unit Circle Polar Angles:</span>
+                    $$e^{i0} = 1, \quad e^{i\pi/4} = \frac{1}{\sqrt{2}} + i\frac{1}{\sqrt{2}}, \quad e^{i\pi/2} = i, \quad e^{i\pi} = -1, \quad e^{i2\pi} = 1$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 1.7 -->
+        <div id="topic-1-7" class="topic-block">
+            <h2>Topic 1.7: Rotating Vectors &amp; SHM in Complex Notation</h2>
+            <ul>
+                <li><span class="eq-label">Phasor Mapping on Complex Plane:</span> $$z = x + iy = A\cos(\omega_0 t) + iA\sin(\omega_0 t) = A\left(\cos(\omega_0 t) + i\sin(\omega_0 t)\right) = Ae^{i\omega_0 t}$$</li>
+                <li><span class="eq-label">General Complex Solution:</span> $$z = Ae^{i(\omega_0 t + \phi)}$$</li>
+                <li><span class="eq-label">Real Mapping vs. Complex Bases:</span>
+                    $$x(t) = \text{Re}[z] = A\cos(\omega_0 t + \phi)$$
+                    $$\frac{dx}{dt} = \text{Re}\left[\frac{dz}{dt}\right], \quad \frac{d^2x}{dt^2} = \text{Re}\left[\frac{d^2z}{dt^2}\right]$$
+                </li>
+                <li><span class="eq-label">Complex Base Derivatives:</span>
+                    $$\frac{dz}{dt} = i\omega_0 Ae^{i(\omega_0 t + \phi)} = i\omega_0 z$$
+                    $$\frac{d^2z}{dt^2} = (i\omega_0)^2 Ae^{i(\omega_0 t + \phi)} = -\omega_0^2 z$$
+                </li>
+                <li><span class="eq-label">Complex Substitution into Equation of Motion:</span>
+                    $$\frac{d^2z}{dt^2} + \omega_0^2 z = 0$$
+                    $$A(i\omega_0)^2 e^{i(\omega_0 t + \phi)} + \omega_0^2 A e^{i(\omega_0 t + \phi)} = 0$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 1.8 -->
+        <div id="topic-1-8" class="topic-block">
+            <h2>Topic 1.8: Mathematical Derivation of the General Solution</h2>
+            <ul>
+                <li><span class="eq-label">Standard ODE:</span> $$\frac{d^2x}{dt^2} + \omega_0^2 x = 0$$</li>
+                <li><span class="eq-label">Trial Solution &amp; Derivatives:</span> $$x = Be^{pt} \implies \frac{dx}{dt} = Bpe^{pt}, \quad \frac{d^2x}{dt^2} = Bp^2e^{pt}$$</li>
+                <li><span class="eq-label">Auxiliary Equation &amp; Roots:</span> $$Bp^2e^{pt} + B\omega_0^2e^{pt} = 0 \implies p^2 = -\omega_0^2 \implies p = \pm \omega_0 i$$</li>
+                <li><span class="eq-label">General Exponential Form:</span> $$x = B_1 e^{i\omega_0 t} + B_2 e^{-i\omega_0 t}$$</li>
+                <li><span class="eq-label">Velocity Equation:</span> $$v = \frac{dx}{dt} = i\omega_0 B_1 e^{i\omega_0 t} - i\omega_0 B_2 e^{-i\omega_0 t}$$</li>
+                <li><span class="eq-label">Boundary Condition ($v(0) = 0$):</span> $$v(0) = i\omega_0 B_1 - i\omega_0 B_2 = 0 \implies B_1 = B_2 = B$$</li>
+                <li><span class="eq-label">Real Cosine Solution Derivation:</span>
+                    $$x = B\left(e^{i\omega_0 t} + e^{-i\omega_0 t}\right) = 2B\cos(\omega_0 t) = A\cos(\omega_0 t) \quad (A = 2B)$$
+                    $$x = A\cos(\omega_0 t + \phi)$$
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 1.9 -->
+        <div id="topic-1-9" class="topic-block">
+            <h2>Topic 1.9: Euler Transformations (Worked Exercises &amp; Interactive Detailed Solutions)</h2>
+            <p style="font-size: 14px; color: #475569; margin-bottom: 20px;">
+                <strong>Objective:</strong> Convert trigonometric sum and difference functions into standard phasor complex exponential form 
+                $$x(t) = \text{Re}\left[ A e^{i(\omega t + \phi)} \right] = A \cos(\omega t + \phi)$$
+                <span style="display: inline-block; margin-left: 10px; font-weight: 600; color: #0284c7; background: #e0f2fe; padding: 4px 12px; border-radius: 12px; font-size: 12px;">👆 Click any card below to reveal the full, step-by-step mathematical derivation!</span>
+            </p>
+
+            <!-- EXERCISE (a) -->
+            <div class="worked-exercise-box">
+                <h3 style="margin-top: 0; color: #1e293b; font-size: 16px; border-bottom: 2px solid #2563eb; padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Exercise (a): Vector $x(t) = \sin(\omega t) + \cos(\omega t)$</span>
+                    <span style="font-size: 12px; color: #2563eb; background: #eff6ff; padding: 4px 10px; border-radius: 12px; font-weight: 600;">Summary Solution</span>
+                </h3>
+
+                <!-- Method 1 Card -->
+                <div class="hover-math-card" data-math-popup
+                     data-title="Method 1: Detailed Complex Phasor &amp; Polar Vector Analysis"
+                     data-badge="Phasor Method"
+                     data-content="<p><strong>Goal:</strong> Express $x(t) = \sin(\omega t) + \cos(\omega t)$ as $x(t) = \text{Re}\left[A e^{i(\omega t + \phi)}\right]$.</p><ol><li><strong>Euler Identity Mapping:</strong><br>Recall Euler's relation: $e^{i\theta} = \cos\theta + i\sin\theta$.<br>Writing trigonometric terms as real parts of complex exponentials:<br>$$\cos(\omega t) = \text{Re}\left[e^{i\omega t}\right]$$<br>$$\sin(\omega t) = \text{Re}\left[-i e^{i\omega t}\right] \quad \left(\text{since } -i e^{i\omega t} = -i(\cos\omega t + i\sin\omega t) = \sin\omega t - i\cos\omega t\right)$$</li><li><strong>Combine Phasor Terms:</strong><br>$$x(t) = \text{Re}\left[e^{i\omega t} - i e^{i\omega t}\right] = \text{Re}\left[(1 - i) e^{i\omega t}\right]$$</li><li><strong>Convert Complex Coefficient $w = 1 - i$ to Polar Form ($R e^{i\theta}$):</strong><br>• Real part $a = 1$, Imaginary part $b = -1$<br>• Magnitude $|w| = \sqrt{a^2 + b^2} = \sqrt{1^2 + (-1)^2} = \sqrt{2}$<br>• Phase angle $\theta = \tan^{-1}\left(\frac{b}{a}\right) = \tan^{-1}\left(\frac{-1}{1}\right) = -\frac{\pi}{4}$ radians<br><div class='formula-highlight'>$$w = 1 - i = \sqrt{2} e^{-i\pi/4}$$</div></li><li><strong>Substitute Back &amp; Extract Real Part:</strong><br>$$\tilde{z}(t) = w e^{i\omega t} = \sqrt{2} e^{-i\pi/4} e^{i\omega t} = \sqrt{2} e^{i(\omega t - \pi/4)}$$<br>$$x(t) = \text{Re}[\tilde{z}(t)] = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right)$$</li><li><strong>Final Parameters:</strong><br>Amplitude $A = \sqrt{2}$, Phase Constant $\phi = -\frac{\pi}{4}$.</li></ol>">
+                    <span class="eq-label" style="color: #1e40af;">Method 1: Complex Phasor &amp; Polar Plane Conversion</span>
+                    <div>$$x(t) = \text{Re}\left[ (1 - i) e^{i\omega t} \right] = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right] = \sqrt{2}\cos\left(\omega t - \frac{\pi}{4}\right)$$</div>
+                </div>
+
+                <!-- Method 2 Card -->
+                <div class="hover-math-card" data-math-popup
+                     data-title="Method 2: Detailed Trigonometric Sum-to-Product Identity"
+                     data-badge="Identity Method"
+                     data-content="<p><strong>Goal:</strong> Transform $x(t) = \sin(\omega t) + \cos(\omega t)$ into cosine amplitude-phase form.</p><ol><li><strong>Convert Sine to Cosine via Phase Shift:</strong><br>Using cofunction identity $\sin\theta = \cos\left(\frac{\pi}{2} - \theta\right) = \cos\left(\theta - \frac{\pi}{2}\right)$:<br>$$x(t) = \cos(\omega t) + \cos\left(\omega t - \frac{\pi}{2}\right)$$</li><li><strong>Apply Sum-to-Product Identity:</strong><br>$$\cos A + \cos B = 2 \cos\left(\frac{A+B}{2}\right) \cos\left(\frac{A-B}{2}\right)$$<br>Let $A = \omega t$ and $B = \omega t - \frac{\pi}{2}$:<br>$$\frac{A+B}{2} = \frac{2\omega t - \pi/2}{2} = \omega t - \frac{\pi}{4}, \quad \frac{A-B}{2} = \frac{\pi/2}{2} = \frac{\pi}{4}$$</li><li><strong>Substitute Values:</strong><br>$$x(t) = 2 \cos\left(\frac{\pi}{4}\right) \cos\left(\omega t - \frac{\pi}{4}\right)$$<br>Since $\cos\left(\frac{\pi}{4}\right) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$:<br><div class='formula-highlight'>$$x(t) = 2 \left(\frac{\sqrt{2}}{2}\right) \cos\left(\omega t - \frac{\pi}{4}\right) = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right)$$</div></li><li><strong>Express in Complex Euler Notation:</strong><br>$$x(t) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</li></ol>">
+                    <span class="eq-label" style="color: #1e40af;">Method 2: Angle Phase Shift &amp; Sum-to-Product Identity</span>
+                    <div>$$x(t) = \cos(\omega t) + \cos\left(\omega t - \frac{\pi}{2}\right) = 2\cos\left(\frac{\pi}{4}\right)\cos\left(\omega t - \frac{\pi}{4}\right) = \sqrt{2}\cos\left(\omega t - \frac{\pi}{4}\right)$$</div>
+                </div>
+
+                <!-- Method 3 Card -->
+                <div class="hover-math-card" data-math-popup
+                     data-title="Method 3: Detailed Linear Combination Component Formula"
+                     data-badge="Component Method"
+                     data-content="<p><strong>Goal:</strong> Use rectangular-to-polar mapping for $x(t) = 1\cdot\cos(\omega t) + 1\cdot\sin(\omega t)$.</p><ol><li><strong>General Component Identity:</strong><br>$$A_1 \cos(\omega t) + A_2 \sin(\omega t) = R \cos(\omega t - \phi)$$<br>where $R = \sqrt{A_1^2 + A_2^2}$ and $\tan\phi = \frac{A_2}{A_1}$.</li><li><strong>Extract Coefficients:</strong><br>$A_1 = 1$ (cosine coefficient), $A_2 = 1$ (sine coefficient).</li><li><strong>Calculate Resultant Amplitude $R$:</strong><br>$$R = \sqrt{1^2 + 1^2} = \sqrt{2}$$</li><li><strong>Calculate Phase Angle $\phi$:</strong><br>$$\tan\phi = \frac{1}{1} = 1 \implies \phi = \frac{\pi}{4}$$</li><li><strong>Combine &amp; Convert to Euler Form:</strong><br><div class='formula-highlight'>$$x(t) = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</div></li></ol>">
+                    <span class="eq-label" style="color: #1e40af;">Method 3: Rectangular Components &amp; Magnitude-Phase Mapping</span>
+                    <div>$$R = \sqrt{1^2 + 1^2} = \sqrt{2}, \quad \tan\phi = \frac{1}{1} \implies \phi = \frac{\pi}{4} \implies x(t) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</div>
+                </div>
+
+                <div class="exercise-result-badge">
+                    ✓ Summary Answer (a): $A = \sqrt{2}, \quad \phi = -\frac{\pi}{4} \implies z(t) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$
+                </div>
+            </div>
+
+            <!-- EXERCISE (b) -->
+            <div class="worked-exercise-box">
+                <h3 style="margin-top: 0; color: #1e293b; font-size: 16px; border-bottom: 2px solid #dc2626; padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Exercise (b): Vector $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$</span>
+                    <span style="font-size: 12px; color: #dc2626; background: #fef2f2; padding: 4px 10px; border-radius: 12px; font-weight: 600;">Summary Solution</span>
+                </h3>
+
+                <!-- Method 1 Card -->
+                <div class="hover-math-card" data-math-popup
+                     data-title="Method 1: Detailed Complex Phasor &amp; Quadrant III Analysis"
+                     data-badge="Phasor Method"
+                     data-content="<p><strong>Goal:</strong> Express $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ as $\text{Re}\left[A e^{i(\omega t + \phi)}\right]$.</p><ol><li><strong>Complex Exponential Representation:</strong><br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \text{Re}\left[ e^{i(\omega t - \pi/3)} \right] = \text{Re}\left[ e^{-i\pi/3} e^{i\omega t} \right]$$<br>$$\cos(\omega t) = \text{Re}\left[ e^{i\omega t} \right]$$</li><li><strong>Factor Out $e^{i\omega t}$:</strong><br>$$\tilde{z}(t) = \left( e^{-i\pi/3} - 1 \right) e^{i\omega t}$$<br>Let the complex coefficient be $w = e^{-i\pi/3} - 1$.</li><li><strong>Convert $e^{-i\pi/3}$ to Rectangular Form ($a + ib$):</strong><br>$$e^{-i\pi/3} = \cos\left(-\frac{\pi}{3}\right) + i\sin\left(-\frac{\pi}{3}\right) = \frac{1}{2} - i \frac{\sqrt{3}}{2}$$<br>Subtract 1:<br>$$w = \left(\frac{1}{2} - i \frac{\sqrt{3}}{2}\right) - 1 = -\frac{1}{2} - i \frac{\sqrt{3}}{2}$$</li><li><strong>Convert $w$ to Polar Form ($R e^{i\phi}$):</strong><br>• Real part $a = -\frac{1}{2} < 0$, Imaginary part $b = -\frac{\sqrt{3}}{2} < 0 \implies \mathbf{Quadrant\ III}$.<br>• Magnitude $|w| = \sqrt{\left(-\frac{1}{2}\right)^2 + \left(-\frac{\sqrt{3}}{2}\right)^2} = \sqrt{\frac{1}{4} + \frac{3}{4}} = 1$.<br>• Phase Angle $\phi = \tan^{-1}\left(\frac{-\sqrt{3}/2}{-1/2}\right) - \pi = \tan^{-1}(\sqrt{3}) - \pi = \frac{\pi}{3} - \pi = -\frac{2\pi}{3}$.<br><div class='formula-highlight'>$$w = -\frac{1}{2} - i \frac{\sqrt{3}}{2} = 1 \cdot e^{-i 2\pi/3}$$</div></li><li><strong>Final Complex Solution:</strong><br>$$\tilde{z}(t) = e^{-i 2\pi/3} e^{i\omega t} = e^{i(\omega t - 2\pi/3)}$$<br>$$x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right] = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</li></ol>">
+                    <span class="eq-label" style="color: #991b1b;">Method 1: Complex Phasor Factorization &amp; Quadrant III Polar Mapping</span>
+                    <div>$$w = e^{-i\pi/3} - 1 = -\frac{1}{2} - i\frac{\sqrt{3}}{2} = 1 \cdot e^{-i 2\pi/3} \implies x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div>
+                </div>
+
+                <!-- Method 2 Card -->
+                <div class="hover-math-card" data-math-popup
+                     data-title="Method 2: Detailed Difference-to-Product Trigonometric Identity"
+                     data-badge="Identity Method"
+                     data-content="<p><strong>Goal:</strong> Transform $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ using trigonometric identities.</p><ol><li><strong>Apply Difference of Cosines Identity:</strong><br>$$\cos A - \cos B = -2 \sin\left(\frac{A+B}{2}\right) \sin\left(\frac{A-B}{2}\right)$$<br>Let $A = \omega t - \frac{\pi}{3}$ and $B = \omega t$:<br>$$\frac{A+B}{2} = \frac{2\omega t - \pi/3}{2} = \omega t - \frac{\pi}{6}, \quad \frac{A-B}{2} = -\frac{\pi}{6}$$</li><li><strong>Substitute into Identity:</strong><br>$$x(t) = -2 \sin\left(\omega t - \frac{\pi}{6}\right) \sin\left(-\frac{\pi}{6}\right)$$<br>Since $\sin\left(-\frac{\pi}{6}\right) = -\frac{1}{2}$:<br>$$x(t) = -2 \sin\left(\omega t - \frac{\pi}{6}\right) \left(-\frac{1}{2}\right) = \sin\left(\omega t - \frac{\pi}{6}\right)$$</li><li><strong>Convert Sine to Standard Cosine Form:</strong><br>Using $\sin\theta = \cos\left(\theta - \frac{\pi}{2}\right)$:<br><div class='formula-highlight'>$$x(t) = \cos\left(\omega t - \frac{\pi}{6} - \frac{\pi}{2}\right) = \cos\left(\omega t - \frac{4\pi}{6}\right) = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</div></li><li><strong>Express in Complex Euler Notation:</strong><br>$$x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</li></ol>">
+                    <span class="eq-label" style="color: #991b1b;">Method 2: Difference-to-Product Identity &amp; Sine-to-Cosine Phase Conversion</span>
+                    <div>$$x(t) = -2\sin\left(\omega t - \frac{\pi}{6}\right)\sin\left(-\frac{\pi}{6}\right) = \sin\left(\omega t - \frac{\pi}{6}\right) = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</div>
+                </div>
+
+                <!-- Method 3 Card -->
+                <div class="hover-math-card" data-math-popup
+                     data-title="Method 3: Detailed Angle Expansion &amp; Component Addition"
+                     data-badge="Expansion Method"
+                     data-content="<p><strong>Goal:</strong> Expand $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ into orthogonal components.</p><ol><li><strong>Expand Cosine Difference:</strong><br>$$\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$$<br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \cos(\omega t)\cos\left(\frac{\pi}{3}\right) + \sin(\omega t)\sin\left(\frac{\pi}{3}\right)$$<br>Since $\cos(\pi/3) = \frac{1}{2}$ and $\sin(\pi/3) = \frac{\sqrt{3}}{2}$:<br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t)$$</li><li><strong>Subtract $\cos(\omega t)$:</strong><br>$$x(t) = \left(\frac{1}{2} - 1\right)\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t) = -\frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t)$$</li><li><strong>Convert Rectangular Form to Polar Form:</strong><br>$A_1 = -\frac{1}{2}, \quad A_2 = \frac{\sqrt{3}}{2}$<br>$$R = \sqrt{A_1^2 + A_2^2} = \sqrt{\left(-\frac{1}{2}\right)^2 + \left(\frac{\sqrt{3}}{2}\right)^2} = \sqrt{\frac{1}{4} + \frac{3}{4}} = 1$$<br>$$\cos\phi = A_1 / R = -\frac{1}{2}, \quad \sin\phi = -A_2 / R = -\frac{\sqrt{3}}{2} \implies \phi = -\frac{2\pi}{3}$$</li><li><strong>Final Solution:</strong><br><div class='formula-highlight'>$$x(t) = 1 \cdot \cos\left(\omega t - \frac{2\pi}{3}\right) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div></li></ol>">
+                    <span class="eq-label" style="color: #991b1b;">Method 3: Angle Difference Expansion &amp; Rectangular Component Sum</span>
+                    <div>$$x(t) = -\frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t) = 1 \cdot \cos\left(\omega t - \frac{2\pi}{3}\right) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div>
+                </div>
+
+                <div class="exercise-result-badge">
+                    ✓ Summary Answer (b): $A = 1, \quad \phi = -\frac{2\pi}{3} \implies z(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Click Modal Window Backdrop Overlay -->
+    <div id="math-modal-overlay" class="math-modal-backdrop"></div>
+
+    <!-- Floating Math Window Element -->
+    <div id="math-floating-window" class="math-popup-window">
+        <div class="math-popup-title">
+            <span id="popup-title-text">Math Step Details</span>
+            <div class="math-popup-header-right">
+                <span id="popup-badge-text" class="math-popup-badge">Derivation</span>
+                <button id="popup-close-btn" class="math-popup-close-btn" title="Close solution window (Esc)">✕</button>
+            </div>
+        </div>
+        <div id="popup-body-content" class="math-popup-body">
+            Click any equation card to view full mathematical steps.
+        </div>
+    </div>
+
+    <!-- JavaScript Engine for Click-to-Open Math Modal Window -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backdrop = document.getElementById('math-modal-overlay');
+            const popup = document.getElementById('math-floating-window');
+            const popupTitle = document.getElementById('popup-title-text');
+            const popupBadge = document.getElementById('popup-badge-text');
+            const popupBody = document.getElementById('popup-body-content');
+            const closeBtn = document.getElementById('popup-close-btn');
+
+            const clickableItems = document.querySelectorAll('[data-math-popup]');
+
+            function openModal(item) {
+                const title = item.getAttribute('data-title') || 'Mathematical Step Breakdown';
+                const badge = item.getAttribute('data-badge') || 'Formula Step';
+                const content = item.getAttribute('data-content') || '';
+
+                popupTitle.textContent = title;
+                popupBadge.textContent = badge;
+                popupBody.innerHTML = content;
+
+                backdrop.classList.add('active');
+                popup.classList.add('active');
+
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    MathJax.typesetPromise([popupBody]).catch(function (err) {
+                        console.log('MathJax typeset error:', err);
+                    });
+                }
+            }
+
+            function closeModal() {
+                backdrop.classList.remove('active');
+                popup.classList.remove('active');
+            }
+
+            clickableItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openModal(this);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && popup.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

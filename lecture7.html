@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 7: Forced Oscillations & Resonance</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+        }
+        .nav-btn {
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-btn:hover { text-decoration: underline; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
+
+        h1 {
+            font-size: 24px;
+            color: #111827;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        .demo-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card h3 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1e293b;
+        }
+        .demo-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid canvas {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .controls-bar {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .controls-bar label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .controls-bar input[type=range] {
+            accent-color: #2563eb;
+        }
+
+        .topic-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .topic-block:target {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .topic-block h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .topic-block ul { margin: 0; padding-left: 20px; }
+        .topic-block li {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-block li:hover {
+            background-color: #f0f7ff;
+            border-color: #93c5fd;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        mjx-container {
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        mjx-container:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="lecture6.html" class="nav-btn">← Prev: Lecture 6</a>
+            <a href="index.html" class="nav-btn">Course Directory</a>
+            <span class="nav-title">Lecture 7 of 8</span>
+            <a href="lecture8.html" class="nav-btn">Next: Lecture 8 →</a>
+        </nav>
+
+        <h1>Lecture 7: Forced Oscillations and Resonance</h1>
+
+        <!-- Interactive Visual Demo: Driven Oscillator & Amplitude Resonance Curve -->
+        <div class="demo-card">
+            <h3>Interactive Physics Visualizer: Resonance Dynamics across Topics</h3>
+            <div class="demo-grid">
+                <canvas id="drivenAnimCanvas" width="380" height="260"></canvas>
+                <canvas id="resPlotCanvas" width="460" height="260"></canvas>
+            </div>
+            <div class="controls-bar">
+                <button id="btnMechRes" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Topic 7.1: Mechanical Driven Oscillator</button>
+                <button id="btnElecRes" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Topic 7.2 &amp; 7.4: Series RLC Circuit Resonance</button>
+                <label style="margin-left: 10px;">
+                    Driving Freq $\omega$: <span id="wDriveVal">3.0</span> rad/s
+                    <input type="range" id="wDriveSlider" min="0.5" max="6.0" step="0.1" value="3.0">
+                </label>
+                <label>
+                    Damping / Resistance $\beta$: <span id="resBetaVal">0.4</span>
+                    <input type="range" id="resBetaSlider" min="0.1" max="1.5" step="0.1" value="0.4">
+                </label>
+            </div>
+        </div>
+
+        <!-- Topic 7.1 -->
+        <div id="topic-7-1" class="topic-block">
+            <h2>Topic 7.1: Forced Mechanical Oscillations</h2>
+            <ul>
+                <li><span class="eq-label">Equation of Motion:</span> $$m \ddot{x} + b \dot{x} + k x = F_0 \cos\omega t \implies \ddot{x} + \beta \dot{x} + \omega_0^2 x = \frac{F_0}{m} \cos\omega t$$</li>
+                <li><span class="eq-label">General Solution (Transient + Steady-State):</span> $$x(t) = x_{\text{trans}}(t) + x_{\text{steady}}(t) = B e^{-\frac{\beta}{2} t} \cos(\omega_d t + \phi) + A(\omega) \cos(\omega t - \delta)$$</li>
+                <li><span class="eq-label">Steady-State Amplitude $A(\omega)$:</span> $$A(\omega) = \frac{F_0 / m}{\sqrt{(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2}}$$</li>
+                <li><span class="eq-label">Phase Difference $\delta$:</span> $$\tan\delta = \frac{\omega \beta}{\omega_0^2 - \omega^2}$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 7.2 -->
+        <div id="topic-7-2" class="topic-block">
+            <h2>Topic 7.2: Series RLC Circuit</h2>
+            <ul>
+                <li><span class="eq-label">KVL Loop with AC Source:</span> $$L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{1}{C} q = V_0 \cos\omega t$$</li>
+                <li><span class="eq-label">Steady-State Charge Amplitude:</span> $$q_0(\omega) = \frac{V_0 / L}{\sqrt{(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2}}$$</li>
+                <li><span class="eq-label">Phase Shift:</span> $$\tan\delta = \frac{\omega \beta}{\omega_0^2 - \omega^2}$$</li>
+                <li><span class="eq-label">Circuit Current:</span> $$i(t) = \frac{dq}{dt} = -q_0 \omega \sin(\omega t - \delta)$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 7.3 -->
+        <div id="topic-7-3" class="topic-block">
+            <h2>Topic 7.3: Complex Impedance Analysis</h2>
+            <ul>
+                <li><span class="eq-label">Device Impedances:</span> $$Z_R = R, \quad Z_L = j\omega L, \quad Z_C = -\frac{j}{\omega C}$$</li>
+                <li><span class="eq-label">Total Impedance ($Z$):</span> $$Z = R + i\left(\omega L - \frac{1}{\omega C}\right)$$</li>
+                <li><span class="eq-label">Impedance Magnitude:</span> $$|Z| = \sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}$$</li>
+                <li><span class="eq-label">Phase Angle:</span> $$\tan\delta = \frac{\omega L - \frac{1}{\omega C}}{R}$$</li>
+                <li><span class="eq-label">Ohm's Law Real Component Current:</span> $$i(t) = \frac{V_0}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t - \delta)$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 7.4 -->
+        <div id="topic-7-4" class="topic-block">
+            <h2>Topic 7.4: Electrical Resonance</h2>
+            <ul>
+                <li><span class="eq-label">Resonance Condition:</span> $$\omega L = \frac{1}{\omega C} \implies \omega_0 = \frac{1}{\sqrt{LC}}$$</li>
+                <li><span class="eq-label">Characteristics at Resonance:</span>
+                    <ul>
+                        <li>Impedance Phase: $\delta = 0$</li>
+                        <li>Impedance Magnitude: $|Z| = R$</li>
+                        <li>Max Current Amplitude: $I_{\text{max}} = \frac{V_0}{R}$</li>
+                        <li>Reduced Current Equation: $i(t) = \frac{V_0}{R} \cos\omega t$</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script for Driven Oscillator Animation & Resonance Curve Plot -->
+    <script>
+        const drCanvas = document.getElementById('drivenAnimCanvas');
+        const drCtx = drCanvas.getContext('2d');
+        const rPlotCanvas = document.getElementById('resPlotCanvas');
+        const rCtx = rPlotCanvas.getContext('2d');
+
+        const wSlider = document.getElementById('wDriveSlider');
+        const betaSlider = document.getElementById('resBetaSlider');
+
+        const btnMechRes = document.getElementById('btnMechRes');
+        const btnElecRes = document.getElementById('btnElecRes');
+        let resMode = 'mech'; // 'mech' or 'elec'
+
+        btnMechRes.addEventListener('click', () => { resMode = 'mech'; });
+        btnElecRes.addEventListener('click', () => { resMode = 'elec'; });
+
+        let time = 0;
+
+        function renderL7() {
+            const wDrive = parseFloat(wSlider.value);
+            const beta = parseFloat(betaSlider.value);
+            const w0 = 3.0; // Fixed natural frequency
+
+            document.getElementById('wDriveVal').innerText = wDrive.toFixed(1);
+            document.getElementById('resBetaVal').innerText = beta.toFixed(1);
+
+            time += 0.02;
+
+            // Calculate Steady State Amplitude A(w) and Phase delta
+            const F0_m = 100;
+            const denom = Math.sqrt(Math.pow(w0 * w0 - wDrive * wDrive, 2) + wDrive * wDrive * beta * beta);
+            const Amp = F0_m / denom;
+            const delta = Math.atan2(wDrive * beta, w0 * w0 - wDrive * wDrive);
+
+            const x_steady = Amp * Math.cos(wDrive * time - delta);
+
+            // Render Driven Oscillator / RLC Diagram
+            const dw = drCanvas.width;
+            const dh = drCanvas.height;
+            const cy = dh / 2;
+
+            drCtx.clearRect(0, 0, dw, dh);
+
+            if (resMode === 'mech') {
+                // Driving Piston on Left
+                const pistonX = 40 + 15 * Math.cos(wDrive * time);
+                drCtx.fillStyle = '#ef4444';
+                drCtx.fillRect(pistonX - 10, cy - 25, 20, 50);
+                drCtx.fillStyle = '#1e293b';
+                drCtx.font = '11px sans-serif';
+                drCtx.fillText('F₀ cos(ωt)', pistonX - 25, cy - 35);
+
+                // Spring connected to Mass
+                const massX = 160 + x_steady * 0.8;
+                drCtx.strokeStyle = '#334155';
+                drCtx.lineWidth = 2;
+                drCtx.beginPath();
+                drCtx.moveTo(pistonX + 10, cy);
+                const numCoils = 10;
+                const coilW = (massX - (pistonX + 10)) / numCoils;
+                for (let c = 0; c < numCoils; c++) {
+                    const px = pistonX + 10 + (c + 0.5) * coilW;
+                    const py = cy + (c % 2 === 0 ? -12 : 12);
+                    drCtx.lineTo(px, py);
+                }
+                drCtx.lineTo(massX, cy);
+                drCtx.stroke();
+
+                // Mass
+                drCtx.fillStyle = '#2563eb';
+                drCtx.fillRect(massX, cy - 35, 60, 70);
+                drCtx.fillStyle = '#ffffff';
+                drCtx.font = '12px sans-serif';
+                drCtx.fillText('Mass m', massX + 8, cy + 4);
+            } else {
+                // Series RLC Circuit Diagram
+                drCtx.strokeStyle = '#334155';
+                drCtx.lineWidth = 3;
+                drCtx.strokeRect(50, 40, 280, 180);
+
+                // Resistor R
+                drCtx.fillStyle = '#f59e0b';
+                drCtx.fillRect(160, 32, 60, 16);
+                drCtx.fillStyle = '#1e293b';
+                drCtx.font = '11px sans-serif';
+                drCtx.fillText('Resistor R', 162, 24);
+
+                // Inductor L
+                drCtx.fillText('Inductor L', 300, 130);
+
+                // Capacitor C
+                drCtx.fillText('Capacitor C', 20, 130);
+
+                // AC Source
+                drCtx.fillStyle = '#2563eb';
+                drCtx.beginPath(); drCtx.arc(190, 220, 16, 0, 2 * Math.PI); drCtx.fill();
+                drCtx.fillStyle = '#ffffff'; drCtx.fillText('~ V₀', 178, 224);
+            }
+
+            // Render Resonance Curve A(w)
+            const pw = rPlotCanvas.width;
+            const ph = rPlotCanvas.height;
+
+            rCtx.clearRect(0, 0, pw, ph);
+
+            // Axes
+            rCtx.strokeStyle = '#cbd5e1';
+            rCtx.lineWidth = 1;
+            rCtx.beginPath();
+            rCtx.moveTo(40, ph - 30); rCtx.lineTo(pw - 20, ph - 30); // w axis
+            rCtx.moveTo(40, 20); rCtx.lineTo(40, ph - 30); // Amplitude axis
+            rCtx.stroke();
+
+            rCtx.fillStyle = '#64748b';
+            rCtx.font = '11px sans-serif';
+            rCtx.fillText('Driving Frequency ω →', pw - 130, ph - 10);
+            rCtx.fillText(resMode === 'mech' ? 'Mechanical Amplitude A(ω)' : 'Electrical Charge Amplitude q₀(ω)', 10, 15);
+
+            // Draw Resonance Curve A(w)
+            rCtx.strokeStyle = '#2563eb';
+            rCtx.lineWidth = 2.5;
+            rCtx.beginPath();
+
+            const maxW = 6.0;
+            let peakX = 0, peakY = 0;
+
+            for (let px = 40; px < pw - 20; px++) {
+                const w_val = ((px - 40) / (pw - 60)) * maxW;
+                const den = Math.sqrt(Math.pow(w0 * w0 - w_val * w_val, 2) + w_val * w_val * beta * beta);
+                const a_val = (F0_m / den) * 0.9;
+                const py = (ph - 30) - Math.min(ph - 50, a_val);
+
+                if (px === 40) rCtx.moveTo(px, py);
+                else rCtx.lineTo(px, py);
+
+                if (Math.abs(w_val - wDrive) < 0.05) {
+                    peakX = px;
+                    peakY = py;
+                }
+            }
+            rCtx.stroke();
+
+            // Natural Frequency dashed vertical line (w0)
+            const w0_px = 40 + (w0 / maxW) * (pw - 60);
+            rCtx.strokeStyle = '#94a3b8';
+            rCtx.setLineDash([4, 4]);
+            rCtx.beginPath();
+            rCtx.moveTo(w0_px, 20);
+            rCtx.lineTo(w0_px, ph - 30);
+            rCtx.stroke();
+            rCtx.setLineDash([]);
+            rCtx.fillStyle = '#64748b';
+            rCtx.fillText('ω0 (Resonance)', w0_px - 35, ph - 12);
+
+            // Current Operating Point Dot
+            if (peakX > 0) {
+                rCtx.fillStyle = '#ef4444';
+                rCtx.beginPath();
+                rCtx.arc(peakX, peakY, 6, 0, 2 * Math.PI);
+                rCtx.fill();
+            }
+
+            requestAnimationFrame(renderL7);
+        }
+
+        renderL7();
+    </script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 2: Superposition of Periodic Motions</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+        }
+        .nav-btn {
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-btn:hover { text-decoration: underline; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
+
+        h1 {
+            font-size: 24px;
+            color: #111827;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        .demo-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card h3 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1e293b;
+        }
+        .demo-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid canvas {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .controls-bar {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .controls-bar label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .controls-bar input[type=range] {
+            accent-color: #2563eb;
+        }
+
+        .topic-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .topic-block:target {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .topic-block h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .topic-block ul { margin: 0; padding-left: 20px; }
+        .topic-block li {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-block li:hover {
+            background-color: #f0f7ff;
+            border-color: #93c5fd;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        mjx-container {
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        mjx-container:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="lecture1.html" class="nav-btn">← Prev: Lecture 1</a>
+            <a href="index.html" class="nav-btn">Course Directory</a>
+            <a href="lecture3.html" class="nav-btn">Next: Lecture 3 →</a>
+        </nav>
+
+        <h1>Lecture 2: Superposition of Periodic Motions</h1>
+
+        <!-- Interactive Visual Demo: Lissajous & Beats -->
+        <div class="demo-card">
+            <h3>Interactive Physics Visualizer: Superposition Dynamics across Topics</h3>
+            <div class="demo-grid">
+                <canvas id="lissajousCanvas" width="380" height="260"></canvas>
+                <canvas id="beatsPlotCanvas" width="460" height="260"></canvas>
+            </div>
+            <div class="controls-bar">
+                <button id="btn1D" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">1D Parallel Superposition</button>
+                <button id="btnBeatsL2" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">1D Beats Superposition</button>
+                <button id="btn2DLiss" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">2D Lissajous Curve</button>
+                <label style="margin-left:8px;">
+                    Phase Shift $\phi$: <span id="lPhaseVal">1.57</span> rad
+                    <input type="range" id="lPhaseSlider" min="0" max="6.28" step="0.1" value="1.57">
+                </label>
+                <label>
+                    Freq Ratio ($\omega_y / \omega_x$): <span id="ratioVal">1.0</span>
+                    <input type="range" id="ratioSlider" min="0.5" max="3.0" step="0.5" value="1.0">
+                </label>
+            </div>
+        </div>
+
+        <!-- Topic 2.1 -->
+        <div id="topic-2-1" class="topic-block">
+            <h2>Topic 2.1: Superposition of Two SHMs (Same Frequency, One Dimension)</h2>
+            <ul>
+                <li><span class="eq-label">Sum of Oscillations:</span> $$x = x_1 + x_2 = A_1 \cos(\omega t + \phi_1) + A_2 \cos(\omega t + \phi_2) = A \cos(\omega t + \phi)$$</li>
+                <li><span class="eq-label">Resultant Amplitude (Law of Cosines):</span> $$A^2 = A_1^2 + A_2^2 + 2A_1 A_2 \cos(\varphi_2 - \varphi_1)$$</li>
+                <li><span class="eq-label">Inner Triangle Geometry Calculation:</span> $$A^2 = A_1^2 + A_2^2 - 2A_1 A_2 \cos(180^\circ - (\varphi_2 - \varphi_1))$$</li>
+                <li><span class="eq-label">Resultant Phase Angle $\beta$ (Law of Sines):</span> $$A \sin\beta = A_2 \sin(\varphi_2 - \varphi_1) \quad (\text{where } \phi = \phi_1 + \beta)$$</li>
+                <li><span class="eq-label">Complex Superposition Formulation:</span> $$z = z_1 + z_2 = A_1 e^{i(\omega t + \varphi_1)} + A_2 e^{i(\omega t + \varphi_2)} = e^{i(\omega t + \varphi_1)}\left[A_1 + A_2 e^{i(\varphi_2 - \varphi_1)}\right]$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 2.2 -->
+        <div id="topic-2-2" class="topic-block">
+            <h2>Topic 2.2: Equal Amplitudes Special Case</h2>
+            <ul>
+                <li><span class="eq-label">Phase Angle Split (when $A_1 = A_2$):</span> $$\beta = \frac{\delta}{2} \quad (\text{where } \delta = \varphi_2 - \varphi_1)$$</li>
+                <li><span class="eq-label">Resultant Amplitude:</span> $$A = 2A_1 \cos\beta = 2A_1 \cos\left(\frac{\delta}{2}\right)$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 2.3 -->
+        <div id="topic-2-3" class="topic-block">
+            <h2>Topic 2.3: Superposition of Different Frequencies (Beats)</h2>
+            <ul>
+                <li><span class="eq-label">Superposed Beat Position:</span> $$x = x_1 + x_2 = A \cos\omega_1 t + A \cos\omega_2 t = 2A \cos\left(\frac{\omega_1 + \omega_2}{2} t\right) \cos\left(\frac{\omega_1 - \omega_2}{2} t\right)$$</li>
+                <li><span class="eq-label">Beat Period:</span> $$T_{\text{beat}} = \frac{2\pi}{|\omega_1 - \omega_2|}$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 2.4 -->
+        <div id="topic-2-4" class="topic-block">
+            <h2>Topic 2.4: Superposition of Perpendicular Vibrations (Two Dimensions)</h2>
+            <ul>
+                <li><span class="eq-label">Component Equations:</span> $$x = A_1 \cos(\omega t + \phi_1), \quad y = A_2 \cos(\omega t + \phi_2)$$</li>
+                <li><span class="eq-label">Common Reference Form ($\phi_1 = 0, \phi_2 = \phi$):</span> $$x = A_1 \cos(\omega t), \quad y = A_2 \cos(\omega t + \phi)$$</li>
+                <li><span class="eq-label">General Elliptical Trajectory ($A_1 = A_2 = A$):</span> $$x^2 - 2xy \cos\phi + y^2 = A^2 \sin^2\phi$$</li>
+                <li><span class="eq-label">Special Trajectories (Lissajous Curves):</span>
+                    <ul>
+                        <li>$\phi = 0$ (In-phase Rectilinear): $y = \frac{A_2}{A_1} x$</li>
+                        <li>$\phi = \pi/2$ (Clockwise Ellipse): $\frac{x^2}{A_1^2} + \frac{y^2}{A_2^2} = 1$</li>
+                        <li>$\phi = \pi$ (Out-of-phase Rectilinear): $y = -\frac{A_2}{A_1} x$</li>
+                        <li>$\phi = 3\pi/2$ (Counter-Clockwise Ellipse): $\frac{x^2}{A_1^2} + \frac{y^2}{A_2^2} = 1$</li>
+                        <li>$\phi = \pi/4$ (Rotated Clockwise Ellipse): $y = \frac{\sqrt{2}}{2} A_2 \cos\omega t - \frac{\sqrt{2}}{2} A_2 \sin\omega t$</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Topic 2.5 -->
+        <div id="topic-2-5" class="topic-block">
+            <h2>Topic 2.5: Parallel vs. Perpendicular Superposition Summary</h2>
+            <ul>
+                <li><span class="eq-label">Parallel Superposition:</span> $$y = y_1 + y_2 = \left(2A \cos\frac{\varphi}{2}\right) \cos\left(\omega t + \frac{\varphi}{2}\right)$$</li>
+                <li><span class="eq-label">Perpendicular Superposition:</span> $$x^2 - 2xy \cos\varphi + y^2 = A^2 \sin^2\varphi$$</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script for Lissajous Animation & Beats Plot -->
+    <script>
+        const lissCanvas = document.getElementById('lissajousCanvas');
+        const lCtx = lissCanvas.getContext('2d');
+        const beatCanvas = document.getElementById('beatsPlotCanvas');
+        const bCtx = beatCanvas.getContext('2d');
+
+        const phaseSlider = document.getElementById('lPhaseSlider');
+        const ratioSlider = document.getElementById('ratioSlider');
+
+        const btn1D = document.getElementById('btn1D');
+        const btnBeatsL2 = document.getElementById('btnBeatsL2');
+        const btn2DLiss = document.getElementById('btn2DLiss');
+
+        let visMode = '2D'; // '1D', 'beats', '2D'
+        let time = 0;
+
+        btn1D.addEventListener('click', () => { visMode = '1D'; time = 0; });
+        btnBeatsL2.addEventListener('click', () => { visMode = 'beats'; time = 0; });
+        btn2DLiss.addEventListener('click', () => { visMode = '2D'; time = 0; });
+
+        function renderL2() {
+            const delta = parseFloat(phaseSlider.value);
+            const rVal = parseFloat(ratioSlider.value);
+
+            document.getElementById('lPhaseVal').innerText = delta.toFixed(2);
+            document.getElementById('ratioVal').innerText = rVal.toFixed(1);
+
+            time += 0.02;
+
+            // Canvas 1: Trajectory / Motion Space
+            const lw = lissCanvas.width;
+            const lh = lissCanvas.height;
+            const lcx = lw / 2;
+            const lcy = lh / 2;
+
+            lCtx.clearRect(0, 0, lw, lh);
+            lCtx.strokeStyle = '#cbd5e1';
+            lCtx.lineWidth = 1;
+            lCtx.beginPath();
+            lCtx.moveTo(0, lcy); lCtx.lineTo(lw, lcy);
+            lCtx.moveTo(lcx, 0); lCtx.lineTo(lcx, lh);
+            lCtx.stroke();
+
+            const Ax = 80;
+            const Ay = 80;
+
+            if (visMode === '2D') {
+                const wx = 2.0;
+                const wy = 2.0 * rVal;
+                lCtx.strokeStyle = '#2563eb';
+                lCtx.lineWidth = 2;
+                lCtx.beginPath();
+                for (let t = 0; t < 2 * Math.PI; t += 0.02) {
+                    const px = lcx + Ax * Math.cos(wx * t);
+                    const py = lcy - Ay * Math.cos(wy * t + delta);
+                    if (t === 0) lCtx.moveTo(px, py);
+                    else lCtx.lineTo(px, py);
+                }
+                lCtx.stroke();
+
+                const curX = lcx + Ax * Math.cos(wx * time);
+                const curY = lcy - Ay * Math.cos(wy * time + delta);
+                lCtx.fillStyle = '#ef4444';
+                lCtx.beginPath(); lCtx.arc(curX, curY, 6, 0, 2 * Math.PI); lCtx.fill();
+
+                lCtx.fillStyle = '#64748b'; lCtx.font = '11px sans-serif';
+                lCtx.fillText(`2D Lissajous Curve (ratio=${rVal})`, 10, 18);
+            } else if (visMode === '1D') {
+                const x1 = Ax * Math.cos(2.0 * time);
+                const x2 = Ax * Math.cos(2.0 * time + delta);
+                const xSum = x1 + x2;
+
+                lCtx.fillStyle = '#2563eb';
+                lCtx.beginPath(); lCtx.arc(lcx + x1, lcy - 30, 8, 0, 2 * Math.PI); lCtx.fill();
+                lCtx.fillStyle = '#3b82f6'; lCtx.font = '11px sans-serif';
+                lCtx.fillText('x₁', lcx + x1 - 5, lcy - 45);
+
+                lCtx.fillStyle = '#f59e0b';
+                lCtx.beginPath(); lCtx.arc(lcx + x2, lcy + 30, 8, 0, 2 * Math.PI); lCtx.fill();
+                lCtx.fillStyle = '#f59e0b'; lCtx.fillText('x₂', lcx + x2 - 5, lcy + 45);
+
+                lCtx.fillStyle = '#ef4444';
+                lCtx.beginPath(); lCtx.arc(lcx + xSum * 0.5, lcy, 10, 0, 2 * Math.PI); lCtx.fill();
+                lCtx.fillStyle = '#ef4444'; lCtx.fillText('x = x₁ + x₂', lcx + xSum * 0.5 - 25, lcy - 16);
+
+                lCtx.fillStyle = '#64748b'; lCtx.font = '11px sans-serif';
+                lCtx.fillText('1D Parallel Motion (Same Freq)', 10, 18);
+            } else {
+                const w1 = 2.0;
+                const w2 = 2.4;
+                const x1 = Ax * 0.5 * Math.cos(w1 * time);
+                const x2 = Ax * 0.5 * Math.cos(w2 * time);
+                const xSum = x1 + x2;
+
+                lCtx.fillStyle = '#ef4444';
+                lCtx.beginPath(); lCtx.arc(lcx + xSum, lcy, 10, 0, 2 * Math.PI); lCtx.fill();
+                lCtx.fillStyle = '#64748b'; lCtx.font = '11px sans-serif';
+                lCtx.fillText('Beats Superposition Position', 10, 18);
+            }
+
+            // Canvas 2: Time-Domain Wave Plot
+            const bw = beatCanvas.width;
+            const bh = beatCanvas.height;
+            const bcy = bh / 2;
+
+            bCtx.clearRect(0, 0, bw, bh);
+            bCtx.strokeStyle = '#cbd5e1';
+            bCtx.lineWidth = 1;
+            bCtx.beginPath();
+            bCtx.moveTo(0, bcy); bCtx.lineTo(bw, bcy);
+            bCtx.stroke();
+
+            bCtx.strokeStyle = '#2563eb';
+            bCtx.lineWidth = 2;
+            bCtx.beginPath();
+
+            for (let px = 0; px < bw; px++) {
+                const tv = time - (bw - px) * 0.02;
+                let yVal = 0;
+                if (visMode === '2D') {
+                    yVal = Ay * 0.6 * Math.cos(2.0 * rVal * tv + delta);
+                } else if (visMode === '1D') {
+                    yVal = Ax * 0.4 * (Math.cos(2.0 * tv) + Math.cos(2.0 * tv + delta));
+                } else {
+                    yVal = Ax * 0.4 * (Math.cos(2.0 * tv) + Math.cos(2.4 * tv));
+                }
+                const py = bcy - yVal;
+                if (px === 0) bCtx.moveTo(px, py);
+                else bCtx.lineTo(px, py);
+            }
+            bCtx.stroke();
+
+            bCtx.fillStyle = '#64748b';
+            bCtx.font = '11px sans-serif';
+            bCtx.fillText(`Time Domain Waveform (${visMode} Mode)`, 10, 18);
+
+            requestAnimationFrame(renderL2);
+        }
+
+        renderL2();
+    </script>
+</body>
+</html>

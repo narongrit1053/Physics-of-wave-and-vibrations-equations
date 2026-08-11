@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 6: Damped Free Oscillations</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 30px;
+        }
+        .nav-btn {
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-btn:hover { text-decoration: underline; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
+
+        h1 {
+            font-size: 24px;
+            color: #111827;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+
+        .demo-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .demo-card h3 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1e293b;
+        }
+        .demo-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-grid canvas {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        .controls-bar {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .controls-bar label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .controls-bar input[type=range] {
+            accent-color: #2563eb;
+        }
+
+        .topic-block {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            scroll-margin-top: 20px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .topic-block:target {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .topic-block h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 14px;
+            color: #1f2937;
+        }
+
+        .topic-block ul { margin: 0; padding-left: 20px; }
+        .topic-block li {
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .topic-block li:hover {
+            background-color: #f0f7ff;
+            border-color: #93c5fd;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        mjx-container {
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        mjx-container:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="lecture5.html" class="nav-btn">← Prev: Lecture 5</a>
+            <a href="index.html" class="nav-btn">Course Directory</a>
+            <a href="lecture7.html" class="nav-btn">Next: Lecture 7 →</a>
+        </nav>
+
+        <h1>Lecture 6: Damped Free Oscillations</h1>
+
+        <!-- Interactive Visual Demo: Mass-Spring Dashpot & Exponential Decay Envelope -->
+        <div class="demo-card">
+            <h3>Interactive Physics Visualizer: Damped Oscillations across Regimes</h3>
+            <div class="demo-grid">
+                <canvas id="dampedAnimCanvas" width="380" height="260"></canvas>
+                <canvas id="dampedPlotCanvas" width="460" height="260"></canvas>
+            </div>
+            <div class="controls-bar">
+                <button id="btnUnder" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Underdamped Regime ($\beta &lt; 2\omega_0$)</button>
+                <button id="btnCritical" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Critically Damped ($\beta = 2\omega_0$)</button>
+                <button id="btnOver" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Overdamped Regime ($\beta &gt; 2\omega_0$)</button>
+                <label style="margin-left: 10px;">
+                    Damping Coeff $\beta$: <span id="betaVal">0.8</span>
+                    <input type="range" id="betaSlider" min="0.1" max="10.0" step="0.1" value="0.8">
+                </label>
+                <button id="resetDampedBtn" style="padding:4px 10px; cursor:pointer; background:#64748b; color:white; border:none; border-radius:4px;">Reset Time</button>
+            </div>
+        </div>
+
+        <!-- Topic 6.1 -->
+        <div id="topic-6-1" class="topic-block">
+            <h2>Topic 6.1: Viscous Damping &amp; Equation of Motion</h2>
+            <ul>
+                <li><span class="eq-label">Viscous Damping Force:</span> $$R = -bv$$</li>
+                <li><span class="eq-label">Newton's 2nd Law Horizontal Forces:</span> $$ma = -kx - bv \implies m \frac{d^2x}{dt^2} + b \frac{dx}{dt} + kx = 0$$</li>
+                <li><span class="eq-label">Standard Form:</span> $$\frac{d^2x}{dt^2} + \beta \frac{dx}{dt} + \omega_0^2 x = 0 \quad \left(\text{where } \omega_0 = \sqrt{\frac{k}{m}}, \, \beta = \frac{b}{m}\right)$$</li>
+                <li><span class="eq-label">Auxiliary Characteristic Equation:</span> $$p^2 + \beta p + \omega_0^2 = 0 \implies p = -\frac{\beta}{2} \pm \sqrt{\frac{\beta^2}{4} - \omega_0^2}$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 6.2 -->
+        <div id="topic-6-2" class="topic-block">
+            <h2>Topic 6.2: Underdamped Solution (Light Damping)</h2>
+            <ul>
+                <li><span class="eq-label">Condition:</span> $$\frac{\beta^2}{4} &lt; \omega_0^2 \quad \text{or} \quad b &lt; 2\sqrt{km}$$</li>
+                <li><span class="eq-label">Characteristic Roots:</span> $$p = -\frac{\beta}{2} \pm i\omega$$</li>
+                <li><span class="eq-label">Damped Angular Frequency:</span> $$\omega = \sqrt{\omega_0^2 - \frac{\beta^2}{4}} = \sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}$$</li>
+                <li><span class="eq-label">Position Solution:</span> $$x(t) = A_0 e^{-\frac{\beta}{2} t} \cos(\omega t + \phi)$$</li>
+                <li><span class="eq-label">Energy Decay:</span> $$E(t) = E_0 e^{-\beta t}$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 6.3 -->
+        <div id="topic-6-3" class="topic-block">
+            <h2>Topic 6.3: Critically Damped Solution</h2>
+            <ul>
+                <li><span class="eq-label">Condition &amp; Critical Damping Coefficient ($b_c$):</span> $$\frac{\beta^2}{4} = \omega_0^2 \implies \beta = 2\omega_0 \implies b_c = 2m\omega_0 = 2\sqrt{km}$$</li>
+                <li><span class="eq-label">Repeated Real Characteristic Root:</span> $$p = -\frac{\beta}{2} = -\omega_0$$</li>
+                <li><span class="eq-label">General Position Solution (Reduction of Order):</span> $$x(t) = (C_1 + C_2 t) e^{-\frac{\beta}{2} t} = (C_1 + C_2 t) e^{-\omega_0 t}$$</li>
+                <li><span class="eq-label">Physical Behavior:</span> Returns to equilibrium position in the fastest possible time without oscillating.</li>
+            </ul>
+        </div>
+
+        <!-- Topic 6.4 -->
+        <div id="topic-6-4" class="topic-block">
+            <h2>Topic 6.4: Overdamped Solution (Heavy Damping)</h2>
+            <ul>
+                <li><span class="eq-label">Condition:</span> $$\frac{\beta^2}{4} &gt; \omega_0^2 \implies \lambda = \sqrt{\frac{\beta^2}{4} - \omega_0^2} &gt; 0$$</li>
+                <li><span class="eq-label">Two Distinct Negative Real Roots:</span> $$p_1, p_2 = -\frac{\beta}{2} \pm \lambda$$</li>
+                <li><span class="eq-label">General Position Solution:</span> $$x(t) = C_1 e^{\left(-\frac{\beta}{2} + \lambda\right) t} + C_2 e^{\left(-\frac{\beta}{2} - \lambda\right) t} = e^{-\frac{\beta}{2} t} \left( C_1 e^{\lambda t} + C_2 e^{-\lambda t} \right)$$</li>
+                <li><span class="eq-label">Physical Behavior:</span> Heavy damping prevents oscillation; the system slowly decays exponentially back to equilibrium.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script for Damped Oscillator Animation & Plot -->
+    <script>
+        const dCanvas = document.getElementById('dampedAnimCanvas');
+        const dCtx = dCanvas.getContext('2d');
+        const dpCanvas = document.getElementById('dampedPlotCanvas');
+        const dpCtx = dpCanvas.getContext('2d');
+
+        const betaSlider = document.getElementById('betaSlider');
+        const resetBtn = document.getElementById('resetDampedBtn');
+
+        const btnUnder = document.getElementById('btnUnder');
+        const btnCritical = document.getElementById('btnCritical');
+        const btnOver = document.getElementById('btnOver');
+
+        let time = 0;
+        const w0 = 3.0;
+
+        function updateBtnStyles(activeBtn) {
+            [btnUnder, btnCritical, btnOver].forEach(b => {
+                b.style.background = (b === activeBtn) ? '#1d4ed8' : '#2563eb';
+            });
+        }
+
+        btnUnder.addEventListener('click', () => {
+            betaSlider.value = 0.8;
+            time = 0;
+            updateBtnStyles(btnUnder);
+        });
+
+        btnCritical.addEventListener('click', () => {
+            betaSlider.value = 6.0; // 2 * w0
+            time = 0;
+            updateBtnStyles(btnCritical);
+        });
+
+        btnOver.addEventListener('click', () => {
+            betaSlider.value = 8.0; // > 2 * w0 = 6.0
+            time = 0;
+            updateBtnStyles(btnOver);
+        });
+
+        resetBtn.addEventListener('click', () => { time = 0; });
+
+        function getDisplacement(t, beta, omega0) {
+            const gamma = beta / 2;
+            const disc = gamma * gamma - omega0 * omega0;
+            const B = 80;
+            if (disc < -0.01) {
+                const w = Math.sqrt(-disc);
+                return B * Math.exp(-gamma * t) * Math.cos(w * t);
+            } else if (Math.abs(disc) <= 0.01) {
+                return B * (1 + gamma * t) * Math.exp(-gamma * t);
+            } else {
+                const l = Math.sqrt(disc);
+                return B * Math.exp(-gamma * t) * Math.cosh(l * t);
+            }
+        }
+
+        function renderL6() {
+            const beta = parseFloat(betaSlider.value);
+            document.getElementById('betaVal').innerText = beta.toFixed(2);
+
+            time += 0.02;
+
+            const t_wrap = time % 8;
+            const x_t = getDisplacement(t_wrap, beta, w0);
+
+            // Render Mass-Spring Dashpot Animation
+            const dw = dCanvas.width;
+            const dh = dCanvas.height;
+            const cy = dh / 2;
+
+            dCtx.clearRect(0, 0, dw, dh);
+
+            // Wall
+            dCtx.fillStyle = '#64748b';
+            dCtx.fillRect(20, 40, 10, 180);
+
+            // Spring
+            const massX = 140 + x_t;
+            dCtx.strokeStyle = '#334155';
+            dCtx.lineWidth = 2;
+            dCtx.beginPath();
+            dCtx.moveTo(30, cy - 20);
+            const numCoils = 12;
+            const coilW = (massX - 30) / numCoils;
+            for (let c = 0; c < numCoils; c++) {
+                const px = 30 + (c + 0.5) * coilW;
+                const py = cy - 20 + (c % 2 === 0 ? -12 : 12);
+                dCtx.lineTo(px, py);
+            }
+            dCtx.lineTo(massX, cy - 20);
+            dCtx.stroke();
+
+            // Dashpot Damper
+            dCtx.fillStyle = 'rgba(245, 158, 11, 0.2)';
+            dCtx.fillRect(30, cy + 30, massX - 30, 24);
+            dCtx.strokeStyle = '#f59e0b';
+            dCtx.strokeRect(30, cy + 30, massX - 30, 24);
+
+            // Mass Block
+            dCtx.fillStyle = '#2563eb';
+            dCtx.fillRect(massX, cy - 40, 55, 80);
+            dCtx.fillStyle = '#ffffff';
+            dCtx.font = '12px sans-serif';
+            dCtx.fillText('Mass m', massX + 6, cy + 4);
+
+            // Render Plot Canvas
+            const pw = dpCanvas.width;
+            const ph = dpCanvas.height;
+            const pcy = ph / 2;
+
+            dpCtx.clearRect(0, 0, pw, ph);
+
+            dpCtx.strokeStyle = '#cbd5e1';
+            dpCtx.lineWidth = 1;
+            dpCtx.beginPath();
+            dpCtx.moveTo(0, pcy); dpCtx.lineTo(pw, pcy);
+            dpCtx.stroke();
+
+            // Envelope line for underdamped
+            const gamma = beta / 2;
+            if (gamma < w0) {
+                dpCtx.strokeStyle = '#ef4444';
+                dpCtx.setLineDash([4, 4]);
+                dpCtx.beginPath();
+                for (let px = 0; px < pw; px++) {
+                    const tv = (px / pw) * 8;
+                    const env = 80 * Math.exp(-gamma * tv);
+                    if (px === 0) dpCtx.moveTo(px, pcy - env);
+                    else dpCtx.lineTo(px, pcy - env);
+                }
+                dpCtx.stroke();
+
+                dpCtx.beginPath();
+                for (let px = 0; px < pw; px++) {
+                    const tv = (px / pw) * 8;
+                    const env = 80 * Math.exp(-gamma * tv);
+                    if (px === 0) dpCtx.moveTo(px, pcy + env);
+                    else dpCtx.lineTo(px, pcy + env);
+                }
+                dpCtx.stroke();
+                dpCtx.setLineDash([]);
+            }
+
+            // Curve x(t)
+            dpCtx.strokeStyle = '#2563eb';
+            dpCtx.lineWidth = 2;
+            dpCtx.beginPath();
+            for (let px = 0; px < pw; px++) {
+                const tv = (px / pw) * 8;
+                const val = getDisplacement(tv, beta, w0);
+                const py = pcy - val;
+                if (px === 0) dpCtx.moveTo(px, py);
+                else dpCtx.lineTo(px, py);
+            }
+            dpCtx.stroke();
+
+            // Marker Dot
+            const curPx = (t_wrap / 8) * pw;
+            const curPy = pcy - x_t;
+            dpCtx.fillStyle = '#ef4444';
+            dpCtx.beginPath();
+            dpCtx.arc(curPx, curPy, 5, 0, 2 * Math.PI);
+            dpCtx.fill();
+
+            dpCtx.fillStyle = '#64748b';
+            dpCtx.font = '11px sans-serif';
+            const labelStr = (beta/2 < w0) ? 'Underdamped (Oscillatory)' : (Math.abs(beta/2 - w0) < 0.05 ? 'Critically Damped (Fastest Decay)' : 'Overdamped (Slow Decay)');
+            dpCtx.fillText(`x(t): ${labelStr}`, 10, 18);
+
+            requestAnimationFrame(renderL6);
+        }
+
+        renderL6();
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Ignore heavy PDF source files
+*.pdf
+
+# Ignore Python OCR scripts and extracted raw text data
+*.py
+*.txt
+*.json
+
+# System / OS files
+.DS_Store
+Thumbs.db

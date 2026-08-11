@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics & Wave Equations - Course Directory</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .home-section {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .home-title {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .home-subtitle {
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 28px;
+        }
+
+        .lecture-toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .toc-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .toc-card:hover {
+            border-color: #2563eb;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .toc-card h2 {
+            font-size: 17px;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .toc-card h2 a {
+            color: #1d4ed8;
+            text-decoration: none;
+        }
+
+        .toc-card h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .toc-card ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+
+        .toc-card li {
+            margin-bottom: 6px;
+        }
+
+        .toc-card li a {
+            color: #374151;
+            text-decoration: none;
+        }
+
+        .toc-card li a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .btn-view-lecture {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2563eb;
+            text-decoration: none;
+            background: #eff6ff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #bfdbfe;
+            transition: all 0.2s ease;
+        }
+
+        .btn-view-lecture:hover {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="home-section">
+            <h1 class="home-title">Wave Equations Course Directory</h1>
+            <p class="home-subtitle">Select a lecture page or specific topic to view its mathematical derivations and equations.</p>
+            
+            <div class="lecture-toc-grid">
+                <!-- Lecture 0 -->
+                <div class="toc-card">
+                    <h2><a href="lecture0.html">Lecture 0: Mathematical Prerequisites</a></h2>
+                    <ul>
+                        <li><a href="lecture0.html#topic-0-1">Topic 0.1: Quadratic Equations &amp; Root Finding</a></li>
+                        <li><a href="lecture0.html#topic-0-2">Topic 0.2: Trigonometric Foundations &amp; Euler</a></li>
+                        <li><a href="lecture0.html#topic-0-3">Topic 0.3: The Ansatz Technique (Trial Solutions)</a></li>
+                        <li><a href="lecture0.html#topic-0-4">Topic 0.4: Useful Trigonometric Identities</a></li>
+                    </ul>
+                    <a href="lecture0.html" class="btn-view-lecture">Open Lecture 0 Page →</a>
+                </div>
+
+                <!-- Lecture 1 -->
+                <div class="toc-card">
+                    <h2><a href="lecture1.html">Lecture 1: SHM &amp; Complex Numbers</a></h2>
+                    <ul>
+                        <li><a href="lecture1.html#topic-1-1">Topic 1.1: Periodic Motion &amp; Waveforms</a></li>
+                        <li><a href="lecture1.html#topic-1-2">Topic 1.2: Hooke's Law &amp; Newtonian Equations</a></li>
+                        <li><a href="lecture1.html#topic-1-3">Topic 1.3: Physical Parameters of Oscillation</a></li>
+                        <li><a href="lecture1.html#topic-1-4">Topic 1.4: SHM Waveforms &amp; Solutions</a></li>
+                        <li><a href="lecture1.html#topic-1-5">Topic 1.5: Velocity &amp; Acceleration Relations</a></li>
+                        <li><a href="lecture1.html#topic-1-6">Topic 1.6: Complex Numbers &amp; Euler's Relations</a></li>
+                        <li><a href="lecture1.html#topic-1-7">Topic 1.7: Rotating Vectors in Complex Notation</a></li>
+                        <li><a href="lecture1.html#topic-1-8">Topic 1.8: Mathematical Derivation of Solution</a></li>
+                        <li><a href="lecture1.html#topic-1-9">Topic 1.9: Euler Transformations (Worked Exercises)</a></li>
+                    </ul>
+                    <a href="lecture1.html" class="btn-view-lecture">Open Lecture 1 Page →</a>
+                </div>
+
+                <!-- Lecture 2 -->
+                <div class="toc-card">
+                    <h2><a href="lecture2.html">Lecture 2: Superposition of Periodic Motions</a></h2>
+                    <ul>
+                        <li><a href="lecture2.html#topic-2-1">Topic 2.1: Superposition of Two 1D SHMs</a></li>
+                        <li><a href="lecture2.html#topic-2-2">Topic 2.2: Equal Amplitudes Special Case</a></li>
+                        <li><a href="lecture2.html#topic-2-3">Topic 2.3: Different Frequencies (Beats)</a></li>
+                        <li><a href="lecture2.html#topic-2-4">Topic 2.4: 2D Perpendicular Vibrations</a></li>
+                        <li><a href="lecture2.html#topic-2-5">Topic 2.5: Parallel vs. Perpendicular</a></li>
+                    </ul>
+                    <a href="lecture2.html" class="btn-view-lecture">Open Lecture 2 Page →</a>
+                </div>
+
+                <!-- Lecture 3 -->
+                <div class="toc-card">
+                    <h2><a href="lecture3.html">Lecture 3: Pendulums &amp; Rotational Dynamics</a></h2>
+                    <ul>
+                        <li><a href="lecture3.html#topic-3-1">Topic 3.1: Small Angle Approximation</a></li>
+                        <li><a href="lecture3.html#topic-3-2">Topic 3.2: Energy of a Simple Pendulum</a></li>
+                        <li><a href="lecture3.html#topic-3-3">Topic 3.3: Rotational Inertia ($I$)</a></li>
+                        <li><a href="lecture3.html#topic-3-4">Topic 3.4: Physical Pendulum</a></li>
+                    </ul>
+                    <a href="lecture3.html" class="btn-view-lecture">Open Lecture 3 Page →</a>
+                </div>
+
+                <!-- Lecture 4 -->
+                <div class="toc-card">
+                    <h2><a href="lecture4.html">Lecture 4: Elasticity &amp; Advanced Oscillators</a></h2>
+                    <ul>
+                        <li><a href="lecture4.html#topic-4-1">Topic 4.1: Elasticity, Stress, and Strain</a></li>
+                        <li><a href="lecture4.html#topic-4-2">Topic 4.2: Oscillation of Elastic Wire</a></li>
+                        <li><a href="lecture4.html#topic-4-3">Topic 4.3: Torsion Pendulum</a></li>
+                        <li><a href="lecture4.html#topic-4-4">Topic 4.4: Spring of Air (Adiabatic)</a></li>
+                        <li><a href="lecture4.html#topic-4-5">Topic 4.5: Liquid Column in U-Tube</a></li>
+                        <li><a href="lecture4.html#topic-4-6">Topic 4.6: Cylinder Rolling on Springs</a></li>
+                        <li><a href="lecture4.html#topic-4-7">Topic 4.7: Pivoted Rod with Spring</a></li>
+                    </ul>
+                    <a href="lecture4.html" class="btn-view-lecture">Open Lecture 4 Page →</a>
+                </div>
+
+                <!-- Lecture 5 -->
+                <div class="toc-card">
+                    <h2><a href="lecture5.html">Lecture 5: LC Circuit Oscillations</a></h2>
+                    <ul>
+                        <li><a href="lecture5.html#topic-5-1">Topic 5.1: DE &amp; Natural Frequency</a></li>
+                        <li><a href="lecture5.html#topic-5-2">Topic 5.2: LC Circuit Energy Conservation</a></li>
+                    </ul>
+                    <a href="lecture5.html" class="btn-view-lecture">Open Lecture 5 Page →</a>
+                </div>
+
+                <!-- Lecture 6 -->
+                <div class="toc-card">
+                    <h2><a href="lecture6.html">Lecture 6: Damped Free Oscillations</a></h2>
+                    <ul>
+                        <li><a href="lecture6.html#topic-6-1">Topic 6.1: Viscous Damping &amp; Motion</a></li>
+                        <li><a href="lecture6.html#topic-6-2">Topic 6.2: Underdamped Solution</a></li>
+                        <li><a href="lecture6.html#topic-6-3">Topic 6.3: Critically Damped Solution</a></li>
+                        <li><a href="lecture6.html#topic-6-4">Topic 6.4: Overdamped Solution</a></li>
+                    </ul>
+                    <a href="lecture6.html" class="btn-view-lecture">Open Lecture 6 Page →</a>
+                </div>
+
+                <!-- Lecture 7 -->
+                <div class="toc-card">
+                    <h2><a href="lecture7.html">Lecture 7: Forced Oscillations &amp; Resonance</a></h2>
+                    <ul>
+                        <li><a href="lecture7.html#topic-7-1">Topic 7.1: Forced Mechanical Oscillations</a></li>
+                        <li><a href="lecture7.html#topic-7-2">Topic 7.2: Series RLC Circuit</a></li>
+                        <li><a href="lecture7.html#topic-7-3">Topic 7.3: Complex Impedance Analysis</a></li>
+                        <li><a href="lecture7.html#topic-7-4">Topic 7.4: Electrical Resonance</a></li>
+                    </ul>
+                    <a href="lecture7.html" class="btn-view-lecture">Open Lecture 7 Page →</a>
+                </div>
+
+                <!-- Lecture 8 -->
+                <div class="toc-card">
+                    <h2><a href="lecture8.html">Lecture 8: Coupled Oscillations</a></h2>
+                    <ul>
+                        <li><a href="lecture8.html#topic-8-1">Topic 8.1: Single Pendulum Reference</a></li>
+                        <li><a href="lecture8.html#topic-8-2">Topic 8.2: Coupled Pendulums &amp; Forces</a></li>
+                        <li><a href="lecture8.html#topic-8-3">Topic 8.3: Coordinate Decoupling Method</a></li>
+                        <li><a href="lecture8.html#topic-8-4">Topic 8.4: Normal Coordinates &amp; Superposition</a></li>
+                        <li><a href="lecture8.html#topic-8-5">Topic 8.5: Matrix Method &amp; Eigenvalues</a></li>
+                        <li><a href="lecture8.html#topic-8-6">Topic 8.6: Eigenvectors &amp; Mode Behaviors</a></li>
+                        <li><a href="lecture8.html#topic-8-7">Topic 8.7: Initial Excitation &amp; Energy Beats</a></li>
+                        <li><a href="lecture8.html#topic-8-8">Topic 8.8: Exercise 1: Horizontal Mass-Spring</a></li>
+                        <li><a href="lecture8.html#topic-8-9">Topic 8.9: Exercise 2: Vertical Mass-Spring</a></li>
+                    </ul>
+                    <a href="lecture8.html" class="btn-view-lecture">Open Lecture 8 Page →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
