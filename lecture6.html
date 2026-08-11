@@ -151,7 +151,88 @@
         }
 
         .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+
+        .toggle-bar {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 13px;
+            color: #334155;
+            background: #ffffff;
+            padding: 14px 18px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+        .toggle-label:hover {
+            background-color: #f1f5f9;
+        }
+        .toggle-swatch {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            transition: opacity 0.2s ease;
+        }
+        .toggle-label input[type="checkbox"] {
+            accent-color: var(--accent, #2563eb);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
@@ -160,10 +241,10 @@
         <nav class="nav-bar">
             <a href="lecture5.html" class="nav-btn">← Prev: Lecture 5</a>
             <a href="index.html" class="nav-btn">Course Directory</a>
-            <a href="lecture7.html" class="nav-btn">Next: Lecture 7 →</a>
+            <a href="lecture7.html" class="nav-btn"><span class="lang-en">Next: Lecture 7 →</span><span class="lang-th">ถัดไป: บทที่ 7 →</span></a>
         </nav>
 
-        <h1>Lecture 6: Damped Free Oscillations</h1>
+        <h1><span class="lang-en">Lecture 6: Damped Free Oscillations</span><span class="lang-th">บทที่ 6: การสั่นแบบมีความหน่วงอิสระ</span></h1>
 
         <!-- Interactive Visual Demo: Mass-Spring Dashpot & Exponential Decay Envelope -->
         <div class="demo-card">
@@ -186,18 +267,18 @@
 
         <!-- Topic 6.1 -->
         <div id="topic-6-1" class="topic-block">
-            <h2>Topic 6.1: Viscous Damping &amp; Equation of Motion</h2>
+            <h2><span class="lang-en">Topic 6.1: Viscous Damping &amp; Equation of Motion</span><span class="lang-th">หัวข้อ 6.1: แรงหน่วงหนืดและสมการการเคลื่อนที่</span></h2>
             <ul>
-                <li><span class="eq-label">Viscous Damping Force:</span> $$R = -bv$$</li>
+                <li><span class="eq-label"><span class="lang-en">Viscous Damping Force:</span><span class="lang-th">แรงหน่วงหนืด:</span></span> $$R = -bv$$</li>
                 <li><span class="eq-label">Newton's 2nd Law Horizontal Forces:</span> $$ma = -kx - bv \implies m \frac{d^2x}{dt^2} + b \frac{dx}{dt} + kx = 0$$</li>
-                <li><span class="eq-label">Standard Form:</span> $$\frac{d^2x}{dt^2} + \beta \frac{dx}{dt} + \omega_0^2 x = 0 \quad \left(\text{where } \omega_0 = \sqrt{\frac{k}{m}}, \, \beta = \frac{b}{m}\right)$$</li>
+                <li class="key-equation"><span class="eq-label">Standard Form:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\frac{d^2x}{dt^2} + \beta \frac{dx}{dt} + \omega_0^2 x = 0 \quad \left(\text{where } \omega_0 = \sqrt{\frac{k}{m}}, \, \beta = \frac{b}{m}\right)$$</li>
                 <li><span class="eq-label">Auxiliary Characteristic Equation:</span> $$p^2 + \beta p + \omega_0^2 = 0 \implies p = -\frac{\beta}{2} \pm \sqrt{\frac{\beta^2}{4} - \omega_0^2}$$</li>
             </ul>
         </div>
 
         <!-- Topic 6.2 -->
         <div id="topic-6-2" class="topic-block">
-            <h2>Topic 6.2: Underdamped Solution (Light Damping)</h2>
+            <h2><span class="lang-en">Topic 6.2: Underdamped Solution (Light Damping)</span><span class="lang-th">หัวข้อ 6.2: การสั่นแบบหน่วงน้อย (Underdamped - หน่วงเบา)</span></h2>
             <ul>
                 <li><span class="eq-label">Condition:</span> $$\frac{\beta^2}{4} &lt; \omega_0^2 \quad \text{or} \quad b &lt; 2\sqrt{km}$$</li>
                 <li><span class="eq-label">Characteristic Roots:</span> $$p = -\frac{\beta}{2} \pm i\omega$$</li>
@@ -209,18 +290,18 @@
 
         <!-- Topic 6.3 -->
         <div id="topic-6-3" class="topic-block">
-            <h2>Topic 6.3: Critically Damped Solution</h2>
+            <h2><span class="lang-en">Topic 6.3: Critically Damped Solution</span><span class="lang-th">หัวข้อ 6.3: การสั่นแบบหน่วงวิกฤต (Critically Damped)</span></h2>
             <ul>
                 <li><span class="eq-label">Condition &amp; Critical Damping Coefficient ($b_c$):</span> $$\frac{\beta^2}{4} = \omega_0^2 \implies \beta = 2\omega_0 \implies b_c = 2m\omega_0 = 2\sqrt{km}$$</li>
                 <li><span class="eq-label">Repeated Real Characteristic Root:</span> $$p = -\frac{\beta}{2} = -\omega_0$$</li>
-                <li><span class="eq-label">General Position Solution (Reduction of Order):</span> $$x(t) = (C_1 + C_2 t) e^{-\frac{\beta}{2} t} = (C_1 + C_2 t) e^{-\omega_0 t}$$</li>
+                <li class="key-equation"><span class="eq-label">General Position Solution (Reduction of Order):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$x(t) = (C_1 + C_2 t) e^{-\frac{\beta}{2} t} = (C_1 + C_2 t) e^{-\omega_0 t}$$</li>
                 <li><span class="eq-label">Physical Behavior:</span> Returns to equilibrium position in the fastest possible time without oscillating.</li>
             </ul>
         </div>
 
         <!-- Topic 6.4 -->
         <div id="topic-6-4" class="topic-block">
-            <h2>Topic 6.4: Overdamped Solution (Heavy Damping)</h2>
+            <h2><span class="lang-en">Topic 6.4: Overdamped Solution (Heavy Damping)</span><span class="lang-th">หัวข้อ 6.4: การสั่นแบบหน่วงมาก (Overdamped - หน่วงหนัก)</span></h2>
             <ul>
                 <li><span class="eq-label">Condition:</span> $$\frac{\beta^2}{4} &gt; \omega_0^2 \implies \lambda = \sqrt{\frac{\beta^2}{4} - \omega_0^2} &gt; 0$$</li>
                 <li><span class="eq-label">Two Distinct Negative Real Roots:</span> $$p_1, p_2 = -\frac{\beta}{2} \pm \lambda$$</li>
@@ -228,6 +309,41 @@
                 <li><span class="eq-label">Physical Behavior:</span> Heavy damping prevents oscillation; the system slowly decays exponentially back to equilibrium.</li>
             </ul>
         </div>
+
+        <!-- Static Comparison Plot: All Three Regimes -->
+        <div class="demo-card" id="comparison-plot-section">
+            <h3>Comparison Plot: All Three Damping Regimes</h3>
+            <p style="margin: 0 0 14px 0; font-size: 14px; color: #64748b;">
+                Static plot of $x(t)$ for underdamped, critically damped, and overdamped systems with identical initial conditions.
+                Toggle each curve below.
+            </p>
+            <div style="display: flex; justify-content: center;">
+                <canvas id="staticCompareCanvas" width="720" height="340"></canvas>
+            </div>
+            <div class="toggle-bar">
+                <label class="toggle-label" style="--accent: #3b82f6;">
+                    <input type="checkbox" id="togUnder" checked>
+                    <span class="toggle-swatch" style="background: #3b82f6;"></span>
+                    Underdamped ($\beta < 2\omega_0$)
+                </label>
+                <label class="toggle-label" style="--accent: #10b981;">
+                    <input type="checkbox" id="togCritical" checked>
+                    <span class="toggle-swatch" style="background: #10b981;"></span>
+                    Critically Damped ($\beta = 2\omega_0$)
+                </label>
+                <label class="toggle-label" style="--accent: #f59e0b;">
+                    <input type="checkbox" id="togOver" checked>
+                    <span class="toggle-swatch" style="background: #f59e0b;"></span>
+                    Overdamped ($\beta > 2\omega_0$)
+                </label>
+                <label class="toggle-label" style="--accent: #ef4444;">
+                    <input type="checkbox" id="togEnvelope">
+                    <span class="toggle-swatch" style="background: #ef4444;"></span>
+                    Envelope $\pm A_0 e^{-\frac{\beta}{2}t}$
+                </label>
+            </div>
+        </div>
+
     </div>
 
     <!-- Script for Damped Oscillator Animation & Plot -->
@@ -405,6 +521,243 @@
         }
 
         renderL6();
+    </script>
+
+    <!-- Script for Static Comparison Plot -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('staticCompareCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const togUnder    = document.getElementById('togUnder');
+        const togCritical = document.getElementById('togCritical');
+        const togOver     = document.getElementById('togOver');
+        const togEnvelope = document.getElementById('togEnvelope');
+
+        // Physics parameters (same ω₀ as the animated demo)
+        const omega0 = 3.0;
+        const A0 = 1.0;              // normalized amplitude
+        const betaUnder    = 1.2;    // β < 2ω₀ = 6
+        const betaCritical = 6.0;    // β = 2ω₀
+        const betaOver     = 10.0;   // β > 2ω₀
+
+        const tMax = 5.0;            // seconds
+
+        // Compute x(t) for each regime
+        function xUnderdamped(t) {
+            const gamma = betaUnder / 2;
+            const w = Math.sqrt(omega0 * omega0 - gamma * gamma);
+            return A0 * Math.exp(-gamma * t) * Math.cos(w * t);
+        }
+
+        function xCritical(t) {
+            const gamma = betaCritical / 2;
+            return A0 * (1 + gamma * t) * Math.exp(-gamma * t);
+        }
+
+        function xOverdamped(t) {
+            const gamma = betaOver / 2;
+            const lambda = Math.sqrt(gamma * gamma - omega0 * omega0);
+            return A0 * Math.exp(-gamma * t) * Math.cosh(lambda * t);
+        }
+
+        function xEnvelope(t) {
+            const gamma = betaUnder / 2;
+            return A0 * Math.exp(-gamma * t);
+        }
+
+        // Drawing constants
+        const dpr = window.devicePixelRatio || 1;
+        const W = canvas.width;
+        const H = canvas.height;
+
+        // Scale canvas for sharpness
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
+
+        const pad = { top: 30, right: 30, bottom: 50, left: 60 };
+        const plotW = W - pad.left - pad.right;
+        const plotH = H - pad.top - pad.bottom;
+
+        function tToX(t) { return pad.left + (t / tMax) * plotW; }
+        function valToY(v) {
+            // map [-1.1, 1.1] → plot area
+            const normalized = (1.1 - v) / 2.2;
+            return pad.top + normalized * plotH;
+        }
+
+        function drawCurve(fn, color, lineWidth, dash) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.setLineDash(dash || []);
+            ctx.beginPath();
+            const steps = plotW * 2;
+            for (let i = 0; i <= steps; i++) {
+                const t = (i / steps) * tMax;
+                const x = tToX(t);
+                const y = valToY(fn(t));
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, W, H);
+
+            // Background
+            ctx.fillStyle = '#fafbfc';
+            ctx.fillRect(0, 0, W, H);
+
+            // Plot area background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(pad.left, pad.top, plotW, plotH);
+
+            // Grid lines
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 1;
+            // Horizontal grid
+            for (let v = -1.0; v <= 1.0; v += 0.5) {
+                const y = valToY(v);
+                ctx.beginPath();
+                ctx.moveTo(pad.left, y);
+                ctx.lineTo(pad.left + plotW, y);
+                ctx.stroke();
+            }
+            // Vertical grid
+            for (let t = 0; t <= tMax; t += 0.5) {
+                const x = tToX(t);
+                ctx.beginPath();
+                ctx.moveTo(x, pad.top);
+                ctx.lineTo(x, pad.top + plotH);
+                ctx.stroke();
+            }
+
+            // Zero line (thicker)
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            const zeroY = valToY(0);
+            ctx.moveTo(pad.left, zeroY);
+            ctx.lineTo(pad.left + plotW, zeroY);
+            ctx.stroke();
+
+            // Axes border
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(pad.left, pad.top, plotW, plotH);
+
+            // Axis labels
+            ctx.fillStyle = '#334155';
+            ctx.font = '13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = 'center';
+            // X-axis tick labels
+            for (let t = 0; t <= tMax; t += 1) {
+                const x = tToX(t);
+                ctx.fillText(t.toString(), x, pad.top + plotH + 20);
+                // Tick mark
+                ctx.beginPath();
+                ctx.moveTo(x, pad.top + plotH);
+                ctx.lineTo(x, pad.top + plotH + 5);
+                ctx.strokeStyle = '#334155';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            // X-axis title
+            ctx.font = '14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.fillText('Time t (s)', pad.left + plotW / 2, pad.top + plotH + 42);
+
+            // Y-axis tick labels
+            ctx.textAlign = 'right';
+            ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            for (let v = -1.0; v <= 1.0; v += 0.5) {
+                const y = valToY(v);
+                ctx.fillText(v.toFixed(1), pad.left - 8, y + 4);
+            }
+            // Y-axis title
+            ctx.save();
+            ctx.translate(16, pad.top + plotH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            ctx.font = '14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.fillText('x(t) / A₀', 0, 0);
+            ctx.restore();
+
+            // Draw envelope first (behind curves)
+            if (togEnvelope.checked) {
+                drawCurve(t => xEnvelope(t),  '#ef4444', 1.5, [6, 4]);
+                drawCurve(t => -xEnvelope(t), '#ef4444', 1.5, [6, 4]);
+            }
+
+            // Draw the three regime curves
+            if (togOver.checked) {
+                drawCurve(xOverdamped, '#f59e0b', 2.5);
+            }
+            if (togCritical.checked) {
+                drawCurve(xCritical, '#10b981', 2.5);
+            }
+            if (togUnder.checked) {
+                drawCurve(xUnderdamped, '#3b82f6', 2.5);
+            }
+
+            // Legend box
+            const legendX = pad.left + plotW - 210;
+            const legendY = pad.top + 8;
+            ctx.fillStyle = 'rgba(255,255,255,0.92)';
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            const legendItems = [];
+            if (togUnder.checked)    legendItems.push({ color: '#3b82f6', label: 'Underdamped (β=1.2)' });
+            if (togCritical.checked)  legendItems.push({ color: '#10b981', label: 'Critical (β=6.0)' });
+            if (togOver.checked)     legendItems.push({ color: '#f59e0b', label: 'Overdamped (β=10.0)' });
+            if (togEnvelope.checked)  legendItems.push({ color: '#ef4444', label: 'Envelope (dashed)', dash: true });
+
+            if (legendItems.length > 0) {
+                const lh = legendItems.length * 22 + 12;
+                ctx.beginPath();
+                ctx.roundRect(legendX, legendY, 200, lh, 6);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+                ctx.textAlign = 'left';
+                legendItems.forEach((item, i) => {
+                    const ly = legendY + 18 + i * 22;
+                    // Color line
+                    ctx.strokeStyle = item.color;
+                    ctx.lineWidth = 2.5;
+                    ctx.setLineDash(item.dash ? [5, 3] : []);
+                    ctx.beginPath();
+                    ctx.moveTo(legendX + 10, ly - 4);
+                    ctx.lineTo(legendX + 35, ly - 4);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    // Text
+                    ctx.fillStyle = '#1e293b';
+                    ctx.fillText(item.label, legendX + 42, ly);
+                });
+            }
+
+            // Title
+            ctx.fillStyle = '#1f2937';
+            ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Displacement x(t) — Three Damping Regimes (ω₀ = 3.0)', pad.left + 4, pad.top - 10);
+        }
+
+        // Re-render when toggles change
+        togUnder.addEventListener('change', render);
+        togCritical.addEventListener('change', render);
+        togOver.addEventListener('change', render);
+        togEnvelope.addEventListener('change', render);
+
+        // Initial render
+        render();
+    })();
     </script>
 </body>
 </html>

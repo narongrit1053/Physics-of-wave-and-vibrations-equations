@@ -151,7 +151,47 @@
         }
 
         .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
@@ -160,10 +200,10 @@
         <nav class="nav-bar">
             <a href="lecture4.html" class="nav-btn">← Prev: Lecture 4</a>
             <a href="index.html" class="nav-btn">Course Directory</a>
-            <a href="lecture6.html" class="nav-btn">Next: Lecture 6 →</a>
+            <a href="lecture6.html" class="nav-btn"><span class="lang-en">Next: Lecture 6 →</span><span class="lang-th">ถัดไป: บทที่ 6 →</span></a>
         </nav>
 
-        <h1>Lecture 5: LC Circuit Oscillations</h1>
+        <h1><span class="lang-en">Lecture 5: LC Circuit Oscillations</span><span class="lang-th">บทที่ 5: การสั่นในวงจรไฟฟ้า LC</span></h1>
 
         <!-- Interactive Visual Demo: LC Circuit Animation & Charge/Current Plot -->
         <div class="demo-card">
@@ -191,21 +231,61 @@
 
         <!-- Topic 5.1 -->
         <div id="topic-5-1" class="topic-block">
-            <h2>Topic 5.1: Differential Equations &amp; Natural Frequency</h2>
+            <h2><span class="lang-en">Topic 5.1: Differential Equations &amp; Natural Frequency</span><span class="lang-th">หัวข้อ 5.1: สมการเชิงอนุพันธ์และความถี่ธรรมชาติ</span></h2>
             <ul>
                 <li><span class="eq-label">KVL Loop Equation:</span> $$-\frac{q}{C} - L\frac{di}{dt} = 0 \implies L\frac{d^2q}{dt^2} + \frac{1}{C}q = 0 \quad \left(\text{since } i = \frac{dq}{dt}\right)$$</li>
                 <li><span class="eq-label">Standard Form:</span> $$\frac{d^2q}{dt^2} + \frac{1}{LC} q = 0$$</li>
-                <li><span class="eq-label">Natural Angular Frequency:</span> $$\omega_0 = \frac{1}{\sqrt{LC}}$$</li>
+                <li class="key-equation"><span class="eq-label">Natural Angular Frequency:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\omega_0 = \frac{1}{\sqrt{LC}}$$</li>
                 <li><span class="eq-label">Charge Solution:</span> $$q(t) = q_0 \cos(\omega_0 t + \phi)$$</li>
             </ul>
         </div>
 
         <!-- Topic 5.2 -->
         <div id="topic-5-2" class="topic-block">
-            <h2>Topic 5.2: LC Circuit Energy Conservation</h2>
+            <h2><span class="lang-en">Topic 5.2: LC Circuit Energy Conservation</span><span class="lang-th">หัวข้อ 5.2: การอนุรักษ์พลังงานในวงจร LC</span></h2>
             <ul>
-                <li><span class="eq-label">Total Electrical Energy ($E$):</span> $$E = U_E + U_B = \frac{1}{2C} q^2 + \frac{1}{2} L i^2 = \text{constant}$$</li>
-                <li><span class="eq-label">Energy Conservation Proof:</span> $$\frac{dE}{dt} = \frac{d}{dt}\left(\frac{1}{2C} q^2 + \frac{1}{2} L i^2\right) = 0 \implies \frac{q}{C}\frac{dq}{dt} + L i \frac{di}{dt} = 0 \implies \ddot{q} + \frac{1}{LC} q = 0$$</li>
+                <li class="key-equation"><span class="eq-label">Total Electrical Energy ($E$):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$E = U_E + U_B = \frac{1}{2C} q^2 + \frac{1}{2} L i^2 = \text{constant}$$</li>
+                <li class="key-equation"><span class="eq-label">Energy Conservation Proof:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\frac{dE}{dt} = \frac{d}{dt}\left(\frac{1}{2C} q^2 + \frac{1}{2} L i^2\right) = 0 \implies \frac{q}{C}\frac{dq}{dt} + L i \frac{di}{dt} = 0 \implies \ddot{q} + \frac{1}{LC} q = 0$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 5.3: Phase Diagrams -->
+        <div id="topic-5-3" class="topic-block">
+            <h2><span class="lang-en">Topic 5.3: Phase Diagrams — Capacitor &amp; Inductor</span><span class="lang-th">หัวข้อ 5.3: ไดอะแกรมเฟส — ตัวเก็บประจุและตัวเหนี่ยวนำ</span></h2>
+
+            <!-- Capacitor Phase Diagram -->
+            <div class="demo-card" style="margin-bottom: 24px;">
+                <h3>Capacitor: Voltage lags Current by $90°$ ($-\frac{\pi}{2}$)</h3>
+                <p style="font-size: 14px; color: #475569; margin-bottom: 14px;">
+                    For a capacitor driven by $i(t) = i_0 e^{i\omega t}$, the voltage is:
+                    $$V_C = \frac{1}{i\omega C}\, i_0 e^{i\omega t} = \frac{i_0}{\omega C}\, e^{i(\omega t - \pi/2)}$$
+                    The impedance is $Z_C = \frac{1}{i\omega C}$, so $V_C$ <strong>lags</strong> $i$ by $90°$.
+                </p>
+                <div class="demo-grid">
+                    <canvas id="phasorCapCanvas" width="260" height="260"></canvas>
+                    <canvas id="waveCapCanvas" width="460" height="220"></canvas>
+                </div>
+            </div>
+
+            <!-- Inductor Phase Diagram -->
+            <div class="demo-card">
+                <h3>Inductor: Voltage leads Current by $90°$ ($+\frac{\pi}{2}$)</h3>
+                <p style="font-size: 14px; color: #475569; margin-bottom: 14px;">
+                    For an inductor driven by $i(t) = i_0 e^{i\omega t}$, the voltage is:
+                    $$V_L = i\omega L\, i_0 e^{i\omega t} = \omega L\, i_0\, e^{i(\omega t + \pi/2)}$$
+                    The impedance is $Z_L = i\omega L$, so $V_L$ <strong>leads</strong> $i$ by $90°$.
+                </p>
+                <div class="demo-grid">
+                    <canvas id="phasorIndCanvas" width="260" height="260"></canvas>
+                    <canvas id="waveIndCanvas" width="460" height="220"></canvas>
+                </div>
+            </div>
+
+            <!-- Summary Equations -->
+            <ul>
+                <li class="key-equation"><span class="eq-label">Capacitor Impedance:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$Z_C = \frac{1}{i\omega C} = \frac{1}{\omega C}\, e^{-i\pi/2} \quad \Rightarrow \quad V_C \text{ lags } i \text{ by } 90°$$</li>
+                <li class="key-equation"><span class="eq-label">Inductor Impedance:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$Z_L = i\omega L = \omega L\, e^{i\pi/2} \quad \Rightarrow \quad V_L \text{ leads } i \text{ by } 90°$$</li>
+                <li class="key-equation"><span class="eq-label">Resistor (Reference):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$Z_R = R \quad \Rightarrow \quad V_R \text{ is in phase with } i$$</li>
             </ul>
         </div>
     </div>
@@ -387,6 +467,243 @@
         }
 
         renderL5();
+    </script>
+
+    <!-- Script for Phase Diagrams (Capacitor & Inductor) -->
+    <script>
+        (function() {
+            // Canvas refs
+            const phCapC = document.getElementById('phasorCapCanvas');
+            const phCapCtx = phCapC.getContext('2d');
+            const wvCapC = document.getElementById('waveCapCanvas');
+            const wvCapCtx = wvCapC.getContext('2d');
+
+            const phIndC = document.getElementById('phasorIndCanvas');
+            const phIndCtx = phIndC.getContext('2d');
+            const wvIndC = document.getElementById('waveIndCanvas');
+            const wvIndCtx = wvIndC.getContext('2d');
+
+            const PHASOR_R = 85;
+
+            function drawPhasorDiagram(ctx, w, h, angle_i, angle_v, labelI, labelV, colorI, colorV) {
+                const cx = w / 2;
+                const cy = h / 2;
+                ctx.clearRect(0, 0, w, h);
+
+                // Background circle
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(cx, cy, PHASOR_R, 0, 2 * Math.PI);
+                ctx.stroke();
+
+                // Axes
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 0.5;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(cx - PHASOR_R - 15, cy);
+                ctx.lineTo(cx + PHASOR_R + 15, cy);
+                ctx.moveTo(cx, cy - PHASOR_R - 15);
+                ctx.lineTo(cx, cy + PHASOR_R + 15);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Axis labels
+                ctx.font = '11px sans-serif';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText('Re', cx + PHASOR_R + 8, cy + 4);
+                ctx.fillText('Im', cx - 8, cy - PHASOR_R - 8);
+
+                // Phase arc between I and V
+                const arcStart = -Math.max(angle_i, angle_v);
+                const arcEnd = -Math.min(angle_i, angle_v);
+                ctx.strokeStyle = '#a78bfa';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                ctx.arc(cx, cy, 35, arcStart, arcEnd);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Phase label
+                const midAngle = -(angle_i + angle_v) / 2;
+                const phaseDeg = Math.round(((angle_v - angle_i) * 180 / Math.PI + 360) % 360);
+                const dispDeg = phaseDeg > 180 ? phaseDeg - 360 : phaseDeg;
+                ctx.font = 'bold 13px sans-serif';
+                ctx.fillStyle = '#7c3aed';
+                ctx.fillText(
+                    (dispDeg >= 0 ? '+' : '') + dispDeg + '°',
+                    cx + 44 * Math.cos(midAngle) - 10,
+                    cy + 44 * Math.sin(midAngle) + 4
+                );
+
+                // Draw phasor arrow
+                function drawArrow(fromX, fromY, toX, toY, color, lw) {
+                    ctx.strokeStyle = color;
+                    ctx.fillStyle = color;
+                    ctx.lineWidth = lw;
+                    ctx.beginPath();
+                    ctx.moveTo(fromX, fromY);
+                    ctx.lineTo(toX, toY);
+                    ctx.stroke();
+                    const a = Math.atan2(toY - fromY, toX - fromX);
+                    const headLen = 10;
+                    ctx.beginPath();
+                    ctx.moveTo(toX, toY);
+                    ctx.lineTo(toX - headLen * Math.cos(a - 0.3), toY - headLen * Math.sin(a - 0.3));
+                    ctx.lineTo(toX - headLen * Math.cos(a + 0.3), toY - headLen * Math.sin(a + 0.3));
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                // Current phasor (I)
+                const ix = cx + PHASOR_R * Math.cos(angle_i);
+                const iy = cy - PHASOR_R * Math.sin(angle_i);
+                drawArrow(cx, cy, ix, iy, colorI, 3);
+
+                // Voltage phasor (V)
+                const vx = cx + PHASOR_R * Math.cos(angle_v);
+                const vy = cy - PHASOR_R * Math.sin(angle_v);
+                drawArrow(cx, cy, vx, vy, colorV, 3);
+
+                // Labels at phasor tips
+                ctx.font = 'bold 13px sans-serif';
+                const labelOff = 16;
+                ctx.fillStyle = colorI;
+                ctx.fillText(labelI, ix + labelOff * Math.cos(angle_i), iy - labelOff * Math.sin(angle_i) + 4);
+                ctx.fillStyle = colorV;
+                ctx.fillText(labelV, vx + labelOff * Math.cos(angle_v), vy - labelOff * Math.sin(angle_v) + 4);
+
+                // Title
+                ctx.font = 'bold 12px sans-serif';
+                ctx.fillStyle = '#334155';
+                ctx.fillText('Phasor Diagram', 8, 18);
+            }
+
+            function drawStaticWaveform(ctx, w, h, phaseI, phaseV, labelI, labelV, colorI, colorV) {
+                ctx.clearRect(0, 0, w, h);
+                const cy = h / 2;
+                const amp = 70;
+                const marginL = 40;
+                const marginR = 20;
+                const plotW = w - marginL - marginR;
+                const periods = 2;
+                const omega = 2 * Math.PI * periods;
+
+                // Zero line
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(marginL, cy);
+                ctx.lineTo(marginL + plotW, cy);
+                ctx.stroke();
+
+                // Time axis arrow
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(marginL, cy);
+                ctx.lineTo(marginL + plotW + 10, cy);
+                ctx.stroke();
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '11px sans-serif';
+                ctx.fillText('t', marginL + plotW + 12, cy + 4);
+
+                // Y axis
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.beginPath();
+                ctx.moveTo(marginL, cy - amp - 15);
+                ctx.lineTo(marginL, cy + amp + 15);
+                ctx.stroke();
+
+                // Draw current waveform (solid)
+                ctx.strokeStyle = colorI;
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                for (let px = 0; px <= plotW; px++) {
+                    const t = px / plotW;
+                    const val = amp * Math.cos(omega * t + phaseI);
+                    const py = cy - val;
+                    if (px === 0) ctx.moveTo(marginL + px, py);
+                    else ctx.lineTo(marginL + px, py);
+                }
+                ctx.stroke();
+
+                // Draw voltage waveform (dashed)
+                ctx.strokeStyle = colorV;
+                ctx.lineWidth = 2.5;
+                ctx.setLineDash([8, 4]);
+                ctx.beginPath();
+                for (let px = 0; px <= plotW; px++) {
+                    const t = px / plotW;
+                    const val = amp * Math.cos(omega * t + phaseV);
+                    const py = cy - val;
+                    if (px === 0) ctx.moveTo(marginL + px, py);
+                    else ctx.lineTo(marginL + px, py);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Period markers
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '10px sans-serif';
+                for (let p = 0; p <= periods; p++) {
+                    const px = marginL + (p / periods) * plotW;
+                    ctx.beginPath();
+                    ctx.moveTo(px, cy - 4);
+                    ctx.lineTo(px, cy + 4);
+                    ctx.strokeStyle = '#cbd5e1';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                    if (p > 0) ctx.fillText(p + 'T', px - 6, cy + 16);
+                    else ctx.fillText('0', px - 3, cy + 16);
+                }
+
+                // Legend
+                ctx.font = '12px sans-serif';
+                ctx.fillStyle = colorI;
+                ctx.fillText('— ' + labelI, marginL, 18);
+                ctx.fillStyle = colorV;
+                ctx.fillText('--- ' + labelV, marginL + 90, 18);
+
+                // +/- labels
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '10px sans-serif';
+                ctx.fillText('+A', marginL - 25, cy - amp + 4);
+                ctx.fillText('−A', marginL - 25, cy + amp + 4);
+            }
+
+            // === Draw once, static ===
+
+            // Capacitor: I at 0°, V_C at -90° (V lags I)
+            drawPhasorDiagram(
+                phCapCtx, phCapC.width, phCapC.height,
+                0, -Math.PI / 2,
+                'I', 'Vᶜ',
+                '#ef4444', '#0284c7'
+            );
+            drawStaticWaveform(
+                wvCapCtx, wvCapC.width, wvCapC.height,
+                0, -Math.PI / 2,
+                'i(t)', 'Vᶜ(t)',
+                '#ef4444', '#0284c7'
+            );
+
+            // Inductor: I at 0°, V_L at +90° (V leads I)
+            drawPhasorDiagram(
+                phIndCtx, phIndC.width, phIndC.height,
+                0, Math.PI / 2,
+                'I', 'Vₗ',
+                '#ef4444', '#f59e0b'
+            );
+            drawStaticWaveform(
+                wvIndCtx, wvIndC.width, wvIndC.height,
+                0, Math.PI / 2,
+                'i(t)', 'Vₗ(t)',
+                '#ef4444', '#f59e0b'
+            );
+        })();
     </script>
 </body>
 </html>

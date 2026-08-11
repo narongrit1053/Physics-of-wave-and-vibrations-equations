@@ -151,26 +151,66 @@
         }
 
         .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
     <div class="container">
         <!-- Navigation Header -->
         <nav class="nav-bar">
-            <a href="index.html" class="nav-btn">← Back to Course Directory</a>
+            <a href="index.html" class="nav-btn"><span class="lang-en">← Course Directory</span><span class="lang-th">← สารบัญรายวิชา</span></a> <a href="formula_sheet.html" class="nav-btn" style="color:#b45309; font-weight:700; margin-left:8px;"><span class="lang-en">🎓 Exam Formula Sheet</span><span class="lang-th">🎓 แผ่นสูตรสอบ</span></a>
             <span class="nav-title">Lecture 0 (Prerequisites)</span>
-            <a href="lecture1.html" class="nav-btn">Next: Lecture 1 →</a>
+            <a href="lecture1.html" class="nav-btn"><span class="lang-en">Next: Lecture 1 →</span><span class="lang-th">ถัดไป: บทที่ 1 →</span></a>
         </nav>
 
-        <h1>Lecture 0: Mathematical Foundations &amp; Prerequisites</h1>
+        <h1><span class="lang-en">Lecture 0: Mathematical Foundations &amp; Prerequisites</span><span class="lang-th">บทที่ 0: พื้นฐานทางคณิตศาสตร์ที่จำเป็น</span></h1>
 
         <!-- Topic 0.1 -->
         <div id="topic-0-1" class="topic-block">
-            <h2>Topic 0.1: Quadratic Equations &amp; Root Finding</h2>
+            <h2><span class="lang-en">Topic 0.1: Quadratic Equations &amp; Root Finding</span><span class="lang-th">หัวข้อ 0.1: สมการกำลังสองและการหาคำตอบ</span></h2>
             <ul>
-                <li><span class="eq-label">Standard Quadratic Equation:</span> $$a x^2 + b x + c = 0$$</li>
-                <li><span class="eq-label">Quadratic Formula for Roots:</span> $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Standard Quadratic Equation:</span><span class="lang-th">สมการกำลังสองมาตรฐาน:</span></span> $$a x^2 + b x + c = 0$$</li>
+                <li><span class="eq-label"><span class="lang-en">Quadratic Formula for Roots:</span><span class="lang-th">สูตรการหาคำตอบสมการกำลังสอง:</span></span> $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$</li>
                 <li><span class="eq-label">Auxiliary Polynomial for ODE ($p^2 + \beta p + \omega_0^2 = 0$):</span> $$p = -\frac{\beta}{2} \pm \sqrt{\frac{\beta^2}{4} - \omega_0^2}$$</li>
                 <li><span class="eq-label">Discriminant Classification ($\Delta = \frac{\beta^2}{4} - \omega_0^2$):</span>
                     $$\Delta &gt; 0 \implies \text{Two distinct real roots (Overdamped)}$$
@@ -182,21 +222,21 @@
 
         <!-- Topic 0.2 -->
         <div id="topic-0-2" class="topic-block">
-            <h2>Topic 0.2: Trigonometric Foundations &amp; Euler's Formula</h2>
+            <h2><span class="lang-en">Topic 0.2: Trigonometric Foundations &amp; Euler's Formula</span><span class="lang-th">หัวข้อ 0.2: พื้นฐานตรีโกณมิติและสูตรของออยเลอร์</span></h2>
             <ul>
-                <li><span class="eq-label">Euler's Formula:</span> $$e^{i\theta} = \cos\theta + i\sin\theta$$</li>
-                <li><span class="eq-label">Polar Form of Complex Number:</span> $$z = a + ib = R e^{i\theta} \quad \left(R = \sqrt{a^2 + b^2}, \quad \theta = \tan^{-1}\left(\frac{b}{a}\right)\right)$$</li>
+                <li><span class="eq-label"><span class="lang-en">Euler's Formula:</span><span class="lang-th">สูตรของออยเลอร์:</span></span> $$e^{i\theta} = \cos\theta + i\sin\theta$$</li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Polar Form of Complex Number:</span><span class="lang-th">รูปแบบโพลาร์ของจำนวนเชิงซ้อน:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$z = a + ib = R e^{i\theta} \quad \left(R = \sqrt{a^2 + b^2}, \quad \theta = \tan^{-1}\left(\frac{b}{a}\right)\right)$$</li>
                 <li><span class="eq-label">Linear Combination of Sine &amp; Cosine to Single Harmonic Phase Form:</span>
                     $$A \cos\omega t + B \sin\omega t = R \cos(\omega t - \phi)$$
                     $$\text{where } R = \sqrt{A^2 + B^2}, \quad \phi = \tan^{-1}\left(\frac{B}{A}\right)$$
                 </li>
-                <li><span class="eq-label">Cosine Phase Expansion:</span> $$\cos(\omega t + \phi) = \cos(\omega t)\cos\phi - \sin(\omega t)\sin\phi$$</li>
+                <li><span class="eq-label"><span class="lang-en">Cosine Phase Expansion:</span><span class="lang-th">การกระจายเฟสของคอส (Cosine):</span></span> $$\cos(\omega t + \phi) = \cos(\omega t)\cos\phi - \sin(\omega t)\sin\phi$$</li>
             </ul>
         </div>
 
         <!-- Topic 0.3 -->
         <div id="topic-0-3" class="topic-block">
-            <h2>Topic 0.3: The Ansatz Technique (Trial Solutions for ODEs)</h2>
+            <h2><span class="lang-en">Topic 0.3: The Ansatz Technique (Trial Solutions for ODEs)</span><span class="lang-th">หัวข้อ 0.3: เทคนิคการตั้งคำตอบสมมติ (Ansatz)</span></h2>
             <ul>
                 <li><span class="eq-label">Exponential Trial Solution (Ansatz):</span> $$x(t) = C e^{p t}$$</li>
                 <li><span class="eq-label">Derivatives of Exponential Ansatz:</span> $$\frac{dx}{dt} = p C e^{p t}, \quad \frac{d^2x}{dt^2} = p^2 C e^{p t}$$</li>
@@ -208,8 +248,8 @@
         </div>
 
         <!-- Topic 0.4 -->
-        <div id="topic-0-4" class="topic-block">
-            <h2>Topic 0.4: Useful Trigonometric Identities</h2>
+        <div id="topic-0-4" class="topic-block key-topic-block">
+            <h2><span class="lang-en">Topic 0.4: Useful Trigonometric Identities</span><span class="lang-th">หัวข้อ 0.4: เอกลักษณ์ตรีโกณมิติที่สำคัญ</span></h2>
             <ul>
                 <li><span class="eq-label">Pythagorean Identity:</span> $$\sin^2 A + \cos^2 A = 1$$</li>
                 <li><span class="eq-label">Negative Angle Identities:</span> $$\sin(-A) = -\sin A, \quad \cos(-A) = \cos A, \quad \tan(-A) = -\tan A$$</li>
@@ -218,7 +258,7 @@
                     $$\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$$
                     $$\tan(A \pm B) = \frac{\tan A \pm \tan B}{1 \mp \tan A \tan B}$$
                 </li>
-                <li><span class="eq-label">Cofunction &amp; Double Angle Identities:</span>
+                <li class="key-equation"><span class="eq-label">Cofunction &amp; Double Angle Identities:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span>
                     $$\sin\left(\frac{\pi}{2} - A\right) = \cos A$$
                     $$\sin(2A) = 2\sin A\cos A$$
                     $$\cos(2A) = \cos^2 A - \sin^2 A = 1 - 2\sin^2 A$$
@@ -230,7 +270,7 @@
                     $$\cos A + \cos B = 2\cos\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$$
                     $$\cos A - \cos B = -2\sin\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)$$
                 </li>
-                <li><span class="eq-label">Product-to-Sum Identities:</span>
+                <li class="key-equation"><span class="eq-label">Product-to-Sum Identities:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span>
                     $$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$$
                     $$\cos A \cos B = \frac{1}{2}[\cos(A-B) + \cos(A+B)]$$
                     $$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$$
@@ -301,7 +341,7 @@
                 </svg>
             </div>
 
-            <h2>Topic 0.5: Coordinate Systems ($x$-$y$ Axis, $\text{Re}$-$\text{Im}$ Complex Axis &amp; $\cos$-$\sin$ Projections)</h2>
+            <h2><span class="lang-en">Topic 0.5: Coordinate Systems ($x$-$y$ Axis, $\text{Re}$-$\text{Im}$ Complex Axis &amp; $\cos$-$\sin$ Projections)</span><span class="lang-th">หัวข้อ 0.5: ระบบพิกัดและแกน ($x$-$y$, $\text{Re}$-$\text{Im}$, $\cos$-$\sin$)</span></h2>
             <ul>
                 <li><span class="eq-label">2D Cartesian Coordinate System ($x$-$y$ Axis):</span>
                     $$\text{Position Vector: } \vec{r} = x\hat{i} + y\hat{j}, \quad \text{Magnitude: } r = \sqrt{x^2 + y^2}, \quad \text{Angle: } \theta = \tan^{-1}\left(\frac{y}{x}\right)$$
@@ -398,7 +438,7 @@
                 </svg>
             </div>
 
-            <h2>Topic 0.6: The Unit Circle &amp; Trigonometric Mapping</h2>
+            <h2><span class="lang-en">Topic 0.6: The Unit Circle &amp; Trigonometric Mapping</span><span class="lang-th">หัวข้อ 0.6: วงกลมหนึ่งหน่วยและการส่งแปลงทางตรีโกณมิติ</span></h2>
             <ul>
                 <li><span class="eq-label">Unit Circle Equation ($R = 1$):</span>
                     $$x^2 + y^2 = 1 \implies \cos^2\theta + \sin^2\theta = 1$$

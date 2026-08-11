@@ -151,7 +151,47 @@
         }
 
         .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
@@ -161,71 +201,142 @@
             <a href="lecture6.html" class="nav-btn">← Prev: Lecture 6</a>
             <a href="index.html" class="nav-btn">Course Directory</a>
             <span class="nav-title">Lecture 7 of 8</span>
-            <a href="lecture8.html" class="nav-btn">Next: Lecture 8 →</a>
+            <a href="lecture8.html" class="nav-btn"><span class="lang-en">Next: Lecture 8 →</span><span class="lang-th">ถัดไป: บทที่ 8 →</span></a>
         </nav>
 
-        <h1>Lecture 7: Forced Oscillations and Resonance</h1>
+        <h1><span class="lang-en">Lecture 7: Forced Oscillations and Resonance</span><span class="lang-th">บทที่ 7: การสั่นถูกบังคับและการสั่นพ้อง</span></h1>
 
-        <!-- Interactive Visual Demo: Driven Oscillator & Amplitude Resonance Curve -->
+        <!-- Interactive Visual Demo: Driven Oscillator & Amplitude/Phase Resonance Curves -->
         <div class="demo-card">
             <h3>Interactive Physics Visualizer: Resonance Dynamics across Topics</h3>
             <div class="demo-grid">
-                <canvas id="drivenAnimCanvas" width="380" height="260"></canvas>
-                <canvas id="resPlotCanvas" width="460" height="260"></canvas>
+                <canvas id="drivenAnimCanvas" width="380" height="280"></canvas>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <canvas id="resAmpCanvas" width="500" height="220"></canvas>
+                    <canvas id="resPhaseCanvas" width="500" height="160"></canvas>
+                </div>
             </div>
             <div class="controls-bar">
-                <button id="btnMechRes" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Topic 7.1: Mechanical Driven Oscillator</button>
+                <button id="btnMechRes" style="padding:6px 12px; cursor:pointer; background:#1d4ed8; color:white; border:none; border-radius:4px; font-weight:500;">Topic 7.1: Mechanical Driven Oscillator</button>
                 <button id="btnElecRes" style="padding:6px 12px; cursor:pointer; background:#2563eb; color:white; border:none; border-radius:4px; font-weight:500;">Topic 7.2 &amp; 7.4: Series RLC Circuit Resonance</button>
-                <label style="margin-left: 10px;">
-                    Driving Freq $\omega$: <span id="wDriveVal">3.0</span> rad/s
-                    <input type="range" id="wDriveSlider" min="0.5" max="6.0" step="0.1" value="3.0">
+            </div>
+            <div class="controls-bar" style="margin-top: 8px;">
+                <label>
+                    Driving Freq $\omega$: <span id="wDriveVal" style="min-width:40px; display:inline-block; font-weight:600; color:#2563eb;">3.0</span> rad/s
+                    <input type="range" id="wDriveSlider" min="0.1" max="8.0" step="0.05" value="3.0" style="width:140px;">
                 </label>
                 <label>
-                    Damping / Resistance $\beta$: <span id="resBetaVal">0.4</span>
-                    <input type="range" id="resBetaSlider" min="0.1" max="1.5" step="0.1" value="0.4">
+                    Damping $\beta$: <span id="resBetaVal" style="min-width:28px; display:inline-block; font-weight:600; color:#ef4444;">0.4</span>
+                    <input type="range" id="resBetaSlider" min="0.1" max="3.0" step="0.05" value="0.4" style="width:120px;">
                 </label>
+                <span id="readoutBox" style="background:#f0f9ff; border:1px solid #bfdbfe; border-radius:6px; padding:4px 10px; font-size:12px; color:#1e40af; font-weight:500;"></span>
             </div>
         </div>
 
         <!-- Topic 7.1 -->
         <div id="topic-7-1" class="topic-block">
-            <h2>Topic 7.1: Forced Mechanical Oscillations</h2>
+            <h2><span class="lang-en">Topic 7.1: Forced Mechanical Oscillations</span><span class="lang-th">หัวข้อ 7.1: การสั่นถูกบังคับทางกลศาสตร์</span></h2>
             <ul>
                 <li><span class="eq-label">Equation of Motion:</span> $$m \ddot{x} + b \dot{x} + k x = F_0 \cos\omega t \implies \ddot{x} + \beta \dot{x} + \omega_0^2 x = \frac{F_0}{m} \cos\omega t$$</li>
                 <li><span class="eq-label">General Solution (Transient + Steady-State):</span> $$x(t) = x_{\text{trans}}(t) + x_{\text{steady}}(t) = B e^{-\frac{\beta}{2} t} \cos(\omega_d t + \phi) + A(\omega) \cos(\omega t - \delta)$$</li>
-                <li><span class="eq-label">Steady-State Amplitude $A(\omega)$:</span> $$A(\omega) = \frac{F_0 / m}{\sqrt{(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2}}$$</li>
-                <li><span class="eq-label">Phase Difference $\delta$:</span> $$\tan\delta = \frac{\omega \beta}{\omega_0^2 - \omega^2}$$</li>
+                <li class="key-equation"><span class="eq-label">Steady-State Amplitude $A(\omega)$:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$A(\omega) = \frac{F_0 / m}{\sqrt{(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2}}$$</li>
+                <li class="key-equation"><span class="eq-label">Phase Difference $\delta$:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\tan\delta = \frac{\omega \beta}{\omega_0^2 - \omega^2}$$</li>
             </ul>
+
+            <!-- Transient & Steady State Plot Decomposition -->
+            <div class="demo-card" style="margin-top: 20px; margin-bottom: 10px;">
+                <h3>Transient &amp; Steady-State Motion Decomposition</h3>
+                <p style="font-size: 13px; color: #475569; margin-top: -6px; margin-bottom: 12px;">
+                    The total response $x(t) = x_{\text{trans}}(t) + x_{\text{steady}}(t)$ transitions from high-frequency damped natural oscillations (transient) to driving-frequency oscillations (steady state).
+                </p>
+                <div style="display: flex; justify-content: center;">
+                    <canvas id="transientPlotCanvas" width="720" height="460"></canvas>
+                </div>
+                <div class="controls-bar" style="margin-top: 12px; gap: 16px;">
+                    <label>
+                        Natural Freq $\omega_0$: <span id="w0TransVal" style="font-weight:600; color:#2563eb;">18.0</span> rad/s
+                        <input type="range" id="w0TransSlider" min="8.0" max="30.0" step="1.0" value="18.0" style="width:110px;">
+                    </label>
+                    <label>
+                        Driving Freq $\omega$: <span id="wDriveTransVal" style="font-weight:600; color:#059669;">3.0</span> rad/s
+                        <input type="range" id="wDriveTransSlider" min="1.0" max="8.0" step="0.5" value="3.0" style="width:100px;">
+                    </label>
+                    <label>
+                        Damping $\beta$: <span id="betaTransVal" style="font-weight:600; color:#dc2626;">0.8</span>
+                        <input type="range" id="betaTransSlider" min="0.2" max="2.0" step="0.1" value="0.8" style="width:90px;">
+                    </label>
+                    <label style="cursor:pointer; user-select:none;">
+                        <input type="checkbox" id="chkShowComponents" checked style="accent-color:#2563eb;">
+                        Show Overlay Curves
+                    </label>
+                </div>
+            </div>
         </div>
 
         <!-- Topic 7.2 -->
         <div id="topic-7-2" class="topic-block">
-            <h2>Topic 7.2: Series RLC Circuit</h2>
+            <h2><span class="lang-en">Topic 7.2: Power Absorption, Half-Power Points &amp; Bandwidth</span><span class="lang-th">หัวข้อ 7.2: การดูดกลืนพลังงาน จุดครึ่งพลังงาน และความกว้างแถบความถี่ (Bandwidth)</span></h2>
             <ul>
-                <li><span class="eq-label">KVL Loop with AC Source:</span> $$L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{1}{C} q = V_0 \cos\omega t$$</li>
-                <li><span class="eq-label">Steady-State Charge Amplitude:</span> $$q_0(\omega) = \frac{V_0 / L}{\sqrt{(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2}}$$</li>
-                <li><span class="eq-label">Phase Shift:</span> $$\tan\delta = \frac{\omega \beta}{\omega_0^2 - \omega^2}$$</li>
-                <li><span class="eq-label">Circuit Current:</span> $$i(t) = \frac{dq}{dt} = -q_0 \omega \sin(\omega t - \delta)$$</li>
+                <li><span class="eq-label">Average Power Absorption:</span> $$P(\omega) = \frac{1}{2} b v_0^2 = \frac{F_0^2 \beta \omega^2}{2 m \left[(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2\right]}$$</li>
+                <li><span class="eq-label">Maximum Power (at Resonance $\omega = \omega_0$):</span> $$P_{\text{max}} = P(\omega_0) = \frac{F_0^2}{2 m \beta} = \frac{F_0^2}{2 b}$$</li>
+                <li><span class="eq-label">Half-Power Condition:</span> $$P(\omega_{1,2}) = \frac{1}{2} P_{\text{max}} \implies A(\omega_{1,2}) = \frac{1}{\sqrt{2}} A_{\text{max}} \approx 0.707 \, A_{\text{max}}$$</li>
+                <li><span class="eq-label">Half-Power Frequencies ($\omega_1, \omega_2$):</span> $$\omega_{1,2} = \sqrt{\omega_0^2 + \frac{\beta^2}{4}} \mp \frac{\beta}{2} \approx \omega_0 \mp \frac{\beta}{2}$$</li>
+                <li><span class="eq-label">Resonance Bandwidth ($\Delta\omega$):</span> $$\Delta\omega = \omega_2 - \omega_1 = \beta = \frac{b}{m} \quad \left(\text{or } \frac{R}{L}\right)$$</li>
+                <li class="key-equation"><span class="eq-label">Quality Factor ($Q$):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$Q = \frac{\omega_0}{\Delta\omega} = \frac{\omega_0}{\beta}$$</li>
             </ul>
+
+            <!-- Half-Power Points & Bandwidth Plot Card -->
+            <div class="demo-card" style="margin-top: 20px; margin-bottom: 10px;">
+                <h3>Half-Power Points &amp; Resonance Bandwidth ($\Delta\omega$)</h3>
+                <p style="font-size: 13px; color: #475569; margin-top: -6px; margin-bottom: 12px;">
+                    At half-power frequencies $\omega_1$ and $\omega_2$, average power drops to $P_{\text{max}}/2$ and amplitude drops to $A_{\text{max}}/\sqrt{2} \approx 0.707 A_{\text{max}}$.
+                    The bandwidth $\Delta\omega = \omega_2 - \omega_1 = \beta$.
+                </p>
+                <div style="display: flex; justify-content: center;">
+                    <canvas id="halfPowerCanvas" width="720" height="360"></canvas>
+                </div>
+                <div class="controls-bar" style="margin-top: 12px; gap: 16px;">
+                    <label>
+                        Resonance Freq $\omega_0$: <span id="w0HPVal" style="font-weight:600; color:#2563eb;">5.0</span> rad/s
+                        <input type="range" id="w0HPSlider" min="2.0" max="8.0" step="0.2" value="5.0" style="width:110px;">
+                    </label>
+                    <label>
+                        Damping / Bandwidth $\beta$: <span id="betaHPVal" style="font-weight:600; color:#dc2626;">0.8</span> rad/s
+                        <input type="range" id="betaHPSlider" min="0.2" max="2.0" step="0.1" value="0.8" style="width:110px;">
+                    </label>
+                    <span id="hpReadout" style="background:#f0f9ff; border:1px solid #bfdbfe; border-radius:6px; padding:4px 10px; font-size:12px; color:#1e40af; font-weight:500;"></span>
+                </div>
+            </div>
         </div>
 
         <!-- Topic 7.3 -->
         <div id="topic-7-3" class="topic-block">
-            <h2>Topic 7.3: Complex Impedance Analysis</h2>
+            <h2><span class="lang-en">Topic 7.3: Series RLC Circuit</span><span class="lang-th">หัวข้อ 7.3: วงจรไฟฟ้า RLC แบบอนุกรม</span></h2>
             <ul>
-                <li><span class="eq-label">Device Impedances:</span> $$Z_R = R, \quad Z_L = j\omega L, \quad Z_C = -\frac{j}{\omega C}$$</li>
-                <li><span class="eq-label">Total Impedance ($Z$):</span> $$Z = R + i\left(\omega L - \frac{1}{\omega C}\right)$$</li>
-                <li><span class="eq-label">Impedance Magnitude:</span> $$|Z| = \sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}$$</li>
-                <li><span class="eq-label">Phase Angle:</span> $$\tan\delta = \frac{\omega L - \frac{1}{\omega C}}{R}$$</li>
-                <li><span class="eq-label">Ohm's Law Real Component Current:</span> $$i(t) = \frac{V_0}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t - \delta)$$</li>
+                <li><span class="eq-label">KVL Loop with AC Source:</span> $$L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{1}{C} q = V_0 \cos\omega t$$</li>
+                <li><span class="eq-label">Steady-State Charge Amplitude:</span> $$q_0(\omega) = \frac{V_0 / L}{\sqrt{(\omega_0^2 - \omega^2)^2 + \omega^2 \beta^2}}$$</li>
+                <li class="key-equation"><span class="eq-label">Phase Shift:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\tan\delta = \frac{\omega \beta}{\omega_0^2 - \omega^2}$$</li>
+                <li><span class="eq-label">Circuit Current:</span> $$i(t) = \frac{dq}{dt} = -q_0 \omega \sin(\omega t - \delta)$$</li>
             </ul>
         </div>
 
         <!-- Topic 7.4 -->
         <div id="topic-7-4" class="topic-block">
-            <h2>Topic 7.4: Electrical Resonance</h2>
+            <h2><span class="lang-en">Topic 7.4: Complex Impedance Analysis</span><span class="lang-th">หัวข้อ 7.4: การวิเคราะห์ความต้านทานเชิงซ้อน (Impedance)</span></h2>
             <ul>
-                <li><span class="eq-label">Resonance Condition:</span> $$\omega L = \frac{1}{\omega C} \implies \omega_0 = \frac{1}{\sqrt{LC}}$$</li>
+                <li class="key-equation"><span class="eq-label">Device Impedances:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$Z_R = R, \quad Z_L = j\omega L, \quad Z_C = -\frac{j}{\omega C}$$</li>
+                <li><span class="eq-label">Total Impedance ($Z$):</span> $$Z = R + i\left(\omega L - \frac{1}{\omega C}\right)$$</li>
+                <li><span class="eq-label">Impedance Magnitude:</span> $$|Z| = \sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}$$</li>
+                <li class="key-equation"><span class="eq-label">Phase Angle:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\tan\delta = \frac{\omega L - \frac{1}{\omega C}}{R}$$</li>
+                <li><span class="eq-label">Ohm's Law Real Component Current:</span> $$i(t) = \frac{V_0}{\sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}} \cos(\omega t - \delta)$$</li>
+            </ul>
+        </div>
+
+        <!-- Topic 7.5 -->
+        <div id="topic-7-5" class="topic-block">
+            <h2><span class="lang-en">Topic 7.5: Electrical Resonance</span><span class="lang-th">หัวข้อ 7.5: การสั่นพ้องทางไฟฟ้า (Resonance)</span></h2>
+            <ul>
+                <li class="key-equation"><span class="eq-label">Resonance Condition:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\omega L = \frac{1}{\omega C} \implies \omega_0 = \frac{1}{\sqrt{LC}}$$</li>
                 <li><span class="eq-label">Characteristics at Resonance:</span>
                     <ul>
                         <li>Impedance Phase: $\delta = 0$</li>
@@ -240,171 +351,1294 @@
 
     <!-- Script for Driven Oscillator Animation & Resonance Curve Plot -->
     <script>
-        const drCanvas = document.getElementById('drivenAnimCanvas');
-        const drCtx = drCanvas.getContext('2d');
-        const rPlotCanvas = document.getElementById('resPlotCanvas');
-        const rCtx = rPlotCanvas.getContext('2d');
+    (function() {
+        // === Canvas Setup with HiDPI ===
+        function setupHiDPI(canvas) {
+            const dpr = window.devicePixelRatio || 1;
+            const w = canvas.width;
+            const h = canvas.height;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            return { ctx, w, h };
+        }
+
+        const drSetup = setupHiDPI(document.getElementById('drivenAnimCanvas'));
+        const drCtx = drSetup.ctx, drW = drSetup.w, drH = drSetup.h;
+
+        const ampSetup = setupHiDPI(document.getElementById('resAmpCanvas'));
+        const aCtx = ampSetup.ctx, aW = ampSetup.w, aH = ampSetup.h;
+
+        const phSetup = setupHiDPI(document.getElementById('resPhaseCanvas'));
+        const pCtx = phSetup.ctx, pW = phSetup.w, pH = phSetup.h;
 
         const wSlider = document.getElementById('wDriveSlider');
         const betaSlider = document.getElementById('resBetaSlider');
+        const readoutBox = document.getElementById('readoutBox');
 
         const btnMechRes = document.getElementById('btnMechRes');
         const btnElecRes = document.getElementById('btnElecRes');
-        let resMode = 'mech'; // 'mech' or 'elec'
+        let resMode = 'mech';
 
-        btnMechRes.addEventListener('click', () => { resMode = 'mech'; });
-        btnElecRes.addEventListener('click', () => { resMode = 'elec'; });
+        btnMechRes.addEventListener('click', () => {
+            resMode = 'mech';
+            btnMechRes.style.background = '#1d4ed8';
+            btnElecRes.style.background = '#2563eb';
+        });
+        btnElecRes.addEventListener('click', () => {
+            resMode = 'elec';
+            btnElecRes.style.background = '#1d4ed8';
+            btnMechRes.style.background = '#2563eb';
+        });
+
+        // === Physics Constants ===
+        const w0 = 3.0;
+        const F0_m = 1.0;    // Normalized F₀/m = 1
+        const maxW = 8.0;    // Frequency axis range
+
+        // === Physics Functions ===
+        function amplitude(w, beta) {
+            if (w < 0.001) w = 0.001;
+            const d2 = Math.pow(w0 * w0 - w * w, 2) + w * w * beta * beta;
+            return F0_m / Math.sqrt(d2);
+        }
+
+        function phase(w, beta) {
+            const num = w * beta;
+            const den = w0 * w0 - w * w;
+            return Math.atan2(num, den); // returns [0, π]
+        }
+
+        // Amplitude resonance frequency: ω_r = √(ω₀² - β²/2) — only if β² < 2ω₀²
+        function resonanceFreq(beta) {
+            const disc = w0 * w0 - beta * beta / 2;
+            if (disc <= 0) return 0; // overdamped, no resonance peak
+            return Math.sqrt(disc);
+        }
 
         let time = 0;
+        let chargePhase = 0;
 
+        // === Utility: Draw Axis ===
+        const font = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+        function drawAxes(ctx, W, H, pad, xLabel, yLabel, xTicks, yTicks) {
+            // Background
+            ctx.fillStyle = '#fafbfc';
+            ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(pad.left, pad.top, W - pad.left - pad.right, H - pad.top - pad.bottom);
+
+            const plotW = W - pad.left - pad.right;
+            const plotH = H - pad.top - pad.bottom;
+
+            // Grid
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            yTicks.forEach(v => {
+                const y = pad.top + (1 - (v - yTicks[0]) / (yTicks[yTicks.length - 1] - yTicks[0])) * plotH;
+                ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + plotW, y); ctx.stroke();
+            });
+            xTicks.forEach(v => {
+                const x = pad.left + ((v - xTicks[0]) / (xTicks[xTicks.length - 1] - xTicks[0])) * plotW;
+                ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, pad.top + plotH); ctx.stroke();
+            });
+
+            // Axes border
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(pad.left, pad.top, plotW, plotH);
+
+            // X tick labels
+            ctx.fillStyle = '#64748b';
+            ctx.font = `11px ${font}`;
+            ctx.textAlign = 'center';
+            xTicks.forEach(v => {
+                const x = pad.left + ((v - xTicks[0]) / (xTicks[xTicks.length - 1] - xTicks[0])) * plotW;
+                ctx.fillText(v.toString(), x, pad.top + plotH + 14);
+            });
+
+            // Y tick labels
+            ctx.textAlign = 'right';
+            yTicks.forEach(v => {
+                const y = pad.top + (1 - (v - yTicks[0]) / (yTicks[yTicks.length - 1] - yTicks[0])) * plotH;
+                const label = Number.isInteger(v) ? v.toString() : v.toFixed(1);
+                ctx.fillText(label, pad.left - 6, y + 4);
+            });
+
+            // Axis labels
+            ctx.fillStyle = '#334155';
+            ctx.font = `12px ${font}`;
+            ctx.textAlign = 'center';
+            ctx.fillText(xLabel, pad.left + plotW / 2, H - 2);
+
+            ctx.save();
+            ctx.translate(12, pad.top + plotH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText(yLabel, 0, 0);
+            ctx.restore();
+        }
+
+        // === Render Loop ===
         function renderL7() {
             const wDrive = parseFloat(wSlider.value);
             const beta = parseFloat(betaSlider.value);
-            const w0 = 3.0; // Fixed natural frequency
 
-            document.getElementById('wDriveVal').innerText = wDrive.toFixed(1);
-            document.getElementById('resBetaVal').innerText = beta.toFixed(1);
+            document.getElementById('wDriveVal').innerText = wDrive.toFixed(2);
+            document.getElementById('resBetaVal').innerText = beta.toFixed(2);
 
-            time += 0.02;
+            time += 0.025;
 
-            // Calculate Steady State Amplitude A(w) and Phase delta
-            const F0_m = 100;
-            const denom = Math.sqrt(Math.pow(w0 * w0 - wDrive * wDrive, 2) + wDrive * wDrive * beta * beta);
-            const Amp = F0_m / denom;
-            const delta = Math.atan2(wDrive * beta, w0 * w0 - wDrive * wDrive);
+            // Compute current values
+            const Amp = amplitude(wDrive, beta);
+            const del = phase(wDrive, beta);
+            const wR = resonanceFreq(beta);
+            const AmpMax = wR > 0 ? amplitude(wR, beta) : amplitude(0.01, beta);
 
-            const x_steady = Amp * Math.cos(wDrive * time - delta);
+            // Readout
+            const modeLabel = resMode === 'mech' ? 'A' : 'q₀';
+            readoutBox.innerHTML =
+                `${modeLabel}(ω) = <b>${Amp.toFixed(4)}</b> &nbsp;|&nbsp; ` +
+                `δ = <b>${(del * 180 / Math.PI).toFixed(1)}°</b> &nbsp;|&nbsp; ` +
+                `ω<sub>r</sub> = <b>${wR > 0 ? wR.toFixed(3) : 'N/A'}</b> &nbsp;|&nbsp; ` +
+                `Q = <b>${(w0 / beta).toFixed(2)}</b>`;
 
-            // Render Driven Oscillator / RLC Diagram
-            const dw = drCanvas.width;
-            const dh = drCanvas.height;
-            const cy = dh / 2;
-
-            drCtx.clearRect(0, 0, dw, dh);
+            // ===========================================================
+            // 1. DRIVEN OSCILLATOR / RLC ANIMATION
+            // ===========================================================
+            drCtx.clearRect(0, 0, drW, drH);
+            drCtx.fillStyle = '#fafbfc';
+            drCtx.fillRect(0, 0, drW, drH);
 
             if (resMode === 'mech') {
-                // Driving Piston on Left
-                const pistonX = 40 + 15 * Math.cos(wDrive * time);
-                drCtx.fillStyle = '#ef4444';
-                drCtx.fillRect(pistonX - 10, cy - 25, 20, 50);
-                drCtx.fillStyle = '#1e293b';
-                drCtx.font = '11px sans-serif';
-                drCtx.fillText('F₀ cos(ωt)', pistonX - 25, cy - 35);
+                // === MECHANICAL DRIVEN OSCILLATOR ===
+                const cy = 135;
 
-                // Spring connected to Mass
-                const massX = 160 + x_steady * 0.8;
+                // Fixed Left Wall (Stationary)
+                const wallX = 28;
+                drCtx.fillStyle = '#64748b';
+                drCtx.fillRect(wallX - 8, cy - 85, 8, 170);
+                // Hatching lines on wall
+                drCtx.strokeStyle = '#475569';
+                drCtx.lineWidth = 1.5;
+                for (let hy = cy - 80; hy <= cy + 75; hy += 12) {
+                    drCtx.beginPath();
+                    drCtx.moveTo(wallX - 8, hy);
+                    drCtx.lineTo(wallX - 16, hy + 10);
+                    drCtx.stroke();
+                }
+
+                // Equilibrium x=0 Line
+                const eqX = 185;
+                drCtx.strokeStyle = '#cbd5e1';
+                drCtx.setLineDash([4, 4]);
+                drCtx.beginPath();
+                drCtx.moveTo(eqX, cy - 90);
+                drCtx.lineTo(eqX, cy + 90);
+                drCtx.stroke();
+                drCtx.setLineDash([]);
+                drCtx.fillStyle = '#94a3b8';
+                drCtx.font = `11px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText('x = 0 (Equilibrium)', eqX, cy - 95);
+
+                // Calculate Mass Displacement x(t) = A * cos(w*t - delta)
+                const maxDisp = 85;
+                const normAmp = Math.min(Amp * 65, maxDisp);
+                const x_t = normAmp * Math.cos(wDrive * time - del);
+                const massW = 56, massH = 64;
+                const massX = eqX + x_t - massW / 2;
+                const massY = cy - massH / 2;
+
+                // Ground Line under mass
+                drCtx.strokeStyle = '#cbd5e1';
+                drCtx.lineWidth = 2;
+                drCtx.beginPath();
+                drCtx.moveTo(wallX, cy + massH / 2 + 8);
+                drCtx.lineTo(drW - 15, cy + massH / 2 + 8);
+                drCtx.stroke();
+
+                // Spring (Top connection: y = cy - 16)
+                const springY = cy - 16;
+                const springStart = wallX;
+                const springEnd = massX;
+                const springLen = springEnd - springStart;
                 drCtx.strokeStyle = '#334155';
                 drCtx.lineWidth = 2;
                 drCtx.beginPath();
-                drCtx.moveTo(pistonX + 10, cy);
-                const numCoils = 10;
-                const coilW = (massX - (pistonX + 10)) / numCoils;
+                drCtx.moveTo(springStart, springY);
+                const numCoils = 12;
+                const coilStep = springLen / numCoils;
                 for (let c = 0; c < numCoils; c++) {
-                    const px = pistonX + 10 + (c + 0.5) * coilW;
-                    const py = cy + (c % 2 === 0 ? -12 : 12);
+                    const px = springStart + (c + 0.5) * coilStep;
+                    const py = springY + (c % 2 === 0 ? -9 : 9);
                     drCtx.lineTo(px, py);
                 }
-                drCtx.lineTo(massX, cy);
+                drCtx.lineTo(springEnd, springY);
+                drCtx.stroke();
+                drCtx.fillStyle = '#475569';
+                drCtx.font = `10px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText('Spring k', springStart + springLen / 2, springY - 12);
+
+                // Dashpot / Damper (Bottom connection: y = cy + 16)
+                const dampY = cy + 16;
+                const cylLen = 65;
+                const cylH = 16;
+                // Outer Cylinder (attached to fixed wall)
+                drCtx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+                drCtx.fillRect(springStart, dampY - cylH / 2, cylLen, cylH);
+                drCtx.strokeStyle = '#f59e0b';
+                drCtx.lineWidth = 1.5;
+                drCtx.strokeRect(springStart, dampY - cylH / 2, cylLen, cylH);
+                // Piston Rod (attached to mass)
+                drCtx.strokeStyle = '#b45309';
+                drCtx.lineWidth = 2;
+                drCtx.beginPath();
+                drCtx.moveTo(springEnd, dampY);
+                drCtx.lineTo(springStart + Math.min(cylLen - 8, springLen * 0.45), dampY);
+                drCtx.stroke();
+                // Piston Head inside cylinder
+                const pistonHeadX = springStart + Math.min(cylLen - 8, springLen * 0.45);
+                drCtx.fillStyle = '#b45309';
+                drCtx.fillRect(pistonHeadX - 3, dampY - cylH / 2 + 2, 6, cylH - 4);
+                drCtx.fillStyle = '#b45309';
+                drCtx.font = `10px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText('Damper b', springStart + cylLen / 2, dampY + 20);
+
+                // Mass Block m
+                drCtx.fillStyle = '#2563eb';
+                drCtx.beginPath();
+                drCtx.roundRect(massX, massY, massW, massH, 6);
+                drCtx.fill();
+                drCtx.strokeStyle = '#1d4ed8';
+                drCtx.lineWidth = 2;
+                drCtx.stroke();
+                drCtx.fillStyle = '#ffffff';
+                drCtx.font = `bold 14px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText('m', massX + massW / 2, cy + 5);
+
+                // Driving Force Vector F(t) = F₀ cos(ωt) (Applied to right side of mass)
+                const fPhase = Math.cos(wDrive * time);
+                const maxArrowLen = 50;
+                const arrowLen = fPhase * maxArrowLen;
+                const fStartX = massX + massW;
+                const fY = cy;
+
+                if (Math.abs(arrowLen) > 2) {
+                    drCtx.strokeStyle = '#ef4444';
+                    drCtx.lineWidth = 3;
+                    drCtx.beginPath();
+                    drCtx.moveTo(fStartX, fY);
+                    drCtx.lineTo(fStartX + arrowLen, fY);
+                    drCtx.stroke();
+
+                    // Arrowhead
+                    const dir = arrowLen > 0 ? 1 : -1;
+                    drCtx.fillStyle = '#ef4444';
+                    drCtx.beginPath();
+                    drCtx.moveTo(fStartX + arrowLen, fY);
+                    drCtx.lineTo(fStartX + arrowLen - dir * 8, fY - 5);
+                    drCtx.lineTo(fStartX + arrowLen - dir * 8, fY + 5);
+                    drCtx.fill();
+                }
+                drCtx.fillStyle = '#dc2626';
+                drCtx.font = `bold 11px ${font}`;
+                drCtx.textAlign = 'left';
+                drCtx.fillText('F(t) = F₀ cos(ωt)', Math.max(fStartX + 5, 220), fY - 14);
+
+                // Position Marker Arrow (Red arrow showing x(t) displacement from equilibrium)
+                if (Math.abs(x_t) > 3) {
+                    drCtx.strokeStyle = '#2563eb';
+                    drCtx.lineWidth = 1.5;
+                    drCtx.beginPath();
+                    drCtx.moveTo(eqX, cy + massH / 2 + 18);
+                    drCtx.lineTo(eqX + x_t, cy + massH / 2 + 18);
+                    drCtx.stroke();
+                    const xDir = x_t > 0 ? 1 : -1;
+                    drCtx.fillStyle = '#2563eb';
+                    drCtx.beginPath();
+                    drCtx.moveTo(eqX + x_t, cy + massH / 2 + 18);
+                    drCtx.lineTo(eqX + x_t - xDir * 5, cy + massH / 2 + 15);
+                    drCtx.lineTo(eqX + x_t - xDir * 5, cy + massH / 2 + 21);
+                    drCtx.fill();
+                }
+                drCtx.fillStyle = '#1e40af';
+                drCtx.font = `11px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText(`x(t) = ${(x_t / 65).toFixed(2)}`, eqX + x_t / 2, cy + massH / 2 + 32);
+
+                // Title
+                drCtx.fillStyle = '#0f172a';
+                drCtx.font = `bold 13px ${font}`;
+                drCtx.textAlign = 'left';
+                drCtx.fillText('Mechanical Driven Oscillator', 12, 22);
+
+            } else {
+                // === SERIES RLC CIRCUIT ANIMATION ===
+                const cx = drW / 2, cy = drH / 2 + 5;
+                const boxW = 240, boxH = 150;
+                const left = cx - boxW / 2;
+                const top = cy - boxH / 2;
+                const right = left + boxW;
+                const bottom = top + boxH;
+
+                // Wire Loop
+                drCtx.strokeStyle = '#334155';
+                drCtx.lineWidth = 2.5;
+                drCtx.beginPath();
+                drCtx.roundRect(left, top, boxW, boxH, 8);
                 drCtx.stroke();
 
-                // Mass
-                drCtx.fillStyle = '#2563eb';
-                drCtx.fillRect(massX, cy - 35, 60, 70);
-                drCtx.fillStyle = '#ffffff';
-                drCtx.font = '12px sans-serif';
-                drCtx.fillText('Mass m', massX + 8, cy + 4);
-            } else {
-                // Series RLC Circuit Diagram
-                drCtx.strokeStyle = '#334155';
-                drCtx.lineWidth = 3;
-                drCtx.strokeRect(50, 40, 280, 180);
+                // Compute AC Current i(t) = -I₀ * sin(ωt - δ)
+                const currentAmp = Math.min(Amp * wDrive * 0.8, 2.5);
+                const instCurrent = -currentAmp * Math.sin(wDrive * time - del);
+                chargePhase += instCurrent * 0.25;
 
-                // Resistor R
-                drCtx.fillStyle = '#f59e0b';
-                drCtx.fillRect(160, 32, 60, 16);
-                drCtx.fillStyle = '#1e293b';
-                drCtx.font = '11px sans-serif';
-                drCtx.fillText('Resistor R', 162, 24);
+                // Compute Capacitor Charge q(t) = q₀ * cos(ωt - δ)
+                const instCharge = Amp * Math.cos(wDrive * time - del);
 
-                // Inductor L
-                drCtx.fillText('Inductor L', 300, 130);
+                // === 1. CHARGE CARRIER PARTICLES (FLOWING ELECTRONS) ===
+                const totalPerimeter = 2 * (boxW + boxH);
+                const numParticles = 24;
 
-                // Capacitor C
-                drCtx.fillText('Capacitor C', 20, 130);
-
-                // AC Source
-                drCtx.fillStyle = '#2563eb';
-                drCtx.beginPath(); drCtx.arc(190, 220, 16, 0, 2 * Math.PI); drCtx.fill();
-                drCtx.fillStyle = '#ffffff'; drCtx.fillText('~ V₀', 178, 224);
-            }
-
-            // Render Resonance Curve A(w)
-            const pw = rPlotCanvas.width;
-            const ph = rPlotCanvas.height;
-
-            rCtx.clearRect(0, 0, pw, ph);
-
-            // Axes
-            rCtx.strokeStyle = '#cbd5e1';
-            rCtx.lineWidth = 1;
-            rCtx.beginPath();
-            rCtx.moveTo(40, ph - 30); rCtx.lineTo(pw - 20, ph - 30); // w axis
-            rCtx.moveTo(40, 20); rCtx.lineTo(40, ph - 30); // Amplitude axis
-            rCtx.stroke();
-
-            rCtx.fillStyle = '#64748b';
-            rCtx.font = '11px sans-serif';
-            rCtx.fillText('Driving Frequency ω →', pw - 130, ph - 10);
-            rCtx.fillText(resMode === 'mech' ? 'Mechanical Amplitude A(ω)' : 'Electrical Charge Amplitude q₀(ω)', 10, 15);
-
-            // Draw Resonance Curve A(w)
-            rCtx.strokeStyle = '#2563eb';
-            rCtx.lineWidth = 2.5;
-            rCtx.beginPath();
-
-            const maxW = 6.0;
-            let peakX = 0, peakY = 0;
-
-            for (let px = 40; px < pw - 20; px++) {
-                const w_val = ((px - 40) / (pw - 60)) * maxW;
-                const den = Math.sqrt(Math.pow(w0 * w0 - w_val * w_val, 2) + w_val * w_val * beta * beta);
-                const a_val = (F0_m / den) * 0.9;
-                const py = (ph - 30) - Math.min(ph - 50, a_val);
-
-                if (px === 40) rCtx.moveTo(px, py);
-                else rCtx.lineTo(px, py);
-
-                if (Math.abs(w_val - wDrive) < 0.05) {
-                    peakX = px;
-                    peakY = py;
+                function getLoopPos(dist) {
+                    let d = (dist % totalPerimeter + totalPerimeter) % totalPerimeter;
+                    if (d < boxW) return { x: left + d, y: top }; // Top branch
+                    d -= boxW;
+                    if (d < boxH) return { x: right, y: top + d }; // Right branch
+                    d -= boxH;
+                    if (d < boxW) return { x: right - d, y: bottom }; // Bottom branch
+                    d -= boxW;
+                    return { x: left, y: bottom - d }; // Left branch
                 }
-            }
-            rCtx.stroke();
 
-            // Natural Frequency dashed vertical line (w0)
-            const w0_px = 40 + (w0 / maxW) * (pw - 60);
-            rCtx.strokeStyle = '#94a3b8';
-            rCtx.setLineDash([4, 4]);
-            rCtx.beginPath();
-            rCtx.moveTo(w0_px, 20);
-            rCtx.lineTo(w0_px, ph - 30);
-            rCtx.stroke();
-            rCtx.setLineDash([]);
-            rCtx.fillStyle = '#64748b';
-            rCtx.fillText('ω0 (Resonance)', w0_px - 35, ph - 12);
+                drCtx.fillStyle = '#0284c7';
+                for (let p = 0; p < numParticles; p++) {
+                    const pDist = (p / numParticles) * totalPerimeter + chargePhase;
+                    const pos = getLoopPos(pDist);
+                    drCtx.beginPath();
+                    drCtx.arc(pos.x, pos.y, 3.5, 0, Math.PI * 2);
+                    drCtx.fill();
+                }
 
-            // Current Operating Point Dot
-            if (peakX > 0) {
-                rCtx.fillStyle = '#ef4444';
-                rCtx.beginPath();
-                rCtx.arc(peakX, peakY, 6, 0, 2 * Math.PI);
-                rCtx.fill();
+                // === 2. RESISTOR R (Top Branch) ===
+                const rW = 46;
+                const rX = cx - rW / 2;
+                drCtx.fillStyle = '#fafbfc';
+                drCtx.fillRect(rX - 4, top - 10, rW + 8, 20);
+                drCtx.strokeStyle = '#f59e0b';
+                drCtx.lineWidth = 2;
+                drCtx.beginPath();
+                drCtx.moveTo(rX, top);
+                const zags = 5;
+                for (let z = 0; z < zags; z++) {
+                    const zx = rX + (z + 0.5) * (rW / zags);
+                    drCtx.lineTo(zx, top + (z % 2 === 0 ? -7 : 7));
+                }
+                drCtx.lineTo(rX + rW, top);
+                drCtx.stroke();
+                drCtx.fillStyle = '#b45309';
+                drCtx.font = `bold 11px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText('R', cx, top - 13);
+
+                // === 3. INDUCTOR L (Right Branch) ===
+                const iY = cy - 20;
+                drCtx.fillStyle = '#fafbfc';
+                drCtx.fillRect(right - 8, iY - 4, 16, 44);
+                drCtx.strokeStyle = '#7c3aed';
+                drCtx.lineWidth = 2;
+                for (let c = 0; c < 4; c++) {
+                    const cy2 = iY + c * 9 + 4;
+                    drCtx.beginPath();
+                    drCtx.arc(right, cy2, 5, -Math.PI / 2, Math.PI / 2);
+                    drCtx.stroke();
+                }
+                drCtx.fillStyle = '#6d28d9';
+                drCtx.font = `bold 11px ${font}`;
+                drCtx.textAlign = 'left';
+                drCtx.fillText('L', right + 10, cy + 2);
+
+                // === 4. CAPACITOR C (Left Branch with Accumulating Charge) ===
+                const capY = cy;
+                const plateH = 26, plateGap = 12;
+                drCtx.fillStyle = '#fafbfc';
+                drCtx.fillRect(left - 10, capY - plateH / 2 - 2, 20, plateH + 4);
+
+                // Top & Bottom Capacitor Plates
+                drCtx.strokeStyle = '#0891b2';
+                drCtx.lineWidth = 3;
+                // Top Plate
+                drCtx.beginPath();
+                drCtx.moveTo(left - 14, capY - plateGap / 2);
+                drCtx.lineTo(left + 14, capY - plateGap / 2);
+                drCtx.stroke();
+                // Bottom Plate
+                drCtx.beginPath();
+                drCtx.moveTo(left - 14, capY + plateGap / 2);
+                drCtx.lineTo(left + 14, capY + plateGap / 2);
+                drCtx.stroke();
+                drCtx.fillStyle = '#0e7490';
+                drCtx.font = `bold 11px ${font}`;
+                drCtx.textAlign = 'right';
+                drCtx.fillText('C', left - 16, cy + 4);
+
+                // Capacitor Accumulating Charge Display (+ and - signs)
+                const chargeMag = Math.abs(instCharge);
+                const chargeAlpha = Math.min(chargeMag, 1).toFixed(2);
+                if (chargeMag > 0.1) {
+                    drCtx.font = `bold 10px ${font}`;
+                    drCtx.textAlign = 'center';
+
+                    const topSign = instCharge > 0 ? '+' : '-';
+                    const botSign = instCharge > 0 ? '-' : '+';
+                    const topColor = instCharge > 0 ? `rgba(239,68,68,${chargeAlpha})` : `rgba(37,99,235,${chargeAlpha})`;
+                    const botColor = instCharge > 0 ? `rgba(37,99,235,${chargeAlpha})` : `rgba(239,68,68,${chargeAlpha})`;
+
+                    drCtx.fillStyle = topColor;
+                    drCtx.fillText(topSign, left, capY - plateGap / 2 - 4);
+                    drCtx.fillStyle = botColor;
+                    drCtx.fillText(botSign, left, capY + plateGap / 2 + 11);
+                }
+
+                // === 5. AC VOLTAGE SOURCE (Bottom Branch) ===
+                const srcX = cx, srcY = bottom;
+                drCtx.fillStyle = '#fafbfc';
+                drCtx.beginPath();
+                drCtx.arc(srcX, srcY, 14, 0, Math.PI * 2);
+                drCtx.fill();
+                drCtx.strokeStyle = '#2563eb';
+                drCtx.lineWidth = 2;
+                drCtx.beginPath();
+                drCtx.arc(srcX, srcY, 14, 0, Math.PI * 2);
+                drCtx.stroke();
+
+                // Sine wave inside AC symbol
+                drCtx.strokeStyle = '#2563eb';
+                drCtx.lineWidth = 1.5;
+                drCtx.beginPath();
+                for (let i = 0; i <= 16; i++) {
+                    const sx = srcX - 7 + (i / 16) * 14;
+                    const sy = srcY - 4 * Math.sin((i / 16) * Math.PI * 2);
+                    if (i === 0) drCtx.moveTo(sx, sy);
+                    else drCtx.lineTo(sx, sy);
+                }
+                drCtx.stroke();
+                drCtx.fillStyle = '#1d4ed8';
+                drCtx.font = `bold 10px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText('v(t) = V₀ cos(ωt)', srcX, srcY + 25);
+
+                // Polarity (+ / -) indicator on AC source
+                const vPhase = Math.cos(wDrive * time);
+                if (Math.abs(vPhase) > 0.1) {
+                    drCtx.font = `bold 10px ${font}`;
+                    drCtx.fillStyle = vPhase > 0 ? '#ef4444' : '#2563eb';
+                    drCtx.fillText(vPhase > 0 ? '+' : '-', srcX + 19, srcY + 3);
+                    drCtx.fillStyle = vPhase > 0 ? '#2563eb' : '#ef4444';
+                    drCtx.fillText(vPhase > 0 ? '-' : '+', srcX - 19, srcY + 3);
+                }
+
+                // === 6. INSTANTANEOUS CURRENT ARROW i(t) ===
+                const curArrowLen = instCurrent * 25;
+                if (Math.abs(curArrowLen) > 2) {
+                    drCtx.strokeStyle = '#ef4444';
+                    drCtx.lineWidth = 2.5;
+                    drCtx.beginPath();
+                    drCtx.moveTo(cx - 30, top - 18);
+                    drCtx.lineTo(cx - 30 + curArrowLen, top - 18);
+                    drCtx.stroke();
+                    const iDir = curArrowLen > 0 ? 1 : -1;
+                    drCtx.fillStyle = '#ef4444';
+                    drCtx.beginPath();
+                    drCtx.moveTo(cx - 30 + curArrowLen, top - 18);
+                    drCtx.lineTo(cx - 30 + curArrowLen - iDir * 6, top - 22);
+                    drCtx.lineTo(cx - 30 + curArrowLen - iDir * 6, top - 14);
+                    drCtx.fill();
+                }
+                drCtx.fillStyle = '#dc2626';
+                drCtx.font = `bold 10px ${font}`;
+                drCtx.textAlign = 'center';
+                drCtx.fillText(`i(t) = ${instCurrent > 0 ? '→' : '←'} ${(Math.abs(instCurrent)).toFixed(2)}`, cx - 30, top - 26);
+
+                // Title
+                drCtx.fillStyle = '#0f172a';
+                drCtx.font = `bold 13px ${font}`;
+                drCtx.textAlign = 'left';
+                drCtx.fillText('Series RLC Circuit (AC Driven)', 12, 22);
             }
+
+            // ===========================================================
+            // 2. AMPLITUDE RESONANCE CURVE A(ω)
+            // ===========================================================
+            aCtx.clearRect(0, 0, aW, aH);
+            const aPad = { top: 24, right: 20, bottom: 30, left: 55 };
+
+            // Compute amplitude scale: find peak for current β
+            const peakAmp = wR > 0 ? amplitude(wR, beta) : amplitude(0.5, beta);
+            const yMaxAmp = Math.ceil(peakAmp * 1.15 * 10) / 10; // round up nicely
+            const yMinAmp = 0;
+
+            // Generate y ticks
+            const ampYTicks = [];
+            const ampStep = yMaxAmp <= 1 ? 0.2 : yMaxAmp <= 5 ? 1 : yMaxAmp <= 20 ? 5 : 10;
+            for (let v = 0; v <= yMaxAmp; v += ampStep) ampYTicks.push(Math.round(v * 100) / 100);
+            if (ampYTicks[ampYTicks.length - 1] < yMaxAmp) ampYTicks.push(yMaxAmp);
+
+            const ampXTicks = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+            drawAxes(aCtx, aW, aH, aPad,
+                'ω (rad/s)',
+                resMode === 'mech' ? 'A(ω)' : 'q₀(ω)',
+                ampXTicks, ampYTicks);
+
+            const aPlotW = aW - aPad.left - aPad.right;
+            const aPlotH = aH - aPad.top - aPad.bottom;
+
+            function ampToY(a) {
+                return aPad.top + (1 - (a - yMinAmp) / (yMaxAmp - yMinAmp)) * aPlotH;
+            }
+            function wToX_a(w) {
+                return aPad.left + (w / maxW) * aPlotW;
+            }
+
+            // Draw comparison curves for different β values
+            const compBetas = [0.3, 0.8, 1.5, 2.5];
+            const compColors = ['#c4b5fd', '#a5b4fc', '#93c5fd', '#a7f3d0'];
+            compBetas.forEach((cb, idx) => {
+                if (Math.abs(cb - beta) > 0.15) {
+                    aCtx.strokeStyle = compColors[idx];
+                    aCtx.lineWidth = 1;
+                    aCtx.setLineDash([3, 3]);
+                    aCtx.beginPath();
+                    for (let i = 0; i <= aPlotW; i++) {
+                        const w = (i / aPlotW) * maxW;
+                        const a = amplitude(w, cb);
+                        const px = wToX_a(w);
+                        const py = ampToY(Math.min(a, yMaxAmp));
+                        if (i === 0) aCtx.moveTo(px, py);
+                        else aCtx.lineTo(px, py);
+                    }
+                    aCtx.stroke();
+                    aCtx.setLineDash([]);
+                }
+            });
+
+            // Main resonance curve
+            aCtx.strokeStyle = '#2563eb';
+            aCtx.lineWidth = 2.5;
+            aCtx.beginPath();
+            const steps = aPlotW * 2;
+            for (let i = 0; i <= steps; i++) {
+                const w = (i / steps) * maxW;
+                const a = amplitude(w, beta);
+                const px = wToX_a(w);
+                const py = ampToY(Math.min(a, yMaxAmp));
+                if (i === 0) aCtx.moveTo(px, py);
+                else aCtx.lineTo(px, py);
+            }
+            aCtx.stroke();
+
+            // Natural frequency ω₀ dashed line
+            aCtx.strokeStyle = '#94a3b8';
+            aCtx.lineWidth = 1;
+            aCtx.setLineDash([4, 4]);
+            aCtx.beginPath();
+            const w0x = wToX_a(w0);
+            aCtx.moveTo(w0x, aPad.top);
+            aCtx.lineTo(w0x, aPad.top + aPlotH);
+            aCtx.stroke();
+            aCtx.setLineDash([]);
+            aCtx.fillStyle = '#64748b';
+            aCtx.font = `10px ${font}`;
+            aCtx.textAlign = 'center';
+            aCtx.fillText('ω₀', w0x, aPad.top + aPlotH + 26);
+
+            // Resonance frequency ω_r marker
+            if (wR > 0) {
+                aCtx.strokeStyle = '#10b981';
+                aCtx.lineWidth = 1.5;
+                aCtx.setLineDash([2, 2]);
+                aCtx.beginPath();
+                const wRx = wToX_a(wR);
+                aCtx.moveTo(wRx, aPad.top);
+                aCtx.lineTo(wRx, aPad.top + aPlotH);
+                aCtx.stroke();
+                aCtx.setLineDash([]);
+                aCtx.fillStyle = '#059669';
+                aCtx.font = `bold 10px ${font}`;
+                aCtx.fillText('ω_r', wRx, aPad.top - 4);
+            }
+
+            // Current operating point
+            const opAmp = amplitude(wDrive, beta);
+            const opX = wToX_a(wDrive);
+            const opY = ampToY(Math.min(opAmp, yMaxAmp));
+            aCtx.fillStyle = '#ef4444';
+            aCtx.beginPath();
+            aCtx.arc(opX, opY, 5, 0, Math.PI * 2);
+            aCtx.fill();
+            // Crosshair lines from point to axes
+            aCtx.strokeStyle = 'rgba(239, 68, 68, 0.3)';
+            aCtx.lineWidth = 1;
+            aCtx.setLineDash([2, 2]);
+            aCtx.beginPath();
+            aCtx.moveTo(opX, opY); aCtx.lineTo(opX, aPad.top + aPlotH);
+            aCtx.stroke();
+            aCtx.beginPath();
+            aCtx.moveTo(opX, opY); aCtx.lineTo(aPad.left, opY);
+            aCtx.stroke();
+            aCtx.setLineDash([]);
+
+            // Title
+            aCtx.fillStyle = '#1f2937';
+            aCtx.font = `bold 12px ${font}`;
+            aCtx.textAlign = 'left';
+            aCtx.fillText(resMode === 'mech' ? 'Amplitude Response A(ω)' : 'Charge Amplitude q₀(ω)', aPad.left, aPad.top - 8);
+
+            // β label
+            aCtx.fillStyle = '#ef4444';
+            aCtx.font = `bold 11px ${font}`;
+            aCtx.textAlign = 'right';
+            aCtx.fillText(`β = ${beta.toFixed(2)}`, aW - aPad.right - 4, aPad.top + 14);
+
+            // ===========================================================
+            // 3. PHASE PLOT δ(ω)
+            // ===========================================================
+            pCtx.clearRect(0, 0, pW, pH);
+            const pPad = { top: 20, right: 20, bottom: 30, left: 55 };
+            const pPlotW = pW - pPad.left - pPad.right;
+            const pPlotH = pH - pPad.top - pPad.bottom;
+
+            const phYTicks = [0, 45, 90, 135, 180];
+            drawAxes(pCtx, pW, pH, pPad, 'ω (rad/s)', 'δ (deg)', ampXTicks, phYTicks);
+
+            function degToY(d) {
+                return pPad.top + (1 - d / 180) * pPlotH;
+            }
+            function wToX_p(w) {
+                return pPad.left + (w / maxW) * pPlotW;
+            }
+
+            // Comparison phase curves
+            compBetas.forEach((cb, idx) => {
+                if (Math.abs(cb - beta) > 0.15) {
+                    pCtx.strokeStyle = compColors[idx];
+                    pCtx.lineWidth = 1;
+                    pCtx.setLineDash([3, 3]);
+                    pCtx.beginPath();
+                    for (let i = 0; i <= pPlotW; i++) {
+                        const w = (i / pPlotW) * maxW;
+                        const d = phase(w, cb) * 180 / Math.PI;
+                        const px = wToX_p(w);
+                        const py = degToY(d);
+                        if (i === 0) pCtx.moveTo(px, py);
+                        else pCtx.lineTo(px, py);
+                    }
+                    pCtx.stroke();
+                    pCtx.setLineDash([]);
+                }
+            });
+
+            // Main phase curve
+            pCtx.strokeStyle = '#8b5cf6';
+            pCtx.lineWidth = 2.5;
+            pCtx.beginPath();
+            for (let i = 0; i <= steps; i++) {
+                const w = (i / steps) * maxW;
+                const d = phase(w, beta) * 180 / Math.PI;
+                const px = wToX_p(w);
+                const py = degToY(d);
+                if (i === 0) pCtx.moveTo(px, py);
+                else pCtx.lineTo(px, py);
+            }
+            pCtx.stroke();
+
+            // ω₀ dashed line on phase plot
+            pCtx.strokeStyle = '#94a3b8';
+            pCtx.lineWidth = 1;
+            pCtx.setLineDash([4, 4]);
+            pCtx.beginPath();
+            const w0xP = wToX_p(w0);
+            pCtx.moveTo(w0xP, pPad.top);
+            pCtx.lineTo(w0xP, pPad.top + pPlotH);
+            pCtx.stroke();
+            pCtx.setLineDash([]);
+
+            // 90° reference line
+            pCtx.strokeStyle = '#e2e8f0';
+            pCtx.lineWidth = 1;
+            pCtx.setLineDash([6, 3]);
+            pCtx.beginPath();
+            const y90 = degToY(90);
+            pCtx.moveTo(pPad.left, y90);
+            pCtx.lineTo(pPad.left + pPlotW, y90);
+            pCtx.stroke();
+            pCtx.setLineDash([]);
+            pCtx.fillStyle = '#94a3b8';
+            pCtx.font = `10px ${font}`;
+            pCtx.textAlign = 'left';
+            pCtx.fillText('π/2', pPad.left + pPlotW + 3, y90 + 4);
+
+            // Current operating point on phase
+            const opDeg = phase(wDrive, beta) * 180 / Math.PI;
+            const opXp = wToX_p(wDrive);
+            const opYp = degToY(opDeg);
+            pCtx.fillStyle = '#ef4444';
+            pCtx.beginPath();
+            pCtx.arc(opXp, opYp, 5, 0, Math.PI * 2);
+            pCtx.fill();
+
+            // Title
+            pCtx.fillStyle = '#1f2937';
+            pCtx.font = `bold 12px ${font}`;
+            pCtx.textAlign = 'left';
+            pCtx.fillText('Phase Response δ(ω)', pPad.left, pPad.top - 6);
 
             requestAnimationFrame(renderL7);
         }
 
         renderL7();
+    })();
+    </script>
+
+    <!-- Script for Transient & Steady State Decomposition Plot -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('transientPlotCanvas');
+        if (!canvas) return;
+
+        const dpr = window.devicePixelRatio || 1;
+        const W = canvas.width;
+        const H = canvas.height;
+
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+
+        const w0Slider = document.getElementById('w0TransSlider');
+        const wDriveSlider = document.getElementById('wDriveTransSlider');
+        const betaSlider = document.getElementById('betaTransSlider');
+        const chkShowComponents = document.getElementById('chkShowComponents');
+
+        const font = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+        function renderPlot() {
+            const w0 = parseFloat(w0Slider.value);
+            const wDrive = parseFloat(wDriveSlider.value);
+            const beta = parseFloat(betaSlider.value);
+            const showOverlay = chkShowComponents.checked;
+
+            document.getElementById('w0TransVal').innerText = w0.toFixed(1);
+            document.getElementById('wDriveTransVal').innerText = wDrive.toFixed(1);
+            document.getElementById('betaTransVal').innerText = beta.toFixed(1);
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Canvas Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, W, H);
+
+            const tMax = 8.0; // 8 seconds
+            const padLeft = 45;
+            const padRight = 30;
+            const plotW = W - padLeft - padRight;
+
+            // Subplot dimensions (3 panels stacked vertically)
+            const subH = 100;
+            const panel1Y = 45;  // Top panel center
+            const panel2Y = 175; // Middle panel center
+            const panel3Y = 325; // Bottom panel center
+
+            function tToX(t) { return padLeft + (t / tMax) * plotW; }
+
+            // Amplitude parameters
+            const A_trans = 1.0;
+            const A_steady = 0.8;
+            const gamma = beta / 2;
+            const wd = Math.sqrt(Math.max(w0 * w0 - gamma * gamma, 1));
+
+            // Component Functions
+            function xTrans(t) {
+                return A_trans * Math.exp(-gamma * t) * Math.cos(wd * t);
+            }
+            function FDrive(t) {
+                return A_steady * Math.cos(wDrive * t);
+            }
+            function xTotal(t) {
+                return xTrans(t) + FDrive(t);
+            }
+
+            // Helper to draw horizontal baseline & vertical axis
+            function drawSubplotAxis(centerY, labelY, labelText, titleText) {
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 2;
+
+                // Baseline (t axis)
+                ctx.beginPath();
+                ctx.moveTo(padLeft, centerY);
+                ctx.lineTo(padLeft + plotW, centerY);
+                ctx.stroke();
+
+                // Vertical Axis
+                ctx.beginPath();
+                ctx.moveTo(padLeft, centerY - subH / 2 + 5);
+                ctx.lineTo(padLeft, centerY + subH / 2 - 5);
+                ctx.stroke();
+
+                // Axis Arrow & Label
+                ctx.fillStyle = '#1e293b';
+                ctx.font = `italic bold 14px ${font}`;
+                ctx.textAlign = 'right';
+                ctx.fillText(labelY, padLeft - 10, centerY - subH / 2 + 20);
+
+                ctx.font = `italic 13px ${font}`;
+                ctx.textAlign = 'center';
+                ctx.fillText('t', padLeft + plotW + 15, centerY + 4);
+
+                // Title Text
+                if (titleText) {
+                    ctx.font = `14px ${font}`;
+                    ctx.fillStyle = '#0f172a';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(titleText, padLeft + 25, centerY - subH / 2 + 14);
+                }
+            }
+
+            // =========================================================
+            // SUBPLOT 1: FREE DAMPED OSCILLATIONS x_trans(t)
+            // =========================================================
+            drawSubplotAxis(panel1Y, 'x', null, 'A damped oscillator ... free oscillations at natural frequency ω₀');
+
+            // Draw envelope (dashed red)
+            ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            for (let px = 0; px <= plotW; px++) {
+                const t = (px / plotW) * tMax;
+                const env = A_trans * Math.exp(-gamma * t) * 35;
+                const x = padLeft + px;
+                if (px === 0) ctx.moveTo(x, panel1Y - env);
+                else ctx.lineTo(x, panel1Y - env);
+            }
+            ctx.stroke();
+            ctx.beginPath();
+            for (let px = 0; px <= plotW; px++) {
+                const t = (px / plotW) * tMax;
+                const env = A_trans * Math.exp(-gamma * t) * 35;
+                const x = padLeft + px;
+                if (px === 0) ctx.moveTo(x, panel1Y + env);
+                else ctx.lineTo(x, panel1Y + env);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw x_trans curve
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            for (let px = 0; px <= plotW; px++) {
+                const t = (px / plotW) * tMax;
+                const val = xTrans(t) * 35;
+                const x = padLeft + px;
+                const y = panel1Y - val;
+                if (px === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // Period Marker 2π/ω₀ (between 2nd and 3rd peak)
+            const T0 = (2 * Math.PI) / wd;
+            const tPeak1 = T0;
+            const tPeak2 = 2 * T0;
+            if (tPeak2 < tMax) {
+                const x1 = tToX(tPeak1);
+                const x2 = tToX(tPeak2);
+                const markerY = panel1Y + 38;
+
+                ctx.strokeStyle = '#0f172a';
+                ctx.lineWidth = 1.5;
+                // Vertical ticks
+                ctx.beginPath();
+                ctx.moveTo(x1, markerY - 8); ctx.lineTo(x1, markerY + 8);
+                ctx.moveTo(x2, markerY - 8); ctx.lineTo(x2, markerY + 8);
+                ctx.stroke();
+
+                // Arrow line
+                ctx.beginPath();
+                ctx.moveTo(x1, markerY); ctx.lineTo(x2, markerY);
+                ctx.stroke();
+
+                // Label 2π/ω₀
+                ctx.fillStyle = '#0f172a';
+                ctx.font = `12px ${font}`;
+                ctx.textAlign = 'center';
+                ctx.fillText('2π / ω₀', (x1 + x2) / 2, markerY + 20);
+            }
+
+            // =========================================================
+            // SUBPLOT 2: DRIVING FORCE F(t)
+            // =========================================================
+            drawSubplotAxis(panel2Y, 'F', null, 'A driving force F with ω < ω₀');
+
+            ctx.strokeStyle = '#059669';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            for (let px = 0; px <= plotW; px++) {
+                const t = (px / plotW) * tMax;
+                const val = FDrive(t) * 35;
+                const x = padLeft + px;
+                const y = panel2Y - val;
+                if (px === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // Period Marker 2π/ω (between t = 0 and t = T_drive)
+            const Tdrive = (2 * Math.PI) / wDrive;
+            if (Tdrive < tMax) {
+                const x1 = tToX(Tdrive);
+                const x2 = tToX(2 * Tdrive);
+                const markerY = panel2Y + 40;
+
+                ctx.strokeStyle = '#0f172a';
+                ctx.lineWidth = 1.5;
+                // Vertical ticks
+                ctx.beginPath();
+                ctx.moveTo(x1, markerY - 10); ctx.lineTo(x1, markerY + 10);
+                ctx.moveTo(x2, markerY - 10); ctx.lineTo(x2, markerY + 10);
+                ctx.stroke();
+
+                // Arrow line
+                ctx.beginPath();
+                ctx.moveTo(x1, markerY); ctx.lineTo(x2, markerY);
+                ctx.stroke();
+
+                // Label 2π/ω
+                ctx.fillStyle = '#0f172a';
+                ctx.font = `13px ${font}`;
+                ctx.textAlign = 'center';
+                ctx.fillText('2π / ω', (x1 + x2) / 2, markerY - 6);
+            }
+
+            // =========================================================
+            // SUBPLOT 3: COMBINED RESPONSE x(t) = x_trans + x_steady
+            // =========================================================
+            drawSubplotAxis(panel3Y, 'x', null, null);
+
+            // Optional Overlay Component Curves (dashed)
+            if (showOverlay) {
+                // x_trans component overlay (blue dashed)
+                ctx.strokeStyle = 'rgba(37, 99, 235, 0.4)';
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                for (let px = 0; px <= plotW; px++) {
+                    const t = (px / plotW) * tMax;
+                    const val = xTrans(t) * 32;
+                    const x = padLeft + px;
+                    if (px === 0) ctx.moveTo(x, panel3Y - val);
+                    else ctx.lineTo(x, panel3Y - val);
+                }
+                ctx.stroke();
+
+                // x_steady component overlay (green dashed)
+                ctx.strokeStyle = 'rgba(5, 150, 105, 0.4)';
+                ctx.beginPath();
+                for (let px = 0; px <= plotW; px++) {
+                    const t = (px / plotW) * tMax;
+                    const val = FDrive(t) * 32;
+                    const x = padLeft + px;
+                    if (px === 0) ctx.moveTo(x, panel3Y - val);
+                    else ctx.lineTo(x, panel3Y - val);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // Main Total Curve x(t) (Thick solid black line)
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for (let px = 0; px <= plotW; px++) {
+                const t = (px / plotW) * tMax;
+                const val = xTotal(t) * 32;
+                const x = padLeft + px;
+                const y = panel3Y - val;
+                if (px === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // =========================================================
+            // TRANSIENT & STEADY STATE REGION BRACKETS
+            // =========================================================
+            // Estimate transient time ~ 3 / gamma
+            const tTransient = Math.min(3.5 / gamma, tMax * 0.55);
+            const xTransEnd = tToX(tTransient);
+            const brackY = panel3Y + 52;
+
+            // Transient Bracket (left to tTransient)
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(padLeft, brackY);
+            ctx.lineTo(xTransEnd, brackY);
+            // End arrows
+            ctx.moveTo(padLeft + 8, brackY - 4); ctx.lineTo(padLeft, brackY); ctx.lineTo(padLeft + 8, brackY + 4);
+            ctx.moveTo(xTransEnd - 8, brackY - 4); ctx.lineTo(xTransEnd, brackY); ctx.lineTo(xTransEnd - 8, brackY + 4);
+            ctx.stroke();
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = `bold 14px ${font}`;
+            ctx.textAlign = 'center';
+            ctx.fillText('Transient', (padLeft + xTransEnd) / 2, brackY + 20);
+
+            // Steady State Bracket (tTransient to tMax)
+            const xSteadyEnd = padLeft + plotW - 10;
+            ctx.beginPath();
+            ctx.moveTo(xTransEnd + 15, brackY);
+            ctx.lineTo(xSteadyEnd, brackY);
+            // End arrows
+            ctx.moveTo(xTransEnd + 23, brackY - 4); ctx.lineTo(xTransEnd + 15, brackY); ctx.lineTo(xTransEnd + 23, brackY + 4);
+            ctx.moveTo(xSteadyEnd - 8, brackY - 4); ctx.lineTo(xSteadyEnd, brackY); ctx.lineTo(xSteadyEnd - 8, brackY + 4);
+            ctx.stroke();
+
+            ctx.fillText('Steady state', (xTransEnd + 15 + xSteadyEnd) / 2, brackY + 20);
+        }
+
+        w0Slider.addEventListener('input', renderPlot);
+        wDriveSlider.addEventListener('input', renderPlot);
+        betaSlider.addEventListener('input', renderPlot);
+        chkShowComponents.addEventListener('change', renderPlot);
+
+        renderPlot();
+    })();
+    </script>
+
+    <!-- Script for Half-Power Points & Bandwidth Plot -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('halfPowerCanvas');
+        if (!canvas) return;
+
+        const dpr = window.devicePixelRatio || 1;
+        const W = canvas.width;
+        const H = canvas.height;
+
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+
+        const w0Slider = document.getElementById('w0HPSlider');
+        const betaSlider = document.getElementById('betaHPSlider');
+        const readout = document.getElementById('hpReadout');
+
+        const font = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+        function renderHalfPower() {
+            const w0 = parseFloat(w0Slider.value);
+            const beta = parseFloat(betaSlider.value);
+
+            document.getElementById('w0HPVal').innerText = w0.toFixed(1);
+            document.getElementById('betaHPVal').innerText = beta.toFixed(1);
+
+            // Compute exact half-power frequencies
+            const w1 = Math.sqrt(w0 * w0 + (beta * beta) / 4) - beta / 2;
+            const w2 = Math.sqrt(w0 * w0 + (beta * beta) / 4) + beta / 2;
+            const dW = w2 - w1; // equals beta exactly
+            const Q = w0 / beta;
+
+            readout.innerHTML =
+                `ω₁ = <b>${w1.toFixed(2)}</b> rad/s &nbsp;|&nbsp; ` +
+                `ω₂ = <b>${w2.toFixed(2)}</b> rad/s &nbsp;|&nbsp; ` +
+                `Δω = <b>${dW.toFixed(2)}</b> &nbsp;|&nbsp; ` +
+                `Q = <b>${Q.toFixed(2)}</b>`;
+
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = '#fafbfc';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { top: 35, right: 40, bottom: 50, left: 60 };
+            const plotW = W - pad.left - pad.right;
+            const plotH = H - pad.top - pad.bottom;
+
+            const wMax = Math.max(w0 * 2.0, 10.0);
+
+            function wToX(w) { return pad.left + (w / wMax) * plotW; }
+            function pToY(p) { return pad.top + (1 - p / 1.15) * plotH; }
+
+            // Plot Area Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(pad.left, pad.top, plotW, plotH);
+
+            // Horizontal Grid
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let p = 0; p <= 1.0; p += 0.25) {
+                const y = pToY(p);
+                ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + plotW, y); ctx.stroke();
+            }
+
+            // Power Curve P(w) / P_max
+            function powerRel(w) {
+                if (w <= 0.001) return 0;
+                const den = Math.pow(w0 * w0 - w * w, 2) + w * w * beta * beta;
+                return (w * w * beta * beta) / den;
+            }
+
+            // Draw Power Curve
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            const steps = plotW * 2;
+            for (let i = 0; i <= steps; i++) {
+                const w = (i / steps) * wMax;
+                const p = powerRel(w);
+                const x = wToX(w);
+                const y = pToY(p);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // Half-Power Level Line (P = 0.5 P_max)
+            const yHalf = pToY(0.5);
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([5, 4]);
+            ctx.beginPath();
+            ctx.moveTo(pad.left, yHalf);
+            ctx.lineTo(pad.left + plotW, yHalf);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#dc2626';
+            ctx.font = `bold 11px ${font}`;
+            ctx.textAlign = 'left';
+            ctx.fillText('P_max / 2 (0.50)', pad.left + 8, yHalf - 6);
+
+            // Peak Power Line (P = 1.0 P_max)
+            const yPeak = pToY(1.0);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(pad.left, yPeak);
+            ctx.lineTo(pad.left + plotW, yPeak);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = `11px ${font}`;
+            ctx.textAlign = 'left';
+            ctx.fillText('P_max (1.00)', pad.left + 8, yPeak - 5);
+
+            // Vertical Projection Lines for w1, w0, w2
+            const x1 = wToX(w1);
+            const x0 = wToX(w0);
+            const x2 = wToX(w2);
+
+            // w1 line
+            ctx.strokeStyle = '#dc2626';
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath(); ctx.moveTo(x1, yHalf); ctx.lineTo(x1, pad.top + plotH); ctx.stroke();
+
+            // w2 line
+            ctx.beginPath(); ctx.moveTo(x2, yHalf); ctx.lineTo(x2, pad.top + plotH); ctx.stroke();
+
+            // w0 line
+            ctx.strokeStyle = '#2563eb';
+            ctx.beginPath(); ctx.moveTo(x0, yPeak); ctx.lineTo(x0, pad.top + plotH); ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Dots at half-power points & peak
+            ctx.fillStyle = '#ef4444';
+            ctx.beginPath(); ctx.arc(x1, yHalf, 5, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(x2, yHalf, 5, 0, Math.PI * 2); ctx.fill();
+
+            ctx.fillStyle = '#2563eb';
+            ctx.beginPath(); ctx.arc(x0, yPeak, 5, 0, Math.PI * 2); ctx.fill();
+
+            // Bandwidth Arrow Δω = w2 - w1
+            const bwY = yHalf;
+            ctx.strokeStyle = '#059669';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x1, bwY);
+            ctx.lineTo(x2, bwY);
+            ctx.stroke();
+            // Arrowheads
+            ctx.fillStyle = '#059669';
+            ctx.beginPath(); ctx.moveTo(x1, bwY); ctx.lineTo(x1 + 6, bwY - 4); ctx.lineTo(x1 + 6, bwY + 4); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(x2, bwY); ctx.lineTo(x2 - 6, bwY - 4); ctx.lineTo(x2 - 6, bwY + 4); ctx.fill();
+
+            // Bandwidth Text Label
+            ctx.fillStyle = '#047857';
+            ctx.font = `bold 12px ${font}`;
+            ctx.textAlign = 'center';
+            ctx.fillText(`Bandwidth Δω = β = ${beta.toFixed(2)}`, (x1 + x2) / 2, bwY - 10);
+
+            // Frequency Ticks and Labels on X-axis
+            ctx.fillStyle = '#1e293b';
+            ctx.font = `bold 11px ${font}`;
+
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#dc2626';
+            ctx.fillText(`ω₁=${w1.toFixed(2)}`, x1, pad.top + plotH + 18);
+            ctx.fillText(`ω₂=${w2.toFixed(2)}`, x2, pad.top + plotH + 18);
+
+            ctx.fillStyle = '#2563eb';
+            ctx.fillText(`ω₀=${w0.toFixed(1)}`, x0, pad.top + plotH + 32);
+
+            // Axes Border & Labels
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(pad.left, pad.top, plotW, plotH);
+
+            // Y Axis Ticks
+            ctx.textAlign = 'right';
+            ctx.fillStyle = '#475569';
+            ctx.font = `11px ${font}`;
+            ctx.fillText('1.0', pad.left - 6, pToY(1.0) + 4);
+            ctx.fillText('0.5', pad.left - 6, pToY(0.5) + 4);
+            ctx.fillText('0.0', pad.left - 6, pToY(0.0) + 4);
+
+            // Axis Title
+            ctx.fillStyle = '#1e293b';
+            ctx.font = `12px ${font}`;
+            ctx.textAlign = 'center';
+            ctx.fillText('Angular Frequency ω (rad/s)', pad.left + plotW / 2, H - 6);
+
+            ctx.save();
+            ctx.translate(14, pad.top + plotH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText('Average Power Ratio P(ω) / P_max', 0, 0);
+            ctx.restore();
+        }
+
+        w0Slider.addEventListener('input', renderHalfPower);
+        betaSlider.addEventListener('input', renderHalfPower);
+
+        renderHalfPower();
+    })();
     </script>
 </body>
 </html>
+

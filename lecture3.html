@@ -151,7 +151,47 @@
         }
 
         .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
@@ -160,10 +200,10 @@
         <nav class="nav-bar">
             <a href="lecture2.html" class="nav-btn">← Prev: Lecture 2</a>
             <a href="index.html" class="nav-btn">Course Directory</a>
-            <a href="lecture4.html" class="nav-btn">Next: Lecture 4 →</a>
+            <a href="lecture4.html" class="nav-btn"><span class="lang-en">Next: Lecture 4 →</span><span class="lang-th">ถัดไป: บทที่ 4 →</span></a>
         </nav>
 
-        <h1>Lecture 3: Dynamics &amp; Energy of Pendulums &amp; Rotational Equations</h1>
+        <h1><span class="lang-en">Lecture 3: Dynamics &amp; Energy of Pendulums &amp; Rotational Equations</span><span class="lang-th">บทที่ 3: พลศาสตร์ พลังงานของเพนดูลัม และสมการการหมุน</span></h1>
 
         <!-- Interactive Visual Demo: Swinging Pendulum & Energy Conservation -->
         <div class="demo-card">
@@ -186,22 +226,22 @@
 
         <!-- Topic 3.1 -->
         <div id="topic-3-1" class="topic-block">
-            <h2>Topic 3.1: Small Angle Approximation for Simple Pendulums</h2>
+            <h2><span class="lang-en">Topic 3.1: Small Angle Approximation for Simple Pendulums</span><span class="lang-th">หัวข้อ 3.1: การประมาณค่ามุมขนาดเล็กสำหรับลูกตุ้มอย่างง่าย</span></h2>
             <ul>
                 <li><span class="eq-label">Pendulum Equation of Motion:</span> $$\ddot{\theta} + \omega_0^2 \sin\theta = 0$$</li>
                 <li><span class="eq-label">Power Series Expansion:</span> $$\sin\theta = \theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \frac{\theta^7}{7!} + \dots$$</li>
                 <li><span class="eq-label">Linearized Equation ($\theta \ll 1$):</span> $$\ddot{\theta} + \omega_0^2 \theta = 0 \implies \theta(t) = \theta_0 \cos(\omega_0 t + \varphi)$$</li>
-                <li><span class="eq-label">Natural Angular Frequency:</span> $$\omega_0 = \sqrt{\frac{g}{L}}$$</li>
+                <li class="key-equation"><span class="eq-label">Natural Angular Frequency:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\omega_0 = \sqrt{\frac{g}{L}}$$</li>
             </ul>
         </div>
 
         <!-- Topic 3.2 -->
         <div id="topic-3-2" class="topic-block">
-            <h2>Topic 3.2: Energy of a Simple Pendulum</h2>
+            <h2><span class="lang-en">Topic 3.2: Energy of a Simple Pendulum</span><span class="lang-th">หัวข้อ 3.2: พลังงานของลูกตุ้มนาฬิกาอย่างง่าย</span></h2>
             <ul>
                 <li><span class="eq-label">Kinetic Energy ($K$):</span> $$K = \frac{1}{2} I \left(\frac{d\theta}{dt}\right)^2 = \frac{1}{2} I \dot{\theta}^2 = \frac{1}{2} I \omega^2$$</li>
                 <li><span class="eq-label">Potential Energy ($U$):</span> $$U = mgh = mgL(1 - \cos\theta) \approx \frac{1}{2} mgL \theta^2$$</li>
-                <li><span class="eq-label">Total Mechanical Energy ($E$):</span> $$E = K + U = \frac{1}{2} I \dot{\theta}^2 + \frac{1}{2} mgL \theta^2 = \text{constant}$$</li>
+                <li class="key-equation"><span class="eq-label">Total Mechanical Energy ($E$):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$E = K + U = \frac{1}{2} I \dot{\theta}^2 + \frac{1}{2} mgL \theta^2 = \text{constant}$$</li>
                 <li><span class="eq-label">ODE Derivation ($\frac{dE}{dt} = 0$):</span> $$I \dot{\theta} \ddot{\theta} + mgL \theta \dot{\theta} = 0 \implies \ddot{\theta} + \frac{mgL}{I} \theta = 0 \implies \omega_0 = \sqrt{\frac{mgL}{I}}$$</li>
             </ul>
         </div>
@@ -215,7 +255,7 @@
                     Image Source: <a href="https://phys.libretexts.org/Courses/Muhlenberg_College/MC%3A_Physics_121_-_General_Physics_I/11%3A_Fixed-Axis_Rotation__Introduction/11.05%3A_Moment_of_Inertia_and_Rotational_Kinetic_Energy" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline;">LibreTexts Physics (Muhlenberg College - Fixed-Axis Rotation: Moment of Inertia)</a>
                 </div>
             </div>
-            <h2>Topic 3.3: Rotational Inertia (Moments of Inertia $I$)</h2>
+            <h2><span class="lang-en">Topic 3.3: Rotational Inertia (Moments of Inertia $I$)</span><span class="lang-th">หัวข้อ 3.3: โมเมนต์ความเฉื่อยของการหมุน ($I$)</span></h2>
             <ul>
                 <li><span class="eq-label">Parallel Axis Theorem:</span> $$I = I_{\text{CM}} + M d^2$$</li>
                 <li><span class="eq-label">Thin Rod Integration Form (about end):</span> $$I = \int_0^L x^2 \, dm = \int_0^L x^2 \frac{M}{L} \, dx = \frac{1}{3} M L^2$$</li>
@@ -223,11 +263,11 @@
         </div>
 
         <div id="topic-3-4" class="topic-block">
-            <h2>Topic 3.4: Physical Pendulum</h2>
+            <h2><span class="lang-en">Topic 3.4: Physical Pendulum</span><span class="lang-th">หัวข้อ 3.4: เพนดูลัมกายภาพ (Physical Pendulum)</span></h2>
             <ul>
                 <li><span class="eq-label">Restoring Torque:</span> $$\tau = -mgd \sin\theta \approx -mgd \theta$$</li>
                 <li><span class="eq-label">Equation of Motion:</span> $$I \ddot{\theta} = \tau \implies \ddot{\theta} + \frac{mgd}{I} \theta = 0$$</li>
-                <li><span class="eq-label">Oscillatory Characteristics:</span> $$\omega = \sqrt{\frac{mgd}{I}}, \quad T = 2\pi \sqrt{\frac{I}{mgd}}, \quad f = \frac{1}{2\pi} \sqrt{\frac{mgd}{I}}$$</li>
+                <li class="key-equation"><span class="eq-label">Oscillatory Characteristics:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\omega = \sqrt{\frac{mgd}{I}}, \quad T = 2\pi \sqrt{\frac{I}{mgd}}, \quad f = \frac{1}{2\pi} \sqrt{\frac{mgd}{I}}$$</li>
             </ul>
         </div>
     </div>

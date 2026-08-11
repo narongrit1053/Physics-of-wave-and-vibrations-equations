@@ -151,7 +151,47 @@
         }
 
         .eq-label { font-weight: 600; color: #374151; margin-bottom: 4px; }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
@@ -160,10 +200,10 @@
         <nav class="nav-bar">
             <a href="lecture1.html" class="nav-btn">← Prev: Lecture 1</a>
             <a href="index.html" class="nav-btn">Course Directory</a>
-            <a href="lecture3.html" class="nav-btn">Next: Lecture 3 →</a>
+            <a href="lecture3.html" class="nav-btn"><span class="lang-en">Next: Lecture 3 →</span><span class="lang-th">ถัดไป: บทที่ 3 →</span></a>
         </nav>
 
-        <h1>Lecture 2: Superposition of Periodic Motions</h1>
+        <h1><span class="lang-en">Lecture 2: Superposition of Periodic Motions</span><span class="lang-th">บทที่ 2: การซ้อนทับกันของการเคลื่อนที่แบบคาบ</span></h1>
 
         <!-- Interactive Visual Demo: Lissajous & Beats -->
         <div class="demo-card">
@@ -233,7 +273,7 @@
                 </svg>
             </div>
 
-            <h2>Topic 2.1: Superposition of Two SHMs (Same Frequency, One Dimension)</h2>
+            <h2><span class="lang-en">Topic 2.1: Superposition of Two SHMs (Same Frequency, One Dimension)</span><span class="lang-th">หัวข้อ 2.1: การซ้อนทับของการสั่น 1 มิติ 2 ขบวน (ความถี่เท่ากัน)</span></h2>
             <ul>
                 <li><span class="eq-label">Sum of Oscillations:</span>
                     $$x(t) = x_1(t) + x_2(t) = A_1 \cos(\omega t + \phi_1) + A_2 \cos(\omega t + \phi_2) = A \cos(\omega t + \phi)$$
@@ -273,7 +313,7 @@
                     </defs>
 
                     <!-- ================= PANEL 1: Individual Phasors ================= -->
-                    <line x1="40" y1="300" x2="40" y2="35" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" />
+                    <line x1="40" y1="300" x2="40" y2="35" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" / class="key-equation">
                     <line x1="40" y1="300" x2="380" y2="300" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" />
 
                     <text x="05" y="55" font-size="22" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Im</text>
@@ -335,7 +375,7 @@
                 </svg>
             </div>
 
-                <li><span class="eq-label">Complex Superposition Formulation:</span>
+                <li><span class="eq-label">Complex Superposition Formulation:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span>
                     $$z = z_1 + z_2 = A_1 e^{i(\omega t + \phi_1)} + A_2 e^{i(\omega t + \phi_2)} = e^{i(\omega t + \phi_1)}\left[A_1 + A_2 e^{i(\phi_2 - \phi_1)}\right]$$
                 </li>
             </ul>
@@ -398,7 +438,7 @@
                 </svg>
             </div>
 
-            <h2>Topic 2.2: Equal Amplitudes Special Case</h2>
+            <h2><span class="lang-en">Topic 2.2: Equal Amplitudes Special Case</span><span class="lang-th">หัวข้อ 2.2: กรณีพิเศษแอมพลิจูดเท่ากัน</span></h2>
             <ul>
                 <li><span class="eq-label">Phase Angle Split (when $A_1 = A_2$):</span> $$\beta = \frac{\delta}{2} \quad (\text{where } \delta =\varphi_2 -\varphi_1)$$</li>
                 <li><span class="eq-label">Resultant Amplitude:</span> $$A = 2A_1 \cos\beta = 2A_1 \cos\left(\frac{\delta}{2}\right)$$</li>
@@ -457,10 +497,10 @@
                 </svg>
             </div>
 
-            <h2>Topic 2.3: Superposition of Different Frequencies (Beats)</h2>
+            <h2><span class="lang-en">Topic 2.3: Superposition of Different Frequencies (Beats)</span><span class="lang-th">หัวข้อ 2.3: การซ้อนทับที่มีความถี่ต่างกัน (ปรากฏการณ์บีตส์)</span></h2>
             <ul>
                 <li><span class="eq-label">Superposed Beat Position:</span> $$x = x_1 + x_2 = A \cos\omega_1 t + A \cos\omega_2 t = 2A \cos\left(\frac{\omega_1 + \omega_2}{2} t\right) \cos\left(\frac{\omega_1 - \omega_2}{2} t\right)$$</li>
-                <li><span class="eq-label">Beat Period:</span> $$T_{\text{beat}} = \frac{2\pi}{|\omega_1 - \omega_2|}$$</li>
+                <li class="key-equation"><span class="eq-label">Beat Period:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$T_{\text{beat}} = \frac{2\pi}{|\omega_1 - \omega_2|}$$</li>
             </ul>
         </div>
 
@@ -552,7 +592,7 @@
                 </svg>
             </div>
 
-            <h2>Topic 2.4: Superposition of Perpendicular Vibrations (Two Dimensions)</h2>
+            <h2><span class="lang-en">Topic 2.4: Superposition of Perpendicular Vibrations (Two Dimensions)</span><span class="lang-th">หัวข้อ 2.4: การซ้อนทับของการสั่นใน 2 มิติตั้งฉากกัน (รูป ลิสซาฌูส์)</span></h2>
             <ul>
                 <li><span class="eq-label">Component Equations:</span> $$x = A_1 \cos(\omega t +\phi_1), \quad y = A_2 \cos(\omega t +\phi_2)$$</li>
                 <li><span class="eq-label">Common Reference Form ($\phi_1 = 0,\phi_2 =\phi$):</span> $$x = A_1 \cos(\omega t), \quad y = A_2 \cos(\omega t +\phi)$$</li>
@@ -571,7 +611,7 @@
 
         <!-- Topic 2.5 -->
         <div id="topic-2-5" class="topic-block">
-            <h2>Topic 2.5: Parallel vs. Perpendicular Superposition Summary</h2>
+            <h2><span class="lang-en">Topic 2.5: Parallel vs. Perpendicular Superposition Summary</span><span class="lang-th">หัวข้อ 2.5: สรุปการซ้อนทับแบบขนานกับการซ้อนทับแบบตั้งฉาก</span></h2>
             <ul>
                 <li><span class="eq-label">Parallel Superposition:</span> $$y = y_1 + y_2 = \left(2A \cos\frac{\varphi}{2}\right) \cos\left(\omega t + \frac{\varphi}{2}\right)$$</li>
                 <li><span class="eq-label">Perpendicular Superposition:</span> $$x^2 - 2xy \cos\varphi + y^2 = A^2 \sin^2\varphi$$</li>

@@ -346,7 +346,47 @@
             margin-top: 10px;
             font-size: 13px;
         }
+    
+        /* Key Equation & Topic Highlight Styling */
+        .key-equation {
+            background-color: #fffbeb !important;
+            border-left: 4px solid #f59e0b !important;
+            border-top: 1px solid #fde68a !important;
+            border-right: 1px solid #fde68a !important;
+            border-bottom: 1px solid #fde68a !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08) !important;
+        }
+        .key-equation:hover {
+            background-color: #fef3c7 !important;
+            border-left-color: #d97706 !important;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.16) !important;
+        }
+        .key-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+        .topic-block.key-topic-block {
+            border: 2px solid #f59e0b !important;
+            background-color: #fffdf5 !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+        }
+        .topic-block.key-topic-block h2 {
+            color: #b45309 !important;
+        }
+
     </style>
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
@@ -355,14 +395,14 @@
         <nav class="nav-bar">
             <a href="lecture0.html" class="nav-btn">← Prev: Lecture 0</a>
             <span class="nav-title">Lecture 1 of 7</span>
-            <a href="lecture2.html" class="nav-btn">Next: Lecture 2 →</a>
+            <a href="lecture2.html" class="nav-btn"><span class="lang-en">Next: Lecture 2 →</span><span class="lang-th">ถัดไป: บทที่ 2 →</span></a>
         </nav>
 
-        <h1>Lecture 1: Simple Harmonic Motion (SHM) using Complex Numbers</h1>
+        <h1><span class="lang-en">Lecture 1: Simple Harmonic Motion (SHM) using Complex Numbers</span><span class="lang-th">บทที่ 1: การสั่นแบบฮาร์มอนิกอย่างง่ายและจำนวนเชิงซ้อน</span></h1>
 
         <!-- Topic 1.1 -->
         <div id="topic-1-1" class="topic-block">
-            <h2>Topic 1.1: Periodic Motion &amp; Waveforms</h2>
+            <h2><span class="lang-en">Topic 1.1: Periodic Motion &amp; Waveforms</span><span class="lang-th">หัวข้อ 1.1: การเคลื่อนที่แบบคาบและรูปคลื่น</span></h2>
             <ul>
                 <li>
                     <span class="eq-label">General Mathematical Expression for Periodic Motion (Fourier Series):</span>
@@ -527,30 +567,30 @@
                 </div>
             </div>
 
-            <h2>Topic 1.2: Hooke's Law &amp; Newtonian Equations of Motion</h2>
+            <h2><span class="lang-en">Topic 1.2: Hooke's Law &amp; Newtonian Equations of Motion</span><span class="lang-th">หัวข้อ 1.2: กฎของฮุกและสมการการเคลื่อนที่ของนิวตัน</span></h2>
             <ul>
                 <li><span class="eq-label">Hooke’s Law (Restoring Force):</span> $$\vec{F} = -k\vec{x}$$</li>
                 <li><span class="eq-label">Newton’s Second Law for Mass-Spring System:</span> $$\vec{F} = m\vec{a} = -k\vec{x}$$</li>
                 <li><span class="eq-label">Acceleration as Function of Displacement:</span> $$\vec{a} = -\frac{k}{m}\vec{x}$$</li>
                 <li><span class="eq-label">Second-Order Differential Equation for SHM:</span> $$\frac{d^2\vec{x}}{dt^2} = -\frac{k}{m}\vec{x}$$</li>
-                <li><span class="eq-label">Standard Form ($\omega^2 = \frac{k}{m}$):</span> $$\frac{d^2x}{dt^2} = -\omega^2 x$$</li>
+                <li class="key-equation"><span class="eq-label">Standard Form ($\omega^2 = \frac{k}{m}$):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\frac{d^2x}{dt^2} = -\omega^2 x$$</li>
             </ul>
         </div>
 
         <!-- Topic 1.3 -->
         <div id="topic-1-3" class="topic-block">
-            <h2>Topic 1.3: Physical Parameters of Oscillation</h2>
+            <h2><span class="lang-en">Topic 1.3: Physical Parameters of Oscillation</span><span class="lang-th">หัวข้อ 1.3: พารามิเตอร์ทางกายภาพของการสั่น</span></h2>
             <ul>
                 <li><span class="eq-label">Angular Frequency ($\omega$):</span> $$\omega = \sqrt{\frac{k}{m}}$$</li>
                 <li><span class="eq-label">Oscillation Period ($T$):</span> $$T = \frac{2\pi}{\omega} = \frac{1}{f} = 2\pi\sqrt{\frac{m}{k}}$$</li>
                 <li><span class="eq-label">Frequency ($f$):</span> $$f = \frac{1}{T} = \frac{\omega}{2\pi} = \frac{1}{2\pi}\sqrt{\frac{k}{m}}$$</li>
-                <li><span class="eq-label">Natural Frequency ($\omega_0$) &amp; Period ($T$):</span> $$\omega_0 = \sqrt{\frac{k}{m}}, \quad T = 2\pi\sqrt{\frac{m}{k}}$$</li>
+                <li class="key-equation"><span class="eq-label">Natural Frequency ($\omega_0$) &amp; Period ($T$):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\omega_0 = \sqrt{\frac{k}{m}}, \quad T = 2\pi\sqrt{\frac{m}{k}}$$</li>
             </ul>
         </div>
 
         <!-- Topic 1.4 -->
         <div id="topic-1-4" class="topic-block">
-            <h2>Topic 1.4: Simple Harmonic Motion (SHM) Waveforms &amp; Solutions</h2>
+            <h2><span class="lang-en">Topic 1.4: Simple Harmonic Motion (SHM) Waveforms &amp; Solutions</span><span class="lang-th">หัวข้อ 1.4: รูปแบบคลื่น SHM และคำตอบของสมการ</span></h2>
             <ul>
                 <li><span class="eq-label">General Displacement Solution:</span> $$x(t) = A \cos(\omega t + \phi)$$</li>
                 <li><span class="eq-label">Displacement Waveform ($\phi = \pi/2$):</span> $$x(t) = A \sin(\omega t)$$</li>
@@ -563,7 +603,7 @@
 
         <!-- Topic 1.5 -->
         <div id="topic-1-5" class="topic-block">
-            <h2>Topic 1.5: Velocity &amp; Acceleration Relations in SHM</h2>
+            <h2><span class="lang-en">Topic 1.5: Velocity &amp; Acceleration Relations in SHM</span><span class="lang-th">หัวข้อ 1.5: ความสัมพันธ์ระหว่างความเร็วและความเร่งใน SHM</span></h2>
             <ul>
                 <li><span class="eq-label">Linear Velocity on Reference Circle:</span> $$v = r\omega$$</li>
                 <li><span class="eq-label">Maximum Linear Velocity ($v_{\max}$):</span> $$v_{\max} = A\omega$$</li>
@@ -577,15 +617,15 @@
                     $$a(t) = \frac{d^2x(t)}{dt^2} = \frac{dv(t)}{dt} = -A\omega^2 \cos(\omega t + \phi)$$
                     $$a(t) = A\omega^2 \cos(\omega t + \phi + \pi)$$
                 </li>
-                <li><span class="eq-label">Acceleration Mapped to Displacement ($x$):</span> $$a(x) = -\omega^2 x$$</li>
+                <li class="key-equation"><span class="eq-label">Acceleration Mapped to Displacement ($x$):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$a(x) = -\omega^2 x$$</li>
             </ul>
         <!-- Topic 1.6 -->
         <div id="topic-1-6" class="topic-block">
-            <h2>Topic 1.6: Complex Numbers &amp; Euler's Relations</h2>
+            <h2><span class="lang-en">Topic 1.6: Complex Numbers &amp; Euler's Relations</span><span class="lang-th">หัวข้อ 1.6: จำนวนเชิงซ้อนและสูตรของออยเลอร์</span></h2>
             <ul>
-                <li><span class="eq-label">Standard Complex Representation:</span> $$z = a + jb \quad \text{or} \quad z = a + ib$$</li>
+                <li class="key-equation"><span class="eq-label">Standard Complex Representation:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$z = a + jb \quad \text{or} \quad z = a + ib$$</li>
                 <li><span class="eq-label">Imaginary Unit Identity:</span> $$j^2 = -1 \quad \text{or} \quad i^2 = -1$$</li>
-                <li><span class="eq-label">Polar Form of Complex Number:</span> $$z = a + ib = |z|e^{i\theta} \quad \left(|z| = \sqrt{a^2 + b^2}, \quad \tan\theta = \frac{b}{a}\right)$$</li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Polar Form of Complex Number:</span><span class="lang-th">รูปแบบโพลาร์ของจำนวนเชิงซ้อน:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$z = a + ib = |z|e^{i\theta} \quad \left(|z| = \sqrt{a^2 + b^2}, \quad \tan\theta = \frac{b}{a}\right)$$</li>
                 <li><span class="eq-label">Taylor Series Expansions:</span>
                     $$f(x) = f(0) + xf'(0) + \frac{x^2}{2!}f''(0) + \dots$$
                     $$\cos\theta = 1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \dots$$
@@ -602,7 +642,7 @@
 
         <!-- Topic 1.7 -->
         <div id="topic-1-7" class="topic-block">
-            <h2>Topic 1.7: Rotating Vectors &amp; SHM in Complex Notation</h2>
+            <h2><span class="lang-en">Topic 1.7: Rotating Vectors &amp; SHM in Complex Notation</span><span class="lang-th">หัวข้อ 1.7: เวคเตอร์หมุน (Phasor) และ SHM ในรูปแบบเชิงซ้อน</span></h2>
             <ul>
                 <li><span class="eq-label">Phasor Mapping on Complex Plane:</span> $$z = x + iy = A\cos(\omega_0 t) + iA\sin(\omega_0 t) = A\left(\cos(\omega_0 t) + i\sin(\omega_0 t)\right) = Ae^{i\omega_0 t}$$</li>
                 <li><span class="eq-label">General Complex Solution:</span> $$z = Ae^{i(\omega_0 t + \phi)}$$</li>
@@ -623,7 +663,7 @@
 
         <!-- Topic 1.8 -->
         <div id="topic-1-8" class="topic-block">
-            <h2>Topic 1.8: Mathematical Derivation of the General Solution</h2>
+            <h2><span class="lang-en">Topic 1.8: Mathematical Derivation of the General Solution</span><span class="lang-th">หัวข้อ 1.8: การพิสูจน์คำตอบทั่วไปทางคณิตศาสตร์</span></h2>
             <ul>
                 <li><span class="eq-label">Standard ODE:</span> $$\frac{d^2x}{dt^2} + \omega_0^2 x = 0$$</li>
                 <li><span class="eq-label">Trial Solution &amp; Derivatives:</span> $$x = Be^{pt} \implies \frac{dx}{dt} = Bpe^{pt}, \quad \frac{d^2x}{dt^2} = Bp^2e^{pt}$$</li>
@@ -640,7 +680,7 @@
 
         <!-- Topic 1.9 -->
         <div id="topic-1-9" class="topic-block">
-            <h2>Topic 1.9: Euler Transformations (Worked Exercises &amp; Interactive Detailed Solutions)</h2>
+            <h2><span class="lang-en">Topic 1.9: Euler Transformations (Worked Exercises &amp; Interactive Detailed Solutions)</span><span class="lang-th">หัวข้อ 1.9: การแปลงออยเลอร์ (โจทย์แบบฝึกหัดและเฉลยละเอียด)</span></h2>
             <p style="font-size: 14px; color: #475569; margin-bottom: 20px;">
                 <strong>Objective:</strong> Convert trigonometric sum and difference functions into standard phasor complex exponential form 
                 $$x(t) = \text{Re}\left[ A e^{i(\omega t + \phi)} \right] = A \cos(\omega t + \phi)$$
@@ -658,7 +698,7 @@
                 <div class="hover-math-card" data-math-popup
                      data-title="Method 1: Detailed Complex Phasor &amp; Polar Vector Analysis"
                      data-badge="Phasor Method"
-                     data-content="<p><strong>Goal:</strong> Express $x(t) = \sin(\omega t) + \cos(\omega t)$ as $x(t) = \text{Re}\left[A e^{i(\omega t + \phi)}\right]$.</p><ol><li><strong>Euler Identity Mapping:</strong><br>Recall Euler's relation: $e^{i\theta} = \cos\theta + i\sin\theta$.<br>Writing trigonometric terms as real parts of complex exponentials:<br>$$\cos(\omega t) = \text{Re}\left[e^{i\omega t}\right]$$<br>$$\sin(\omega t) = \text{Re}\left[-i e^{i\omega t}\right] \quad \left(\text{since } -i e^{i\omega t} = -i(\cos\omega t + i\sin\omega t) = \sin\omega t - i\cos\omega t\right)$$</li><li><strong>Combine Phasor Terms:</strong><br>$$x(t) = \text{Re}\left[e^{i\omega t} - i e^{i\omega t}\right] = \text{Re}\left[(1 - i) e^{i\omega t}\right]$$</li><li><strong>Convert Complex Coefficient $w = 1 - i$ to Polar Form ($R e^{i\theta}$):</strong><br>• Real part $a = 1$, Imaginary part $b = -1$<br>• Magnitude $|w| = \sqrt{a^2 + b^2} = \sqrt{1^2 + (-1)^2} = \sqrt{2}$<br>• Phase angle $\theta = \tan^{-1}\left(\frac{b}{a}\right) = \tan^{-1}\left(\frac{-1}{1}\right) = -\frac{\pi}{4}$ radians<br><div class='formula-highlight'>$$w = 1 - i = \sqrt{2} e^{-i\pi/4}$$</div></li><li><strong>Substitute Back &amp; Extract Real Part:</strong><br>$$\tilde{z}(t) = w e^{i\omega t} = \sqrt{2} e^{-i\pi/4} e^{i\omega t} = \sqrt{2} e^{i(\omega t - \pi/4)}$$<br>$$x(t) = \text{Re}[\tilde{z}(t)] = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right)$$</li><li><strong>Final Parameters:</strong><br>Amplitude $A = \sqrt{2}$, Phase Constant $\phi = -\frac{\pi}{4}$.</li></ol>">
+                     data-content="<p><strong>Goal:</strong> Express $x(t) = \sin(\omega t) + \cos(\omega t)$ as $x(t) = \text{Re}\left[A e^{i(\omega t + \phi)}\right]$.</p><ol><li><strong>Euler Identity Mapping:</strong><br>Recall Euler's relation: $e^{i\theta} = \cos\theta + i\sin\theta$.<br>Writing trigonometric terms as real parts of complex exponentials:<br>$$\cos(\omega t) = \text{Re}\left[e^{i\omega t}\right]$$<br>$$\sin(\omega t) = \text{Re}\left[-i e^{i\omega t}\right] \quad \left(\text{since } -i e^{i\omega t} = -i(\cos\omega t + i\sin\omega t) = \sin\omega t - i\cos\omega t\right)$$</li><li><strong>Combine Phasor Terms:</strong><br>$$x(t) = \text{Re}\left[e^{i\omega t} - i e^{i\omega t}\right] = \text{Re}\left[(1 - i) e^{i\omega t}\right]$$</li><li><strong>Convert Complex Coefficient $w = 1 - i$ to Polar Form ($R e^{i\theta}$):</strong><br>• Real part $a = 1$, Imaginary part $b = -1$<br>• Magnitude $|w| = \sqrt{a^2 + b^2} = \sqrt{1^2 + (-1)^2} = \sqrt{2}$<br>• Phase angle $\theta = \tan^{-1}\left(\frac{b}{a}\right) = \tan^{-1}\left(\frac{-1}{1}\right) = -\frac{\pi}{4}$ radians<br><div class='formula-highlight'>$$w = 1 - i = \sqrt{2} e^{-i\pi/4}$$</div></li><li class="key-equation"><strong>Substitute Back &amp; Extract Real Part:</strong><br>$$\tilde{z}(t) = w e^{i\omega t} = \sqrt{2} e^{-i\pi/4} e^{i\omega t} = \sqrt{2} e^{i(\omega t - \pi/4)}$$<br>$$x(t) = \text{Re}[\tilde{z}(t)] = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right)$$</li><li><strong>Final Parameters:</strong><br>Amplitude $A = \sqrt{2}$, Phase Constant $\phi = -\frac{\pi}{4}$.</li></ol>">
                     <span class="eq-label" style="color: #1e40af;">Method 1: Complex Phasor &amp; Polar Plane Conversion</span>
                     <div>$$x(t) = \text{Re}\left[ (1 - i) e^{i\omega t} \right] = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right] = \sqrt{2}\cos\left(\omega t - \frac{\pi}{4}\right)$$</div>
                 </div>
@@ -667,7 +707,7 @@
                 <div class="hover-math-card" data-math-popup
                      data-title="Method 2: Detailed Trigonometric Sum-to-Product Identity"
                      data-badge="Identity Method"
-                     data-content="<p><strong>Goal:</strong> Transform $x(t) = \sin(\omega t) + \cos(\omega t)$ into cosine amplitude-phase form.</p><ol><li><strong>Convert Sine to Cosine via Phase Shift:</strong><br>Using cofunction identity $\sin\theta = \cos\left(\frac{\pi}{2} - \theta\right) = \cos\left(\theta - \frac{\pi}{2}\right)$:<br>$$x(t) = \cos(\omega t) + \cos\left(\omega t - \frac{\pi}{2}\right)$$</li><li><strong>Apply Sum-to-Product Identity:</strong><br>$$\cos A + \cos B = 2 \cos\left(\frac{A+B}{2}\right) \cos\left(\frac{A-B}{2}\right)$$<br>Let $A = \omega t$ and $B = \omega t - \frac{\pi}{2}$:<br>$$\frac{A+B}{2} = \frac{2\omega t - \pi/2}{2} = \omega t - \frac{\pi}{4}, \quad \frac{A-B}{2} = \frac{\pi/2}{2} = \frac{\pi}{4}$$</li><li><strong>Substitute Values:</strong><br>$$x(t) = 2 \cos\left(\frac{\pi}{4}\right) \cos\left(\omega t - \frac{\pi}{4}\right)$$<br>Since $\cos\left(\frac{\pi}{4}\right) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$:<br><div class='formula-highlight'>$$x(t) = 2 \left(\frac{\sqrt{2}}{2}\right) \cos\left(\omega t - \frac{\pi}{4}\right) = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right)$$</div></li><li><strong>Express in Complex Euler Notation:</strong><br>$$x(t) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</li></ol>">
+                     data-content="<p><strong>Goal:</strong> Transform $x(t) = \sin(\omega t) + \cos(\omega t)$ into cosine amplitude-phase form.</p><ol><li><strong>Convert Sine to Cosine via Phase Shift:</strong><br>Using cofunction identity $\sin\theta = \cos\left(\frac{\pi}{2} - \theta\right) = \cos\left(\theta - \frac{\pi}{2}\right)$:<br>$$x(t) = \cos(\omega t) + \cos\left(\omega t - \frac{\pi}{2}\right)$$</li><li><strong>Apply Sum-to-Product Identity:</strong><br>$$\cos A + \cos B = 2 \cos\left(\frac{A+B}{2}\right) \cos\left(\frac{A-B}{2}\right)$$<br>Let $A = \omega t$ and $B = \omega t - \frac{\pi}{2}$:<br>$$\frac{A+B}{2} = \frac{2\omega t - \pi/2}{2} = \omega t - \frac{\pi}{4}, \quad \frac{A-B}{2} = \frac{\pi/2}{2} = \frac{\pi}{4}$$</li><li><strong>Substitute Values:</strong><br>$$x(t) = 2 \cos\left(\frac{\pi}{4}\right) \cos\left(\omega t - \frac{\pi}{4}\right)$$<br>Since $\cos\left(\frac{\pi}{4}\right) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$:<br><div class='formula-highlight'>$$x(t) = 2 \left(\frac{\sqrt{2}}{2}\right) \cos\left(\omega t - \frac{\pi}{4}\right) = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right)$$</div></li><li class="key-equation"><strong>Express in Complex Euler Notation:</strong><br>$$x(t) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</li></ol>">
                     <span class="eq-label" style="color: #1e40af;">Method 2: Angle Phase Shift &amp; Sum-to-Product Identity</span>
                     <div>$$x(t) = \cos(\omega t) + \cos\left(\omega t - \frac{\pi}{2}\right) = 2\cos\left(\frac{\pi}{4}\right)\cos\left(\omega t - \frac{\pi}{4}\right) = \sqrt{2}\cos\left(\omega t - \frac{\pi}{4}\right)$$</div>
                 </div>
@@ -676,7 +716,7 @@
                 <div class="hover-math-card" data-math-popup
                      data-title="Method 3: Detailed Linear Combination Component Formula"
                      data-badge="Component Method"
-                     data-content="<p><strong>Goal:</strong> Use rectangular-to-polar mapping for $x(t) = 1\cdot\cos(\omega t) + 1\cdot\sin(\omega t)$.</p><ol><li><strong>General Component Identity:</strong><br>$$A_1 \cos(\omega t) + A_2 \sin(\omega t) = R \cos(\omega t - \phi)$$<br>where $R = \sqrt{A_1^2 + A_2^2}$ and $\tan\phi = \frac{A_2}{A_1}$.</li><li><strong>Extract Coefficients:</strong><br>$A_1 = 1$ (cosine coefficient), $A_2 = 1$ (sine coefficient).</li><li><strong>Calculate Resultant Amplitude $R$:</strong><br>$$R = \sqrt{1^2 + 1^2} = \sqrt{2}$$</li><li><strong>Calculate Phase Angle $\phi$:</strong><br>$$\tan\phi = \frac{1}{1} = 1 \implies \phi = \frac{\pi}{4}$$</li><li><strong>Combine &amp; Convert to Euler Form:</strong><br><div class='formula-highlight'>$$x(t) = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</div></li></ol>">
+                     data-content="<p><strong>Goal:</strong> Use rectangular-to-polar mapping for $x(t) = 1\cdot\cos(\omega t) + 1\cdot\sin(\omega t)$.</p><ol><li><strong>General Component Identity:</strong><br>$$A_1 \cos(\omega t) + A_2 \sin(\omega t) = R \cos(\omega t - \phi)$$<br>where $R = \sqrt{A_1^2 + A_2^2}$ and $\tan\phi = \frac{A_2}{A_1}$.</li><li><strong>Extract Coefficients:</strong><br>$A_1 = 1$ (cosine coefficient), $A_2 = 1$ (sine coefficient).</li><li><strong>Calculate Resultant Amplitude $R$:</strong><br>$$R = \sqrt{1^2 + 1^2} = \sqrt{2}$$</li><li><strong>Calculate Phase Angle $\phi$:</strong><br>$$\tan\phi = \frac{1}{1} = 1 \implies \phi = \frac{\pi}{4}$$</li><li class="key-equation"><strong>Combine &amp; Convert to Euler Form:</strong><br><div class='formula-highlight'>$$x(t) = \sqrt{2} \cos\left(\omega t - \frac{\pi}{4}\right) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</div></li></ol>">
                     <span class="eq-label" style="color: #1e40af;">Method 3: Rectangular Components &amp; Magnitude-Phase Mapping</span>
                     <div>$$R = \sqrt{1^2 + 1^2} = \sqrt{2}, \quad \tan\phi = \frac{1}{1} \implies \phi = \frac{\pi}{4} \implies x(t) = \text{Re}\left[ \sqrt{2} e^{i(\omega t - \pi/4)} \right]$$</div>
                 </div>
@@ -697,7 +737,7 @@
                 <div class="hover-math-card" data-math-popup
                      data-title="Method 1: Detailed Complex Phasor &amp; Quadrant III Analysis"
                      data-badge="Phasor Method"
-                     data-content="<p><strong>Goal:</strong> Express $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ as $\text{Re}\left[A e^{i(\omega t + \phi)}\right]$.</p><ol><li><strong>Complex Exponential Representation:</strong><br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \text{Re}\left[ e^{i(\omega t - \pi/3)} \right] = \text{Re}\left[ e^{-i\pi/3} e^{i\omega t} \right]$$<br>$$\cos(\omega t) = \text{Re}\left[ e^{i\omega t} \right]$$</li><li><strong>Factor Out $e^{i\omega t}$:</strong><br>$$\tilde{z}(t) = \left( e^{-i\pi/3} - 1 \right) e^{i\omega t}$$<br>Let the complex coefficient be $w = e^{-i\pi/3} - 1$.</li><li><strong>Convert $e^{-i\pi/3}$ to Rectangular Form ($a + ib$):</strong><br>$$e^{-i\pi/3} = \cos\left(-\frac{\pi}{3}\right) + i\sin\left(-\frac{\pi}{3}\right) = \frac{1}{2} - i \frac{\sqrt{3}}{2}$$<br>Subtract 1:<br>$$w = \left(\frac{1}{2} - i \frac{\sqrt{3}}{2}\right) - 1 = -\frac{1}{2} - i \frac{\sqrt{3}}{2}$$</li><li><strong>Convert $w$ to Polar Form ($R e^{i\phi}$):</strong><br>• Real part $a = -\frac{1}{2} < 0$, Imaginary part $b = -\frac{\sqrt{3}}{2} < 0 \implies \mathbf{Quadrant\ III}$.<br>• Magnitude $|w| = \sqrt{\left(-\frac{1}{2}\right)^2 + \left(-\frac{\sqrt{3}}{2}\right)^2} = \sqrt{\frac{1}{4} + \frac{3}{4}} = 1$.<br>• Phase Angle $\phi = \tan^{-1}\left(\frac{-\sqrt{3}/2}{-1/2}\right) - \pi = \tan^{-1}(\sqrt{3}) - \pi = \frac{\pi}{3} - \pi = -\frac{2\pi}{3}$.<br><div class='formula-highlight'>$$w = -\frac{1}{2} - i \frac{\sqrt{3}}{2} = 1 \cdot e^{-i 2\pi/3}$$</div></li><li><strong>Final Complex Solution:</strong><br>$$\tilde{z}(t) = e^{-i 2\pi/3} e^{i\omega t} = e^{i(\omega t - 2\pi/3)}$$<br>$$x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right] = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</li></ol>">
+                     data-content="<p><strong>Goal:</strong> Express $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ as $\text{Re}\left[A e^{i(\omega t + \phi)}\right]$.</p><ol><li class="key-equation"><strong>Complex Exponential Representation:</strong><br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \text{Re}\left[ e^{i(\omega t - \pi/3)} \right] = \text{Re}\left[ e^{-i\pi/3} e^{i\omega t} \right]$$<br>$$\cos(\omega t) = \text{Re}\left[ e^{i\omega t} \right]$$</li><li><strong>Factor Out $e^{i\omega t}$:</strong><br>$$\tilde{z}(t) = \left( e^{-i\pi/3} - 1 \right) e^{i\omega t}$$<br>Let the complex coefficient be $w = e^{-i\pi/3} - 1$.</li><li><strong>Convert $e^{-i\pi/3}$ to Rectangular Form ($a + ib$):</strong><br>$$e^{-i\pi/3} = \cos\left(-\frac{\pi}{3}\right) + i\sin\left(-\frac{\pi}{3}\right) = \frac{1}{2} - i \frac{\sqrt{3}}{2}$$<br>Subtract 1:<br>$$w = \left(\frac{1}{2} - i \frac{\sqrt{3}}{2}\right) - 1 = -\frac{1}{2} - i \frac{\sqrt{3}}{2}$$</li><li><strong>Convert $w$ to Polar Form ($R e^{i\phi}$):</strong><br>• Real part $a = -\frac{1}{2} < 0$, Imaginary part $b = -\frac{\sqrt{3}}{2} < 0 \implies \mathbf{Quadrant\ III}$.<br>• Magnitude $|w| = \sqrt{\left(-\frac{1}{2}\right)^2 + \left(-\frac{\sqrt{3}}{2}\right)^2} = \sqrt{\frac{1}{4} + \frac{3}{4}} = 1$.<br>• Phase Angle $\phi = \tan^{-1}\left(\frac{-\sqrt{3}/2}{-1/2}\right) - \pi = \tan^{-1}(\sqrt{3}) - \pi = \frac{\pi}{3} - \pi = -\frac{2\pi}{3}$.<br><div class='formula-highlight'>$$w = -\frac{1}{2} - i \frac{\sqrt{3}}{2} = 1 \cdot e^{-i 2\pi/3}$$</div></li><li class="key-equation"><strong>Final Complex Solution:</strong><br>$$\tilde{z}(t) = e^{-i 2\pi/3} e^{i\omega t} = e^{i(\omega t - 2\pi/3)}$$<br>$$x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right] = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</li></ol>">
                     <span class="eq-label" style="color: #991b1b;">Method 1: Complex Phasor Factorization &amp; Quadrant III Polar Mapping</span>
                     <div>$$w = e^{-i\pi/3} - 1 = -\frac{1}{2} - i\frac{\sqrt{3}}{2} = 1 \cdot e^{-i 2\pi/3} \implies x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div>
                 </div>
@@ -706,7 +746,7 @@
                 <div class="hover-math-card" data-math-popup
                      data-title="Method 2: Detailed Difference-to-Product Trigonometric Identity"
                      data-badge="Identity Method"
-                     data-content="<p><strong>Goal:</strong> Transform $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ using trigonometric identities.</p><ol><li><strong>Apply Difference of Cosines Identity:</strong><br>$$\cos A - \cos B = -2 \sin\left(\frac{A+B}{2}\right) \sin\left(\frac{A-B}{2}\right)$$<br>Let $A = \omega t - \frac{\pi}{3}$ and $B = \omega t$:<br>$$\frac{A+B}{2} = \frac{2\omega t - \pi/3}{2} = \omega t - \frac{\pi}{6}, \quad \frac{A-B}{2} = -\frac{\pi}{6}$$</li><li><strong>Substitute into Identity:</strong><br>$$x(t) = -2 \sin\left(\omega t - \frac{\pi}{6}\right) \sin\left(-\frac{\pi}{6}\right)$$<br>Since $\sin\left(-\frac{\pi}{6}\right) = -\frac{1}{2}$:<br>$$x(t) = -2 \sin\left(\omega t - \frac{\pi}{6}\right) \left(-\frac{1}{2}\right) = \sin\left(\omega t - \frac{\pi}{6}\right)$$</li><li><strong>Convert Sine to Standard Cosine Form:</strong><br>Using $\sin\theta = \cos\left(\theta - \frac{\pi}{2}\right)$:<br><div class='formula-highlight'>$$x(t) = \cos\left(\omega t - \frac{\pi}{6} - \frac{\pi}{2}\right) = \cos\left(\omega t - \frac{4\pi}{6}\right) = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</div></li><li><strong>Express in Complex Euler Notation:</strong><br>$$x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</li></ol>">
+                     data-content="<p><strong>Goal:</strong> Transform $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ using trigonometric identities.</p><ol><li><strong>Apply Difference of Cosines Identity:</strong><br>$$\cos A - \cos B = -2 \sin\left(\frac{A+B}{2}\right) \sin\left(\frac{A-B}{2}\right)$$<br>Let $A = \omega t - \frac{\pi}{3}$ and $B = \omega t$:<br>$$\frac{A+B}{2} = \frac{2\omega t - \pi/3}{2} = \omega t - \frac{\pi}{6}, \quad \frac{A-B}{2} = -\frac{\pi}{6}$$</li><li><strong>Substitute into Identity:</strong><br>$$x(t) = -2 \sin\left(\omega t - \frac{\pi}{6}\right) \sin\left(-\frac{\pi}{6}\right)$$<br>Since $\sin\left(-\frac{\pi}{6}\right) = -\frac{1}{2}$:<br>$$x(t) = -2 \sin\left(\omega t - \frac{\pi}{6}\right) \left(-\frac{1}{2}\right) = \sin\left(\omega t - \frac{\pi}{6}\right)$$</li><li><strong>Convert Sine to Standard Cosine Form:</strong><br>Using $\sin\theta = \cos\left(\theta - \frac{\pi}{2}\right)$:<br><div class='formula-highlight'>$$x(t) = \cos\left(\omega t - \frac{\pi}{6} - \frac{\pi}{2}\right) = \cos\left(\omega t - \frac{4\pi}{6}\right) = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</div></li><li class="key-equation"><strong>Express in Complex Euler Notation:</strong><br>$$x(t) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</li></ol>">
                     <span class="eq-label" style="color: #991b1b;">Method 2: Difference-to-Product Identity &amp; Sine-to-Cosine Phase Conversion</span>
                     <div>$$x(t) = -2\sin\left(\omega t - \frac{\pi}{6}\right)\sin\left(-\frac{\pi}{6}\right) = \sin\left(\omega t - \frac{\pi}{6}\right) = \cos\left(\omega t - \frac{2\pi}{3}\right)$$</div>
                 </div>
@@ -715,7 +755,7 @@
                 <div class="hover-math-card" data-math-popup
                      data-title="Method 3: Detailed Angle Expansion &amp; Component Addition"
                      data-badge="Expansion Method"
-                     data-content="<p><strong>Goal:</strong> Expand $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ into orthogonal components.</p><ol><li><strong>Expand Cosine Difference:</strong><br>$$\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$$<br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \cos(\omega t)\cos\left(\frac{\pi}{3}\right) + \sin(\omega t)\sin\left(\frac{\pi}{3}\right)$$<br>Since $\cos(\pi/3) = \frac{1}{2}$ and $\sin(\pi/3) = \frac{\sqrt{3}}{2}$:<br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t)$$</li><li><strong>Subtract $\cos(\omega t)$:</strong><br>$$x(t) = \left(\frac{1}{2} - 1\right)\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t) = -\frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t)$$</li><li><strong>Convert Rectangular Form to Polar Form:</strong><br>$A_1 = -\frac{1}{2}, \quad A_2 = \frac{\sqrt{3}}{2}$<br>$$R = \sqrt{A_1^2 + A_2^2} = \sqrt{\left(-\frac{1}{2}\right)^2 + \left(\frac{\sqrt{3}}{2}\right)^2} = \sqrt{\frac{1}{4} + \frac{3}{4}} = 1$$<br>$$\cos\phi = A_1 / R = -\frac{1}{2}, \quad \sin\phi = -A_2 / R = -\frac{\sqrt{3}}{2} \implies \phi = -\frac{2\pi}{3}$$</li><li><strong>Final Solution:</strong><br><div class='formula-highlight'>$$x(t) = 1 \cdot \cos\left(\omega t - \frac{2\pi}{3}\right) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div></li></ol>">
+                     data-content="<p><strong>Goal:</strong> Expand $x(t) = \cos\left(\omega t - \frac{\pi}{3}\right) - \cos(\omega t)$ into orthogonal components.</p><ol><li><strong>Expand Cosine Difference:</strong><br>$$\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$$<br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \cos(\omega t)\cos\left(\frac{\pi}{3}\right) + \sin(\omega t)\sin\left(\frac{\pi}{3}\right)$$<br>Since $\cos(\pi/3) = \frac{1}{2}$ and $\sin(\pi/3) = \frac{\sqrt{3}}{2}$:<br>$$\cos\left(\omega t - \frac{\pi}{3}\right) = \frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t)$$</li><li><strong>Subtract $\cos(\omega t)$:</strong><br>$$x(t) = \left(\frac{1}{2} - 1\right)\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t) = -\frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t)$$</li><li><strong>Convert Rectangular Form to Polar Form:</strong><br>$A_1 = -\frac{1}{2}, \quad A_2 = \frac{\sqrt{3}}{2}$<br>$$R = \sqrt{A_1^2 + A_2^2} = \sqrt{\left(-\frac{1}{2}\right)^2 + \left(\frac{\sqrt{3}}{2}\right)^2} = \sqrt{\frac{1}{4} + \frac{3}{4}} = 1$$<br>$$\cos\phi = A_1 / R = -\frac{1}{2}, \quad \sin\phi = -A_2 / R = -\frac{\sqrt{3}}{2} \implies \phi = -\frac{2\pi}{3}$$</li><li class="key-equation"><strong>Final Solution:</strong><br><div class='formula-highlight'>$$x(t) = 1 \cdot \cos\left(\omega t - \frac{2\pi}{3}\right) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div></li></ol>">
                     <span class="eq-label" style="color: #991b1b;">Method 3: Angle Difference Expansion &amp; Rectangular Component Sum</span>
                     <div>$$x(t) = -\frac{1}{2}\cos(\omega t) + \frac{\sqrt{3}}{2}\sin(\omega t) = 1 \cdot \cos\left(\omega t - \frac{2\pi}{3}\right) = \text{Re}\left[ 1 \cdot e^{i(\omega t - 2\pi/3)} \right]$$</div>
                 </div>
