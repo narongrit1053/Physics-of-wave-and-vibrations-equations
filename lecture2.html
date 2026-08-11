@@ -185,31 +185,278 @@
                     <input type="range" id="ratioSlider" min="0.5" max="3.0" step="0.5" value="1.0">
                 </label>
             </div>
-        </div>
-
-        <!-- Topic 2.1 -->
+        </di        <!-- Topic 2.1 -->
         <div id="topic-2-1" class="topic-block">
+            <!-- Simplified SVG Wave Superposition Diagram -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 320" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="simple-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+                        </marker>
+                    </defs>
+
+                    <!-- Header Legend Bar -->
+                    <rect x="15" y="15" width="730" height="42" fill="#f8fafc" stroke="#cbd5e1" rx="6" />
+                    
+                    <line x1="30" y1="36" x2="58" y2="36" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 3" />
+                    <text x="65" y="40" font-size="12" font-weight="700" fill="#2563eb">Component 1: x₁(t) = A₁ cos(ωt + φ₁)</text>
+
+                    <line x1="270" y1="36" x2="298" y2="36" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="4 2" />
+                    <text x="305" y="40" font-size="12" font-weight="700" fill="#16a34a">Component 2: x₂(t) = A₂ cos(ωt + φ₂)</text>
+
+                    <line x1="535" y1="36" x2="563" y2="36" stroke="#7c3aed" stroke-width="3.5" />
+                    <text x="570" y="40" font-size="12" font-weight="700" fill="#7c3aed">Resultant: x(t) = A cos(ωt + φ)</text>
+
+                    <!-- Time & Displacement Coordinate Axes -->
+                    <line x1="50" y1="170" x2="720" y2="170" stroke="#334155" stroke-width="2" marker-end="url(#simple-arrow)" />
+                    <line x1="60" y1="290" x2="60" y2="70" stroke="#334155" stroke-width="2" marker-end="url(#simple-arrow)" />
+
+                    <text x="700" y="160" font-size="13" font-weight="700" fill="#334155">Time t</text>
+                    <text x="70" y="80" font-size="13" font-weight="700" fill="#334155">+x (Displacement)</text>
+                    <text x="70" y="285" font-size="13" font-weight="700" fill="#334155">-x</text>
+
+                    <!-- Amplitude Grid Lines -->
+                    <line x1="60" y1="105" x2="700" y2="105" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" />
+                    <line x1="60" y1="235" x2="700" y2="235" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" />
+                    <text x="705" y="109" font-size="11" font-weight="700" fill="#7c3aed">+A</text>
+                    <text x="705" y="239" font-size="11" font-weight="700" fill="#7c3aed">-A</text>
+
+                    <!-- Wave 1: x1(t) [Blue Dashed] -->
+                    <path d="M 60,125.0 L 70,125.9 L 80,128.4 L 90,132.6 L 100,138.2 L 110,145.0 L 120,152.8 L 130,161.2 L 140,170.0 L 150,178.8 L 160,187.2 L 170,195.0 L 180,201.8 L 190,207.4 L 200,211.6 L 210,214.1 L 220,215.0 L 230,214.1 L 240,211.6 L 250,207.4 L 260,201.8 L 270,195.0 L 280,187.2 L 290,178.8 L 300,170.0 L 310,161.2 L 320,152.8 L 330,145.0 L 340,138.2 L 350,132.6 L 360,128.4 L 370,125.9 L 380,125.0 L 390,125.9 L 400,128.4 L 410,132.6 L 420,138.2 L 430,145.0 L 440,152.8 L 450,161.2 L 460,170.0 L 470,178.8 L 480,187.2 L 490,195.0 L 500,201.8 L 510,207.4 L 520,211.6 L 530,214.1 L 540,215.0 L 550,214.1 L 560,211.6 L 570,207.4 L 580,201.8 L 590,195.0 L 600,187.2 L 610,178.8 L 620,170.0 L 630,161.2 L 640,152.8 L 650,145.0 L 660,138.2 L 670,132.6 L 680,128.4 L 690,125.9 L 700,125.0" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 3" />
+
+                    <!-- Wave 2: x2(t) [Green Dashed] -->
+                    <path d="M 60,155.0 L 70,160.4 L 80,166.1 L 90,172.0 L 100,177.8 L 110,183.3 L 120,188.3 L 130,192.6 L 140,196.0 L 150,198.4 L 160,199.7 L 170,199.9 L 180,199.0 L 190,196.9 L 200,193.8 L 210,189.8 L 220,185.0 L 230,179.6 L 240,173.9 L 250,168.0 L 260,162.2 L 270,156.7 L 280,151.7 L 290,147.4 L 300,144.0 L 310,141.6 L 320,140.3 L 330,140.1 L 340,141.0 L 350,143.1 L 360,146.2 L 370,150.2 L 380,155.0 L 390,160.4 L 400,166.1 L 410,172.0 L 420,177.8 L 430,183.3 L 440,188.3 L 450,192.6 L 460,196.0 L 470,198.4 L 480,199.7 L 490,199.9 L 500,199.0 L 510,196.9 L 520,193.8 L 530,189.8 L 540,185.0 L 550,179.6 L 560,173.9 L 570,168.0 L 580,162.2 L 590,156.7 L 600,151.7 L 610,147.4 L 620,144.0 L 630,141.6 L 640,140.3 L 650,140.1 L 660,141.0 L 670,143.1 L 680,146.2 L 690,150.2 L 700,155.0" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="4 2" />
+
+                    <!-- Combined Wave: x(t) = x1(t) + x2(t) [Solid Purple] -->
+                    <path d="M 60,110.0 L 70,116.2 L 80,124.5 L 90,134.5 L 100,145.9 L 110,158.3 L 120,171.0 L 130,183.8 L 140,196.0 L 150,207.2 L 160,217.0 L 170,224.9 L 180,230.8 L 190,234.3 L 200,235.4 L 210,233.9 L 220,230.0 L 230,223.8 L 240,215.5 L 250,205.5 L 260,194.1 L 270,181.7 L 280,169.0 L 290,156.2 L 300,144.0 L 310,132.8 L 320,123.0 L 330,115.1 L 340,109.2 L 350,105.7 L 360,104.6 L 370,106.1 L 380,110.0 L 390,116.2 L 400,124.5 L 410,134.5 L 420,145.9 L 430,158.3 L 440,171.0 L 450,183.8 L 460,196.0 L 470,207.2 L 480,217.0 L 490,224.9 L 500,230.8 L 510,234.3 L 520,235.4 L 530,233.9 L 540,230.0 L 550,223.8 L 560,215.5 L 570,205.5 L 580,194.1 L 590,181.7 L 600,169.0 L 610,156.2 L 620,144.0 L 630,132.8 L 640,123.0 L 650,115.1 L 660,109.2 L 670,105.7 L 680,104.6 L 690,106.1 L 700,110.0" fill="none" stroke="#7c3aed" stroke-width="4" />
+                </svg>
+            </div>
+
             <h2>Topic 2.1: Superposition of Two SHMs (Same Frequency, One Dimension)</h2>
             <ul>
-                <li><span class="eq-label">Sum of Oscillations:</span> $$x = x_1 + x_2 = A_1 \cos(\omega t + \phi_1) + A_2 \cos(\omega t + \phi_2) = A \cos(\omega t + \phi)$$</li>
-                <li><span class="eq-label">Resultant Amplitude (Law of Cosines):</span> $$A^2 = A_1^2 + A_2^2 + 2A_1 A_2 \cos(\varphi_2 - \varphi_1)$$</li>
-                <li><span class="eq-label">Inner Triangle Geometry Calculation:</span> $$A^2 = A_1^2 + A_2^2 - 2A_1 A_2 \cos(180^\circ - (\varphi_2 - \varphi_1))$$</li>
-                <li><span class="eq-label">Resultant Phase Angle $\beta$ (Law of Sines):</span> $$A \sin\beta = A_2 \sin(\varphi_2 - \varphi_1) \quad (\text{where } \phi = \phi_1 + \beta)$$</li>
-                <li><span class="eq-label">Complex Superposition Formulation:</span> $$z = z_1 + z_2 = A_1 e^{i(\omega t + \varphi_1)} + A_2 e^{i(\omega t + \varphi_2)} = e^{i(\omega t + \varphi_1)}\left[A_1 + A_2 e^{i(\varphi_2 - \varphi_1)}\right]$$</li>
+                <li><span class="eq-label">Sum of Oscillations:</span>
+                    $$x(t) = x_1(t) + x_2(t) = A_1 \cos(\omega t + \phi_1) + A_2 \cos(\omega t + \phi_2) = A \cos(\omega t + \phi)$$
+                </li>
+                <li><span class="eq-label">Resultant Amplitude (Law of Cosines):</span>
+                    $$A^2 = A_1^2 + A_2^2 + 2A_1 A_2 \cos(\phi_2 - \phi_1)$$
+                </li>
+                <li><span class="eq-label">Inner Triangle Geometry Calculation:</span>
+                    $$A^2 = A_1^2 + A_2^2 - 2A_1 A_2 \cos(180^\circ - (\phi_2 - \phi_1))$$
+                </li>
+                <li><span class="eq-label">Resultant Phase Angle $\phi$ &amp; Relative Shift $\beta$:</span>
+                    $$\tan\phi = \frac{A_1 \sin\phi_1 + A_2 \sin\phi_2}{A_1 \cos\phi_1 + A_2 \cos\phi_2}$$
+                    $$A \sin\beta = A_2 \sin(\phi_2 - \phi_1), \quad \tan\beta = \frac{A_2 \sin(\phi_2 - \phi_1)}{A_1 + A_2 \cos(\phi_2 - \phi_1)} \quad (\text{where } \phi = \phi_1 + \beta)$$
+
+                    
+                </li>
+
+            <!-- SVG Diagram 1: Resultant Phase Angle & Relative Shift (2 Panels) -->
+            <div style="text-align: center; margin-top: 18px; margin-bottom: 20px;">
+                <svg viewBox="0 0 820 340" style="width: 100%; max-width: 820px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t21-axis" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000" />
+                        </marker>
+                        <marker id="t21-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                        <marker id="t21-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                        </marker>
+                        <marker id="t21-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+                        </marker>
+                        <marker id="t21-arc" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000" />
+                        </marker>
+                    </defs>
+
+                    <!-- ================= PANEL 1: Individual Phasors ================= -->
+                    <line x1="40" y1="300" x2="40" y2="35" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" />
+                    <line x1="40" y1="300" x2="380" y2="300" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" />
+
+                    <text x="05" y="55" font-size="22" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Im</text>
+                    <text x="345" y="328" font-size="22" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Re</text>
+
+                    <!-- Vector A1 (Red) -->
+                    <line x1="40" y1="300" x2="270" y2="220" stroke="#dc2626" stroke-width="4" marker-end="url(#t21-red)" />
+                    <text x="280" y="222" font-size="22" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A<tspan font-size="15" font-style="normal" dy="4">1</tspan></text>
+
+                    <!-- Vector A2 (Purple) -->
+                    <line x1="40" y1="300" x2="175" y2="75" stroke="#7c3aed" stroke-width="4" marker-end="url(#t21-purple)" />
+                    <text x="185" y="78" font-size="22" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A<tspan font-size="15" font-style="normal" dy="4">2</tspan></text>
+
+                    <!-- Angle Arc wt + phi1 -->
+                    <path d="M 180 300 A 140 140 0 0 0 172 254" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t21-arc)" />
+                    <!-- Leader Line & Text for wt + phi1 -->
+                    <line x1="176" y1="277" x2="235" y2="285" stroke="#000000" stroke-width="1" />
+                    <text x="242" y="290" font-size="19" font-style="italic" font-family="Times New Roman, serif" fill="#000000">ωt + φ<tspan font-size="14" font-style="normal" dy="3">1</tspan></text>
+
+                    <!-- Angle Arc wt + phi2 -->
+                    <path d="M 110 300 A 70 70 0 0 0 76 240" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t21-arc)" />
+                    <!-- Leader Line & Text for wt + phi2 -->
+                    <line x1="93" y1="270" x2="135" y2="210" stroke="#000000" stroke-width="1" />
+                    <text x="140" y="205" font-size="19" font-style="italic" font-family="Times New Roman, serif" fill="#000000">ωt + φ<tspan font-size="14" font-style="normal" dy="3">2</tspan></text>
+
+                    <!-- ================= PANEL 2: Phasor Addition Triangle ================= -->
+                    <line x1="430" y1="300" x2="430" y2="35" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" />
+                    <line x1="430" y1="300" x2="790" y2="300" stroke="#000000" stroke-width="3" marker-end="url(#t21-axis)" />
+
+                    <text x="395" y="55" font-size="22" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Im</text>
+                    <text x="755" y="328" font-size="22" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Re</text>
+
+                    <!-- Red Vector A1 -->
+                    <line x1="430" y1="300" x2="570" y2="260" stroke="#dc2626" stroke-width="4" marker-end="url(#t21-red)" />
+                    <text x="515" y="260" font-size="22" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A<tspan font-size="15" font-style="normal" dy="4">1</tspan></text>
+
+                    <!-- Extension Dashed Line of A1 -->
+                    <line x1="570" y1="260" x2="675" y2="230" stroke="#000000" stroke-width="2" stroke-dasharray="6 4" />
+
+                    <!-- Purple Vector A2 (Tip to Tail) -->
+                    <line x1="570" y1="260" x2="760" y2="45" stroke="#7c3aed" stroke-width="4" marker-end="url(#t21-purple)" />
+                    <text x="710" y="115" font-size="22" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A<tspan font-size="15" font-style="normal" dy="4">2</tspan></text>
+
+                    <!-- Green Resultant Vector A -->
+                    <line x1="430" y1="300" x2="760" y2="45" stroke="#16a34a" stroke-width="4" marker-end="url(#t21-green)" />
+                    <text x="570" y="135" font-size="24" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A</text>
+
+                    <!-- Angle Arc beta -->
+                    <path d="M 515 300 A 90 90 0 0 0 500 247" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t21-arc)" />
+                    <text x="490" y="270" font-size="21" font-style="italic" font-family="Times New Roman, serif" fill="#000000">β</text>
+
+                    <!-- Angle Arc wt + phi1 -->
+                    <path d="M 545 300 A 120 120 0 0 0 535 270" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t21-arc)" />
+                    <text x="550" y="290" font-size="18" font-style="italic" font-family="Times New Roman, serif" fill="#000000">ωt + φ<tspan font-size="13" font-style="normal" dy="3">1</tspan></text>
+
+                    <!-- Angle Arc phi2 - phi1 -->
+                    <path d="M 640 240 A 70 70 0 0 0 615 210" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t21-arc)" />
+                    <text x="660" y="200" font-size="21" font-style="italic" font-family="Times New Roman, serif" fill="#000000">φ<tspan font-size="14" font-style="normal" dy="3">2</tspan> − φ<tspan font-size="14" font-style="normal" dy="3">1</tspan></text>
+                </svg>
+            </div>
+
+                <li><span class="eq-label">Complex Superposition Formulation:</span>
+                    $$z = z_1 + z_2 = A_1 e^{i(\omega t + \phi_1)} + A_2 e^{i(\omega t + \phi_2)} = e^{i(\omega t + \phi_1)}\left[A_1 + A_2 e^{i(\phi_2 - \phi_1)}\right]$$
+                </li>
             </ul>
         </div>
 
-        <!-- Topic 2.2 -->
+<!-- Topic 2.2 -->
         <div id="topic-2-2" class="topic-block">
+            
+            <!-- SVG Diagram 2: Equal Amplitudes Special Case (A1 = A1 Isosceles Phasor Triangle) -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 560 360" style="width: 100%; max-width: 560px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t22-axis" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000" />
+                        </marker>
+                        <marker id="t22-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                        <marker id="t22-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+                        </marker>
+                        <marker id="t22-arc" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#000000" />
+                        </marker>
+                    </defs>
+
+                    <!-- Coordinate Axes Im and Re -->
+                    <line x1="50" y1="320" x2="50" y2="35" stroke="#000000" stroke-width="3" marker-end="url(#t22-axis)" />
+                    <line x1="50" y1="320" x2="530" y2="320" stroke="#000000" stroke-width="3" marker-end="url(#t22-axis)" />
+
+                    <text x="25" y="55" font-size="24" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Im</text>
+                    <text x="495" y="348" font-size="24" font-weight="700" font-family="Times New Roman, serif" fill="#000000">Re</text>
+
+                    <!-- 1st Vector A1 (Red) -->
+                    <line x1="50" y1="320" x2="250" y2="260" stroke="#dc2626" stroke-width="4" marker-end="url(#t22-red)" />
+                    <text x="180" y="262" font-size="24" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A<tspan font-size="16" font-style="normal" dy="4">1</tspan></text>
+
+                    <!-- Extension Dashed Line of A1 -->
+                    <line x1="250" y1="260" x2="380" y2="221" stroke="#000000" stroke-width="2" stroke-dasharray="6 4" />
+
+                    <!-- 2nd Vector A1 (Red, Equal Length) -->
+                    <line x1="250" y1="260" x2="450" y2="40" stroke="#dc2626" stroke-width="4" marker-end="url(#t22-red)" />
+                    <text x="395" y="115" font-size="24" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A<tspan font-size="16" font-style="normal" dy="4">1</tspan></text>
+
+                    <!-- Green Resultant Vector A -->
+                    <line x1="50" y1="320" x2="450" y2="40" stroke="#16a34a" stroke-width="4" marker-end="url(#t22-green)" />
+                    <text x="220" y="145" font-size="26" font-style="italic" font-weight="700" font-family="Times New Roman, serif" fill="#000000">A</text>
+
+                    <!-- Angle Arc beta -->
+                    <path d="M 155 320 A 110 110 0 0 0 132 258" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t22-arc)" />
+                    <text x="128" y="290" font-size="22" font-style="italic" font-family="Times New Roman, serif" fill="#000000">β</text>
+
+                    <!-- Angle Arc wt + phi1 -->
+                    <path d="M 180 320 A 130 130 0 0 0 174 283" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t22-arc)" />
+                    <text x="180" y="312" font-size="19" font-style="italic" font-family="Times New Roman, serif" fill="#000000">ωt + φ<tspan font-size="14" font-style="normal" dy="3">1</tspan></text>
+
+                    <!-- Relative Phase Angle Arc delta -->
+                    <path d="M 330 236 A 80 80 0 0 0 300 205" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#t22-arc)" />
+                    <text x="325" y="200" font-size="24" font-style="italic" font-family="Times New Roman, serif" fill="#000000">δ</text>
+                </svg>
+            </div>
+
             <h2>Topic 2.2: Equal Amplitudes Special Case</h2>
             <ul>
-                <li><span class="eq-label">Phase Angle Split (when $A_1 = A_2$):</span> $$\beta = \frac{\delta}{2} \quad (\text{where } \delta = \varphi_2 - \varphi_1)$$</li>
+                <li><span class="eq-label">Phase Angle Split (when $A_1 = A_2$):</span> $$\beta = \frac{\delta}{2} \quad (\text{where } \delta =\varphi_2 -\varphi_1)$$</li>
                 <li><span class="eq-label">Resultant Amplitude:</span> $$A = 2A_1 \cos\beta = 2A_1 \cos\left(\frac{\delta}{2}\right)$$</li>
             </ul>
         </div>
 
         <!-- Topic 2.3 -->
         <div id="topic-2-3" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 2.3: Superposition of Different Frequencies (Beats) -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 280" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="beats-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+                        </marker>
+                    </defs>
+
+                    <!-- Header Legend Bar -->
+                    <rect x="15" y="12" width="730" height="38" fill="#f8fafc" stroke="#cbd5e1" rx="6" />
+                    
+                    <line x1="30" y1="31" x2="60" y2="31" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3" />
+                    <text x="68" y="35" font-size="12" font-weight="700" fill="#dc2626">Modulation Envelope: x_env(t) = ±2A cos(½(ω₁−ω₂)t)</text>
+
+                    <line x1="430" y1="31" x2="460" y2="31" stroke="#7c3aed" stroke-width="2.5" />
+                    <text x="468" y="35" font-size="12" font-weight="700" fill="#7c3aed">Combined Beat Wave: x(t) = x₁(t) + x₂(t)</text>
+
+                    <!-- Time & Amplitude Axes -->
+                    <line x1="45" y1="150" x2="725" y2="150" stroke="#334155" stroke-width="2" marker-end="url(#beats-arrow)" />
+                    <line x1="50" y1="260" x2="50" y2="60" stroke="#334155" stroke-width="2" marker-end="url(#beats-arrow)" />
+
+                    <text x="700" y="140" font-size="12" font-weight="700" fill="#334155">Time t</text>
+                    <text x="60" y="72" font-size="12" font-weight="700" fill="#334155">+2A</text>
+                    <text x="60" y="245" font-size="12" font-weight="700" fill="#334155">-2A</text>
+
+                    <!-- Modulation Envelope Lines (Red Dashed) -->
+                    <path d="M 50,65.0 L 53,65.0 L 56,65.2 L 59,65.4 L 62,65.8 L 65,66.2 L 68,66.7 L 71,67.3 L 74,68.1 L 77,68.9 L 80,69.8 L 83,70.8 L 86,71.8 L 89,73.0 L 92,74.3 L 95,75.6 L 98,77.0 L 101,78.5 L 104,80.1 L 107,81.8 L 110,83.5 L 113,85.4 L 116,87.3 L 119,89.2 L 122,91.3 L 125,93.4 L 128,95.5 L 131,97.8 L 134,100.0 L 137,102.4 L 140,104.8 L 143,107.2 L 146,109.7 L 149,112.3 L 152,114.8 L 155,117.5 L 158,120.1 L 161,122.8 L 164,125.6 L 167,128.3 L 170,131.1 L 173,133.9 L 176,136.7 L 179,139.5 L 182,142.4 L 185,145.2 L 188,148.1 L 191,149.0 L 194,146.2 L 197,143.3 L 200,140.5 L 203,137.6 L 206,134.8 L 209,132.0 L 212,129.2 L 215,126.5 L 218,123.7 L 221,121.0 L 224,118.4 L 227,115.7 L 230,113.1 L 233,110.6 L 236,108.1 L 239,105.6 L 242,103.2 L 245,100.8 L 248,98.5 L 251,96.3 L 254,94.1 L 257,92.0 L 260,89.9 L 263,87.9 L 266,86.0 L 269,84.1 L 272,82.4 L 275,80.7 L 278,79.1 L 281,77.5 L 284,76.1 L 287,74.7 L 290,73.4 L 293,72.2 L 296,71.1 L 299,70.1 L 302,69.2 L 305,68.3 L 308,67.6 L 311,66.9 L 314,66.4 L 317,65.9 L 320,65.5 L 323,65.3 L 326,65.1 L 329,65.0 L 332,65.0 L 335,65.1 L 338,65.3 L 341,65.6 L 344,66.0 L 347,66.5 L 350,67.1 L 353,67.8 L 356,68.6 L 359,69.5 L 362,70.4 L 365,71.5 L 368,72.6 L 371,73.8 L 374,75.1 L 377,76.5 L 380,78.0 L 383,79.6 L 386,81.2 L 389,83.0 L 392,84.8 L 395,86.6 L 398,88.6 L 401,90.6 L 404,92.7 L 407,94.8 L 410,97.0 L 413,99.3 L 416,101.6 L 419,104.0 L 422,106.4 L 425,108.9 L 428,111.4 L 431,114.0 L 434,116.6 L 437,119.2 L 440,121.9 L 443,124.6 L 446,127.4 L 449,130.2 L 452,132.9 L 455,135.8 L 458,138.6 L 461,141.4 L 464,144.3 L 467,147.1 L 470,150.0 L 473,147.1 L 476,144.3 L 479,141.4 L 482,138.6 L 485,135.8 L 488,132.9 L 491,130.2 L 494,127.4 L 497,124.6 L 500,121.9 L 503,119.2 L 506,116.6 L 509,114.0 L 512,111.4 L 515,108.9 L 518,106.4 L 521,104.0 L 524,101.6 L 527,99.3 L 530,97.0 L 533,94.8 L 536,92.7 L 539,90.6 L 542,88.6 L 545,86.6 L 548,84.8 L 551,83.0 L 554,81.2 L 557,79.6 L 560,78.0 L 563,76.5 L 566,75.1 L 569,73.8 L 572,72.6 L 575,71.5 L 578,70.4 L 581,69.5 L 584,68.6 L 587,67.8 L 590,67.1 L 593,66.5 L 596,66.0 L 599,65.6 L 602,65.3 L 605,65.1 L 608,65.0 L 611,65.0 L 614,65.1 L 617,65.3 L 620,65.5 L 623,65.9 L 626,66.4 L 629,66.9 L 632,67.6 L 635,68.3 L 638,69.2 L 641,70.1 L 644,71.1 L 647,72.2 L 650,73.4 L 653,74.7 L 656,76.1 L 659,77.5 L 662,79.1 L 665,80.7 L 668,82.4 L 671,84.1 L 674,86.0 L 677,87.9 L 680,89.9 L 683,92.0 L 686,94.1 L 689,96.3 L 692,98.5 L 695,100.8 L 698,103.2 L 701,105.6 L 704,108.1 L 707,110.6" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3" />
+                    <path d="M 50,235.0 L 53,235.0 L 56,234.8 L 59,234.6 L 62,234.2 L 65,233.8 L 68,233.3 L 71,232.7 L 74,231.9 L 77,231.1 L 80,230.2 L 83,229.2 L 86,228.2 L 89,227.0 L 92,225.7 L 95,224.4 L 98,223.0 L 101,221.5 L 104,219.9 L 107,218.2 L 110,216.5 L 113,214.6 L 116,212.7 L 119,210.8 L 122,208.7 L 125,206.6 L 128,204.5 L 131,202.2 L 134,200.0 L 137,197.6 L 140,195.2 L 143,192.8 L 146,190.3 L 149,187.7 L 152,185.2 L 155,182.5 L 158,179.9 L 161,177.2 L 164,174.4 L 167,171.7 L 170,168.9 L 173,166.1 L 176,163.3 L 179,160.5 L 182,157.6 L 185,154.8 L 188,151.9 L 191,151.0 L 194,153.8 L 197,156.7 L 200,159.5 L 203,162.4 L 206,165.2 L 209,168.0 L 212,170.8 L 215,173.5 L 218,176.3 L 221,179.0 L 224,181.6 L 227,184.3 L 230,186.9 L 233,189.4 L 236,191.9 L 239,194.4 L 242,196.8 L 245,199.2 L 248,201.5 L 251,203.7 L 254,205.9 L 257,208.0 L 260,210.1 L 263,212.1 L 266,214.0 L 269,215.9 L 272,217.6 L 275,219.3 L 278,220.9 L 281,222.5 L 284,223.9 L 287,225.3 L 290,226.6 L 293,227.8 L 296,228.9 L 299,229.9 L 302,230.8 L 305,231.7 L 308,232.4 L 311,233.1 L 314,233.6 L 317,234.1 L 320,234.5 L 323,234.7 L 326,234.9 L 329,235.0 L 332,235.0 L 335,234.9 L 338,234.7 L 341,234.4 L 344,234.0 L 347,233.5 L 350,232.9 L 353,232.2 L 356,231.4 L 359,230.5 L 362,229.6 L 365,228.5 L 368,227.4 L 371,226.2 L 374,224.9 L 377,223.5 L 380,222.0 L 383,220.4 L 386,218.8 L 389,217.0 L 392,215.2 L 395,213.4 L 398,211.4 L 401,209.4 L 404,207.3 L 407,205.2 L 410,203.0 L 413,200.7 L 416,198.4 L 419,196.0 L 422,193.6 L 425,191.1 L 428,188.6 L 431,186.0 L 434,183.4 L 437,180.8 L 440,178.1 L 443,175.4 L 446,172.6 L 449,169.8 L 452,167.1 L 455,164.2 L 458,161.4 L 461,158.6 L 464,155.7 L 467,152.9 L 470,150.0 L 473,152.9 L 476,155.7 L 479,158.6 L 482,161.4 L 485,164.2 L 488,167.1 L 491,169.8 L 494,172.6 L 497,175.4 L 500,178.1 L 503,180.8 L 506,183.4 L 509,186.0 L 512,188.6 L 515,191.1 L 518,193.6 L 521,196.0 L 524,198.4 L 527,200.7 L 530,203.0 L 533,205.2 L 536,207.3 L 539,209.4 L 542,211.4 L 545,213.4 L 548,215.2 L 551,217.0 L 554,218.8 L 557,220.4 L 560,222.0 L 563,223.5 L 566,224.9 L 569,226.2 L 572,227.4 L 575,228.5 L 578,229.6 L 581,230.5 L 584,231.4 L 587,232.2 L 590,232.9 L 593,233.5 L 596,234.0 L 599,234.4 L 602,234.7 L 605,234.9 L 608,235.0 L 611,235.0 L 614,234.9 L 617,234.7 L 620,234.5 L 623,234.1 L 626,233.6 L 629,233.1 L 632,232.4 L 635,231.7 L 638,230.8 L 641,229.9 L 644,228.9 L 647,227.8 L 650,226.6 L 653,225.3 L 656,223.9 L 659,222.5 L 662,220.9 L 665,219.3 L 668,217.6 L 671,215.9 L 674,214.0 L 677,212.1 L 680,210.1 L 683,208.0 L 686,205.9 L 689,203.7 L 692,201.5 L 695,199.2 L 698,196.8 L 701,194.4 L 704,191.9 L 707,189.4" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 3" />
+
+                    <!-- Carrier Oscillation Beat Wave (Solid Purple) -->
+                    <path d="M 50,65.0 L 53,74.3 L 56,100.2 L 59,136.8 L 62,176.0 L 65,209.3 L 68,229.2 L 71,231.6 L 74,216.3 L 77,186.8 L 80,150.0 L 83,114.0 L 86,86.8 L 89,74.0 L 92,78.0 L 95,97.4 L 98,127.5 L 101,161.2 L 104,191.1 L 107,210.8 L 110,216.5 L 113,207.6 L 116,186.9 L 119,159.5 L 122,131.8 L 125,109.9 L 128,98.2 L 131,98.4 L 134,109.6 L 137,128.4 L 140,150.0 L 143,169.4 L 146,182.6 L 149,187.3 L 152,183.4 L 155,173.0 L 158,159.2 L 161,145.7 L 164,135.6 L 167,130.7 L 170,131.1 L 173,135.6 L 176,142.2 L 179,148.4 L 182,152.4 L 185,153.4 L 188,151.8 L 191,149.1 L 194,146.9 L 197,147.0 L 200,150.0 L 203,155.6 L 206,162.3 L 209,167.8 L 212,169.8 L 215,166.6 L 218,158.1 L 221,145.5 L 224,131.4 L 227,119.5 L 230,113.1 L 233,114.9 L 236,125.3 L 239,143.1 L 242,164.5 L 245,184.8 L 248,199.0 L 251,203.1 L 254,195.2 L 257,176.4 L 260,150.0 L 263,121.8 L 266,98.2 L 269,85.0 L 272,85.7 L 275,101.0 L 278,128.1 L 281,161.3 L 284,193.5 L 287,217.1 L 290,226.6 L 293,219.3 L 296,196.4 L 299,162.5 L 302,125.0 L 305,92.2 L 308,71.6 L 311,67.9 L 314,82.3 L 317,111.8 L 320,150.0 L 323,188.5 L 326,218.7 L 329,233.9 L 332,230.8 L 335,210.0 L 338,176.2 L 341,136.8 L 344,100.7 L 347,75.6 L 350,67.1 L 353,76.8 L 356,102.1 L 359,137.4 L 362,174.6 L 365,205.5 L 368,223.6 L 371,225.2 L 374,210.6 L 377,183.3 L 380,150.0 L 383,118.0 L 386,94.4 L 389,83.8 L 392,87.9 L 395,105.2 L 398,131.0 L 401,159.3 L 404,183.7 L 407,199.2 L 410,203.0 L 413,195.2 L 416,178.5 L 419,157.2 L 422,136.5 L 425,120.9 L 428,113.3 L 431,114.4 L 434,123.0 L 437,136.0 L 440,150.0 L 443,161.5 L 446,168.3 L 449,169.6 L 452,166.2 L 455,160.1 L 458,153.5 L 461,148.7 L 464,146.6 L 467,147.5 L 470,150.0 L 473,152.5 L 476,153.4 L 479,151.3 L 482,146.5 L 485,139.9 L 488,133.8 L 491,130.4 L 494,131.7 L 497,138.5 L 500,150.0 L 503,164.0 L 506,177.0 L 509,185.6 L 512,186.7 L 515,179.1 L 518,163.5 L 521,142.8 L 524,121.5 L 527,104.8 L 530,97.0 L 533,100.8 L 536,116.3 L 539,140.7 L 542,169.0 L 545,194.8 L 548,212.1 L 551,216.2 L 554,205.6 L 557,182.0 L 560,150.0 L 563,116.7 L 566,89.4 L 569,74.8 L 572,76.4 L 575,94.5 L 578,125.4 L 581,162.6 L 584,197.9 L 587,223.2 L 590,232.9 L 593,224.4 L 596,199.3 L 599,163.2 L 602,123.8 L 605,90.0 L 608,69.2 L 611,66.1 L 614,81.3 L 617,111.5 L 620,150.0 L 623,188.2 L 626,217.7 L 629,232.1 L 632,228.4 L 635,207.8 L 638,175.0 L 641,137.5 L 644,103.6 L 647,80.7 L 650,73.4 L 653,82.9 L 656,106.5 L 659,138.7 L 662,171.9 L 665,199.0 L 668,214.3 L 671,215.0 L 674,201.8 L 677,178.2 L 680,150.0 L 683,123.6 L 686,104.8 L 689,96.9 L 692,101.0 L 695,115.2 L 698,135.5 L 701,156.9 L 704,174.7 L 707,185.1" fill="none" stroke="#7c3aed" stroke-width="2" />
+
+                    <!-- Beat Period T_beat Arrow Annotations -->
+                    <!-- Beat 1: x=50 to x=330 -->
+                    <line x1="50" y1="250" x2="330" y2="250" stroke="#2563eb" stroke-width="1.8" marker-end="url(#beats-arrow)" />
+                    <line x1="50" y1="238" x2="50" y2="262" stroke="#2563eb" stroke-width="1.5" />
+                    <line x1="330" y1="238" x2="330" y2="262" stroke="#2563eb" stroke-width="1.5" />
+                    <text x="145" y="244" font-size="12" font-weight="700" fill="#2563eb">Beat Period T_beat = 2π / |ω₁ − ω₂|</text>
+
+                    <!-- Node Annotations -->
+                    <circle cx="190" cy="150" r="4" fill="#dc2626" />
+                    <text x="175" y="138" font-size="11" font-weight="700" fill="#dc2626">Node (x = 0)</text>
+
+                    <circle cx="470" cy="150" r="4" fill="#dc2626" />
+                    <text x="455" y="138" font-size="11" font-weight="700" fill="#dc2626">Node (x = 0)</text>
+                </svg>
+            </div>
+
             <h2>Topic 2.3: Superposition of Different Frequencies (Beats)</h2>
             <ul>
                 <li><span class="eq-label">Superposed Beat Position:</span> $$x = x_1 + x_2 = A \cos\omega_1 t + A \cos\omega_2 t = 2A \cos\left(\frac{\omega_1 + \omega_2}{2} t\right) \cos\left(\frac{\omega_1 - \omega_2}{2} t\right)$$</li>
@@ -219,10 +466,96 @@
 
         <!-- Topic 2.4 -->
         <div id="topic-2-4" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 2.4: Lissajous Curves (1:1 Frequency Ratio Trajectories) -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 770 250" style="width: 100%; max-width: 770px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <!-- Top Title Banner -->
+                    <rect x="15" y="10" width="740" height="30" fill="#f8fafc" stroke="#cbd5e1" rx="6" />
+                    <text x="385" y="30" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Lissajous Trajectories (1:1 Frequency Ratio ω_x = ω_y across Phase Shifts φ)</text>
+                    
+                    <!-- Sub-Panel centered at cx=85 -->
+                    <rect x="23" y="48" width="124" height="190" fill="#faf5ff" stroke="#e9d5ff" rx="8" />
+                    
+                    <!-- Inner Axes -->
+                    <line x1="35" y1="125" x2="135" y2="125" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <line x1="85" y1="175" x2="85" y2="75" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <text x="125" y="120" font-size="11" font-weight="700" fill="#64748b">x</text>
+                    <text x="90" y="85" font-size="11" font-weight="700" fill="#64748b">y</text>
+
+                    <!-- Lissajous Path -->
+                    <path d="M 121.0,89.0 L 120.9,89.1 L 120.6,89.4 L 120.2,89.8 L 119.6,90.4 L 118.8,91.2 L 117.9,92.1 L 116.8,93.2 L 115.5,94.5 L 114.1,95.9 L 112.6,97.4 L 110.9,99.1 L 109.1,100.9 L 107.2,102.8 L 105.1,104.9 L 103.0,107.0 L 100.8,109.2 L 98.5,111.5 L 96.1,113.9 L 93.7,116.3 L 91.3,118.7 L 88.8,121.2 L 86.3,123.7 L 83.7,126.3 L 81.2,128.8 L 78.7,131.3 L 76.3,133.7 L 73.9,136.1 L 71.5,138.5 L 69.2,140.8 L 67.0,143.0 L 64.9,145.1 L 62.8,147.2 L 60.9,149.1 L 59.1,150.9 L 57.4,152.6 L 55.9,154.1 L 54.5,155.5 L 53.2,156.8 L 52.1,157.9 L 51.2,158.8 L 50.4,159.6 L 49.8,160.2 L 49.4,160.6 L 49.1,160.9 L 49.0,161.0 L 49.1,160.9 L 49.4,160.6 L 49.8,160.2 L 50.4,159.6 L 51.2,158.8 L 52.1,157.9 L 53.2,156.8 L 54.5,155.5 L 55.9,154.1 L 57.4,152.6 L 59.1,150.9 L 60.9,149.1 L 62.8,147.2 L 64.9,145.1 L 67.0,143.0 L 69.2,140.8 L 71.5,138.5 L 73.9,136.1 L 76.3,133.7 L 78.7,131.3 L 81.2,128.8 L 83.7,126.3 L 86.3,123.7 L 88.8,121.2 L 91.3,118.7 L 93.7,116.3 L 96.1,113.9 L 98.5,111.5 L 100.8,109.2 L 103.0,107.0 L 105.1,104.9 L 107.2,102.8 L 109.1,100.9 L 110.9,99.1 L 112.6,97.4 L 114.1,95.9 L 115.5,94.5 L 116.8,93.2 L 117.9,92.1 L 118.8,91.2 L 119.6,90.4 L 120.2,89.8 L 120.6,89.4 L 120.9,89.1 L 121.0,89.0" fill="none" stroke="#7c3aed" stroke-width="3" />
+
+                    <!-- Phase Title -->
+                    <text x="85" y="222" font-size="11" font-weight="700" fill="#6b21a8" text-anchor="middle">φ = 0 (Linear y = x)</text>
+
+                    <!-- Sub-Panel centered at cx=235 -->
+                    <rect x="173" y="48" width="124" height="190" fill="#faf5ff" stroke="#e9d5ff" rx="8" />
+                    
+                    <!-- Inner Axes -->
+                    <line x1="185" y1="125" x2="285" y2="125" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <line x1="235" y1="175" x2="235" y2="75" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <text x="275" y="120" font-size="11" font-weight="700" fill="#64748b">x</text>
+                    <text x="240" y="85" font-size="11" font-weight="700" fill="#64748b">y</text>
+
+                    <!-- Lissajous Path -->
+                    <path d="M 271.0,99.5 L 270.9,101.4 L 270.6,103.3 L 270.2,105.4 L 269.6,107.5 L 268.8,109.8 L 267.9,112.1 L 266.8,114.5 L 265.5,116.9 L 264.1,119.4 L 262.6,121.9 L 260.9,124.4 L 259.1,126.9 L 257.2,129.4 L 255.1,131.9 L 253.0,134.3 L 250.8,136.7 L 248.5,139.1 L 246.1,141.3 L 243.7,143.5 L 241.3,145.6 L 238.8,147.7 L 236.3,149.6 L 233.7,151.3 L 231.2,153.0 L 228.7,154.5 L 226.3,155.9 L 223.9,157.1 L 221.5,158.1 L 219.2,159.0 L 217.0,159.8 L 214.9,160.3 L 212.8,160.7 L 210.9,161.0 L 209.1,161.0 L 207.4,160.9 L 205.9,160.6 L 204.5,160.1 L 203.2,159.4 L 202.1,158.6 L 201.2,157.6 L 200.4,156.5 L 199.8,155.2 L 199.4,153.8 L 199.1,152.2 L 199.0,150.5 L 199.1,148.6 L 199.4,146.7 L 199.8,144.6 L 200.4,142.5 L 201.2,140.2 L 202.1,137.9 L 203.2,135.5 L 204.5,133.1 L 205.9,130.6 L 207.4,128.1 L 209.1,125.6 L 210.9,123.1 L 212.8,120.6 L 214.9,118.1 L 217.0,115.7 L 219.2,113.3 L 221.5,110.9 L 223.9,108.7 L 226.3,106.5 L 228.7,104.4 L 231.2,102.3 L 233.7,100.4 L 236.3,98.7 L 238.8,97.0 L 241.3,95.5 L 243.7,94.1 L 246.1,92.9 L 248.5,91.9 L 250.8,91.0 L 253.0,90.2 L 255.1,89.7 L 257.2,89.3 L 259.1,89.0 L 260.9,89.0 L 262.6,89.1 L 264.1,89.4 L 265.5,89.9 L 266.8,90.6 L 267.9,91.4 L 268.8,92.4 L 269.6,93.5 L 270.2,94.8 L 270.6,96.2 L 270.9,97.8 L 271.0,99.5" fill="none" stroke="#7c3aed" stroke-width="3" />
+
+                    <!-- Phase Title -->
+                    <text x="235" y="222" font-size="11" font-weight="700" fill="#6b21a8" text-anchor="middle">φ = π/4 (Clockwise Ellipse)</text>
+
+                    <!-- Sub-Panel centered at cx=385 -->
+                    <rect x="323" y="48" width="124" height="190" fill="#faf5ff" stroke="#e9d5ff" rx="8" />
+                    
+                    <!-- Inner Axes -->
+                    <line x1="335" y1="125" x2="435" y2="125" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <line x1="385" y1="175" x2="385" y2="75" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <text x="425" y="120" font-size="11" font-weight="700" fill="#64748b">x</text>
+                    <text x="390" y="85" font-size="11" font-weight="700" fill="#64748b">y</text>
+
+                    <!-- Lissajous Path -->
+                    <path d="M 421.0,125.0 L 420.9,127.5 L 420.6,130.0 L 420.2,132.5 L 419.6,134.9 L 418.8,137.3 L 417.9,139.6 L 416.8,141.9 L 415.5,144.1 L 414.1,146.2 L 412.6,148.1 L 410.9,150.0 L 409.1,151.8 L 407.2,153.4 L 405.1,154.8 L 403.0,156.2 L 400.8,157.4 L 398.5,158.4 L 396.1,159.2 L 393.7,159.9 L 391.3,160.5 L 388.8,160.8 L 386.3,161.0 L 383.7,161.0 L 381.2,160.8 L 378.7,160.5 L 376.3,159.9 L 373.9,159.2 L 371.5,158.4 L 369.2,157.4 L 367.0,156.2 L 364.9,154.8 L 362.8,153.4 L 360.9,151.8 L 359.1,150.0 L 357.4,148.1 L 355.9,146.2 L 354.5,144.1 L 353.2,141.9 L 352.1,139.6 L 351.2,137.3 L 350.4,134.9 L 349.8,132.5 L 349.4,130.0 L 349.1,127.5 L 349.0,125.0 L 349.1,122.5 L 349.4,120.0 L 349.8,117.5 L 350.4,115.1 L 351.2,112.7 L 352.1,110.4 L 353.2,108.1 L 354.5,105.9 L 355.9,103.8 L 357.4,101.9 L 359.1,100.0 L 360.9,98.2 L 362.8,96.6 L 364.9,95.2 L 367.0,93.8 L 369.2,92.6 L 371.5,91.6 L 373.9,90.8 L 376.3,90.1 L 378.7,89.5 L 381.2,89.2 L 383.7,89.0 L 386.3,89.0 L 388.8,89.2 L 391.3,89.5 L 393.7,90.1 L 396.1,90.8 L 398.5,91.6 L 400.8,92.6 L 403.0,93.8 L 405.1,95.2 L 407.2,96.6 L 409.1,98.2 L 410.9,100.0 L 412.6,101.9 L 414.1,103.8 L 415.5,105.9 L 416.8,108.1 L 417.9,110.4 L 418.8,112.7 L 419.6,115.1 L 420.2,117.5 L 420.6,120.0 L 420.9,122.5 L 421.0,125.0" fill="none" stroke="#7c3aed" stroke-width="3" />
+
+                    <!-- Phase Title -->
+                    <text x="385" y="222" font-size="11" font-weight="700" fill="#6b21a8" text-anchor="middle">φ = π/2 (Circle)</text>
+
+                    <!-- Sub-Panel centered at cx=535 -->
+                    <rect x="473" y="48" width="124" height="190" fill="#faf5ff" stroke="#e9d5ff" rx="8" />
+                    
+                    <!-- Inner Axes -->
+                    <line x1="485" y1="125" x2="585" y2="125" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <line x1="535" y1="175" x2="535" y2="75" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <text x="575" y="120" font-size="11" font-weight="700" fill="#64748b">x</text>
+                    <text x="540" y="85" font-size="11" font-weight="700" fill="#64748b">y</text>
+
+                    <!-- Lissajous Path -->
+                    <path d="M 571.0,150.5 L 570.9,152.2 L 570.6,153.8 L 570.2,155.2 L 569.6,156.5 L 568.8,157.6 L 567.9,158.6 L 566.8,159.4 L 565.5,160.1 L 564.1,160.6 L 562.6,160.9 L 560.9,161.0 L 559.1,161.0 L 557.2,160.7 L 555.1,160.3 L 553.0,159.8 L 550.8,159.0 L 548.5,158.1 L 546.1,157.1 L 543.7,155.9 L 541.3,154.5 L 538.8,153.0 L 536.3,151.3 L 533.7,149.6 L 531.2,147.7 L 528.7,145.6 L 526.3,143.5 L 523.9,141.3 L 521.5,139.1 L 519.2,136.7 L 517.0,134.3 L 514.9,131.9 L 512.8,129.4 L 510.9,126.9 L 509.1,124.4 L 507.4,121.9 L 505.9,119.4 L 504.5,116.9 L 503.2,114.5 L 502.1,112.1 L 501.2,109.8 L 500.4,107.5 L 499.8,105.4 L 499.4,103.3 L 499.1,101.4 L 499.0,99.5 L 499.1,97.8 L 499.4,96.2 L 499.8,94.8 L 500.4,93.5 L 501.2,92.4 L 502.1,91.4 L 503.2,90.6 L 504.5,89.9 L 505.9,89.4 L 507.4,89.1 L 509.1,89.0 L 510.9,89.0 L 512.8,89.3 L 514.9,89.7 L 517.0,90.2 L 519.2,91.0 L 521.5,91.9 L 523.9,92.9 L 526.3,94.1 L 528.7,95.5 L 531.2,97.0 L 533.7,98.7 L 536.3,100.4 L 538.8,102.3 L 541.3,104.4 L 543.7,106.5 L 546.1,108.7 L 548.5,110.9 L 550.8,113.3 L 553.0,115.7 L 555.1,118.1 L 557.2,120.6 L 559.1,123.1 L 560.9,125.6 L 562.6,128.1 L 564.1,130.6 L 565.5,133.1 L 566.8,135.5 L 567.9,137.9 L 568.8,140.2 L 569.6,142.5 L 570.2,144.6 L 570.6,146.7 L 570.9,148.6 L 571.0,150.5" fill="none" stroke="#7c3aed" stroke-width="3" />
+
+                    <!-- Phase Title -->
+                    <text x="535" y="222" font-size="11" font-weight="700" fill="#6b21a8" text-anchor="middle">φ = 3π/4 (CCW Ellipse)</text>
+
+                    <!-- Sub-Panel centered at cx=685 -->
+                    <rect x="623" y="48" width="124" height="190" fill="#faf5ff" stroke="#e9d5ff" rx="8" />
+                    
+                    <!-- Inner Axes -->
+                    <line x1="635" y1="125" x2="735" y2="125" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <line x1="685" y1="175" x2="685" y2="75" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3" />
+                    <text x="725" y="120" font-size="11" font-weight="700" fill="#64748b">x</text>
+                    <text x="690" y="85" font-size="11" font-weight="700" fill="#64748b">y</text>
+
+                    <!-- Lissajous Path -->
+                    <path d="M 721.0,161.0 L 720.9,160.9 L 720.6,160.6 L 720.2,160.2 L 719.6,159.6 L 718.8,158.8 L 717.9,157.9 L 716.8,156.8 L 715.5,155.5 L 714.1,154.1 L 712.6,152.6 L 710.9,150.9 L 709.1,149.1 L 707.2,147.2 L 705.1,145.1 L 703.0,143.0 L 700.8,140.8 L 698.5,138.5 L 696.1,136.1 L 693.7,133.7 L 691.3,131.3 L 688.8,128.8 L 686.3,126.3 L 683.7,123.7 L 681.2,121.2 L 678.7,118.7 L 676.3,116.3 L 673.9,113.9 L 671.5,111.5 L 669.2,109.2 L 667.0,107.0 L 664.9,104.9 L 662.8,102.8 L 660.9,100.9 L 659.1,99.1 L 657.4,97.4 L 655.9,95.9 L 654.5,94.5 L 653.2,93.2 L 652.1,92.1 L 651.2,91.2 L 650.4,90.4 L 649.8,89.8 L 649.4,89.4 L 649.1,89.1 L 649.0,89.0 L 649.1,89.1 L 649.4,89.4 L 649.8,89.8 L 650.4,90.4 L 651.2,91.2 L 652.1,92.1 L 653.2,93.2 L 654.5,94.5 L 655.9,95.9 L 657.4,97.4 L 659.1,99.1 L 660.9,100.9 L 662.8,102.8 L 664.9,104.9 L 667.0,107.0 L 669.2,109.2 L 671.5,111.5 L 673.9,113.9 L 676.3,116.3 L 678.7,118.7 L 681.2,121.2 L 683.7,123.7 L 686.3,126.3 L 688.8,128.8 L 691.3,131.3 L 693.7,133.7 L 696.1,136.1 L 698.5,138.5 L 700.8,140.8 L 703.0,143.0 L 705.1,145.1 L 707.2,147.2 L 709.1,149.1 L 710.9,150.9 L 712.6,152.6 L 714.1,154.1 L 715.5,155.5 L 716.8,156.8 L 717.9,157.9 L 718.8,158.8 L 719.6,159.6 L 720.2,160.2 L 720.6,160.6 L 720.9,160.9 L 721.0,161.0" fill="none" stroke="#7c3aed" stroke-width="3" />
+
+                    <!-- Phase Title -->
+                    <text x="685" y="222" font-size="11" font-weight="700" fill="#6b21a8" text-anchor="middle">φ = π (Linear y = −x)</text>
+
+                </svg>
+            </div>
+
             <h2>Topic 2.4: Superposition of Perpendicular Vibrations (Two Dimensions)</h2>
             <ul>
-                <li><span class="eq-label">Component Equations:</span> $$x = A_1 \cos(\omega t + \phi_1), \quad y = A_2 \cos(\omega t + \phi_2)$$</li>
-                <li><span class="eq-label">Common Reference Form ($\phi_1 = 0, \phi_2 = \phi$):</span> $$x = A_1 \cos(\omega t), \quad y = A_2 \cos(\omega t + \phi)$$</li>
+                <li><span class="eq-label">Component Equations:</span> $$x = A_1 \cos(\omega t +\phi_1), \quad y = A_2 \cos(\omega t +\phi_2)$$</li>
+                <li><span class="eq-label">Common Reference Form ($\phi_1 = 0,\phi_2 =\phi$):</span> $$x = A_1 \cos(\omega t), \quad y = A_2 \cos(\omega t +\phi)$$</li>
                 <li><span class="eq-label">General Elliptical Trajectory ($A_1 = A_2 = A$):</span> $$x^2 - 2xy \cos\phi + y^2 = A^2 \sin^2\phi$$</li>
                 <li><span class="eq-label">Special Trajectories (Lissajous Curves):</span>
                     <ul>

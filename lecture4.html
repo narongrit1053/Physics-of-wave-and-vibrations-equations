@@ -186,6 +186,53 @@
 
         <!-- Topic 4.1 -->
         <div id="topic-4-1" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 4.1: Elasticity, Stress, and Strain -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 220" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t41-arrow-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                        <marker id="t41-dim" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+                        </marker>
+                    </defs>
+
+                    <!-- Title Banner -->
+                    <rect x="15" y="10" width="730" height="30" fill="#f8fafc" stroke="#cbd5e1" rx="6" />
+                    <text x="380" y="30" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Tensile Stress &amp; Strain Elongation (Hooke's Law: σ = F/A = Y·(ΔL/L₀))</text>
+
+                    <!-- Original Wire Outline (Dashed Gray) -->
+                    <rect x="180" y="80" width="400" height="40" fill="none" stroke="#cbd5e1" stroke-dasharray="4 4" rx="4" />
+                    <text x="380" y="70" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle">Original Un-stretched Rod (Length L₀, Cross-section A)</text>
+
+                    <!-- Stretched Cylindrical Rod (Solid Blue) -->
+                    <rect x="180" y="83" width="460" height="34" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5" rx="4" />
+                    <ellipse cx="640" cy="100" rx="6" ry="17" fill="#0284c7" />
+
+                    <!-- Tensile Force Arrows (Red) -->
+                    <!-- Left Force F -->
+                    <line x1="180" y1="100" x2="100" y2="100" stroke="#dc2626" stroke-width="3" marker-end="url(#t41-arrow-red)" />
+                    <text x="75" y="105" font-size="14" font-weight="700" fill="#dc2626">Force F</text>
+
+                    <!-- Right Force F -->
+                    <line x1="640" y1="100" x2="720" y2="100" stroke="#dc2626" stroke-width="3" marker-end="url(#t41-arrow-red)" />
+                    <text x="725" y="105" font-size="14" font-weight="700" fill="#dc2626">Force F</text>
+
+                    <!-- L0 Dimension Bracket -->
+                    <line x1="180" y1="150" x2="580" y2="150" stroke="#334155" stroke-width="1.5" marker-start="url(#t41-dim)" marker-end="url(#t41-dim)" />
+                    <line x1="180" y1="125" x2="180" y2="158" stroke="#cbd5e1" stroke-dasharray="3 3" />
+                    <line x1="580" y1="125" x2="580" y2="158" stroke="#cbd5e1" stroke-dasharray="3 3" />
+                    <text x="380" y="145" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">Original Length L₀</text>
+
+                    <!-- ΔL Elongation Dimension Bracket -->
+                    <line x1="580" y1="150" x2="640" y2="150" stroke="#7c3aed" stroke-width="2" marker-start="url(#t41-dim)" marker-end="url(#t41-dim)" />
+                    <line x1="640" y1="125" x2="640" y2="158" stroke="#cbd5e1" stroke-dasharray="3 3" />
+                    <text x="610" y="170" font-size="12" font-weight="700" fill="#7c3aed" text-anchor="middle">Elongation ΔL</text>
+                </svg>
+            </div>
+
             <h2>Topic 4.1: Elasticity, Stress, and Strain</h2>
             <ul>
                 <li><span class="eq-label">Tensile Stress:</span> $$\text{Stress} = \frac{F}{A}$$</li>
@@ -196,6 +243,119 @@
 
         <!-- Topic 4.2 -->
         <div id="topic-4-2" class="topic-block">
+            
+            
+            
+            <!-- SVG Diagram for Topic 4.2: Elastic Wire/Rod Length Elongation & Oscillation -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 780 370" style="width: 100%; max-width: 780px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <!-- Support Hatch Pattern -->
+                        <pattern id="hatch-pattern" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                            <line x1="0" y1="0" x2="0" y2="10" stroke="#94a3b8" stroke-width="2" />
+                        </pattern>
+                        <!-- Arrow Markers -->
+                        <marker id="dim-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+                        </marker>
+                        <marker id="force-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                    </defs>
+
+                    <!-- Top Title Banner -->
+                    <rect x="15" y="10" width="750" height="34" fill="#f8fafc" stroke="#cbd5e1" rx="6" />
+                    <text x="390" y="32" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Elastic Wire Elongation &amp; Length Change (Hooke's Law: ΔL = F·L₀ / AY ⟹ Equivalent Spring Constant k = AY / L₀)</text>
+
+                    <!-- Rigid Ceiling Support -->
+                    <rect x="30" y="52" width="720" height="16" fill="url(#hatch-pattern)" stroke="#64748b" />
+                    <line x1="30" y1="68" x2="750" y2="68" stroke="#334155" stroke-width="3" />
+
+                    <!-- ================= STAGE 1: Unloaded Wire (Length L0) ================= -->
+                    <g transform="translate(0, 0)">
+                        <!-- Ceiling Mount -->
+                        <rect x="115" y="68" width="30" height="8" fill="#475569" />
+
+                        <!-- Elastic Wire L0 (Original Diameter d) -->
+                        <line x1="130" y1="76" x2="130" y2="200" stroke="#0284c7" stroke-width="7" stroke-linecap="round" />
+                        
+                        <!-- Diameter d indicator -->
+                        <line x1="118" y1="135" x2="142" y2="135" stroke="#0369a1" stroke-width="1.5" />
+                        <text x="146" y="139" font-size="12" font-weight="700" fill="#0369a1">d</text>
+
+                        <!-- L0 Dimension Line (Left) -->
+                        <line x1="80" y1="76" x2="80" y2="200" stroke="#334155" stroke-width="1.8" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)" />
+                        <line x1="70" y1="76" x2="120" y2="76" stroke="#cbd5e1" stroke-dasharray="3 3" />
+                        <line x1="70" y1="200" x2="120" y2="200" stroke="#cbd5e1" stroke-dasharray="3 3" />
+                        <text x="50" y="142" font-size="13" font-weight="700" fill="#334155">L₀</text>
+
+                        <!-- Stage Label -->
+                        <text x="130" y="322" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">(1) Unloaded Wire</text>
+                        <text x="130" y="340" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Length = L₀</text>
+                    </g>
+
+                    <!-- ================= STAGE 2: Static Load (Equilibrium Elongation ΔL_eq) ================= -->
+                    <g transform="translate(0, 0)">
+                        <!-- Ceiling Mount -->
+                        <rect x="365" y="68" width="30" height="8" fill="#475569" />
+
+                        <!-- Elastic Wire L0 + ΔL_eq -->
+                        <line x1="380" y1="76" x2="380" y2="235" stroke="#0284c7" stroke-width="5" stroke-linecap="round" />
+
+                        <!-- Attached Mass m -->
+                        <rect x="360" y="235" width="40" height="30" rx="4" fill="#2563eb" stroke="#1d4ed8" stroke-width="2" />
+                        <text x="380" y="255" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">m</text>
+
+                        <!-- Extension Reference Lines -->
+                        <line x1="310" y1="200" x2="440" y2="200" stroke="#cbd5e1" stroke-dasharray="3 3" />
+                        <line x1="310" y1="235" x2="440" y2="235" stroke="#cbd5e1" stroke-dasharray="3 3" />
+
+                        <!-- ΔL_eq Dimension Line (Static Extension) -->
+                        <line x1="330" y1="200" x2="330" y2="235" stroke="#dc2626" stroke-width="2" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)" />
+                        <text x="280" y="222" font-size="12" font-weight="700" fill="#dc2626">ΔL_eq</text>
+
+                        <!-- Full Length L Dimension Line (Right) -->
+                        <line x1="435" y1="76" x2="435" y2="235" stroke="#059669" stroke-width="1.8" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)" />
+                        <text x="444" y="155" font-size="12" font-weight="700" fill="#059669">L = L₀ + ΔL_eq</text>
+
+                        <!-- Stage Label -->
+                        <text x="380" y="322" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">(2) Static Equilibrium</text>
+                        <text x="380" y="340" font-size="11" font-weight="600" fill="#dc2626" text-anchor="middle">Stretched by ΔL_eq</text>
+                    </g>
+
+                    <!-- ================= STAGE 3: Oscillating Displaced State (Dynamic Stretch +x) ================= -->
+                    <g transform="translate(0, 0)">
+                        <!-- Ceiling Mount -->
+                        <rect x="615" y="68" width="30" height="8" fill="#475569" />
+
+                        <!-- Elastic Wire L0 + ΔL_eq + x -->
+                        <line x1="630" y1="76" x2="630" y2="270" stroke="#0284c7" stroke-width="3.8" stroke-linecap="round" />
+
+                        <!-- Attached Mass m -->
+                        <rect x="610" y="270" width="40" height="30" rx="4" fill="#2563eb" stroke="#1d4ed8" stroke-width="2" />
+                        <text x="630" y="290" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">m</text>
+
+                        <!-- Displacement Reference Lines -->
+                        <line x1="565" y1="235" x2="685" y2="235" stroke="#059669" stroke-dasharray="3 3" />
+                        <line x1="565" y1="270" x2="685" y2="270" stroke="#cbd5e1" stroke-dasharray="3 3" />
+
+                        <!-- Dynamic Stretch +x Dimension Line -->
+                        <line x1="580" y1="235" x2="580" y2="270" stroke="#7c3aed" stroke-width="2" marker-start="url(#dim-arrow)" marker-end="url(#dim-arrow)" />
+                        <text x="560" y="256" font-size="13" font-weight="700" fill="#7c3aed">+x</text>
+
+                        <!-- Upward Restoring Force Vector -->
+                        <line x1="665" y1="270" x2="665" y2="220" stroke="#dc2626" stroke-width="2.5" marker-end="url(#force-red)" />
+                        <text x="675" y="240" font-size="12" font-weight="700" fill="#dc2626">F = −kx</text>
+
+                        <!-- Stage Label -->
+                        <text x="630" y="322" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">(3) Stretched State (+x)</text>
+                        <text x="630" y="340" font-size="11" font-weight="600" fill="#7c3aed" text-anchor="middle">Total L = L₀ + ΔL_eq + x</text>
+                    </g>
+                </svg>
+            </div>
+
+
+
             <h2>Topic 4.2: Oscillation of Elastic Wire/Rod</h2>
             <ul>
                 <li><span class="eq-label">Equivalent Spring Constant:</span> $$k = \frac{\pi Y d^2}{4 l_0}$$</li>
@@ -205,6 +365,46 @@
 
         <!-- Topic 4.3 -->
         <div id="topic-4-3" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 4.3: Torsion Pendulum -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 260" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <pattern id="hatch-43" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                            <line x1="0" y1="0" x2="0" y2="10" stroke="#94a3b8" stroke-width="2" />
+                        </pattern>
+                        <marker id="t43-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                    </defs>
+
+                    <!-- Ceiling Support -->
+                    <rect x="250" y="15" width="260" height="14" fill="url(#hatch-43)" stroke="#64748b" />
+                    <line x1="250" y1="29" x2="510" y2="29" stroke="#334155" stroke-width="3" />
+
+                    <!-- Torsion Wire / Fiber -->
+                    <line x1="380" y1="29" x2="380" y2="140" stroke="#0284c7" stroke-width="3.5" />
+
+                    <!-- Twisted Wire Helical Markers -->
+                    <path d="M 377 50 Q 383 55 377 60 Q 383 65 377 70 Q 383 75 377 80 Q 383 85 377 90" fill="none" stroke="#0369a1" stroke-width="2" />
+
+                    <!-- Suspended Disk (Moment of Inertia I) -->
+                    <ellipse cx="380" cy="140" rx="110" ry="24" fill="#e0e7ff" stroke="#4338ca" stroke-width="3" />
+                    <ellipse cx="380" cy="140" rx="110" ry="8" fill="none" stroke="#6366f1" stroke-dasharray="4 3" />
+
+                    <!-- Torsional Restoring Torque Arrow τ = -κθ -->
+                    <path d="M 450 148 A 80 18 0 0 0 310 144" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#t43-arrow)" />
+                    <text x="460" y="165" font-size="13" font-weight="700" fill="#dc2626">Restoring Torque τ = −κθ</text>
+
+                    <!-- Angular Twist θ Callout -->
+                    <text x="240" y="90" font-size="12" font-weight="700" fill="#334155">Wire Radius r, Length L</text>
+                    <text x="240" y="108" font-size="12" font-weight="700" fill="#0284c7">Torsional Constant κ = πGr⁴ / 2L</text>
+
+                    <text x="380" y="185" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Suspended Disk / Body (Moment of Inertia I)</text>
+                    <text x="380" y="210" font-size="13" font-weight="700" fill="#4338ca" text-anchor="middle">Oscillation Period T = 2π √(I / κ)</text>
+                </svg>
+            </div>
+
             <h2>Topic 4.3: Torsion Pendulum</h2>
             <ul>
                 <li><span class="eq-label">Restoring Torque:</span> $$\tau = -\kappa \theta$$</li>
@@ -216,6 +416,44 @@
 
         <!-- Topic 4.4 -->
         <div id="topic-4-4" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 4.4: Spring of Air -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 260" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t44-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                    </defs>
+
+                    <!-- Flask / Chamber Vessel (Volume V0, Pressure P0) -->
+                    <path d="M 340 30 L 340 90 Q 240 110 240 200 A 30 30 0 0 0 270 230 L 490 230 A 30 30 0 0 0 520 200 Q 520 110 420 90 L 420 30 Z" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" />
+
+                    <!-- Gas Molecules Pattern inside Vessel -->
+                    <circle cx="320" cy="160" r="3" fill="#60a5fa" />
+                    <circle cx="370" cy="180" r="3" fill="#60a5fa" />
+                    <circle cx="430" cy="150" r="3" fill="#60a5fa" />
+                    <circle cx="450" cy="190" r="3" fill="#60a5fa" />
+                    <circle cx="300" cy="200" r="3" fill="#60a5fa" />
+
+                    <!-- Oscillating Ball / Piston of Mass m in Tube (Area A) -->
+                    <circle cx="380" cy="65" r="22" fill="#2563eb" stroke="#1d4ed8" stroke-width="2" />
+                    <text x="380" y="70" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">m</text>
+
+                    <!-- Downward Displacement +x -->
+                    <line x1="415" y1="50" x2="415" y2="80" stroke="#7c3aed" stroke-width="2" />
+                    <text x="425" y="68" font-size="12" font-weight="700" fill="#7c3aed">Displacement +x</text>
+
+                    <!-- Upward Pressure Restoring Force -->
+                    <line x1="380" y1="90" x2="380" y2="35" stroke="#dc2626" stroke-width="3" marker-end="url(#t44-arrow)" />
+                    <text x="210" y="55" font-size="12" font-weight="700" fill="#dc2626">Restoring Force F = −(γ P₀ A² / V₀) x</text>
+
+                    <!-- Labels -->
+                    <text x="380" y="165" font-size="14" font-weight="700" fill="#1e40af" text-anchor="middle">Air Volume V₀, Pressure P₀</text>
+                    <text x="380" y="248" font-size="13" font-weight="700" fill="#1d4ed8" text-anchor="middle">Adiabatic Frequency ω = √(γ P₀ A² / m V₀)</text>
+                </svg>
+            </div>
+
             <h2>Topic 4.4: Spring of Air (Adiabatic Ball Oscillation)</h2>
             <ul>
                 <li><span class="eq-label">Adiabatic Expansion Relation:</span> $$P V^\gamma = \text{constant} \implies dP = -\gamma \frac{P}{V} dV$$</li>
@@ -227,6 +465,48 @@
 
         <!-- Topic 4.5 -->
         <div id="topic-4-5" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 4.5: Liquid Column in a U-Tube -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 270" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t45-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+                        </marker>
+                    </defs>
+
+                    <!-- U-Tube Glass Structure -->
+                    <!-- Outer U-Shape -->
+                    <path d="M 260 30 L 260 170 A 120 120 0 0 0 500 170 L 500 30" fill="none" stroke="#475569" stroke-width="3" />
+                    <!-- Inner U-Shape -->
+                    <path d="M 310 30 L 310 170 A 70 70 0 0 0 450 170 L 450 30" fill="none" stroke="#475569" stroke-width="3" />
+
+                    <!-- Oscillating Liquid Fill (Density ρ, Total Length L) -->
+                    <!-- Left arm lower by x, Right arm higher by x -->
+                    <path d="M 261 110 L 261 170 A 119 119 0 0 0 499 170 L 499 70 L 451 70 L 451 170 A 69 69 0 0 1 309 170 L 309 110 Z" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5" />
+
+                    <!-- Liquid Surfaces -->
+                    <!-- Left meniscus at y=110 -->
+                    <ellipse cx="285" cy="110" rx="24" ry="4" fill="#0284c7" />
+                    <!-- Right meniscus at y=70 -->
+                    <ellipse cx="475" cy="70" rx="24" ry="4" fill="#0284c7" />
+
+                    <!-- Equilibrium Dashed Line (y=90) -->
+                    <line x1="240" y1="90" x2="520" y2="90" stroke="#64748b" stroke-dasharray="4 3" />
+                    <text x="170" y="94" font-size="12" font-weight="700" fill="#64748b">Equilibrium Level</text>
+
+                    <!-- Liquid Height Difference 2x -->
+                    <line x1="535" y1="70" x2="535" y2="110" stroke="#dc2626" stroke-width="2" marker-start="url(#t45-arrow)" marker-end="url(#t45-arrow)" />
+                    <line x1="475" y1="70" x2="545" y2="70" stroke="#dc2626" stroke-dasharray="3 3" />
+                    <line x1="285" y1="110" x2="545" y2="110" stroke="#dc2626" stroke-dasharray="3 3" />
+                    <text x="552" y="94" font-size="13" font-weight="700" fill="#dc2626">Height Diff = 2x</text>
+
+                    <!-- Restoring Force Callout -->
+                    <text x="380" y="225" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Liquid Density ρ, Column Length L, Area A ⟹ Restoring Force F = −2ρgAx</text>
+                    <text x="380" y="248" font-size="13" font-weight="700" fill="#0284c7" text-anchor="middle">Oscillation Period T = 2π √(L / 2g),  Frequency ω = √(2g / L)</text>
+                </svg>
+            </div>
+
             <h2>Topic 4.5: Liquid Column in a U-Tube</h2>
             <ul>
                 <li><span class="eq-label">Potential Energy:</span> $$U = \rho g A y^2$$</li>
@@ -239,6 +519,49 @@
 
         <!-- Topic 4.6 -->
         <div id="topic-4-6" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 4.6: Cylinder Rolling on Springs -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 250" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t46-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                    </defs>
+
+                    <!-- Rough Ground Surface -->
+                    <line x1="50" y1="180" x2="710" y2="180" stroke="#334155" stroke-width="3" />
+                    <path d="M 50 180 L 40 195 M 100 180 L 90 195 M 150 180 L 140 195 M 200 180 L 190 195 M 250 180 L 240 195 M 300 180 L 290 195 M 350 180 L 340 195 M 400 180 L 390 195 M 450 180 L 440 195 M 500 180 L 490 195 M 550 180 L 540 195 M 600 180 L 590 195 M 650 180 L 640 195 M 700 180 L 690 195" stroke="#94a3b8" stroke-width="2" />
+
+                    <!-- Left Wall Support -->
+                    <rect x="50" y="30" width="16" height="150" fill="#64748b" />
+
+                    <!-- Horizontal Spring k -->
+                    <path d="M 66 110 L 90 110 L 100 95 L 120 125 L 140 95 L 160 125 L 180 95 L 200 125 L 220 95 L 240 125 L 260 95 L 280 125 L 290 110 L 320 110" fill="none" stroke="#2563eb" stroke-width="3" />
+                    <text x="180" y="85" font-size="13" font-weight="700" fill="#2563eb" text-anchor="middle">Spring Constant k</text>
+
+                    <!-- Solid Rolling Cylinder (Mass M, Radius R) -->
+                    <circle cx="380" cy="110" r="70" fill="#f1f5f9" stroke="#0f172a" stroke-width="3.5" />
+                    <circle cx="380" cy="110" r="8" fill="#2563eb" />
+
+                    <!-- Radius R Arrow -->
+                    <line x1="380" y1="110" x2="435" y2="65" stroke="#0f172a" stroke-width="2" />
+                    <text x="415" y="80" font-size="13" font-weight="700" fill="#0f172a">R</text>
+
+                    <!-- Pure Rolling Rotation Arc -->
+                    <path d="M 430 140 A 55 55 0 0 0 440 90" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#t46-arrow)" />
+                    <text x="450" y="120" font-size="12" font-weight="700" fill="#7c3aed">Rotation θ</text>
+
+                    <!-- Friction Force fs at contact point -->
+                    <line x1="380" y1="180" x2="310" y2="180" stroke="#dc2626" stroke-width="2.5" marker-end="url(#t46-arrow)" />
+                    <text x="270" y="172" font-size="12" font-weight="700" fill="#dc2626">Friction fs</text>
+
+                    <!-- Callout Text -->
+                    <text x="380" y="215" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Solid Cylinder (Mass M, Radius R) - Pure Rolling Without Slipping</text>
+                    <text x="380" y="238" font-size="13" font-weight="700" fill="#2563eb" text-anchor="middle">Oscillation Frequency ω = √(2k / 3M)</text>
+                </svg>
+            </div>
+
             <h2>Topic 4.6: Cylinder Rolling on Springs</h2>
             <ul>
                 <li><span class="eq-label">Effective Spring Constant:</span> $$k_{\text{eff}} = 2k$$</li>
@@ -250,6 +573,50 @@
 
         <!-- Topic 4.7 -->
         <div id="topic-4-7" class="topic-block">
+            
+            <!-- SVG Diagram for Topic 4.7: Pivoted Rod Supported by Spring -->
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                <svg viewBox="0 0 760 250" style="width: 100%; max-width: 760px; height: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px;">
+                    <defs>
+                        <marker id="t47-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                    </defs>
+
+                    <!-- Ground Support for Spring -->
+                    <line x1="450" y1="200" x2="570" y2="200" stroke="#334155" stroke-width="3" />
+
+                    <!-- Smooth Pivot O Support at Left End -->
+                    <polygon points="120,180 140,210 100,210" fill="#64748b" stroke="#334155" stroke-width="2" />
+                    <circle cx="120" cy="180" r="6" fill="#0f172a" />
+                    <text x="120" y="225" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Pivot O</text>
+
+                    <!-- Pivoted Uniform Rigid Rod (Length L, Mass M) -->
+                    <!-- Tilted by small angle θ -->
+                    <line x1="120" y1="180" x2="620" y2="120" stroke="#475569" stroke-width="12" stroke-linecap="round" />
+
+                    <!-- Supporting Spring k at distance a from pivot -->
+                    <!-- Spring located at x=500 -->
+                    <path d="M 500 200 L 500 180 L 488 174 L 512 162 L 488 150 L 512 138 L 500 132 L 500 134" fill="none" stroke="#2563eb" stroke-width="3" />
+                    <text x="525" y="170" font-size="12" font-weight="700" fill="#2563eb">Spring k</text>
+
+                    <!-- Pivot to Spring Distance 'a' Callout -->
+                    <line x1="120" y1="195" x2="500" y2="195" stroke="#334155" stroke-width="1.5" />
+                    <text x="310" y="210" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">Distance a</text>
+
+                    <!-- Upward Spring Restoring Force -->
+                    <line x1="500" y1="134" x2="500" y2="80" stroke="#dc2626" stroke-width="2.5" marker-end="url(#t47-arrow)" />
+                    <text x="510" y="95" font-size="12" font-weight="700" fill="#dc2626">Restoring Force F_s = −k(aθ)</text>
+
+                    <!-- Rod Center of Mass & Length L -->
+                    <circle cx="370" cy="150" r="5" fill="#dc2626" />
+                    <text x="370" y="135" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">Center of Mass (M)</text>
+
+                    <!-- Callout Text -->
+                    <text x="380" y="238" font-size="13" font-weight="700" fill="#1e293b" text-anchor="middle">Pivoted Rod (Length L, Moment of Inertia I_O) ⟹ Small Angle Oscillation Frequency ω</text>
+                </svg>
+            </div>
+
             <h2>Topic 4.7: Pivoted Rod Supported by Spring</h2>
             <ul>
                 <li><span class="eq-label">Static Equilibrium Constraint:</span> $$k x_0 = \frac{mg}{2}$$</li>
