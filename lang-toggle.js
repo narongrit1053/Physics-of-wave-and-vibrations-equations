@@ -115,10 +115,10 @@
         var switcherHTML = `
             <div class="lang-switcher" title="Change Language / เปลี่ยนภาษา">
                 <button type="button" id="lang-btn-en" class="lang-toggle-btn ${currentLang === 'en' ? 'active' : ''}" onclick="window.toggleLanguage('en')">
-                    <span>🇬🇧</span> EN
+                    EN
                 </button>
                 <button type="button" id="lang-btn-th" class="lang-toggle-btn ${currentLang === 'th' ? 'active' : ''}" onclick="window.toggleLanguage('th')">
-                    <span>🇹🇭</span> TH
+                    TH
                 </button>
             </div>
         `;

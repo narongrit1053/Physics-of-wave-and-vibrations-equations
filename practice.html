@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Practice &amp; Exercise Bank (Lectures 1–8) — Course 207203</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
+    <!-- Practice Problems Database -->
+    <script src="practice-data.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --border-card: #e5e7eb;
+            --text-dark: #111827;
+            --text-muted: #475569;
+            --radius-card: 8px;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 4px 12px rgba(37, 99, 235, 0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* Top Navigation Header */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .nav-badge {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-size: 14px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: var(--primary-light);
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Hero Header Section */
+        .hero-section-clean {
+            background: #ffffff;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .hero-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+            color: #111827;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: #475569;
+            margin: 0;
+            max-width: 780px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        /* Filter Controls & Search Bar */
+        .controls-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 28px;
+        }
+
+        .search-bar-wrap {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 260px;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            background: #ffffff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            color: #334155;
+            border-color: #cbd5e1;
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            color: #0f172a;
+        }
+
+        /* Lecture Filter Tabs */
+        .lecture-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #ffffff;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Practice Problem Cards Grid */
+        .problem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-card);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .problem-card:hover {
+            border-color: #93c5fd;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .problem-card.solved {
+            border-left: 4px solid var(--success);
+            background: #f0fdf4;
+        }
+
+        .problem-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .problem-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge-id {
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-topic {
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .badge-scope {
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .solved-checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .solved-checkbox-label input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: var(--success);
+        }
+
+        .question-body {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1e293b;
+            margin-bottom: 16px;
+            white-space: pre-line;
+        }
+
+        /* Toolbars & Action Buttons inside Problem Card */
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed #e2e8f0;
+        }
+
+        .toggle-btn {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .toggle-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Expandable Panels: Formulas & Solutions */
+        .panel-box {
+            display: none;
+            margin-top: 14px;
+            padding: 14px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.6;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .formula-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .formula-box h4 {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .solution-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+        }
+
+        .solution-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            padding: 24px 0;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover { text-decoration: underline; }
+
+        /* Empty search state */
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Navigation Header -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-brand">
+                <span class="lang-en">Physics of Waves &amp; Oscillations</span>
+                <span class="lang-th">ฟิสิกส์ของคลื่นและการสั่น</span>
+                <span class="nav-badge">Course 207203</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">
+                    <span class="lang-en">Home</span>
+                    <span class="lang-th">หน้าหลัก</span>
+                </a>
+                <a href="formula_sheet.html" class="nav-btn">
+                    <span class="lang-en">Exam Formula Sheet</span>
+                    <span class="lang-th">สรุปสูตรสอบ</span>
+                </a>
+                <a href="practice.html" class="nav-btn active">
+                    <span class="lang-en">Practice Bank (110)</span>
+                    <span class="lang-th">คลังโจทย์แบบฝึกหัด (110)</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Header -->
+        <div class="hero-section-clean">
+            <div>
+                <h1 class="hero-title">
+                    <span class="lang-en">Exercise &amp; Practice Problem Bank</span>
+                    <span class="lang-th">คลังแบบฝึกหัดและโจทย์ฝึกทักษะ (Lecture 1 – 8)</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="lang-en">Master wave physics with 110 comprehensive practice problems across all 8 lectures. Features bilingual text (Thai &amp; English), key formula hints, step-by-step solutions, and interactive progress tracking.</span>
+                    <span class="lang-th">รวมแบบฝึกหัดวิชาฟิสิกส์ฉบับสมบูรณ์ 110 ข้อ จากบทเรียนที่ 1 ถึง 8 พร้อมคำอธิบายภาษาไทย-อังกฤษ สรุปสูตรสำคัญ และเฉลยขั้นตอนการคำนวณเพื่อเตรียมความพร้อมในการสอบ</span>
+                </p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-badge">
+                    <span class="stat-value" id="stat-total">110</span>
+                    <span class="stat-label">
+                        <span class="lang-en">Total Problems</span>
+                        <span class="lang-th">จำนวนโจทย์ทั้งหมด</span>
+                    </span>
+                </div>
+                <div class="stat-badge">
+                    <span class="stat-value" id="stat-solved">0</span>
+                    <span class="stat-label">
+                        <span class="lang-en">Solved</span>
+                        <span class="lang-th">ทำสำเร็จแล้ว</span>
+                    </span>
+                </div>
+                <div class="stat-badge">
+                    <span class="stat-value" id="stat-percent">0%</span>
+                    <span class="stat-label">
+                        <span class="lang-en">Progress</span>
+                        <span class="lang-th">ความคืบหน้า</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Controls & Search Bar -->
+        <div class="controls-card">
+            <div class="search-bar-wrap">
+                <input type="text" id="search-input" class="search-input" 
+                       data-placeholder-en="Search problems by keyword, concept, equation (e.g. pendulum, beats, LC, resonance)..."
+                       data-placeholder-th="ค้นหาโจทย์ด้วยคีย์เวิร์ด, บทเรียน, หรือสมการ (เช่น ลูกตุ้ม, บีตส์, ความหน่วง, LC)..."
+                       placeholder="Search problems by keyword, concept, equation (e.g. pendulum, beats, LC, resonance)...">
+                <button type="button" class="btn-action btn-outline" id="btn-toggle-all-solutions" onclick="toggleAllSolutions()">
+                    <span class="lang-en">Expand All Solutions</span>
+                    <span class="lang-th">ขยายเฉลยทั้งหมด</span>
+                </button>
+                <button type="button" class="btn-action btn-outline" onclick="resetSolvedProgress()">
+                    <span class="lang-en">Reset Progress</span>
+                    <span class="lang-th">รีเซ็ตความคืบหน้า</span>
+                </button>
+            </div>
+
+            <!-- Lecture Filter Tabs -->
+            <div class="lecture-tabs" id="lecture-tabs">
+                <button class="tab-btn active" onclick="filterLecture('all', this)">
+                    <span class="lang-en">All Lectures (110)</span>
+                    <span class="lang-th">ทุกบทเรียน (110)</span>
+                </button>
+                <button class="tab-btn" onclick="filterLecture(1, this)">L1: SHM (13)</button>
+                <button class="tab-btn" onclick="filterLecture(2, this)">L2: Superposition (9)</button>
+                <button class="tab-btn" onclick="filterLecture(3, this)">L3: Energy (20)</button>
+                <button class="tab-btn" onclick="filterLecture(4, this)">L4: Physical Pendulum (19)</button>
+                <button class="tab-btn" onclick="filterLecture(5, this)">L5: LC Circuits (4)</button>
+                <button class="tab-btn" onclick="filterLecture(6, this)">L6: Damped (18)</button>
+                <button class="tab-btn" onclick="filterLecture(7, this)">L7: Forced &amp; Resonance (20)</button>
+                <button class="tab-btn" onclick="filterLecture(8, this)">L8: Coupled Modes (7)</button>
+            </div>
+        </div>
+
+        <!-- Practice Problem Cards List -->
+        <main class="problem-list" id="problem-container">
+            <!-- Dynamic items rendered by JavaScript -->
+        </main>
+
+        <!-- Footer -->
+        
+    </div>
+
+    <!-- Application Script Logic -->
+    <script>
+        var currentFilter = 'all';
+        var searchQuery = '';
+        var expandAllState = false;
+        var solvedSet = new Set(JSON.parse(localStorage.getItem('solved_problems_set') || '[]'));
+
+        function updateStats() {
+            var total = 110;
+            var solved = solvedSet.size;
+            var percent = roundTwo((solved / total) * 100);
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-solved').innerText = solved;
+            document.getElementById('stat-percent').innerText = percent + '%';
+        }
+
+        function roundTwo(val) {
+            return Math.round(val * 10) / 10;
+        }
+
+        function toggleSolved(probId) {
+            if (solvedSet.has(probId)) {
+                solvedSet.delete(probId);
+            } else {
+                solvedSet.add(probId);
+            }
+            localStorage.setItem('solved_problems_set', JSON.stringify(Array.from(solvedSet)));
+            
+            var card = document.getElementById('card-' + probId);
+            if (card) {
+                if (solvedSet.has(probId)) {
+                    card.classList.add('solved');
+                } else {
+                    card.classList.remove('solved');
+                }
+            }
+            updateStats();
+        }
+
+        function resetSolvedProgress() {
+            if (confirm('Are you sure you want to reset your practice progress? / คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตความคืบหน้า?')) {
+                solvedSet.clear();
+                localStorage.removeItem('solved_problems_set');
+                renderProblems();
+                updateStats();
+            }
+        }
+
+        function filterLecture(lec, btn) {
+            currentFilter = lec;
+            var buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+            renderProblems();
+        }
+
+        function toggleFormula(probId) {
+            var box = document.getElementById('formula-' + probId);
+            var btn = document.getElementById('btn-formula-' + probId);
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+                btn.classList.remove('active');
+            } else {
+                box.style.display = 'block';
+                btn.classList.add('active');
+            }
+        }
+
+        function toggleSolution(probId) {
+            var box = document.getElementById('solution-' + probId);
+            var btn = document.getElementById('btn-sol-' + probId);
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+                btn.classList.remove('active');
+            } else {
+                box.style.display = 'block';
+                btn.classList.add('active');
+            }
+        }
+
+        function toggleAllSolutions() {
+            expandAllState = !expandAllState;
+            var boxes = document.querySelectorAll('.solution-box');
+            var buttons = document.querySelectorAll('.btn-sol-toggle');
+            
+            boxes.forEach(function(box) {
+                box.style.display = expandAllState ? 'block' : 'none';
+            });
+            buttons.forEach(function(btn) {
+                if (expandAllState) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            var labelEn = expandAllState ? 'Collapse All Solutions' : 'Expand All Solutions';
+            var labelTh = expandAllState ? 'ย่อเฉลยทั้งหมด' : 'ขยายเฉลยทั้งหมด';
+            
+            var btnGlobal = document.getElementById('btn-toggle-all-solutions');
+            if (btnGlobal) {
+                btnGlobal.querySelector('.lang-en').innerText = labelEn;
+                btnGlobal.querySelector('.lang-th').innerText = labelTh;
+            }
+        }
+
+        function formatProblemText(txt) {
+            if (!txt) return '';
+            var cleaned = txt.replace(/\n\s*(\$[^\$\n]+\$)\s*\n/g, ' $1 ');
+            cleaned = cleaned.replace(/([^\n])\n(\$[^\$\n]+\$)/g, '$1 $2');
+            cleaned = cleaned.replace(/(\$[^\$\n]+\$)\n([^\n])/g, '$1 $2');
+            
+            var parts = cleaned.split(/\n\s*\n/);
+            return parts.map(function(p) {
+                p = p.trim();
+                if (!p) return '';
+                if (p.startsWith('$$') && p.endsWith('$$')) {
+                    return '<div style="margin: 10px 0; overflow-x: auto; max-width: 100%; text-align: center;">' + p + '</div>';
+                }
+                return '<p style="margin: 0 0 8px 0; line-height: 1.65;">' + p.replace(/\n/g, '<br>') + '</p>';
+            }).join('');
+        }
+
+        function renderProblems() {
+            var container = document.getElementById('problem-container');
+            if (!container || !window.PRACTICE_DATA) return;
+
+            var html = '';
+            var countMatch = 0;
+
+            window.PRACTICE_DATA.forEach(function(lecData) {
+                if (currentFilter !== 'all' && lecData.lecture !== parseInt(currentFilter)) {
+                    return;
+                }
+
+                lecData.problems.forEach(function(prob) {
+                    var textMatch = true;
+                    if (searchQuery.trim() !== '') {
+                        var qLower = searchQuery.toLowerCase();
+                        var textTh = (prob.question_th || '').toLowerCase();
+                        var textEn = (prob.question_en || '').toLowerCase();
+                        var topicTh = (prob.topic_th || '').toLowerCase();
+                        var topicEn = (prob.topic_en || '').toLowerCase();
+
+                        if (!textTh.includes(qLower) && !textEn.includes(qLower) && !topicTh.includes(qLower) && !topicEn.includes(qLower)) {
+                            textMatch = false;
+                        }
+                    }
+
+                    if (!textMatch) return;
+
+                    countMatch++;
+                    var isSolved = solvedSet.has(prob.id);
+                    var cardClass = 'problem-card' + (isSolved ? ' solved' : '');
+
+                    var formulasHTML = '';
+                    var hasFormulas = (prob.formulas && prob.formulas.length > 0);
+                    var hasHints = (prob.hints && prob.hints.length > 0);
+
+                    if (hasFormulas || hasHints) {
+                        formulasHTML = '<div class="panel-box formula-box" id="formula-' + prob.id + '">' +
+                            '<h4>Key Formulas &amp; Hints / สมการและคำแนะนำ:</h4><ul style="margin: 0; padding-left: 20px;">';
+                        
+                        if (hasFormulas) {
+                            prob.formulas.forEach(function(f) {
+                                var str = f.trim();
+                                if (!str.startsWith('$')) {
+                                    if (str.length < 55 && !str.includes('\\begin') && !str.includes('\\pmatrix') && !str.includes('\\matrix')) {
+                                        str = '$' + str + '$';
+                                    } else {
+                                        str = '$$' + str + '$$';
+                                    }
+                                }
+                                formulasHTML += '<li style="margin-bottom: 6px;">' + str + '</li>';
+                            });
+                        }
+
+                        if (hasHints) {
+                            prob.hints.forEach(function(h) {
+                                formulasHTML += '<li style="margin-bottom: 6px; color: #1e3a8a;"><strong>Hint:</strong> ' + formatProblemText(h) + '</li>';
+                            });
+                        }
+
+                        formulasHTML += '</ul></div>';
+                    }
+
+                    html += '<article class="' + cardClass + '" id="card-' + prob.id + '">' +
+                        '<div class="problem-header">' +
+                            '<div class="problem-badges">' +
+                                '<span class="badge-id">Problem ' + lecData.lecture + '.' + prob.num_in_lec + '</span>' +
+                                '<span class="badge-topic">' +
+                                    '<span class="lang-en">' + prob.topic_en + '</span>' +
+                                    '<span class="lang-th">' + prob.topic_th + '</span>' +
+                                '</span>' +
+                                '<span class="badge-scope">' +
+                                    '<span class="lang-en">Scope: L1–L' + lecData.lecture + '</span>' +
+                                    '<span class="lang-th">ขอบเขต: เฉพาะ L1–L' + lecData.lecture + '</span>' +
+                                '</span>' +
+                            '</div>' +
+                            '<label class="solved-checkbox-label">' +
+                                '<input type="checkbox" ' + (isSolved ? 'checked' : '') + ' onchange="toggleSolved(\'' + prob.id + '\')"> ' +
+                                '<span class="lang-en">Mark as Solved</span>' +
+                                '<span class="lang-th">ทำสำเร็จแล้ว</span>' +
+                            '</label>' +
+                        '</div>' +
+
+                        '<div class="question-body">' +
+                            '<div class="lang-th">' + formatProblemText(prob.question_th) + '</div>' +
+                            '<div class="lang-en">' + formatProblemText(prob.question_en) + '</div>' +
+                        '</div>' +
+
+                        '<div class="card-actions">' +
+                            ((hasFormulas || hasHints) ? 
+                                '<button type="button" class="toggle-btn" id="btn-formula-' + prob.id + '" onclick="toggleFormula(\'' + prob.id + '\')">' +
+                                    '<span class="lang-en">Formulas / Hint</span><span class="lang-th">สูตรคำนวณ / คำแนะนำ</span>' +
+                                '</button>' : '') +
+                            '<button type="button" class="toggle-btn btn-sol-toggle" id="btn-sol-' + prob.id + '" onclick="toggleSolution(\'' + prob.id + '\')">' +
+                                '<span class="lang-en">Show Solution &amp; Answer</span><span class="lang-th">แสดงวิธีทำและเฉลย</span>' +
+                            '</button>' +
+                        '</div>' +
+
+                        formulasHTML +
+
+                        '<div class="panel-box solution-box" id="solution-' + prob.id + '">' +
+                            '<h4>Step-by-Step Solution &amp; Answer Key:</h4>' +
+                            '<div class="lang-th">' + formatProblemText(prob.solution_th) + '</div>' +
+                            '<div class="lang-en">' + formatProblemText(prob.solution_en) + '</div>' +
+                        '</div>' +
+                    '</article>';
+                });
+            });
+
+            if (countMatch === 0) {
+                html = '<div class="no-results">' +
+                    '<h3>No problems match your filter or search query.</h3>' +
+                    '<p>Try searching for different terms or reset your lecture filter.</p>' +
+                    '</div>';
+            }
+
+            container.innerHTML = html;
+
+            // Trigger MathJax re-render for dynamically injected content
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise([container]).catch(function (err) {
+                    console.error('MathJax typeset error:', err);
+                });
+            }
+        }
+
+        // Initialize Search Bar Input Listener
+        document.addEventListener('DOMContentLoaded', function() {
+            var input = document.getElementById('search-input');
+            if (input) {
+                input.addEventListener('input', function(e) {
+                    searchQuery = e.target.value;
+                    renderProblems();
+                });
+            }
+            renderProblems();
+            updateStats();
+        });
+    </script>
+<footer class="site-footer">
+    <div class="container" style="text-align: center; padding: 24px 0; margin-top: 40px; border-top: 1px solid #e5e7eb; color: #64748b; font-size: 13px; line-height: 1.6;">
+        <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
+            <span class="lang-en">All course contents and materials are from <strong>Physics of Waves and Oscillations (Course 207203) — Year 1/2026</strong>.</span>
+            <span class="lang-th">เนื้อหาและสื่อการเรียนการสอนทั้งหมดมาจากวิชา <strong>ฟิสิกส์ของคลื่นและการสั่น (207203) ภาคเรียนที่ 1/2569 (Year 1/2026)</strong></span>
+        </p>
+        <p style="margin: 0; font-size: 12.5px; color: #94a3b8;">
+            <a href="index.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Course Directory</a> &bull; 
+            <a href="formula_sheet.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Official Exam Formula Sheet</a> &bull; 
+            <a href="practice.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Practice Problem Bank</a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>

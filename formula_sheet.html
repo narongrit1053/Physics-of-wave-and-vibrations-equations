@@ -20,12 +20,12 @@
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
-            --accent: #f59e0b;
-            --accent-dark: #b45309;
-            --bg-page: #f8fafc;
+            --primary-light: #eff6ff;
+            --bg-page: #ffffff;
             --bg-card: #ffffff;
-            --border-card: #e2e8f0;
-            --text-dark: #0f172a;
+            --border-card: #e5e7eb;
+            --border-accent: #2563eb;
+            --text-dark: #111827;
             --text-muted: #475569;
         }
 
@@ -35,98 +35,99 @@
             background-color: var(--bg-page);
             color: var(--text-dark);
             margin: 0;
-            padding: 30px 20px;
-            line-height: 1.5;
+            padding: 40px 20px;
+            line-height: 1.6;
         }
-        .container { max-width: 1100px; margin: 0 auto; }
+        .container { max-width: 1080px; margin: 0 auto; }
 
         /* Navigation Header */
         .nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
             padding: 12px 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .nav-btn {
             font-size: 14px;
             color: var(--primary);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 6px;
         }
         .nav-btn:hover { text-decoration: underline; }
-        .nav-title { font-weight: 700; color: #334155; font-size: 15px; }
+        .nav-title { font-weight: 600; color: #374151; font-size: 14px; }
 
         /* Exam Sheet Header Banner */
-        .sheet-header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #ffffff;
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-            position: relative;
-            overflow: hidden;
+        .sheet-header-clean {
+            background: #ffffff;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 16px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 16px;
         }
-        .sheet-header h1 {
-            font-size: 26px;
-            margin: 0 0 8px 0;
+        .sheet-header-clean h1 {
+            font-size: 24px;
+            margin: 0 0 6px 0;
             font-weight: 800;
+            color: #111827;
             letter-spacing: -0.5px;
         }
-        .sheet-header p {
+        .sheet-header-clean p {
             margin: 0;
             font-size: 14px;
-            color: #94a3b8;
+            color: #475569;
         }
         .print-btn {
-            position: absolute;
-            right: 32px;
-            top: 32px;
-            background: var(--accent);
-            color: #ffffff;
-            border: none;
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
             border-radius: 6px;
-            padding: 10px 18px;
+            padding: 8px 16px;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .print-btn:hover {
-            background: var(--accent-dark);
-            transform: translateY(-1px);
+            background: #e2e8f0;
+            color: #0f172a;
+            border-color: #94a3b8;
         }
 
         /* Filter & Search Bar */
         .filter-section {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 16px 20px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 18px 20px;
             margin-bottom: 28px;
             display: flex;
             flex-direction: column;
             gap: 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
         .search-box input {
             width: 100%;
-            padding: 10px 16px;
+            padding: 10px 14px;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
             font-size: 14px;
             box-sizing: border-box;
             outline: none;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #ffffff;
         }
         .search-box input:focus {
             border-color: var(--primary);
@@ -139,18 +140,18 @@
             flex-wrap: wrap;
         }
         .tab-btn {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
             color: #475569;
             padding: 6px 14px;
             border-radius: 6px;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            transition: all 0.2s ease;
         }
         .tab-btn:hover {
-            background: #e2e8f0;
+            background: #f1f5f9;
             color: #1e293b;
         }
         .tab-btn.active {
@@ -161,12 +162,12 @@
 
         /* Section Headings */
         .section-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            color: #1e293b;
-            border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 6px;
-            margin-top: 36px;
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 8px;
+            margin-top: 32px;
             margin-bottom: 18px;
             display: flex;
             align-items: center;
@@ -179,33 +180,34 @@
             background: #f1f5f9;
             padding: 2px 8px;
             border-radius: 12px;
+            border: 1px solid #e2e8f0;
         }
 
         /* Equation Grid */
         .eq-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
         }
 
         /* Equation Card */
         .eq-card {
             background: var(--bg-card);
-            border: 1.5px solid var(--border-card);
-            border-left: 5px solid var(--accent);
-            border-radius: 10px;
+            border: 1px solid var(--border-card);
+            border-left: 4px solid var(--border-accent);
+            border-radius: 8px;
             padding: 16px 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
         .eq-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-            border-color: var(--accent-dark);
+            border-color: #93c5fd;
+            background-color: #f0f7ff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
         }
 
         .eq-header {
@@ -216,9 +218,10 @@
         }
         .eq-number {
             font-size: 11px;
-            font-weight: 800;
-            color: #ffffff;
-            background: var(--accent);
+            font-weight: 700;
+            color: var(--primary);
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
             padding: 2px 8px;
             border-radius: 4px;
             letter-spacing: 0.5px;
@@ -228,6 +231,7 @@
             font-weight: 600;
             color: #64748b;
             background: #f1f5f9;
+            border: 1px solid #e2e8f0;
             padding: 2px 8px;
             border-radius: 4px;
         }
@@ -247,13 +251,14 @@
 
         /* Rendered LaTeX Formula Box */
         .eq-formula-box {
-            background: #fffbeb;
-            border: 1px solid #fde68a;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 6px;
             padding: 12px 16px;
             margin-bottom: 12px;
             text-align: center;
             overflow-x: auto;
+            max-width: 100%;
         }
         .eq-formula-box mjx-container {
             font-size: 115% !important;
@@ -270,7 +275,7 @@
             font-size: 11.5px;
             color: #64748b;
             background: #f8fafc;
-            border: 1px solid #f1f5f9;
+            border: 1px solid #e2e8f0;
             padding: 6px 10px;
             border-radius: 4px;
             font-family: monospace, sans-serif;
@@ -280,12 +285,12 @@
         @media print {
             body { padding: 0; background: #ffffff; }
             .nav-bar, .print-btn, .filter-section { display: none !important; }
-            .sheet-header { padding: 16px; margin-bottom: 16px; background: #ffffff !important; color: #000000 !important; border: 1px solid #000000; }
-            .sheet-header h1 { font-size: 20px; color: #000000; }
-            .sheet-header p { color: #333333; }
+            .sheet-header-clean { padding: 16px; margin-bottom: 16px; background: #ffffff !important; color: #000000 !important; border-bottom: 2px solid #000000; }
+            .sheet-header-clean h1 { font-size: 20px; color: #000000; }
+            .sheet-header-clean p { color: #333333; }
             .eq-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .eq-card { padding: 10px; page-break-inside: avoid; border: 1px solid #999999 !important; border-left: 4px solid #000000 !important; box-shadow: none !important; }
-            .eq-formula-box { background: #f5f5f5 !important; border: 1px solid #ccc !important; padding: 6px; }
+            .eq-card { padding: 10px; page-break-inside: avoid; border: 1px solid #cbd5e1 !important; border-left: 4px solid #2563eb !important; box-shadow: none !important; }
+            .eq-formula-box { background: #f8fafc !important; border: 1px solid #cbd5e1 !important; padding: 6px; }
         }
     </style>
     <!-- Global Language Toggle Controller -->
@@ -301,10 +306,14 @@
                 <span class="lang-th">← สารบัญรายวิชา</span>
             </a>
             <span class="nav-title">
-                <span class="lang-en">Physics 207023: Official Exam Sheet</span>
-                <span class="lang-th">วิชาฟิสิกส์ 207023: แผ่นรวมสูตรสอบ</span>
+                <span class="lang-en">Physics 207203: Official Exam Sheet</span>
+                <span class="lang-th">วิชาฟิสิกส์ 207203: แผ่นรวมสูตรสอบ</span>
             </span>
-            <div style="display:flex; gap:8px;">
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <a href="practice.html" class="nav-btn" style="background:#eff6ff; color:#2563eb; padding:4px 10px; border-radius:6px; border:1px solid #bfdbfe; font-weight:600;">
+                    <span class="lang-en">Practice Bank</span>
+                    <span class="lang-th">คลังแบบฝึกหัด</span>
+                </a>
                 <a href="lecture1.html" class="nav-btn">L1</a>
                 <a href="lecture2.html" class="nav-btn">L2</a>
                 <a href="lecture3.html" class="nav-btn">L3</a>
@@ -317,28 +326,30 @@
         </nav>
 
         <!-- Exam Sheet Header Banner -->
-        <header class="sheet-header">
+        <header class="sheet-header-clean">
+            <div>
+                <h1>
+                    <span class="lang-en">Official Physics Exam Equation Reference Sheet</span>
+                    <span class="lang-th">แผ่นรวมสูตรสอบวิชาฟิสิกส์ฉบับเป็นทางการ</span>
+                </h1>
+                <p>
+                    <span class="lang-en">Physics of Waves &amp; Vibrations (207203) — Master Formula List Across All Course Lectures</span>
+                    <span class="lang-th">ฟิสิกส์ของคลื่นและการสั่น (207203) — สรุปรวมสูตรสำคัญทั้งหมดจากทุกบทเรียน</span>
+                </p>
+            </div>
             <button class="print-btn" onclick="window.print()">
-                <span class="lang-en">🖨️ Print Exam Sheet</span>
-                <span class="lang-th">🖨️ พิมพ์แผ่นสูตร</span>
+                <span class="lang-en">Print Exam Sheet</span>
+                <span class="lang-th">พิมพ์แผ่นสูตร</span>
             </button>
-            <h1>
-                <span class="lang-en">🎓 Official Physics Exam Equation Reference Sheet</span>
-                <span class="lang-th">🎓 แผ่นรวมสูตรสอบวิชาฟิสิกส์ฉบับเป็นทางการ</span>
-            </h1>
-            <p>
-                <span class="lang-en">Physics of Waves &amp; Vibrations (207023) — Comprehensive Master Formula List Across All 8 Course Lectures</span>
-                <span class="lang-th">ฟิสิกส์ของคลื่นและการสั่น (207023) — สรุปรวมสูตรสำคัญทั้งหมดจากทั้ง 8 บทเรียน</span>
-            </p>
         </header>
 
         <!-- Filter & Search Controls -->
         <div class="filter-section">
             <div class="search-box">
-                <input type="text" id="searchInput" data-placeholder-en="🔍 Search formula by title, symbol, keyword (e.g., resonance, Q-factor, Euler, LC, beat)..." data-placeholder-th="🔍 ค้นหาสูตรตามชื่อ, สัญลักษณ์, คำสำคัญ (เช่น การสั่นพ้อง, Q-factor, ออยเลอร์, LC, บีตส์)..." placeholder="🔍 Search formula by title, symbol, keyword (e.g., resonance, Q-factor, Euler, LC, beat)..." onkeyup="filterEquations()">
+                <input type="text" id="searchInput" data-placeholder-en="Search formula by title, symbol, keyword (e.g., resonance, Q-factor, Euler, LC, beat)..." data-placeholder-th="ค้นหาสูตรตามชื่อ, สัญลักษณ์, คำสำคัญ (เช่น การสั่นพ้อง, Q-factor, ออยเลอร์, LC, บีตส์)..." placeholder="Search formula by title, symbol, keyword (e.g., resonance, Q-factor, Euler, LC, beat)..." onkeyup="filterEquations()">
             </div>
             <div class="category-tabs">
-                <button class="tab-btn active" onclick="setCategory('all', this)"><span class="lang-en">All</span><span class="lang-th">ทั้งหมด</span> ({len(eqs_data)})</button>
+                <button class="tab-btn active" onclick="setCategory('all', this)"><span class="lang-en">All</span><span class="lang-th">ทั้งหมด</span></button>
                 <button class="tab-btn" onclick="setCategory('math', this)"><span class="lang-en">Math &amp; Trig</span><span class="lang-th">คณิตและตรีโกณ</span></button>
                 <button class="tab-btn" onclick="setCategory('complex', this)"><span class="lang-en">Complex &amp; Phasors</span><span class="lang-th">จำนวนเชิงซ้อนและเฟสเซอร์</span></button>
                 <button class="tab-btn" onclick="setCategory('shm', this)"><span class="lang-en">SHM &amp; Superposition</span><span class="lang-th">SHM และการซ้อนทับ</span></button>
@@ -1474,5 +1485,18 @@
             });
         }
     </script>
+<footer class="site-footer">
+    <div class="container" style="text-align: center; padding: 24px 0; margin-top: 40px; border-top: 1px solid #e5e7eb; color: #64748b; font-size: 13px; line-height: 1.6;">
+        <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
+            <span class="lang-en">All course contents and materials are from <strong>Physics of Waves and Oscillations (Course 207203) — Year 1/2026</strong>.</span>
+            <span class="lang-th">เนื้อหาและสื่อการเรียนการสอนทั้งหมดมาจากวิชา <strong>ฟิสิกส์ของคลื่นและการสั่น (207203) ภาคเรียนที่ 1/2569 (Year 1/2026)</strong></span>
+        </p>
+        <p style="margin: 0; font-size: 12.5px; color: #94a3b8;">
+            <a href="index.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Course Directory</a> &bull; 
+            <a href="formula_sheet.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Official Exam Formula Sheet</a> &bull; 
+            <a href="practice.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Practice Problem Bank</a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>
