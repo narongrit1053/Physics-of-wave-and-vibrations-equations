@@ -230,6 +230,63 @@
             color: #b45309 !important;
         }
 
+        /* Additional styles for sub-topics, examples, and tables */
+        .topic-desc {
+            color: #475569;
+            font-size: 14px;
+            margin-top: -4px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .topic-subsection {
+            margin-top: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 15px;
+            border-left: 3px solid #2563eb;
+            padding-left: 10px;
+        }
+        .example-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-left: 4px solid #16a34a;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-top: 14px;
+            font-size: 14px;
+            color: #166534;
+        }
+        .q-table-container {
+            overflow-x: auto;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+        .q-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            text-align: left;
+        }
+        .q-table th {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-weight: 600;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+        }
+        .q-table td {
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .q-table tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+        .q-table tr:hover td {
+            background-color: #f1f5f9;
+        }
+
     </style>
     <!-- Global Language Toggle Controller -->
     <script src="lang-toggle.js"></script>
@@ -270,9 +327,9 @@
             <h2><span class="lang-en">Topic 6.1: Viscous Damping &amp; Equation of Motion</span><span class="lang-th">หัวข้อ 6.1: แรงหน่วงหนืดและสมการการเคลื่อนที่</span></h2>
             <ul>
                 <li><span class="eq-label"><span class="lang-en">Viscous Damping Force:</span><span class="lang-th">แรงหน่วงหนืด:</span></span> $$R = -bv$$</li>
-                <li><span class="eq-label">Newton's 2nd Law Horizontal Forces:</span> $$ma = -kx - bv \implies m \frac{d^2x}{dt^2} + b \frac{dx}{dt} + kx = 0$$</li>
-                <li class="key-equation"><span class="eq-label">Standard Form:</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\frac{d^2x}{dt^2} + \beta \frac{dx}{dt} + \omega_0^2 x = 0 \quad \left(\text{where } \omega_0 = \sqrt{\frac{k}{m}}, \, \beta = \frac{b}{m}\right)$$</li>
-                <li><span class="eq-label">Auxiliary Characteristic Equation:</span> $$p^2 + \beta p + \omega_0^2 = 0 \implies p = -\frac{\beta}{2} \pm \sqrt{\frac{\beta^2}{4} - \omega_0^2}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Newton's 2nd Law Horizontal Forces:</span><span class="lang-th">กฎข้อ 2 ของนิวตันสำหรับแรงแนวแกน:</span></span> $$ma = -kx - bv \implies m \frac{d^2x}{dt^2} + b \frac{dx}{dt} + kx = 0$$</li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Standard Form:</span><span class="lang-th">สมการรูปมาตรฐาน:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\frac{d^2x}{dt^2} + \beta \frac{dx}{dt} + \omega_0^2 x = 0 \quad \left(\text{where } \omega_0 = \sqrt{\frac{k}{m}}, \, \beta = \frac{b}{m}\right)$$</li>
+                <li><span class="eq-label"><span class="lang-en">Auxiliary Characteristic Equation:</span><span class="lang-th">สมการช่วย (Auxiliary Equation):</span></span> $$p^2 + \beta p + \omega_0^2 = 0 \implies p = -\frac{\beta}{2} \pm \sqrt{\frac{\beta^2}{4} - \omega_0^2}$$</li>
             </ul>
         </div>
 
@@ -280,34 +337,166 @@
         <div id="topic-6-2" class="topic-block">
             <h2><span class="lang-en">Topic 6.2: Underdamped Solution (Light Damping)</span><span class="lang-th">หัวข้อ 6.2: การสั่นแบบหน่วงน้อย (Underdamped - หน่วงเบา)</span></h2>
             <ul>
-                <li><span class="eq-label">Condition:</span> $$\frac{\beta^2}{4} &lt; \omega_0^2 \quad \text{or} \quad b &lt; 2\sqrt{km}$$</li>
-                <li><span class="eq-label">Characteristic Roots:</span> $$p = -\frac{\beta}{2} \pm i\omega$$</li>
-                <li><span class="eq-label">Damped Angular Frequency:</span> $$\omega = \sqrt{\omega_0^2 - \frac{\beta^2}{4}} = \sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}$$</li>
-                <li><span class="eq-label">Position Solution:</span> $$x(t) = A_0 e^{-\frac{\beta}{2} t} \cos(\omega t + \phi)$$</li>
-                <li><span class="eq-label">Energy Decay:</span> $$E(t) = E_0 e^{-\beta t}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Condition:</span><span class="lang-th">เงื่อนไข:</span></span> $$\frac{\beta^2}{4} &lt; \omega_0^2 \quad \text{or} \quad b &lt; 2\sqrt{km}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Characteristic Roots:</span><span class="lang-th">รากของสมการช่วย:</span></span> $$p = -\frac{\beta}{2} \pm i\omega$$</li>
+                <li><span class="eq-label"><span class="lang-en">Damped Angular Frequency:</span><span class="lang-th">ความถี่เชิงมุมหน่วง:</span></span> $$\omega = \sqrt{\omega_0^2 - \frac{\beta^2}{4}} = \sqrt{\frac{k}{m} - \frac{b^2}{4m^2}}$$</li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Position Solution:</span><span class="lang-th">ผลเฉลยการกระจัด:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$x(t) = A_0 e^{-\frac{\beta}{2} t} \cos(\omega t + \phi)$$</li>
             </ul>
         </div>
 
         <!-- Topic 6.3 -->
         <div id="topic-6-3" class="topic-block">
-            <h2><span class="lang-en">Topic 6.3: Critically Damped Solution</span><span class="lang-th">หัวข้อ 6.3: การสั่นแบบหน่วงวิกฤต (Critically Damped)</span></h2>
+            <h2><span class="lang-en">Topic 6.3: Logarithmic Decrement &amp; Amplitude Ratio Analysis</span><span class="lang-th">หัวข้อ 6.3: การวิเคราะห์อัตราส่วนแอมพลิจูด (Logarithmic Decrement)</span></h2>
+            <p class="topic-desc">
+                <span class="lang-en">An engineering tool for measuring and calculating the damping coefficient from experimental data by utilizing the ratio of decreasing successive peak amplitudes per period.</span>
+                <span class="lang-th">เครื่องมือทางวิศวกรรมสำหรับวัดและคำนวณค่าสัมประสิทธิ์การหน่วงจากข้อมูลการทดลองจริง โดยอาศัยความสัมพันธ์ของแอมพลิจูดที่ลดลงในแต่ละคาบเวลา</span>
+            </p>
             <ul>
-                <li><span class="eq-label">Condition &amp; Critical Damping Coefficient ($b_c$):</span> $$\frac{\beta^2}{4} = \omega_0^2 \implies \beta = 2\omega_0 \implies b_c = 2m\omega_0 = 2\sqrt{km}$$</li>
-                <li><span class="eq-label">Repeated Real Characteristic Root:</span> $$p = -\frac{\beta}{2} = -\omega_0$$</li>
-                <li class="key-equation"><span class="eq-label">General Position Solution (Reduction of Order):</span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$x(t) = (C_1 + C_2 t) e^{-\frac{\beta}{2} t} = (C_1 + C_2 t) e^{-\omega_0 t}$$</li>
-                <li><span class="eq-label">Physical Behavior:</span> Returns to equilibrium position in the fastest possible time without oscillating.</li>
+                <li><span class="eq-label"><span class="lang-en">Displacement Equation:</span><span class="lang-th">สมการการกระจัด:</span></span> $$x(t) = A_0 e^{-\frac{\beta}{2} t} \cos(\omega t + \phi)$$</li>
+                <li><span class="eq-label"><span class="lang-en">Amplitude at Peak Time $t_n = nT$:</span><span class="lang-th">แอมพลิจูด ณ เวลา $t_n = nT$:</span></span> $$A_n = x(t_n) = A_0 e^{-\frac{\beta}{2} t_n} \cos(\omega t_n + \phi)$$</li>
+                <li>
+                    <span class="eq-label"><span class="lang-en">Peak Amplitude Ratios:</span><span class="lang-th">อัตราส่วนแอมพลิจูดระหว่างยอดคลื่น:</span></span>
+                    <ul style="margin-top: 6px;">
+                        <li><span class="lang-en">Compared to initial amplitude ($n$ periods):</span><span class="lang-th">เทียบกับจุดเริ่มต้น ($n$ คาบเวลา):</span> $$\frac{A_0}{A_n} = e^{\frac{n\beta}{2} T}$$</li>
+                        <li><span class="lang-en">Compared to next successive peak ($1$ period $T$):</span><span class="lang-th">เทียบกับยอดคลื่นถัดไป ($1$ คาบเวลา $T$):</span> $$\frac{A_n}{A_{n+1}} = e^{\frac{\beta}{2} T}$$</li>
+                    </ul>
+                </li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Logarithmic Decrement ($\delta$):</span><span class="lang-th">สมการความสัมพันธ์เชิงเส้น (Logarithmic Decrement):</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\delta = \ln\left(\frac{A_n}{A_{n+1}}\right) = \frac{\beta T}{2}$$</li>
             </ul>
         </div>
 
         <!-- Topic 6.4 -->
         <div id="topic-6-4" class="topic-block">
-            <h2><span class="lang-en">Topic 6.4: Overdamped Solution (Heavy Damping)</span><span class="lang-th">หัวข้อ 6.4: การสั่นแบบหน่วงมาก (Overdamped - หน่วงหนัก)</span></h2>
+            <h2><span class="lang-en">Topic 6.4: Energy Decay &amp; Power Dissipation</span><span class="lang-th">หัวข้อ 6.4: พฤติกรรมการสลายตัวและอัตราการสูญเสียพลังงาน (Energy Decay &amp; Power Dissipation)</span></h2>
+            <p class="topic-desc">
+                <span class="lang-en">Analysis for very weakly damped systems ($\omega_0^2 \gg \frac{\beta^2}{4}$ or $\omega_0 \gg \frac{\beta}{2}$):</span>
+                <span class="lang-th">สำหรับระบบที่มีความหน่วงน้อยมาก ($\omega_0^2 \gg \frac{\beta^2}{4}$ หรือ $\omega_0 \gg \frac{\beta}{2}$):</span>
+            </p>
             <ul>
-                <li><span class="eq-label">Condition:</span> $$\frac{\beta^2}{4} &gt; \omega_0^2 \implies \lambda = \sqrt{\frac{\beta^2}{4} - \omega_0^2} &gt; 0$$</li>
-                <li><span class="eq-label">Two Distinct Negative Real Roots:</span> $$p_1, p_2 = -\frac{\beta}{2} \pm \lambda$$</li>
-                <li><span class="eq-label">General Position Solution:</span> $$x(t) = C_1 e^{\left(-\frac{\beta}{2} + \lambda\right) t} + C_2 e^{\left(-\frac{\beta}{2} - \lambda\right) t} = e^{-\frac{\beta}{2} t} \left( C_1 e^{\lambda t} + C_2 e^{-\lambda t} \right)$$</li>
-                <li><span class="eq-label">Physical Behavior:</span> Heavy damping prevents oscillation; the system slowly decays exponentially back to equilibrium.</li>
+                <li><span class="eq-label"><span class="lang-en">Velocity Approximation ($\dot{x}$):</span><span class="lang-th">การประมาณค่าความเร็ว ($\dot{x}$):</span></span> $$\dot{x} = -A_0 \omega_0 e^{-\frac{\beta}{2} t} \left[\sin \omega_0 t + \left(\frac{\beta}{2\omega_0}\right) \cos \omega_0 t\right] \approx -A_0 \omega_0 e^{-\frac{\beta}{2} t} \sin \omega_0 t$$</li>
+                <li>
+                    <span class="eq-label"><span class="lang-en">Total Mechanical Energy ($E$):</span><span class="lang-th">พลังงานกลรวม ($E$):</span></span>
+                    <div style="margin-top: 4px; margin-bottom: 6px; color: #475569;">
+                        <span class="lang-en">Total mechanical energy decays exponentially with time, decaying twice as fast as the amplitude:</span>
+                        <span class="lang-th">พลังงานกลรวมสลายตัวแบบเอกซ์โพเนนเชียลตามเวลา โดยลดลงเร็วกว่าแอมพลิจูดสองเท่า:</span>
+                    </div>
+                    $$E = \frac{1}{2} m \dot{x}^2 + \frac{1}{2} k x^2 = \frac{1}{2} A_0^2 e^{-\beta t} \left[m \omega_0^2 \sin^2 \omega_0 t + k \cos^2 \omega_0 t\right]$$
+                    <div style="margin-top: 4px; color: #475569;">
+                        <span class="lang-en">Since $\omega_0^2 = \frac{k}{m}$, this simplifies to:</span>
+                        <span class="lang-th">เมื่อ $\omega_0^2 = \frac{k}{m}$ จะได้:</span>
+                    </div>
+                </li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Exponential Energy Decay Law:</span><span class="lang-th">สมการการสลายตัวของพลังงาน:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$E(t) = \frac{1}{2} k A_0^2 e^{-\beta t} = E_0 e^{-\beta t}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Power Dissipation ($P$):</span><span class="lang-th">อัตราการสูญเสียพลังงาน (Power Dissipation: $P$):</span></span>
+                    <div style="margin-top: 4px; margin-bottom: 6px; color: #475569;">
+                        <span class="lang-en">The rate of energy loss is directly proportional to the energy remaining in the system at that instant:</span>
+                        <span class="lang-th">อัตราการสูญเสียพลังงานแปรผันตรงกับพลังงานที่เหลืออยู่ในระบบ ณ ขณะนั้น:</span>
+                    </div>
+                    $$P = -\frac{dE}{dt} = \beta E_0 e^{-\beta t} = \beta E$$
+                </li>
             </ul>
+        </div>
+
+        <!-- Topic 6.5 -->
+        <div id="topic-6-5" class="topic-block">
+            <h2><span class="lang-en">Topic 6.5: Time Constant ($\tau$) &amp; Quality Factor ($Q$)</span><span class="lang-th">หัวข้อ 6.5: ค่าคงตัวเวลา (Time Constant: $\tau$) และ ปัจจัยคุณภาพ (Quality Factor: $Q$)</span></h2>
+            
+            <div class="topic-subsection"><span class="lang-en">1. Time Constant (Decay Time: $\tau$)</span><span class="lang-th">1. ค่าคงตัวเวลา (Time Constant: $\tau$)</span></div>
+            <p class="topic-desc">
+                <span class="lang-en">System lifetime or decay time is the duration in which system energy decreases to approximately $36.8\%$ of its initial value ($E_0/e$).</span>
+                <span class="lang-th">ระยะเวลาชีวิตของระบบ (Decay Time) คือช่วงเวลาที่พลังงานของระบบลดลงเหลือประมาณ $36.8\%$ ของค่าเริ่มต้น ($E_0/e$)</span>
+            </p>
+            <ul>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Time Constant Definition:</span><span class="lang-th">นิยามค่าคงตัวเวลา:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$\tau = \frac{1}{\beta}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Energy at $t = \tau$:</span><span class="lang-th">พลังงาน ณ เวลา $t = \tau$:</span></span> $$E(\tau) = E_0 e^{-1} \approx 0.368 E_0$$</li>
+                <li><span class="eq-label"><span class="lang-en">Physical Observation:</span><span class="lang-th">ข้อสังเกต:</span></span> <span class="lang-en">Systems with high damping ($\beta$) have low $\tau$, causing rapid energy decay.</span><span class="lang-th">ระบบที่มีค่าความหน่วง ($\beta$) สูง จะมีค่า $\tau$ ต่ำ ทำให้พลังงานสลายตัวอย่างรวดเร็ว</span></li>
+            </ul>
+
+            <div class="topic-subsection" style="margin-top: 24px;"><span class="lang-en">2. Quality Factor (Q-Factor: $Q$)</span><span class="lang-th">2. ปัจจัยคุณภาพ (Quality Factor: $Q$)</span></div>
+            <p class="topic-desc">
+                <span class="lang-en">An indicator of system oscillation persistence. Higher $Q$ values signify slower energy loss and longer-lasting oscillations.</span>
+                <span class="lang-th">ตัวบ่งชี้ระดับการกวัดแกว่งของระบบ ยิ่งค่า $Q$ สูง ระบบยิ่งสูญเสียพลังงานช้าและสามารถสั่นได้หลายรอบ</span>
+            </p>
+            <ul>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">Basic Q Definition:</span><span class="lang-th">นิยามพื้นฐาน:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$Q = \frac{\omega_0}{\beta}$$</li>
+                <li>
+                    <span class="eq-label"><span class="lang-en">Relation with Damped Angular Frequency ($\omega$):</span><span class="lang-th">ความสัมพันธ์กับความถี่เชิงมุมหน่วง ($\omega$):</span></span>
+                    $$\omega = \omega_0 \sqrt{1 - \frac{1}{4Q^2}}$$
+                    <ul style="margin-top: 6px;">
+                        <li><span class="lang-en">If $Q \gg 1$ (Light damping):</span><span class="lang-th">ถ้า $Q \gg 1$ (Light damping):</span> $$\frac{1}{4Q^2} \approx 0 \implies \omega \approx \omega_0$$</li>
+                        <li><span class="lang-en">If $Q = 1$:</span><span class="lang-th">ถ้า $Q = 1$:</span> $$\omega = \omega_0 \sqrt{1 - \frac{1}{4}} \approx \omega_0 \left(1 - \frac{1}{8}\right)$$</li>
+                    </ul>
+                </li>
+                <li><span class="eq-label"><span class="lang-en">Energy-Based Definition:</span><span class="lang-th">นิยามเชิงพลังงาน:</span></span> $$Q = \omega_0 \frac{E}{P} = 2\pi \frac{\text{Energy}}{\text{Energy loss per cycle}}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Oscillation Cycles in $1$ Time Constant ($\tau$):</span><span class="lang-th">จำนวนรอบการสั่นใน $1$ ค่าคงตัวเวลา ($\tau$):</span></span> $$\text{จำนวนรอบ / Cycles} = \frac{1}{\beta T} \approx \frac{1}{\beta} \frac{\omega_0}{2\pi} = \frac{Q}{2\pi}$$</li>
+            </ul>
+
+            <div class="example-box">
+                <strong><span class="lang-en">Example:</span><span class="lang-th">ตัวอย่าง:</span></strong>
+                <span class="lang-en">If $Q = 10$, the system completes approximately $\frac{10}{2\pi} \approx 1.6$ cycles before energy drops to $37\%$ ($E_0/e$).</span>
+                <span class="lang-th">หาก $Q = 10$ ระบบจะสั่นได้ประมาณ $\frac{10}{2\pi} \approx 1.6$ รอบ ก่อนพลังงานจะลดลงเหลือ $37\%$ ($E_0/e$)</span>
+            </div>
+        </div>
+
+        <!-- Topic 6.6 -->
+        <div id="topic-6-6" class="topic-block">
+            <h2><span class="lang-en">Topic 6.6: Critically Damped Solution</span><span class="lang-th">หัวข้อ 6.6: การสั่นแบบหน่วงวิกฤต (Critically Damped)</span></h2>
+            <ul>
+                <li><span class="eq-label"><span class="lang-en">Condition &amp; Critical Damping Coefficient ($b_c$):</span><span class="lang-th">เงื่อนไขและค่าสัมประสิทธิ์ความหน่วงวิกฤต ($b_c$):</span></span> $$\frac{\beta^2}{4} = \omega_0^2 \implies \beta = 2\omega_0 \implies b_c = 2m\omega_0 = 2\sqrt{km}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Repeated Real Characteristic Root:</span><span class="lang-th">รากจริงซ้ำของสมการช่วย:</span></span> $$p = -\frac{\beta}{2} = -\omega_0$$</li>
+                <li class="key-equation"><span class="eq-label"><span class="lang-en">General Position Solution (Reduction of Order):</span><span class="lang-th">ผลเฉลยการกระจัดทั่วไป:</span></span><span class="key-badge"><span class="lang-en">Key Formula</span><span class="lang-th">สูตรสำคัญ</span></span> $$x(t) = (C_1 + C_2 t) e^{-\frac{\beta}{2} t} = (C_1 + C_2 t) e^{-\omega_0 t}$$</li>
+                <li><span class="eq-label"><span class="lang-en">Physical Behavior:</span><span class="lang-th">พฤติกรรมทางกายภาพ:</span></span> <span class="lang-en">Returns to equilibrium position in the fastest possible time without oscillating.</span><span class="lang-th">กลับสู่ตำแหน่งสมดุลในเวลาที่เร็วที่สุดโดยไม่เกิดการสั่น</span></li>
+            </ul>
+        </div>
+
+        <!-- Topic 6.7 -->
+        <div id="topic-6-7" class="topic-block">
+            <h2><span class="lang-en">Topic 6.7: Overdamped Solution (Heavy Damping)</span><span class="lang-th">หัวข้อ 6.7: การสั่นแบบหน่วงมาก (Overdamped - หน่วงหนัก)</span></h2>
+            <ul>
+                <li><span class="eq-label"><span class="lang-en">Condition:</span><span class="lang-th">เงื่อนไข:</span></span> $$\frac{\beta^2}{4} &gt; \omega_0^2 \implies \lambda = \sqrt{\frac{\beta^2}{4} - \omega_0^2} &gt; 0$$</li>
+                <li><span class="eq-label"><span class="lang-en">Two Distinct Negative Real Roots:</span><span class="lang-th">รากจริงลบสองค่าที่แตกต่างกัน:</span></span> $$p_1, p_2 = -\frac{\beta}{2} \pm \lambda$$</li>
+                <li><span class="eq-label"><span class="lang-en">General Position Solution:</span><span class="lang-th">ผลเฉลยการกระจัดทั่วไป:</span></span> $$x(t) = C_1 e^{\left(-\frac{\beta}{2} + \lambda\right) t} + C_2 e^{\left(-\frac{\beta}{2} - \lambda\right) t} = e^{-\frac{\beta}{2} t} \left( C_1 e^{\lambda t} + C_2 e^{-\lambda t} \right)$$</li>
+                <li><span class="eq-label"><span class="lang-en">Physical Behavior:</span><span class="lang-th">พฤติกรรมทางกายภาพ:</span></span> <span class="lang-en">Heavy damping prevents oscillation; the system slowly decays exponentially back to equilibrium.</span><span class="lang-th">ความหน่วงสูงมากป้องกันการสั่น ระบบค่อยๆ สลายตัวแบบเอกซ์โพเนนเชียลกลับสู่จุดสมดุลอย่างช้าๆ</span></li>
+            </ul>
+        </div>
+
+        <!-- Topic 6.8 -->
+        <div id="topic-6-8" class="topic-block">
+            <h2><span class="lang-en">Topic 6.8: Comparison of Damping Regimes &amp; Quality Factors ($Q$)</span><span class="lang-th">หัวข้อ 6.8: เปรียบเทียบพฤติกรรมการสั่นตามระดับปัจจัยคุณภาพ ($Q$) และสภาวะการหน่วง</span></h2>
+            
+            <p class="topic-desc">
+                <span class="lang-en">Comparison of displacement behavior, oscillation persistence, and decay characteristics according to Quality Factor ($Q$) levels:</span>
+                <span class="lang-th">เปรียบเทียบพฤติกรรมการกระจัด ลักษณะการสั่นและการสลายตัวของแอมพลิจูดตามระดับปัจจัยคุณภาพ ($Q$):</span>
+            </p>
+
+            <div class="q-table-container">
+                <table class="q-table">
+                    <thead>
+                        <tr>
+                            <th><span class="lang-en">Quality Factor ($Q$)</span><span class="lang-th">ค่าปัจจัยคุณภาพ ($Q$)</span></th>
+                            <th><span class="lang-en">Oscillation &amp; Amplitude Decay Characteristics</span><span class="lang-th">ลักษณะการสั่นและการสลายตัวของแอมพลิจูด</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>$Q = 500$</strong></td>
+                            <td><span class="lang-en">Uniform wave, almost no attenuation / extremely slow energy decay.</span><span class="lang-th">คลื่นสม่ำเสมอ แทบไม่มีการลดทอน</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>$Q = 10$</strong></td>
+                            <td><span class="lang-en">Amplitude gradually decreases step by step over multiple cycles.</span><span class="lang-th">แอมพลิจูดค่อยๆ ลดลงอย่างเป็นลำดับ</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>$Q = 2$</strong></td>
+                            <td><span class="lang-en">Oscillates only 1–2 cycles before coming to a complete stop.</span><span class="lang-th">สั่นเพียง 1–2 รอบก่อนหยุดสั่น</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Critical Damping ($Q = 0.5$)</strong></td>
+                            <td><span class="lang-en">Critical damping; displacement decays to zero without crossing time axis (no oscillation).</span><span class="lang-th">ความหน่วงวิกฤต การกระจัดลดลงสู่จุดศูนย์โดยไม่ตัดแกนเวลา (ไม่เกิดการสั่น)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- Static Comparison Plot: All Three Regimes -->

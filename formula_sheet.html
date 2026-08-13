@@ -314,6 +314,10 @@
                     <span class="lang-en">Practice Bank</span>
                     <span class="lang-th">คลังแบบฝึกหัด</span>
                 </a>
+                <a href="homework.html" class="nav-btn" style="background:#f0fdf4; color:#166534; padding:4px 10px; border-radius:6px; border:1px solid #bbf7d0; font-weight:600;">
+                    <span class="lang-en">Homeworks</span>
+                    <span class="lang-th">การบ้าน</span>
+                </a>
                 <a href="lecture1.html" class="nav-btn">L1</a>
                 <a href="lecture2.html" class="nav-btn">L2</a>
                 <a href="lecture3.html" class="nav-btn">L3</a>
@@ -357,7 +361,7 @@
                 <button class="tab-btn" onclick="setCategory('springs', this)"><span class="lang-en">Springs &amp; Mechanics</span><span class="lang-th">สปริงและกลศาสตร์</span></button>
                 <button class="tab-btn" onclick="setCategory('circuits', this)"><span class="lang-en">Circuits &amp; LC</span><span class="lang-th">วงจรไฟฟ้าและ LC</span></button>
                 <button class="tab-btn" onclick="setCategory('damped', this)"><span class="lang-en">Damped Free</span><span class="lang-th">การสั่นแบบมีความหน่วง</span></button>
-                <button class="tab-btn" onclick="setCategory('driven', this)"><span class="lang-en">Driven &amp; Resonance</span><span class="lang-th">การสั่นถูกบังคับและการสั่นพ้อง</span></button>
+                <button class="tab-btn" onclick="setCategory('driven', this)"><span class="lang-en">Driven &amp; Resonance</span><span class="lang-th">การสั่นด้วยแรงภายนอกและการสั่นพ้อง</span></button>
                 <button class="tab-btn" onclick="setCategory('coupled', this)"><span class="lang-en">Coupled Oscillations</span><span class="lang-th">การสั่นแบบพัวพัน</span></button>
             </div>
         </div>
@@ -1260,7 +1264,7 @@
         <div class="section-block" data-cat="damped">
             <div class="section-title">
                 <span>7. Damped Free Oscillations</span>
-                <span class="section-count"><span class="lang-en">2 Formulas</span><span class="lang-th">2 สูตร</span></span>
+                <span class="section-count"><span class="lang-en">4 Formulas</span><span class="lang-th">4 สูตร</span></span>
             </div>
             <div class="eq-grid">
     
@@ -1292,6 +1296,36 @@
                         <div class="eq-desc">Dimensionless parameter measuring sharpness of resonance and energy retention per cycle.</div>
                     </div>
                     <div class="eq-vars"><b><span class="lang-en">Where:</span><span class="lang-th">โดยที่:</span></b> \omega_0 = \text{Natural frequency}, \beta = \text{Damping coefficient}, \Delta\omega = \text{Bandwidth}</div>
+                </div>
+
+                <!-- Formula #57a -->
+                <div class="eq-card" data-cat="damped" data-num="57a">
+                    <div>
+                        <div class="eq-header">
+                            <span class="eq-number"># 57a</span>
+                            <span class="eq-lec">Lecture 6</span>
+                        </div>
+                        <div class="eq-title">Logarithmic Decrement ($\delta$)</div>
+                        <div class="eq-title-th">อัตราส่วนแอมพลิจูด (Logarithmic Decrement)</div>
+                        <div class="eq-formula-box">$$\delta = \ln\left(\frac{A_n}{A_{n+1}}\right) = \frac{\beta T}{2} = \frac{b T}{2m}$$</div>
+                        <div class="eq-desc">Logarithmic ratio of successive peak amplitudes separated by one period T in underdamped oscillations.</div>
+                    </div>
+                    <div class="eq-vars"><b><span class="lang-en">Where:</span><span class="lang-th">โดยที่:</span></b> A_n, A_{n+1} = \text{Successive peak amplitudes}, T = \text{Period}, \beta = b/m</div>
+                </div>
+
+                <!-- Formula #57b -->
+                <div class="eq-card" data-cat="damped" data-num="57b">
+                    <div>
+                        <div class="eq-header">
+                            <span class="eq-number"># 57b</span>
+                            <span class="eq-lec">Lecture 6</span>
+                        </div>
+                        <div class="eq-title">Energy Decay & Time Constant ($\tau$)</div>
+                        <div class="eq-title-th">การสลายตัวของพลังงานและค่าคงตัวเวลา ($\tau$)</div>
+                        <div class="eq-formula-box">$$E(t) = E_0 e^{-\beta t}, \quad \tau = \frac{1}{\beta}$$</div>
+                        <div class="eq-desc">Total mechanical energy decays twice as fast as amplitude. Time constant τ is the time for energy to drop to 1/e (~36.8%).</div>
+                    </div>
+                    <div class="eq-vars"><b><span class="lang-en">Where:</span><span class="lang-th">โดยที่:</span></b> E_0 = \text{Initial energy}, \beta = \text{Damping coefficient}, \tau = \text{Decay time constant}</div>
                 </div>
         
             </div>

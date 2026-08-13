@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW 4: Forced Oscillations &amp; Resonance — Physics 207203</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --border-card: #e5e7eb;
+            --text-dark: #111827;
+            --text-muted: #475569;
+            --radius-card: 10px;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Top Navigation Header */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .nav-badge {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-size: 13.5px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: var(--primary-light);
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Sub-Header Breadcrumb */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Page Header Banner */
+        .page-header {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 22px;
+            margin: 0 0 6px 0;
+            color: #0f172a;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 13.5px;
+            color: #475569;
+        }
+
+        /* Problem Card */
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .problem-badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .problem-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 14px 0;
+            color: #1e293b;
+        }
+
+        .problem-text-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .given-box {
+            background: #fffbebf5;
+            border: 1px solid #fde68a;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13.5px;
+            color: #92400e;
+        }
+
+        .given-box strong { color: #78350f; }
+
+        .solution-box {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .solution-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #065f46;
+            margin-top: 0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-block {
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .step-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-heading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .math-result-highlight {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .toggle-sol-btn {
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-sol-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Pagination Bar */
+        .page-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .page-nav-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .site-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 24px 0;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .site-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-brand">
+                <span>⚛️ Physics 207203</span>
+                <span class="nav-badge">HW 4</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">
+                    <span class="lang-en">Course Directory</span>
+                    <span class="lang-th">สารบัญบทเรียน</span>
+                </a>
+                <a href="formula_sheet.html" class="nav-btn">
+                    <span class="lang-en">Formula Sheet</span>
+                    <span class="lang-th">สรุปสูตรสอบ</span>
+                </a>
+                <a href="practice.html" class="nav-btn">
+                    <span class="lang-en">Practice Bank</span>
+                    <span class="lang-th">คลังแบบฝึกหัด</span>
+                </a>
+                <a href="homework.html" class="nav-btn">
+                    <span class="lang-en">All Homeworks</span>
+                    <span class="lang-th">การบ้านทั้งหมด</span>
+                </a>
+                <a href="hw1.html" class="nav-btn">HW 1</a>
+                <a href="hw2.html" class="nav-btn">HW 2</a>
+                <a href="hw3.html" class="nav-btn">HW 3</a>
+                <a href="hw4.html" class="nav-btn active">HW 4</a>
+            </div>
+        </nav>
+
+        <!-- Back to HW Directory -->
+        <a href="homework.html" class="back-link">
+            <span>←</span>
+            <span class="lang-en">Back to Homework Directory</span>
+            <span class="lang-th">กลับสู่สารบัญการบ้านทั้งหมด</span>
+        </a>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1>
+                <span class="lang-en">Homework Set 4: Forced Oscillations &amp; Resonance</span>
+                <span class="lang-th">การบ้านชุดที่ 4: การสั่นด้วยแรงภายนอกและการสั่นพ้อง</span>
+            </h1>
+            <p>
+                <span class="lang-en">Topics: Driven oscillations, resonance frequency, amplitude-damping relationship, and steady-state solutions.</span>
+                <span class="lang-th">หัวข้อ: การสั่นที่มีแรงภายนอกขับเคลื่อน, ความถี่สั่นพ้อง, ความสัมพันธ์ระหว่างแอมพลิจูดกับความหน่วง, และผลเฉลยสภาวะคงตัว</span>
+            </p>
+        </header>
+
+        <main>
+            <!-- PROBLEM 1 -->
+            <article class="problem-card" id="prob1">
+                <span class="problem-badge">Problem 1 / โจทย์ข้อที่ 1</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Forced Oscillation Amplitude without Damping</span>
+                    <span class="lang-th">แอมพลิจูดการสั่นถูกบังคับแบบไม่มีความหน่วง</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> วัตถุมวล $2.00\text{ kg}$ ติดอยู่กับสปริงและเคลื่อนที่โดยไม่มีแรงเสียดทาน ($b=0$) โดยถูกกระทำด้วยแรงขับเคลื่อนภายนอก $F = 3 \sin(2\pi t)$ นิวตัน หากค่าคงตัวของสปริงคือ $20.0\text{ N/m}$ จงหา (a) ความถี่เชิงมุมธรรมชาติของระบบ (b) ความถี่เชิงมุมของแรงขับเคลื่อน และ (c) แอมพลิจูดของการเคลื่อนที่
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A $2.00\text{ kg}$ mass is attached to a spring and moves without friction ($b=0$), driven by an external force $F = 3 \sin(2\pi t)$ N. If the spring constant is $20.0\text{ N/m}$, find (a) the natural angular frequency, (b) the driving angular frequency, and (c) the amplitude of motion.
+                    </p>
+                </div>
+
+                <div class="given-box">
+                    <strong>📌
+                        <span class="lang-en">Given Parameters:</span>
+                        <span class="lang-th">ข้อมูลที่โจทย์กำหนด:</span>
+                    </strong>
+                    <ul style="margin: 6px 0 0 20px; padding: 0;">
+                        <li><span class="lang-en">Mass ($m$) = $2.00\text{ kg}$</span><span class="lang-th">มวล ($m$) = $2.00\text{ kg}$</span></li>
+                        <li><span class="lang-en">Damping ($b$) = $0$ (No friction)</span><span class="lang-th">สัมประสิทธิ์ความหน่วง ($b$) = $0$ (ไม่มีแรงเสียดทาน)</span></li>
+                        <li><span class="lang-en">Driving Force ($F(t)$) = $3 \sin(2\pi t)\text{ N} \implies F_0 = 3\text{ N}$</span><span class="lang-th">แรงขับเคลื่อน ($F(t)$) = $3 \sin(2\pi t)\text{ N} \implies F_0 = 3\text{ N}$</span></li>
+                        <li><span class="lang-en">Spring Constant ($k$) = $20.0\text{ N/m}$</span><span class="lang-th">ค่าคงตัวสปริง ($k$) = $20.0\text{ N/m}$</span></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p1', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p1">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution</span>
+                        <span class="lang-th">เฉลยวิธีทำอย่างเป็นขั้นตอน</span>
+                    </h3>
+
+                    <div class="diagram-container">
+                        <svg width="420" height="160" viewBox="0 0 420 160">
+                            <defs>
+                                <marker id="hw4p1-arrow-force" viewBox="0 0 10 10" refX="9" refY="5"
+                                        markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Wall rectangle -->
+                            <rect x="8" y="20" width="18" height="115" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+                            <!-- Hatch marks on wall -->
+                            <line x1="8"  y1="30"  x2="0"  y2="40"  stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="8"  y1="45"  x2="0"  y2="55"  stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="8"  y1="60"  x2="0"  y2="70"  stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="8"  y1="75"  x2="0"  y2="85"  stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="8"  y1="90"  x2="0"  y2="100" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="8"  y1="105" x2="0"  y2="115" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="8"  y1="120" x2="0"  y2="130" stroke="#64748b" stroke-width="1.2"/>
+
+                            <!-- Floor line -->
+                            <line x1="8" y1="135" x2="360" y2="135" stroke="#475569" stroke-width="2"/>
+                            <!-- Floor hatch marks -->
+                            <line x1="30"  y1="135" x2="22"  y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="55"  y1="135" x2="47"  y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="80"  y1="135" x2="72"  y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="105" y1="135" x2="97"  y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="130" y1="135" x2="122" y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="155" y1="135" x2="147" y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="180" y1="135" x2="172" y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="205" y1="135" x2="197" y2="145" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="230" y1="135" x2="222" y2="145" stroke="#64748b" stroke-width="1.2"/>
+
+                            <!-- Spring (zigzag) from wall to mass -->
+                            <!-- wall right edge x=26, mass left edge x=175 -->
+                            <!-- lead-in segment -->
+                            <polyline points="26,78 40,78 50,58 65,98 80,58 95,98 110,58 125,98 140,58 155,98 165,78 175,78"
+                                      fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round"/>
+                            <!-- Spring label -->
+                            <text x="85" y="52" font-size="11" fill="#1d4ed8" font-weight="600" text-anchor="middle">k = 20.0 N/m</text>
+
+                            <!-- Mass block -->
+                            <rect x="175" y="53" width="68" height="82" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="5"/>
+                            <text x="209" y="100" font-size="13" fill="#1e40af" font-weight="bold" text-anchor="middle">m = 2.00 kg</text>
+
+                            <!-- Force arrow from right face of mass -->
+                            <line x1="243" y1="94" x2="315" y2="94" stroke="#ef4444" stroke-width="2.5"
+                                  marker-end="url(#hw4p1-arrow-force)"/>
+                            <text x="248" y="84" font-size="11" fill="#dc2626" font-weight="700">F = 3sin(2πt) N</text>
+
+                            <!-- Undamped note below -->
+                            <text x="209" y="153" font-size="11" fill="#64748b" font-style="italic" text-anchor="middle">b = 0 (frictionless)</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            (a) <span class="lang-en">Natural Resonance Frequency ($\omega_0$)</span><span class="lang-th">ความถี่เชิงมุมธรรมชาติ ($\omega_0$)</span>
+                        </div>
+                        $$\omega_0 = \sqrt{\frac{k}{m}} = \sqrt{\frac{20}{2}} = \sqrt{10} \approx 3.16\text{ rad/s}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            (b) <span class="lang-en">Driving Frequency ($\omega$)</span><span class="lang-th">ความถี่เชิงมุมของแรงขับเคลื่อน ($\omega$)</span>
+                        </div>
+                        <p style="margin:0 0 8px 0; font-size:14px; color:#475569;">
+                            <span class="lang-en">From the given force equation $F = 3\sin(2\pi t)$, we can see that the coefficient of $t$ is the driving angular frequency.</span>
+                            <span class="lang-th">จากสมการแรง $F = 3\sin(2\pi t)$ จะได้ว่าสัมประสิทธิ์หน้า $t$ คือความถี่เชิงมุมของแรงขับเคลื่อน</span>
+                        </p>
+                        $$\omega = 2\pi \approx 6.28\text{ rad/s}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            (c) <span class="lang-en">Amplitude of Motion ($A(\omega)$)</span><span class="lang-th">แอมพลิจูดของการเคลื่อนที่ ($A(\omega)$)</span>
+                        </div>
+                        $$\begin{align*}
+                        A(\omega) &= \frac{F_0 / m}{\sqrt{(\omega_0^2 - \omega^2)^2 + \cancelto{0}{\omega^2\beta^2}}} = \frac{F_0 / m}{\sqrt{(\omega_0^2 - \omega^2)^2}} \\[6pt]
+                        &= \frac{3 / 2}{\sqrt{(10 - (2\pi)^2)^2}} = \frac{1.5}{\sqrt{(10 - 4\pi^2)^2}} \\[6pt]
+                        &= \frac{1.5}{|10 - 39.478|} = \frac{1.5}{29.478} \approx 0.0508\text{ m}
+                        \end{align*}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: $\omega_0 = \sqrt{10}\text{ rad/s}$, $\omega = 2\pi\text{ rad/s}$, $A = 0.0508\text{ m} = 5.08\text{ cm}$</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: $\omega_0 = \sqrt{10}\text{ rad/s}$, $\omega = 2\pi\text{ rad/s}$, $A = 0.0508\text{ m} = 5.08\text{ cm}$</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROBLEM 2 -->
+            <article class="problem-card" id="prob2">
+                <span class="problem-badge">Problem 2 / โจทย์ข้อที่ 2</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Amplitude Change with Varying Damping Constant</span>
+                    <span class="lang-th">การเปลี่ยนแปลงแอมพลิจูดเมื่อค่าการหน่วงเปลี่ยนไป</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> ระบบตัวแกว่งกวัดฮาร์มอนิกแบบหน่วงมีค่าคงตัวสปริง $k$ และมวล $m$ ถูกขับเคลื่อนด้วยแรงไซน์ หากค่าคงตัวการหน่วงมีค่า $b_1$ แอมพลิจูดของการสั่นจะเป็น $A_1$ เมื่อขับเคลื่อนที่ความถี่ $\omega_d = \sqrt{\frac{k}{m}}$ จงหาแอมพลิจูดใหม่ (ในเทอมของ $A_1$) หากค่าคงตัวการหน่วงถูกเปลี่ยนเป็น (a) $b_1/2$ และ (b) $3b_1$
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A damped harmonic oscillator with spring constant $k$ and mass $m$ is driven by a sinusoidal force. If the damping constant is $b_1$, the amplitude is $A_1$ when driven at $\omega_d = \sqrt{\frac{k}{m}}$. Find the new amplitude (in terms of $A_1$) if the damping constant is changed to (a) $b_1/2$ and (b) $3b_1$.
+                    </p>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p2', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p2">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Resonance Curve</span>
+                        <span class="lang-th">เฉลยวิธีทำและกราฟการสั่นพ้อง</span>
+                    </h3>
+
+                    <div class="diagram-container">
+                        <svg width="420" height="260" viewBox="0 0 420 260">
+                            <defs>
+                                <marker id="hw4p2-arrow-omega" viewBox="0 0 10 10" refX="9" refY="5"
+                                        markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+                                </marker>
+                                <marker id="hw4p2-arrow-A" viewBox="0 0 10 10" refX="9" refY="5"
+                                        markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Horizontal axis (ω) -->
+                            <line x1="40" y1="220" x2="408" y2="220" stroke="#475569" stroke-width="2"
+                                  marker-end="url(#hw4p2-arrow-omega)"/>
+                            <text x="400" y="238" font-size="14" fill="#334155" font-weight="bold" font-style="italic">ω</text>
+
+                            <!-- Vertical axis (A) -->
+                            <line x1="40" y1="220" x2="40" y2="12" stroke="#475569" stroke-width="2"
+                                  marker-end="url(#hw4p2-arrow-A)"/>
+                            <text x="22" y="12" font-size="14" fill="#334155" font-weight="bold" font-style="italic">A</text>
+
+                            <!-- Vertical dashed line at ω₀ (x=210) -->
+                            <line x1="210" y1="220" x2="210" y2="22" stroke="#94a3b8" stroke-width="1.5"
+                                  stroke-dasharray="5 4"/>
+                            <text x="204" y="235" font-size="12" fill="#475569" font-weight="bold">ω₀</text>
+
+                            <!-- RED curve: b = b₁/2 — sharp tall peak at y=40 -->
+                            <path d="M 40,210
+                                     C 80,208  150,205  185,100
+                                     C 196,65   205,40  210,40
+                                     C 215,40   224,65  235,100
+                                     C 270,205  340,208  408,210"
+                                  fill="none" stroke="#ef4444" stroke-width="2.2"/>
+                            <text x="220" y="36" font-size="11" fill="#dc2626" font-weight="700">b = b₁/2  (A = 2A₁)</text>
+
+                            <!-- BLUE curve: b = b₁ — medium peak at y=100 -->
+                            <path d="M 40,212
+                                     C 90,210  155,206  185,150
+                                     C 196,125  205,100  210,100
+                                     C 215,100  224,125  235,150
+                                     C 265,206  330,210  408,212"
+                                  fill="none" stroke="#2563eb" stroke-width="2.2"/>
+                            <text x="222" y="97" font-size="11" fill="#1d4ed8" font-weight="700">b = b₁  (A = A₁)</text>
+
+                            <!-- GREEN curve: b = 3b₁ — broad low peak at y=155 -->
+                            <path d="M 40,214
+                                     C 100,212  165,208  190,175
+                                     C 200,163  207,155  210,155
+                                     C 213,155  220,163  230,175
+                                     C 255,208  320,212  408,214"
+                                  fill="none" stroke="#16a34a" stroke-width="2.2"/>
+                            <text x="222" y="152" font-size="11" fill="#15803d" font-weight="700">b = 3b₁  (A = A₁/3)</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            1. <span class="lang-en">Analyze Amplitude at Resonance</span><span class="lang-th">วิเคราะห์แอมพลิจูดที่ตำแหน่งการสั่นพ้อง</span>
+                        </div>
+                        <p style="margin:0 0 8px 0; font-size:14px; color:#475569;">
+                            <span class="lang-en">The driving frequency is at resonance: $\omega_d = \sqrt{k/m} = \omega_0$. At this frequency, the first term in the denominator becomes zero.</span>
+                            <span class="lang-th">ความถี่ขับเคลื่อนอยู่ที่ตำแหน่งสั่นพ้องพอดี: $\omega_d = \sqrt{k/m} = \omega_0$ ณ ความถี่นี้ พจน์แรกในตัวส่วนจะมีค่าเป็นศูนย์</span>
+                        </p>
+                        $$\begin{align*}
+                        A(\omega_d) &= \frac{F_0 / m}{\sqrt{\cancelto{0}{(\omega_0^2 - \omega_d^2)^2} + \omega_d^2\beta^2}} = \frac{F_0 / m}{\sqrt{\omega_d^2 \beta^2}} \\[6pt]
+                        \text{Since } \beta &= \frac{b}{m} \text{ and } \omega_d = \omega_0, \\[6pt]
+                        A(\omega_0) &= \frac{F_0}{m(\omega_0)\left(\frac{b}{m}\right)} = \frac{F_0}{\omega_0 b}
+                        \end{align*}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            2. <span class="lang-en">Calculate Amplitudes for Different Damping Constants</span><span class="lang-th">คำนวณแอมพลิจูดสำหรับค่าคงตัวการหน่วงแต่ละค่า</span>
+                        </div>
+                        $$\begin{align*}
+                        A(b_1) &= \frac{F_0}{\omega_0 b_1} = A_1 \quad \text{(Given condition)} \\[8pt]
+                        A\left(b = \frac{b_1}{2}\right) &= \frac{F_0}{\omega_0 \left(\frac{b_1}{2}\right)} = \frac{2F_0}{\omega_0 b_1} = 2A_1 \\[8pt]
+                        A(b = 3b_1) &= \frac{F_0}{\omega_0 (3b_1)} = \frac{1}{3}\frac{F_0}{\omega_0 b_1} = \frac{1}{3}A_1
+                        \end{align*}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: (a) $A = 2A_1$, (b) $A = \frac{1}{3}A_1$</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: (a) เมื่อ $b = b_1/2$ แอมพลิจูด $A = 2A_1$, (b) เมื่อ $b = 3b_1$ แอมพลิจูด $A = \frac{1}{3}A_1$</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROBLEM 3 -->
+            <article class="problem-card" id="prob3">
+                <span class="problem-badge">Problem 3 / โจทย์ข้อที่ 3</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Steady-State Solution of Undamped Driven Oscillator</span>
+                    <span class="lang-th">ผลเฉลยสภาวะคงตัวของตัวแกว่งกวัดที่ไม่หน่วงและมีแรงขับ</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> สมการ $m\ddot{x} + sx = F_0 \sin(\omega t)$ อธิบายการเคลื่อนที่ของตัวแกว่งกวัดที่ไม่หน่วงและมีแรงขับ จงหาคำตอบของสมการสำหรับการกระจัดที่สภาวะคงตัว (Steady state solution)
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> The equation $m\ddot{x} + sx = F_0 \sin(\omega t)$ describes an undamped driven oscillator. Find the steady-state solution for the displacement.
+                    </p>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p3', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p3">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Mathematical Derivation</span>
+                        <span class="lang-th">เฉลยวิธีทำและการพิสูจน์ทางคณิตศาสตร์</span>
+                    </h3>
+
+                    <!-- SVG Diagram for Driven Oscillation Response Curves (HW4 Prob 3) -->
+                    <div class="diagram-container">
+                        <svg width="480" height="270" viewBox="0 0 480 270" style="background:#ffffff; border-radius:10px; border:1px solid #e2e8f0;">
+                            <!-- Outer Framed Plot Box -->
+                            <rect x="45" y="15" width="415" height="230" fill="#ffffff" stroke="#000000" stroke-width="1.5"/>
+
+                            <!-- Dotted Grid Lines (Horizontal & Vertical) -->
+                            <g stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2 3">
+                                <!-- Vertical grid lines -->
+                                <line x1="97"  y1="15" x2="97"  y2="245"/>
+                                <line x1="149" y1="15" x2="149" y2="245"/>
+                                <line x1="201" y1="15" x2="201" y2="245"/>
+                                <line x1="253" y1="15" x2="253" y2="245"/>
+                                <line x1="305" y1="15" x2="305" y2="245"/>
+                                <line x1="357" y1="15" x2="357" y2="245"/>
+                                <line x1="409" y1="15" x2="409" y2="245"/>
+
+                                <!-- Horizontal grid lines -->
+                                <line x1="45" y1="53"  x2="460" y2="53"/>
+                                <line x1="45" y1="91"  x2="460" y2="91"/>
+                                <line x1="45" y1="130" x2="460" y2="130"/>
+                                <line x1="45" y1="168" x2="460" y2="168"/>
+                                <line x1="45" y1="207" x2="460" y2="207"/>
+                            </g>
+
+                            <!-- Outer Border Ticks (Matlab Style) -->
+                            <!-- Y-axis left ticks -->
+                            <line x1="45" y1="53"  x2="50" y2="53"  stroke="#000000" stroke-width="1"/>
+                            <line x1="45" y1="91"  x2="50" y2="91"  stroke="#000000" stroke-width="1"/>
+                            <line x1="45" y1="130" x2="50" y2="130" stroke="#000000" stroke-width="1"/>
+                            <line x1="45" y1="168" x2="50" y2="168" stroke="#000000" stroke-width="1"/>
+                            <line x1="45" y1="207" x2="50" y2="207" stroke="#000000" stroke-width="1"/>
+                            <!-- X-axis bottom ticks -->
+                            <line x1="97"  y1="245" x2="97"  y2="240" stroke="#000000" stroke-width="1"/>
+                            <line x1="149" y1="245" x2="149" y2="240" stroke="#000000" stroke-width="1"/>
+                            <line x1="201" y1="245" x2="201" y2="240" stroke="#000000" stroke-width="1"/>
+                            <line x1="253" y1="245" x2="253" y2="240" stroke="#000000" stroke-width="1"/>
+                            <line x1="305" y1="245" x2="305" y2="240" stroke="#000000" stroke-width="1"/>
+                            <line x1="357" y1="245" x2="357" y2="240" stroke="#000000" stroke-width="1"/>
+                            <line x1="409" y1="245" x2="409" y2="240" stroke="#000000" stroke-width="1"/>
+
+                            <!-- Axis Labels -->
+                            <text x="16" y="130" font-size="13" fill="#000000" font-family="serif" text-anchor="middle" transform="rotate(-90 16 130)">magnitude</text>
+                            <text x="252" y="262" font-size="13" fill="#000000" font-family="serif" text-anchor="middle">time</text>
+
+                            <!-- TOP: Red Curve — "steady state response" (Period = 120px, peaks at x=75, 195, 315, 435) -->
+                            <path d="M 45 48 C 61.5 28 88.5 28 105 48 C 121.5 68 148.5 68 165 48 C 181.5 28 208.5 28 225 48 C 241.5 68 268.5 68 285 48 C 301.5 28 328.5 28 345 48 C 361.5 68 388.5 68 405 48 C 421.5 28 448.5 28 460 38"
+                                  fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+                            <text x="120" y="26" font-size="11" fill="#000000" font-family="serif">steady state response</text>
+
+                            <!-- MIDDLE: Blue Curve — "transient response" (Fast damped oscillation decaying to flat line) -->
+                            <path d="M 45 120 C 48 104 54 104 57 120 C 60 136 66 136 69 120 C 72 109 78 109 81 120 C 84 131 90 131 93 120 C 96 114 102 114 105 120 L 460 120"
+                                  fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round"/>
+                            <text x="205" y="112" font-size="11" fill="#000000" font-family="serif">transient response</text>
+
+                            <!-- BOTTOM: Black Curve — "total response" (Same major frequency & phase as steady state) -->
+                            <path d="M 45 190 C 48 174 54 174 57 190 C 60 206 66 206 69 184 C 72 161 78 161 81 172 C 84 183 90 183 93 178 C 96 172 102 172 105 190 C 121.5 210 148.5 210 165 190 C 181.5 170 208.5 170 225 190 C 241.5 210 268.5 210 285 190 C 301.5 170 328.5 170 345 190 C 361.5 210 388.5 210 405 190 C 421.5 170 448.5 170 460 180"
+                                  fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+                            <text x="310" y="152" font-size="11" fill="#000000" font-family="serif">total response</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            1. <span class="lang-en">Set Ansatz (Trial Solution)</span><span class="lang-th">ตั้งสมการสมมติ (Ansatz)</span>
+                        </div>
+                        <p style="margin:0 0 8px 0; font-size:14px; color:#475569;">
+                            <span class="lang-en">For the steady-state solution, we assume the system oscillates at the same frequency as the driving force.</span>
+                            <span class="lang-th">สำหรับผลเฉลยที่สภาวะคงตัว เราสมมติให้ระบบแกว่งด้วยความถี่เดียวกับแรงขับเคลื่อน</span>
+                        </p>
+                        $$x_{\text{steady}} = A\sin(\omega t)$$
+                        $$\begin{align*}
+                        \dot{x}_{\text{steady}} &= \omega A\cos(\omega t) \\
+                        \ddot{x}_{\text{steady}} &= -\omega^2 A\sin(\omega t)
+                        \end{align*}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            2. <span class="lang-en">Substitute into the Differential Equation</span><span class="lang-th">แทนค่าลงในสมการการเคลื่อนที่</span>
+                        </div>
+                        $$\begin{align*}
+                        m\ddot{x}_{\text{steady}} + sx_{\text{steady}} &= F_0 \sin(\omega t) \\[6pt]
+                        m(-\omega^2 A\sin(\omega t)) + s(A\sin(\omega t)) &= F_0 \sin(\omega t) \\[6pt]
+                        (-m\omega^2 + s)A\cancel{\sin(\omega t)} &= F_0 \cancel{\sin(\omega t)}
+                        \end{align*}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            3. <span class="lang-en">Solve for Amplitude $A$</span><span class="lang-th">แก้สมการหาแอมพลิจูด $A$</span>
+                        </div>
+                        $$A = \frac{F_0}{s - m\omega^2}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: $x_{\text{steady}}(t) = \frac{F_0}{s - m\omega^2} \sin(\omega t)$</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: $x_{\text{steady}}(t) = \frac{F_0}{s - m\omega^2} \sin(\omega t)$</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <!-- Pagination Bar -->
+        <div class="page-nav-bar">
+            <a href="hw3.html" class="page-nav-btn">← Previous: HW 3 — Damped Free &amp; RLC</a>
+            <a href="homework.html" class="page-nav-btn">Back to All Homeworks →</a>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
+                <span class="lang-en">Physics of Waves and Oscillations (Course 207203) — Academic Year 1/2026</span>
+                <span class="lang-th">วิชาฟิสิกส์ของคลื่นและการสั่น (207203) — ภาคเรียนที่ 1/2569</span>
+            </p>
+            <p style="margin: 0;">
+                <a href="index.html">Course Directory</a> &bull; 
+                <a href="formula_sheet.html">Exam Formula Sheet</a> &bull; 
+                <a href="practice.html">Practice Problem Bank</a> &bull; 
+                <a href="homework.html">Homework Directory</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSolution(id, btn) {
+            var box = document.getElementById(id);
+            if (!box) return;
+            if (box.style.display === 'none') {
+                box.style.display = 'block';
+                btn.classList.add('active');
+            } else {
+                box.style.display = 'none';
+                btn.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

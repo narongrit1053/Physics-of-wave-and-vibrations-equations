@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW 2: Torsion &amp; Rotational SHM — Physics 207203</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --border-card: #e5e7eb;
+            --text-dark: #111827;
+            --text-muted: #475569;
+            --radius-card: 10px;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Top Navigation Header */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .nav-badge {
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #a7f3d0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-size: 13.5px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .nav-btn.active {
+            color: #047857;
+            font-weight: 600;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .page-header {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 5px solid #10b981;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 22px;
+            margin: 0 0 6px 0;
+            color: #0f172a;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 13.5px;
+            color: #475569;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .problem-badge {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .problem-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 14px 0;
+            color: #1e293b;
+        }
+
+        .problem-text-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .given-box {
+            background: #fffbebf5;
+            border: 1px solid #fde68a;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13.5px;
+            color: #92400e;
+        }
+
+        .given-box strong { color: #78350f; }
+
+        .solution-box {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .solution-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #065f46;
+            margin-top: 0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-block {
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .step-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-heading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .math-result-highlight {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .toggle-sol-btn {
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-sol-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .page-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .page-nav-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .site-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 24px 0;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .site-footer a { color: var(--primary); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-brand">
+                <span>⚛️ Physics 207203</span>
+                <span class="nav-badge">HW 2</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">
+                    <span class="lang-en">Course Directory</span>
+                    <span class="lang-th">สารบัญบทเรียน</span>
+                </a>
+                <a href="formula_sheet.html" class="nav-btn">
+                    <span class="lang-en">Formula Sheet</span>
+                    <span class="lang-th">สรุปสูตรสอบ</span>
+                </a>
+                <a href="practice.html" class="nav-btn">
+                    <span class="lang-en">Practice Bank</span>
+                    <span class="lang-th">คลังแบบฝึกหัด</span>
+                </a>
+                <a href="homework.html" class="nav-btn">
+                    <span class="lang-en">All Homeworks</span>
+                    <span class="lang-th">การบ้านทั้งหมด</span>
+                </a>
+                <a href="hw1.html" class="nav-btn">HW 1</a>
+                <a href="hw2.html" class="nav-btn active">HW 2</a>
+                <a href="hw3.html" class="nav-btn">HW 3</a>
+            </div>
+        </nav>
+
+        <!-- Back Link -->
+        <a href="homework.html" class="back-link">
+            <span>←</span>
+            <span class="lang-en">Back to Homework Directory</span>
+            <span class="lang-th">กลับสู่สารบัญการบ้านทั้งหมด</span>
+        </a>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1>
+                <span class="lang-en">Homework Set 2: Torsional Pendulum &amp; Rotational Dynamics</span>
+                <span class="lang-th">การบ้านชุดที่ 2: เพนดูลัมการบิดและพลศาสตร์การหมุน</span>
+            </h1>
+            <p>
+                <span class="lang-en">Topics: Torsional Stiffness Constant ($\kappa$), Moment of Inertia of Solid Sphere ($I = \frac{2}{5}mR^2$), Mass on Stretched String SHM Frequency, Pivoted Rod with Horizontal Spring.</span>
+                <span class="lang-th">หัวข้อ: ค่าคงตัวการบิด ($\kappa$), โมเมนต์ความเฉื่อยของทรงกลมตัน ($I = \frac{2}{5}mR^2$), การสั่นของมวลบนเชือกขึงตึง, และการหมุนของแท่งวัตถุสม่ำเสมอพร้อมสปริงแนวนอน</span>
+            </p>
+        </header>
+
+        <main>
+            <!-- PROBLEM 1 -->
+            <article class="problem-card" id="prob1">
+                <span class="problem-badge">Problem 1 / โจทย์ข้อที่ 1</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Torsional Oscillation Period of a Solid Sphere</span>
+                    <span class="lang-th">คาบการแกว่งกวัดของทรงกลมตันแขวนด้วยเส้นลวดบิด (Torsion Pendulum)</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> ทรงกลมตันมวล $95\text{ kg}$ รัศมี $15\text{ cm}$ ถูกแขวนไว้ในแนวดิ่งด้วยเส้นลวด หากต้องใช้ทอร์คขนาด $0.20\text{ N}\cdot\text{m}$ เพื่อหมุนทรงกลมไปเป็นมุม $0.85\text{ rad}$ แล้วรักษาสภาพนั้นไว้ จงหาคาบของการแกว่งกวัดที่จะเกิดขึ้นเมื่อปล่อยทรงกลม
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A solid sphere of mass $95\text{ kg}$ and radius $15\text{ cm}$ is suspended vertically by a wire. If a torque of $0.20\text{ N}\cdot\text{m}$ is required to rotate the sphere through an angle of $0.85\text{ rad}$ and hold it in place, find the period of torsional oscillation when the sphere is released.
+                    </p>
+                </div>
+
+                <div class="given-box">
+                    <strong>📌
+                        <span class="lang-en">Given Parameters:</span>
+                        <span class="lang-th">ข้อมูลที่โจทย์กำหนด:</span>
+                    </strong>
+                    <ul style="margin: 6px 0 0 20px; padding: 0;">
+                        <li><span class="lang-en">Mass ($m$) = $95\text{ kg}$</span><span class="lang-th">มวลของทรงกลมตัน ($m$) = $95\text{ kg}$</span></li>
+                        <li><span class="lang-en">Radius ($R$) = $15\text{ cm} = 0.15\text{ m}$</span><span class="lang-th">รัศมี ($R$) = $15\text{ cm} = 0.15\text{ m}$</span></li>
+                        <li><span class="lang-en">Torque ($\tau$) = $0.20\text{ N}\cdot\text{m}$ at $\theta = 0.85\text{ rad}$</span><span class="lang-th">ทอร์คบิด ($\tau$) = $0.20\text{ N}\cdot\text{m}$ ณ มุม $\theta = 0.85\text{ rad}$</span></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p1', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p1">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Torsional Derivation</span>
+                        <span class="lang-th">เฉลยวิธีทำและการคำนวณอย่างเป็นขั้นตอน</span>
+                    </h3>
+
+                    <!-- SVG Diagram for Torsion Pendulum (HW2 Prob 1) -->
+                    <div class="diagram-container">
+                        <svg width="280" height="300" viewBox="0 0 280 300" style="background:#f8fafc; border-radius:10px; border:1px solid #e2e8f0;">
+                            <defs>
+                                <radialGradient id="hw2p1-sphere-grad" cx="35%" cy="30%" r="65%">
+                                    <stop offset="0%" stop-color="#dbeafe"/>
+                                    <stop offset="60%" stop-color="#3b82f6" stop-opacity="0.55"/>
+                                    <stop offset="100%" stop-color="#1e40af"/>
+                                </radialGradient>
+                                <marker id="hw2p1-arrow-twist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Ceiling support bar -->
+                            <rect x="80" y="10" width="120" height="14" rx="2" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+                            <!-- Ceiling hatch marks -->
+                            <line x1="85"  y1="10" x2="75"  y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="100" y1="10" x2="90"  y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="115" y1="10" x2="105" y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="130" y1="10" x2="120" y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="145" y1="10" x2="135" y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="160" y1="10" x2="150" y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="175" y1="10" x2="165" y2="0" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="190" y1="10" x2="180" y2="0" stroke="#64748b" stroke-width="1.5"/>
+
+                            <!-- Suspension wire -->
+                            <line x1="140" y1="24" x2="140" y2="138" stroke="#334155" stroke-width="2.5"/>
+
+                            <!-- Torsion curved arrow (arc showing twist) -->
+                            <path d="M 118 95 A 24 24 0 0 0 162 95" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#hw2p1-arrow-twist)"/>
+                            <!-- τ label -->
+                            <text x="148" y="88" font-size="11" fill="#2563eb" font-weight="bold" font-family="sans-serif">τ = 0.20 N·m</text>
+
+                            <!-- θ arc label (to the left of wire) -->
+                            <path d="M 140 80 L 116 80" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3 2"/>
+                            <text x="58" y="84" font-size="11" fill="#7c3aed" font-weight="bold" font-family="sans-serif">θ = 0.85 rad</text>
+
+                            <!-- Solid sphere -->
+                            <circle cx="140" cy="210" r="70" fill="url(#hw2p1-sphere-grad)" stroke="#2563eb" stroke-width="2.5"/>
+
+                            <!-- Center dot -->
+                            <circle cx="140" cy="210" r="3.5" fill="#1e293b"/>
+
+                            <!-- Radius line R -->
+                            <line x1="140" y1="210" x2="189" y2="250" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 3"/>
+                            <text x="155" y="238" font-size="11" fill="#ef4444" font-weight="bold" font-family="sans-serif">R = 0.15 m</text>
+
+                            <!-- Mass label inside sphere -->
+                            <text x="140" y="205" font-size="13" fill="#ffffff" font-weight="bold" font-family="sans-serif" text-anchor="middle">m = 95 kg</text>
+
+                            <!-- I formula below sphere -->
+                            <text x="140" y="293" font-size="11" fill="#475569" font-weight="600" font-family="sans-serif" text-anchor="middle">I = (2/5)mR²</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">1. Find Torsional Constant ($\kappa$)</div>
+                        $$\tau = \kappa \theta \implies \kappa = \frac{\tau}{\theta} = \frac{0.20\text{ N}\cdot\text{m}}{0.85\text{ rad}} \approx 0.23529\text{ N}\cdot\text{m/rad}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">2. Moment of Inertia ($I$) of Solid Sphere</div>
+                        $$I = \frac{2}{5} m R^2 = \frac{2}{5} (95\text{ kg}) (0.15\text{ m})^2 = 38 \times 0.0225 = 0.855\text{ kg}\cdot\text{m}^2$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">3. Oscillation Period ($T$)</div>
+                        $$T = 2\pi \sqrt{\frac{I}{\kappa}} = 2\pi \sqrt{\frac{0.855}{0.23529}} = 2\pi \sqrt{3.6337} \approx 2\pi \times 1.9062 \approx 11.98\text{ s} \approx 12.0\text{ s}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: Oscillation period $T = 11.98\text{ s} \approx 12.0\text{ s}$</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: คาบของการแกว่งกวัด $T = 11.98\text{ s} \approx 12.0\text{ s}$</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROBLEM 2 -->
+            <article class="problem-card" id="prob2">
+                <span class="problem-badge">Problem 2 / โจทย์ข้อที่ 2</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Angular Frequency of Mass at Midpoint of Stretched String</span>
+                    <span class="lang-th">ความถี่เชิงมุมของมวล ณ จุดกึ่งกลางของเชือกขึงตึง</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> มวล $m$ ถูกติดไว้ที่จุดกึ่งกลางของเชือกที่มีความยาว $2L$ ซึ่งถูกขึงตึงด้วยแรงตึง $T$ คงที่ตลอดเวลา เมื่อมวลถูกดึงในแนวตั้งฉากกับเส้นเชือกเป็นระยะทางเล็กน้อยแล้วปล่อย มวลจะสั่นแบบฮาร์มอนิกอย่างง่าย จงหาความถี่เชิงมุมของการสั่นนี้
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A mass $m$ is attached to the midpoint of a string of total length $2L$ under a constant tension $T$. When the mass is displaced perpendicular to the string by a small distance $x$ and released, it undergoes simple harmonic motion. Find the angular frequency $\omega$ of this oscillation.
+                    </p>
+                </div>
+
+                <div class="given-box">
+                    <strong>📌
+                        <span class="lang-en">Given Parameters:</span>
+                        <span class="lang-th">ข้อมูลที่โจทย์กำหนด:</span>
+                    </strong>
+                    <ul style="margin: 6px 0 0 20px; padding: 0;">
+                        <li><span class="lang-en">Total string length = $2L$ (Each side = $L$)</span><span class="lang-th">ความยาวเชือกรวม = $2L$ (แต่ละข้าง = $L$)</span></li>
+                        <li><span class="lang-en">Mass at midpoint = $m$</span><span class="lang-th">มวลที่จุดกึ่งกลาง = $m$</span></li>
+                        <li><span class="lang-en">Constant string tension = $T$</span><span class="lang-th">แรงตึงเชือกคงที่ = $T$</span></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p2', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p2">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Small Angle Approximation</span>
+                        <span class="lang-th">เฉลยวิธีทำและการประมาณค่ามุมขนาดเล็กอย่างละเอียด</span>
+                    </h3>
+
+                    <!-- SVG Diagram for Mass at Midpoint of Stretched String (HW2 Prob 2) -->
+                    <div class="diagram-container">
+                        <svg width="450" height="200" viewBox="0 0 450 200" style="background:#f8fafc; border-radius:10px; border:1px solid #e2e8f0;">
+                            <defs>
+                                <marker id="hw2p2-arrow-T" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Left wall -->
+                            <rect x="0" y="40" width="20" height="120" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+                            <!-- Left wall hatch marks -->
+                            <line x1="0" y1="48"  x2="-10" y2="40"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="0" y1="64"  x2="-10" y2="56"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="0" y1="80"  x2="-10" y2="72"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="0" y1="96"  x2="-10" y2="88"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="0" y1="112" x2="-10" y2="104" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="0" y1="128" x2="-10" y2="120" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="0" y1="144" x2="-10" y2="136" stroke="#64748b" stroke-width="1.5"/>
+
+                            <!-- Right wall -->
+                            <rect x="430" y="40" width="20" height="120" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+                            <!-- Right wall hatch marks -->
+                            <line x1="450" y1="48"  x2="460" y2="40"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="450" y1="64"  x2="460" y2="56"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="450" y1="80"  x2="460" y2="72"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="450" y1="96"  x2="460" y2="88"  stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="450" y1="112" x2="460" y2="104" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="450" y1="128" x2="460" y2="120" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="450" y1="144" x2="460" y2="136" stroke="#64748b" stroke-width="1.5"/>
+
+                            <!-- Equilibrium dashed line -->
+                            <line x1="20" y1="100" x2="430" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+                            <!-- String segments: wall to mass -->
+                            <line x1="20" y1="100" x2="225" y2="140" stroke="#2563eb" stroke-width="2.5"/>
+                            <line x1="430" y1="100" x2="225" y2="140" stroke="#2563eb" stroke-width="2.5"/>
+
+                            <!-- Mass (red circle) -->
+                            <circle cx="225" cy="140" r="12" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+                            <text x="225" y="144" font-size="12" fill="#ffffff" font-weight="bold" font-family="sans-serif" text-anchor="middle">m</text>
+
+                            <!-- Vertical dashed displacement line x -->
+                            <line x1="225" y1="100" x2="225" y2="128" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="4 3"/>
+                            <!-- x label -->
+                            <text x="232" y="120" font-size="12" fill="#ef4444" font-weight="bold" font-family="sans-serif">x</text>
+
+                            <!-- Tension arrows from mass toward each wall along string -->
+                            <!-- Left tension arrow -->
+                            <line x1="225" y1="140" x2="148" y2="116" stroke="#059669" stroke-width="2.2" marker-end="url(#hw2p2-arrow-T)"/>
+                            <!-- Right tension arrow -->
+                            <line x1="225" y1="140" x2="302" y2="116" stroke="#059669" stroke-width="2.2" marker-end="url(#hw2p2-arrow-T)"/>
+
+                            <!-- T labels -->
+                            <text x="142" y="108" font-size="13" fill="#059669" font-weight="bold" font-family="sans-serif">T</text>
+                            <text x="308" y="108" font-size="13" fill="#059669" font-weight="bold" font-family="sans-serif">T</text>
+
+                            <!-- L labels on each string segment (above the string midpoint) -->
+                            <text x="100" y="90" font-size="13" fill="#475569" font-weight="bold" font-family="sans-serif" text-anchor="middle">L</text>
+                            <text x="350" y="90" font-size="13" fill="#475569" font-weight="bold" font-family="sans-serif" text-anchor="middle">L</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">1. Net Restoring Force along $x$</div>
+                        $$F_{\text{net}} = -2T \sin\theta \implies m \frac{d^2x}{dt^2} = -2T \sin\theta$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">2. Small-Angle Approximation ($\sin\theta \approx \frac{x}{L}$)</div>
+                        $$m \frac{d^2x}{dt^2} = -2T \left(\frac{x}{L}\right) = -\left(\frac{2T}{L}\right)x$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">3. Angular Frequency ($\omega$)</div>
+                        $$\frac{d^2x}{dt^2} + \left(\frac{2T}{mL}\right)x = 0 \implies \omega^2 = \frac{2T}{mL} \implies \omega = \sqrt{\frac{2T}{mL}}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: Angular frequency $\omega = \sqrt{\frac{2T}{mL}}$</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: ความถี่เชิงมุม $\omega = \sqrt{\frac{2T}{mL}}$</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROBLEM 3 -->
+            <article class="problem-card" id="prob3">
+                <span class="problem-badge">Problem 3 / โจทย์ข้อที่ 3</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Oscillation Period of a Uniform Pivoted Rod with Horizontal Spring</span>
+                    <span class="lang-th">คาบการแกว่งของแท่งวัตถุสม่ำเสมอหมุนรอบจุดศูนย์กลางพร้อมสปริงแนวนอน</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> แท่งวัตถุสม่ำเสมอยาวมวล $0.600\text{ kg}$ สามารถหมุนได้อย่างอิสระในแนวระดับรอบแกนในแนวดิ่งที่ผ่านจุดกึ่งกลาง สปริงที่มีค่าคงตัวสปริง $1850\text{ N/m}$ ถูกติดไว้ในแนวระดับระหว่างปลายด้านหนึ่งของแท่งกับผนัง ดังรูป หากแท่งวัตถุถูกหมุนไปเล็กน้อยแล้วปล่อย จงหาคาบของการแกว่งที่เกิดขึ้น
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A uniform slender rod of mass $0.600\text{ kg}$ can rotate freely in a horizontal plane about a vertical axis passing through its center. A spring with spring constant $1850\text{ N/m}$ is attached horizontally between one end of the rod and a wall. If the rod is rotated through a small angle and released, find the period of oscillation.
+                    </p>
+                </div>
+
+                <div class="given-box">
+                    <strong>📌
+                        <span class="lang-en">Given Parameters:</span>
+                        <span class="lang-th">ข้อมูลที่โจทย์กำหนด:</span>
+                    </strong>
+                    <ul style="margin: 6px 0 0 20px; padding: 0;">
+                        <li><span class="lang-en">Rod mass ($m$) = $0.600\text{ kg}$</span><span class="lang-th">มวลของแท่งวัตถุ ($m$) = $0.600\text{ kg}$</span></li>
+                        <li><span class="lang-en">Spring constant ($k$) = $1850\text{ N/m}$</span><span class="lang-th">ค่าคงตัวสปริง ($k$) = $1850\text{ N/m}$</span></li>
+                        <li><span class="lang-en">Axis of rotation: center of rod ($I = \frac{1}{12}m L^2$)</span><span class="lang-th">จุดหมุน: จุดกึ่งกลางของแท่ง ($I = \frac{1}{12}m L^2$)</span></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p3', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p3">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Torque Equation</span>
+                        <span class="lang-th">เฉลยวิธีทำและการตั้งสมการทอร์คอย่างเป็นขั้นตอน</span>
+                    </h3>
+
+                    <!-- SVG Diagram for Pivoted Rod with Spring (HW2 Prob 3) -->
+                    <div class="diagram-container">
+                        <svg width="360" height="340" viewBox="0 0 360 340" style="background:#ffffff; border-radius:10px; border:1px solid #e2e8f0;">
+                            <defs>
+                                <marker id="hw2p3-arrow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+                                </marker>
+                                <marker id="hw2p3-arrow-end" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Right Wall & Hatch Marks -->
+                            <line x1="300" y1="30" x2="300" y2="120" stroke="#0f172a" stroke-width="2.5"/>
+                            <line x1="300" y1="35" x2="315" y2="47" stroke="#475569" stroke-width="1.8"/>
+                            <line x1="300" y1="47" x2="315" y2="59" stroke="#475569" stroke-width="1.8"/>
+                            <line x1="300" y1="59" x2="315" y2="71" stroke="#475569" stroke-width="1.8"/>
+                            <line x1="300" y1="71" x2="315" y2="83" stroke="#475569" stroke-width="1.8"/>
+                            <line x1="300" y1="83" x2="315" y2="95" stroke="#475569" stroke-width="1.8"/>
+                            <line x1="300" y1="95" x2="315" y2="107" stroke="#475569" stroke-width="1.8"/>
+
+                            <!-- Horizontal Spring (k) -->
+                            <path d="M 116 75 L 138 75 L 144 60 L 154 90 L 164 60 L 174 90 L 184 60 L 194 90 L 204 60 L 214 90 L 224 60 L 234 90 L 244 60 L 254 90 L 264 60 L 274 90 L 280 75 L 300 75"
+                                  fill="none" stroke="#0f172a" stroke-width="2.2" stroke-linejoin="round"/>
+                            <text x="210" y="50" font-size="12" fill="#1e293b" font-weight="bold" text-anchor="middle">k = 1850 N/m</text>
+
+                            <!-- Vertical Equilibrium Center Line (Dashed) -->
+                            <line x1="110" y1="20" x2="110" y2="330" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+                            <!-- Rotated Rod (Dashed position at angle theta = -14 deg) -->
+                            <g transform="rotate(-14, 110, 190)">
+                                <!-- Rotated Centerline -->
+                                <line x1="110" y1="20" x2="110" y2="330" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <!-- Rotated Rod Body -->
+                                <rect x="104" y="60" width="12" height="260" rx="4"
+                                      fill="#eff6ff" stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4"/>
+                                <!-- Top pin extension -->
+                                <line x1="110" y1="60" x2="110" y2="45" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3 3"/>
+                            </g>
+
+                            <!-- Vertical Solid Rod (Equilibrium Position) -->
+                            <rect x="104" y="60" width="12" height="260" rx="4"
+                                  fill="#1e293b" fill-opacity="0.8" stroke="#0f172a" stroke-width="2"/>
+                            <text x="70" y="270" font-size="12" fill="#1e40af" font-weight="bold">m = 0.600 kg</text>
+
+                            <!-- Pivot Pin Joint Circle at Center (110, 190) -->
+                            <circle cx="110" cy="190" r="7" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+                            <circle cx="110" cy="190" r="2" fill="#0f172a"/>
+
+                            <!-- Displacement x Arc Arrow at Top -->
+                            <path d="M 78 54 A 140 140 0 0 1 108 50" fill="none" stroke="#0f172a" stroke-width="1.8"
+                                  marker-start="url(#hw2p3-arrow-start)" marker-end="url(#hw2p3-arrow-end)"/>
+                            <text x="88" y="40" font-size="18" fill="#0f172a" font-weight="bold" font-style="italic" text-anchor="middle">x</text>
+
+                            <!-- Angle theta Arc & Label -->
+                            <path d="M 93 118 A 75 75 0 0 1 110 115" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+                            <text x="82" y="132" font-size="18" fill="#0f172a" font-weight="bold" font-style="italic">θ</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">1. Torque Analysis &amp; Spring Force</div>
+                        $$\tau = -k\left(\frac{L}{2}\theta\right)\left(\frac{L}{2}\right) = -\frac{1}{4} k L^2 \theta$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">2. Rotational Equation of Motion</div>
+                        $$\left(\frac{1}{12} m L^2\right) \frac{d^2\theta}{dt^2} = -\frac{1}{4} k L^2 \theta \implies \frac{d^2\theta}{dt^2} + \left(\frac{3k}{m}\right)\theta = 0$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">3. Angular Frequency ($\omega$) &amp; Period ($T$)</div>
+                        $$\omega = \sqrt{\frac{3k}{m}} \implies T = 2\pi \sqrt{\frac{m}{3k}} = 2\pi \sqrt{\frac{0.600}{3(1850)}} = 2\pi \sqrt{\frac{0.600}{5550}} \approx 0.06533\text{ s}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: Period of oscillation $T = 0.0653\text{ s}$ (or $65.3\text{ ms}$)</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: คาบของการแกว่ง $T = 0.0653\text{ s}$ (หรือ $65.3\text{ ms}$)</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <!-- Page Nav Bar -->
+        <div class="page-nav-bar">
+            <a href="hw1.html" class="page-nav-btn">← Previous: HW 1 — SHM &amp; Complex Numbers</a>
+            <a href="hw3.html" class="page-nav-btn">Next: HW 3 — Damped Oscillations &amp; RLC →</a>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
+                <span class="lang-en">Physics of Waves and Oscillations (Course 207203) — Academic Year 1/2026</span>
+                <span class="lang-th">วิชาฟิสิกส์ของคลื่นและการสั่น (207203) — ภาคเรียนที่ 1/2569</span>
+            </p>
+            <p style="margin: 0;">
+                <a href="index.html">Course Directory</a> &bull; 
+                <a href="formula_sheet.html">Exam Formula Sheet</a> &bull; 
+                <a href="practice.html">Practice Problem Bank</a> &bull; 
+                <a href="homework.html">Homework Directory</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSolution(id, btn) {
+            var box = document.getElementById(id);
+            if (!box) return;
+            if (box.style.display === 'none') {
+                box.style.display = 'block';
+                btn.classList.add('active');
+            } else {
+                box.style.display = 'none';
+                btn.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

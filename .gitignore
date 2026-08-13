@@ -8,6 +8,8 @@ __pycache__/
 *.txt
 *.json
 *.md
+!README.md
+.agents/
 
 # System / OS files
 .DS_Store

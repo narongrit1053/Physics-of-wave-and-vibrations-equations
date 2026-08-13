@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW 1: SHM &amp; Complex Numbers — Physics 207203</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --border-card: #e5e7eb;
+            --text-dark: #111827;
+            --text-muted: #475569;
+            --radius-card: 10px;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Top Navigation Header */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .nav-badge {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-size: 13.5px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: var(--primary-light);
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Sub-Header Breadcrumb */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Page Header Banner */
+        .page-header {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 22px;
+            margin: 0 0 6px 0;
+            color: #0f172a;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 13.5px;
+            color: #475569;
+        }
+
+        /* Problem Card */
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .problem-badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .problem-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 14px 0;
+            color: #1e293b;
+        }
+
+        .problem-text-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .given-box {
+            background: #fffbebf5;
+            border: 1px solid #fde68a;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13.5px;
+            color: #92400e;
+        }
+
+        .given-box strong { color: #78350f; }
+
+        .solution-box {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .solution-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #065f46;
+            margin-top: 0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-block {
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .step-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-heading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .math-result-highlight {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .toggle-sol-btn {
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-sol-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Pagination Bar */
+        .page-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .page-nav-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .site-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 24px 0;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .site-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-brand">
+                <span>⚛️ Physics 207203</span>
+                <span class="nav-badge">HW 1</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">
+                    <span class="lang-en">Course Directory</span>
+                    <span class="lang-th">สารบัญบทเรียน</span>
+                </a>
+                <a href="formula_sheet.html" class="nav-btn">
+                    <span class="lang-en">Formula Sheet</span>
+                    <span class="lang-th">สรุปสูตรสอบ</span>
+                </a>
+                <a href="practice.html" class="nav-btn">
+                    <span class="lang-en">Practice Bank</span>
+                    <span class="lang-th">คลังแบบฝึกหัด</span>
+                </a>
+                <a href="homework.html" class="nav-btn">
+                    <span class="lang-en">All Homeworks</span>
+                    <span class="lang-th">การบ้านทั้งหมด</span>
+                </a>
+                <a href="hw1.html" class="nav-btn active">HW 1</a>
+                <a href="hw2.html" class="nav-btn">HW 2</a>
+                <a href="hw3.html" class="nav-btn">HW 3</a>
+            </div>
+        </nav>
+
+        <!-- Back to HW Directory -->
+        <a href="homework.html" class="back-link">
+            <span>←</span>
+            <span class="lang-en">Back to Homework Directory</span>
+            <span class="lang-th">กลับสู่สารบัญการบ้านทั้งหมด</span>
+        </a>
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1>
+                <span class="lang-en">Homework Set 1: Simple Harmonic Motion &amp; Complex Numbers</span>
+                <span class="lang-th">การบ้านชุดที่ 1: การสั่นแบบฮาร์มอนิกอย่างง่ายและจำนวนเชิงซ้อน</span>
+            </h1>
+            <p>
+                <span class="lang-en">Topics: SHM Kinematics, Energy Conservation, Initial Phase Angle $\phi$, Reference Circle Phasors, and Complex Exponential Form $z(t) = A e^{i(\omega t + \phi)}$.</span>
+                <span class="lang-th">หัวข้อ: จลนศาสตร์การสั่น SHM, การอนุรักษ์พลังงาน, มุมเฟสเริ่มต้น $\phi$, เวกเตอร์หมุน Phasor บนวงกลมอ้างอิง, และจำนวนเชิงซ้อนในรูป $z(t) = A e^{i(\omega t + \phi)}$</span>
+            </p>
+        </header>
+
+        <main>
+            <!-- PROBLEM 1 -->
+            <article class="problem-card" id="prob1">
+                <span class="problem-badge">Problem 1 / โจทย์ข้อที่ 1</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">SHM Speed &amp; Acceleration at a Specific Displacement</span>
+                    <span class="lang-th">อัตราเร็วและความเร่งของวัตถุ SHM ณ ตำแหน่งกระจัดที่กำหนด</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> บล็อกขนาดเล็กถูกนำไปติดกับสปริงอุดมคติและกำลังเคลื่อนที่แบบฮาร์มอนิกอย่างง่าย (SHM) บนพื้นราบที่ไม่มีแรงเสียดทาน หากแอมพลิจูดของการเคลื่อนที่คือ $0.250\text{ m}$ และคาบของการเคลื่อนที่คือ $3.20\text{ s}$ จงหาอัตราเร็ว (Speed) และความเร่ง (Acceleration) ของบล็อกในขณะที่บล็อกมีระยะกระจัด $x=0.160\text{ m}$ จากจุดสมดุล
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A small block attached to an ideal spring undergoes simple harmonic motion (SHM) on a frictionless horizontal surface. If the amplitude of oscillation is $A = 0.250\text{ m}$ and the period of motion is $T = 3.20\text{ s}$, find the speed and acceleration of the block when its displacement is $x = 0.160\text{ m}$ from the equilibrium position.
+                    </p>
+                </div>
+
+                <div class="given-box">
+                    <strong>📌
+                        <span class="lang-en">Given Parameters:</span>
+                        <span class="lang-th">ข้อมูลที่โจทย์กำหนด:</span>
+                    </strong>
+                    <ul style="margin: 6px 0 0 20px; padding: 0;">
+                        <li><span class="lang-en">Amplitude ($A$) = $0.250\text{ m}$</span><span class="lang-th">แอมพลิจูด ($A$) = $0.250\text{ m}$</span></li>
+                        <li><span class="lang-en">Period ($T$) = $3.20\text{ s}$</span><span class="lang-th">คาบการแกว่ง ($T$) = $3.20\text{ s}$</span></li>
+                        <li><span class="lang-en">Target Displacement ($x$) = $0.160\text{ m}$</span><span class="lang-th">ระยะกระจัดเป้าหมาย ($x$) = $0.160\text{ m}$</span></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p1', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p1">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Derivations</span>
+                        <span class="lang-th">เฉลยวิธีทำและการพิสูจน์อย่างเป็นขั้นตอน</span>
+                    </h3>
+
+                    <!-- SVG Schematic Diagram for HW1 Prob 1 -->
+                    <div class="diagram-container">
+                        <svg width="480" height="160" viewBox="0 0 480 160" style="background:#ffffff; border-radius:8px;">
+                            <defs>
+                                <marker id="hw1p1-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+                                </marker>
+                                <marker id="hw1p1-arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+                                </marker>
+                                <marker id="hw1p1-arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Wall -->
+                            <rect x="10" y="18" width="14" height="110" fill="#94a3b8"/>
+                            <!-- Hatch marks on wall -->
+                            <line x1="10" y1="22" x2="0" y2="32" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="10" y1="36" x2="0" y2="46" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="10" y1="50" x2="0" y2="60" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="10" y1="64" x2="0" y2="74" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="10" y1="78" x2="0" y2="88" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="10" y1="92" x2="0" y2="102" stroke="#64748b" stroke-width="1.2"/>
+                            <line x1="10" y1="106" x2="0" y2="116" stroke="#64748b" stroke-width="1.2"/>
+
+                            <!-- Floor line -->
+                            <line x1="10" y1="128" x2="460" y2="128" stroke="#475569" stroke-width="2"/>
+
+                            <!-- -A dashed line at x=55 -->
+                            <line x1="55" y1="25" x2="55" y2="128" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+                            <text x="38" y="143" font-size="10" fill="#94a3b8" font-family="monospace">−A</text>
+
+                            <!-- Equilibrium x=0 dashed line at x=190 -->
+                            <line x1="190" y1="20" x2="190" y2="128" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+                            <text x="181" y="143" font-size="10" fill="#64748b" font-weight="600">x=0</text>
+
+                            <!-- +A dashed line at x=370 -->
+                            <line x1="370" y1="25" x2="370" y2="128" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+                            <text x="360" y="143" font-size="10" fill="#94a3b8" font-family="monospace">+A</text>
+
+                            <!-- Spring zigzag from wall (x=24) to mass left face (x=235) at y=73 -->
+                            <path d="M 24 73 L 40 73 L 46 58 L 58 88 L 70 58 L 82 88 L 94 58 L 106 88 L 118 58 L 130 88 L 142 58 L 154 88 L 166 58 L 178 88 L 190 73 L 235 73" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Mass block at x=235..285, y=43..113 -->
+                            <rect x="235" y="43" width="50" height="70" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
+                            <text x="252" y="83" font-size="15" fill="#1e40af" font-weight="bold" font-family="serif">m</text>
+
+                            <!-- Red displacement arrow: from x=0 line (190) to left face of mass (235), at y=32 -->
+                            <line x1="190" y1="32" x2="233" y2="32" stroke="#ef4444" stroke-width="1.8" marker-end="url(#hw1p1-arrow-red)"/>
+                            <text x="194" y="25" font-size="10.5" fill="#ef4444" font-weight="bold">x = 0.160 m</text>
+
+                            <!-- Green velocity arrow: rightward from right face of mass (285), at y=65 -->
+                            <line x1="287" y1="65" x2="355" y2="65" stroke="#16a34a" stroke-width="2" marker-end="url(#hw1p1-arrow-green)"/>
+                            <text x="290" y="57" font-size="10.5" fill="#16a34a" font-weight="bold">v = 0.377 m/s</text>
+
+                            <!-- Orange acceleration arrow: leftward from left face of mass (235), at y=95 -->
+                            <line x1="233" y1="95" x2="165" y2="95" stroke="#d97706" stroke-width="2" marker-end="url(#hw1p1-arrow-orange)"/>
+                            <text x="115" y="107" font-size="10.5" fill="#d97706" font-weight="bold">a = −0.617 m/s²</text>
+                        </svg>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            1.
+                            <span class="lang-en">Calculate Angular Frequency ($\omega_0$)</span>
+                            <span class="lang-th">คำนวณหาความถี่เชิงมุม ($\omega_0$)</span>
+                        </div>
+                        $$\omega_0 = \frac{2\pi}{T} = \frac{2\pi}{3.20\text{ s}} \approx 1.9635\text{ rad/s}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            2.
+                            <span class="lang-en">Method 1: Direct Time-Domain Equations</span>
+                            <span class="lang-th">วิธีที่ 1: การใช้สมการการเคลื่อนที่อิงตามเวลา</span>
+                        </div>
+                        $$\begin{align*}
+                        x(t) &= 0.250 \cos(\omega_0 t) = 0.160\text{ m} \\[6pt]
+                        \cos(\omega_0 t) &= \frac{0.160}{0.250} = 0.64 \implies \omega_0 t = \arccos(0.64) \approx 0.8763\text{ rad} \\[6pt]
+                        t &= \frac{0.8763}{1.9635} \approx 0.446\text{ s} \\[8pt]
+                        v(0.446) &= -(0.250)(1.9635) \sin(0.8763) \approx -0.377\text{ m/s}
+                        \end{align*}$$
+
+                        <div class="math-result-highlight">
+                            <span class="lang-en">Speed $|v| = 0.377\text{ m/s}$</span>
+                            <span class="lang-th">อัตราเร็ว (ขนาดของความเร็ว) $|v| = 0.377\text{ m/s}$</span>
+                        </div>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            3.
+                            <span class="lang-en">Method 2: Energy Conservation Relationship</span>
+                            <span class="lang-th">วิธีที่ 2: ใช้ความสัมพันธ์ของอัตราเร็วกับระยะกระจัด</span>
+                        </div>
+                        $$\begin{align*}
+                        |v| &= \omega_0 \sqrt{A^2 - x^2} = 1.9635 \times \sqrt{(0.250)^2 - (0.160)^2} \\[6pt]
+                        &= 1.9635 \times \sqrt{0.0369} = 1.9635 \times 0.1921 \approx 0.377\text{ m/s}
+                        \end{align*}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            4.
+                            <span class="lang-en">Calculate Acceleration ($a$)</span>
+                            <span class="lang-th">คำนวณหาความเร่ง ($a$)</span>
+                        </div>
+                        $$a = -\omega_0^2 x = -(1.9635)^2 \times (0.160) = -3.8553 \times 0.160 \approx -0.617\text{ m/s}^2$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: Speed $|v| = 0.377\text{ m/s}$, Acceleration $a = -0.617\text{ m/s}^2$ (Magnitude $|a| = 0.617\text{ m/s}^2$)</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: อัตราเร็ว $|v| = 0.377\text{ m/s}$, ความเร่ง $a = -0.617\text{ m/s}^2$ (ขนาดความเร่ง $= 0.617\text{ m/s}^2$)</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROBLEM 2 -->
+            <article class="problem-card" id="prob2">
+                <span class="problem-badge">Problem 2 / โจทย์ข้อที่ 2</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Amplitude, Phase Angle $\phi$, &amp; Rotating Vector (Phasor) Diagram</span>
+                    <span class="lang-th">แอมพลิจูด, มุมเฟสเริ่มต้น $\phi$, และแผนภาพเวกเตอร์หมุน (Phasor)</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> วัตถุมวล $2.00\text{ kg}$ ติดอยู่กับสปริงอุดมคติที่มีค่าคงตัวสปริง $300\text{ N/m}$ วางบนพื้นราบที่ไม่มีแรงเสียดทาน กำลังเคลื่อนที่แบบ SHM กำหนดให้ที่เวลา $t=0$ สปริงไม่ได้ยืดหรือหดตัว (อยู่ที่ตำแหน่งสมดุล $x=0$) แต่บล็อกกำลังเคลื่อนที่ไปในทิศทาง $-x$ ด้วยความเร็ว $v_0 = -12.0\text{ m/s}$ จงหา:<br>
+                        (a) แอมพลิจูดของการเคลื่อนที่ ($A$)<br>
+                        (b) มุมเฟสเริ่มต้น $\phi$ (Phase angle)<br>
+                        (c) วาดภาพอธิบายตำแหน่งของ Rotating vector (Phasor) บนวงกลมอ้างอิง (Reference circle) ณ เวลา $t=0$
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> A $2.00\text{ kg}$ block is attached to an ideal spring with spring constant $k = 300\text{ N/m}$ on a frictionless horizontal surface undergoing SHM. At time $t=0$, the spring is unstretched ($x(0) = 0$), but the block is moving in the $-x$ direction with an initial velocity $v_0 = -12.0\text{ m/s}$. Find:<br>
+                        (a) The amplitude of oscillation ($A$)<br>
+                        (b) The initial phase angle $\phi$<br>
+                        (c) Sketch the position of the Rotating Vector (Phasor) on the Reference Circle at $t=0$.
+                    </p>
+                </div>
+
+                <div class="given-box">
+                    <strong>📌
+                        <span class="lang-en">Given Parameters:</span>
+                        <span class="lang-th">ข้อมูลที่โจทย์กำหนด:</span>
+                    </strong>
+                    <ul style="margin: 6px 0 0 20px; padding: 0;">
+                        <li><span class="lang-en">Mass ($m$) = $2.00\text{ kg}$</span><span class="lang-th">มวล ($m$) = $2.00\text{ kg}$</span></li>
+                        <li><span class="lang-en">Spring constant ($k$) = $300\text{ N/m}$</span><span class="lang-th">ค่าคงตัวสปริง ($k$) = $300\text{ N/m}$</span></li>
+                        <li><span class="lang-en">Initial Conditions at $t=0$: $x(0) = 0\text{ m}$, $v(0) = -12.0\text{ m/s}$</span><span class="lang-th">เงื่อนไขเริ่มต้น ณ $t=0$: $x(0) = 0\text{ m}$, $v(0) = -12.0\text{ m/s}$</span></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p2', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p2">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Vector Diagram</span>
+                        <span class="lang-th">เฉลยวิธีทำและแผนภาพเวกเตอร์อย่างละเอียด</span>
+                    </h3>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            1.
+                            <span class="lang-en">Calculate Natural Angular Frequency ($\omega$)</span>
+                            <span class="lang-th">คำนวณหาความถี่เชิงมุมธรรมชาติ ($\omega$)</span>
+                        </div>
+                        $$\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{300}{2.00}} = \sqrt{150} \approx 12.247\text{ rad/s}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            2.
+                            <span class="lang-en">Determine Initial Phase Angle ($\phi$) &amp; Amplitude ($A$)</span>
+                            <span class="lang-th">หามุมเฟสเริ่มต้น ($\phi$) และแอมพลิจูด ($A$)</span>
+                        </div>
+                        $$\begin{align*}
+                        x(0) &= A \cos(\phi) = 0 \implies \cos(\phi) = 0 \implies \phi = \frac{\pi}{2} \text{ or } \frac{3\pi}{2} \\[6pt]
+                        v(0) &= -A \omega \sin(\phi) = -12.0\text{ m/s} \ (<0) \implies \sin(\phi) = +1 \implies \phi = \frac{\pi}{2}\text{ rad} \ (90^\circ) \\[8pt]
+                        -12.0 &= -A(12.247)(1) \implies A = \frac{12.0}{12.247} \approx 0.98\text{ m}
+                        \end{align*}$$
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-heading">
+                            3.
+                            <span class="lang-en">(c) Rotating Vector (Phasor) Reference Circle Diagram at $t=0$</span>
+                            <span class="lang-th">(c) แผนภาพ Rotating Vector (Phasor) บนวงกลมอ้างอิง ณ เวลา $t=0$</span>
+                        </div>
+
+                        <!-- SVG Phasor Diagram -->
+                        <div class="diagram-container">
+                            <svg width="320" height="320" viewBox="0 0 320 320" style="background:#ffffff; border-radius:8px;">
+                                <!-- center at (160,160) -->
+                                <defs>
+                                    <marker id="hw1p2-arrow-phasor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+                                    </marker>
+                                    <marker id="hw1p2-arrow-omega" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+                                    </marker>
+                                    <marker id="hw1p2-arrow-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+                                    </marker>
+                                </defs>
+
+                                <!-- Axes with arrow endpoints -->
+                                <line x1="20" y1="160" x2="298" y2="160" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#hw1p2-arrow-axis)"/>
+                                <line x1="160" y1="300" x2="160" y2="22" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#hw1p2-arrow-axis)"/>
+                                <!-- Axis labels -->
+                                <text x="292" y="155" font-size="12" fill="#64748b" font-weight="600" font-family="sans-serif">Re</text>
+                                <text x="165" y="18" font-size="12" fill="#64748b" font-weight="600" font-family="sans-serif">Im</text>
+
+                                <!-- Reference circle radius=100, centered at (160,160) -->
+                                <circle cx="160" cy="160" r="100" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+                                <!-- Origin dot -->
+                                <circle cx="160" cy="160" r="3.5" fill="#1e293b"/>
+
+                                <!-- Red phasor arrow: straight UP from center (160,160) to (160,60) -->
+                                <line x1="160" y1="160" x2="160" y2="65" stroke="#ef4444" stroke-width="3" marker-end="url(#hw1p2-arrow-phasor)"/>
+                                <!-- Dot at phasor tip -->
+                                <circle cx="160" cy="60" r="4" fill="#ef4444"/>
+                                <!-- Label A near tip -->
+                                <text x="168" y="58" font-size="13" fill="#ef4444" font-weight="bold" font-family="serif">A</text>
+
+                                <!-- Angle arc from positive x-axis (right) going CCW up to 90° -->
+                                <!-- Arc from (160+28,160)=(188,160) sweeping to (160,160-28)=(160,132) -->
+                                <path d="M 188 160 A 28 28 0 0 0 160 132" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                <!-- φ label -->
+                                <text x="177" y="148" font-size="11" fill="#ef4444" font-weight="bold" font-family="sans-serif">φ=π/2</text>
+
+                                <!-- Blue curved ω arrow indicating CCW rotation -->
+                                <!-- Arc centered at (160,160) radius=115, from angle 200° to 260° (lower-left quadrant, going CCW) -->
+                                <!-- In SVG, angles: 200°→ x=160+115cos(200°)=160-108.1=51.9, y=160+115sin(200°)=160-39.3=120.7 -->
+                                <!-- 260°→ x=160+115cos(260°)=160-20.0=140, y=160+115sin(260°)=160-113.3=46.7 -->
+                                <path d="M 52 122 A 115 115 0 0 1 141 49" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#hw1p2-arrow-omega)"/>
+                                <text x="30" y="108" font-size="13" fill="#2563eb" font-weight="bold" font-family="serif">ω</text>
+
+                                <!-- Dashed projection line from phasor tip (160,60) to x-axis (160,160) showing x(0)=0 -->
+                                <line x1="160" y1="60" x2="160" y2="160" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.6"/>
+                                <!-- Mark on x-axis at (160,160) -->
+                                <line x1="156" y1="160" x2="164" y2="160" stroke="#1e293b" stroke-width="1.5"/>
+                                <!-- x(0)=0 label -->
+                                <text x="163" y="175" font-size="11" fill="#1e293b" font-weight="bold" font-family="sans-serif">x(0)=0</text>
+                            </svg>
+                        </div>
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Final Answer: (a) Amplitude $A = 0.98\text{ m}$, (b) Phase angle $\phi = \frac{\pi}{2}\text{ rad}$ ($90^\circ$), (c) Phasor vector points vertically upwards at $t=0$.</span>
+                            <span class="lang-th">✅ คำตอบสุดท้าย: (a) แอมพลิจูด $A = 0.98\text{ m}$, (b) มุมเฟส $\phi = \frac{\pi}{2}\text{ rad}$ ($90^\circ$), (c) เวกเตอร์ Phasor ชี้ขึ้นแนวดิ่งที่ $t=0$</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- PROBLEM 3 -->
+            <article class="problem-card" id="prob3">
+                <span class="problem-badge">Problem 3 / โจทย์ข้อที่ 3</span>
+                <h2 class="problem-title">
+                    <span class="lang-en">Complex Number Representation of SHM: $z(t) = A e^{i(\omega t + \phi)}$</span>
+                    <span class="lang-th">การอธิบายการสั่น SHM ด้วยจำนวนเชิงซ้อน $z(t) = A e^{i(\omega t + \phi)}$</span>
+                </h2>
+
+                <div class="problem-text-box">
+                    <p class="lang-th" style="margin: 0;">
+                        <strong>โจทย์:</strong> ในการพิจารณาการเคลื่อนที่แบบฮาร์มอนิกอย่างง่าย (SHM) เราสามารถใช้จำนวนเชิงซ้อน (Complex numbers) เพื่อความสะดวกในการคำนวณทางคณิตศาสตร์ โดยสมมติให้การกระจัดของระบบเขียนอยู่ในรูป $z = A e^{i(\omega t + \phi)}$ โดยที่ $A, \omega, \phi$ เป็นค่าคงที่<br>
+                        (a) จงหาความเร็ว $v$ และความเร่ง $a$ ของระบบในรูปของจำนวนเชิงซ้อน<br>
+                        (b) จงแสดงให้เห็นว่าสมการ $z$ ดังกล่าวเป็นผลเฉลยของสมการการเคลื่อนที่ $\frac{d^2z}{dt^2} + \omega^2 z = 0$<br>
+                        (c) จงแสดงว่าผลคูณระหว่างการกระจัด $z$ กับ Complex conjugate ของมัน (แทนด้วย $z^*$) จะมีค่าเท่ากับแอมพลิจูดกำลังสอง ($A^2$) เสมอไม่ว่าเวลาจะผ่านไปเท่าใด
+                    </p>
+                    <p class="lang-en" style="margin: 0;">
+                        <strong>Problem:</strong> In the analysis of Simple Harmonic Motion (SHM), complex numbers provide mathematical convenience by representing displacement as $z = A e^{i(\omega t + \phi)}$, where $A, \omega, \phi$ are constants.<br>
+                        (a) Find the velocity $v$ and acceleration $a$ of the system in complex form.<br>
+                        (b) Show that $z(t)$ is a valid solution to the differential equation of motion $\frac{d^2z}{dt^2} + \omega^2 z = 0$.<br>
+                        (c) Show that the product of the complex displacement $z$ and its complex conjugate $z^*$ always equals the square of the amplitude ($A^2$), independent of time $t$.
+                    </p>
+                </div>
+
+                <button type="button" class="toggle-sol-btn" onclick="toggleSolution('sol-p3', this)">
+                    <span>👇</span>
+                    <span class="lang-en">Hide / Show Detailed Solution</span>
+                    <span class="lang-th">ซ่อน / แสดงเฉลยอย่างละเอียด</span>
+                </button>
+
+                <div class="solution-box" id="sol-p3">
+                    <h3 class="solution-title">
+                        <span>📝</span>
+                        <span class="lang-en">Step-by-Step Solution &amp; Mathematical Proofs</span>
+                        <span class="lang-th">เฉลยวิธีทำและการพิสูจน์ทางคณิตศาสตร์อย่างเป็นขั้นตอน</span>
+                    </h3>
+
+                    <!-- SVG Complex Plane Argand Diagram for HW1 Prob 3 -->
+                    <div class="diagram-container">
+                        <svg width="380" height="320" viewBox="0 0 380 320" style="background:#ffffff; border-radius:8px;">
+                            <!-- center at (170,160) -->
+                            <defs>
+                                <marker id="hw1p3-arrow-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+                                </marker>
+                                <marker id="hw1p3-arrow-z" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+                                </marker>
+                                <marker id="hw1p3-arrow-zstar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/>
+                                </marker>
+                                <marker id="hw1p3-arrow-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Axes with arrows, center at (170,160) -->
+                            <line x1="20" y1="160" x2="358" y2="160" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#hw1p3-arrow-axis)"/>
+                            <line x1="170" y1="308" x2="170" y2="22" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#hw1p3-arrow-axis)"/>
+                            <!-- Axis labels -->
+                            <text x="350" y="155" font-size="12" fill="#64748b" font-weight="bold" font-family="sans-serif">Re</text>
+                            <text x="175" y="18" font-size="12" fill="#64748b" font-weight="bold" font-family="sans-serif">Im</text>
+
+                            <!-- Reference circle radius=90, centered at (170,160) -->
+                            <circle cx="170" cy="160" r="90" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+                            <!-- Origin dot -->
+                            <circle cx="170" cy="160" r="3.5" fill="#1e293b"/>
+
+                            <!-- Vector z at 45° upper-right: tip at (170+63.6, 160-63.6) = (233.6, 96.4) -->
+                            <line x1="170" y1="160" x2="229" y2="101" stroke="#2563eb" stroke-width="3" marker-end="url(#hw1p3-arrow-z)"/>
+                            <text x="237" y="97" font-size="11" fill="#2563eb" font-weight="bold" font-family="sans-serif">z = Ae^{i(ωt+φ)}</text>
+
+                            <!-- Vector z* at 45° lower-right (mirror): tip at (170+63.6, 160+63.6) = (233.6, 223.6) -->
+                            <line x1="170" y1="160" x2="229" y2="219" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#hw1p3-arrow-zstar)"/>
+                            <text x="237" y="225" font-size="11" fill="#7c3aed" font-weight="bold" font-family="sans-serif">z* = Ae^{−i(ωt+φ)}</text>
+
+                            <!-- Velocity vector v = iωz: perpendicular to z, from z tip pointing upper-left -->
+                            <!-- iωz rotates z by 90° CCW: direction is (-sin45°, -cos45°) = (-0.707, -0.707) in SVG (+y down) = (-0.707, +0.707) -->
+                            <!-- Actually iωz is 90° CCW: if z points at 45° upper-right (SVG angle -45°), then iωz points at 45° upper-left (SVG angle -135°) -->
+                            <!-- v from tip of z (229,101) going upper-left: Δx = -55*cos45°≈-39, Δy = -55*sin45°≈-39 -->
+                            <line x1="233" y1="101" x2="178" y2="56" stroke="#16a34a" stroke-width="2.5" marker-end="url(#hw1p3-arrow-v)"/>
+                            <text x="70" y="62" font-size="11" fill="#16a34a" font-weight="bold" font-family="sans-serif">v = iωz (+90°)</text>
+
+                            <!-- Angle arc θ from positive Re axis CCW to z direction (45° in math = -45° SVG) -->
+                            <!-- Arc from (170+32,160)=(202,160) sweeping CCW to z direction (45° up-right in SVG = -45°) -->
+                            <path d="M 202 160 A 32 32 0 0 0 192.6 137.4" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+                            <!-- θ label -->
+                            <text x="204" y="152" font-size="10.5" fill="#2563eb" font-weight="bold" font-family="sans-serif">θ=ωt+φ</text>
+                        </svg>
+                    </div>
+
+                    <!-- Part A -->
+                    <div class="step-block">
+                        <div class="step-heading">(a) Velocity ($v$) and Acceleration ($a$) in Complex Form</div>
+                        $$\begin{align*}
+                        v(t) &= \frac{dz}{dt} = i \omega A e^{i(\omega t + \phi)} = i \omega z(t) \\[6pt]
+                        a(t) &= \frac{d^2z}{dt^2} = i^2 \omega^2 A e^{i(\omega t + \phi)} = -\omega^2 A e^{i(\omega t + \phi)} = -\omega^2 z(t)
+                        \end{align*}$$
+                    </div>
+
+                    <!-- Part B -->
+                    <div class="step-block">
+                        <div class="step-heading">(b) Proof that $z(t)$ Satisfies Differential Equation</div>
+                        $$\text{LHS} = \frac{d^2z}{dt^2} + \omega^2 z = (-\omega^2 z) + \omega^2 z = 0 = \text{RHS} \quad \blacksquare$$
+                    </div>
+
+                    <!-- Part C -->
+                    <div class="step-block">
+                        <div class="step-heading">(c) Proof of Product with Complex Conjugate $z z^* = A^2$</div>
+                        $$\begin{align*}
+                        z^* &= A e^{-i(\omega t + \phi)} \\[6pt]
+                        z \cdot z^* &= \left[ A e^{i(\omega t + \phi)} \right] \times \left[ A e^{-i(\omega t + \phi)} \right] = A^2 e^0 = A^2 \quad \blacksquare
+                        \end{align*}$$
+
+                        <div class="math-result-highlight" style="background:#eff6ff; border-color:#bfdbfe; color:#1e40af;">
+                            <span class="lang-en">✅ Result (c): $z z^* = |z|^2 = A^2$ is a constant value independent of time $t$!</span>
+                            <span class="lang-th">✅ ผลลัพธ์ (c): $z z^* = |z|^2 = A^2$ เป็นค่าคงตัวที่ไม่ขึ้นกับเวลา $t$!</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <!-- Pagination Bar -->
+        <div class="page-nav-bar">
+            <a href="homework.html" class="page-nav-btn">← All Homeworks</a>
+            <a href="hw2.html" class="page-nav-btn">Next: HW 2 — Torsion &amp; Rotational SHM →</a>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
+                <span class="lang-en">Physics of Waves and Oscillations (Course 207203) — Academic Year 1/2026</span>
+                <span class="lang-th">วิชาฟิสิกส์ของคลื่นและการสั่น (207203) — ภาคเรียนที่ 1/2569</span>
+            </p>
+            <p style="margin: 0;">
+                <a href="index.html">Course Directory</a> &bull; 
+                <a href="formula_sheet.html">Exam Formula Sheet</a> &bull; 
+                <a href="practice.html">Practice Problem Bank</a> &bull; 
+                <a href="homework.html">Homework Directory</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleSolution(id, btn) {
+            var box = document.getElementById(id);
+            if (!box) return;
+            if (box.style.display === 'none') {
+                box.style.display = 'block';
+                btn.classList.add('active');
+            } else {
+                box.style.display = 'none';
+                btn.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

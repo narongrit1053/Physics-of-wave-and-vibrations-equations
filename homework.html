@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Directory &amp; Solutions — Physics 207203</title>
+    <!-- MathJax Configuration & Script -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Global Language Toggle Controller -->
+    <script src="lang-toggle.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --purple: #8b5cf6;
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --border-card: #e5e7eb;
+            --text-dark: #111827;
+            --text-muted: #475569;
+            --radius-card: 12px;
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 8px 20px rgba(37, 99, 235, 0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* Top Navigation Header */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .nav-badge {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-size: 13.5px;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: var(--primary-light);
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Hero Header Section */
+        .hero-section-clean {
+            background: #ffffff;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 20px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .hero-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+            color: #111827;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: #475569;
+            margin: 0;
+            max-width: 780px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-chip span.val {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        /* Homework Directory Grid */
+        .hw-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .hw-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius-card);
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .hw-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .hw-card-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .hw-card-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+        }
+
+        .hw-card-title a {
+            color: #0f172a;
+            text-decoration: none;
+        }
+
+        .hw-card-title a:hover {
+            color: var(--primary);
+        }
+
+        .hw-card-desc {
+            font-size: 13.5px;
+            color: #475569;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .hw-topics-list {
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .hw-topics-list ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+        }
+
+        .hw-topics-list li {
+            margin-bottom: 4px;
+        }
+
+        .btn-open-hw {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-open-hw:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .site-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 30px 0;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .site-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <nav class="nav-bar">
+            <a href="index.html" class="nav-brand">
+                <span>⚛️ Physics 207203</span>
+                <span class="nav-badge">Homework Portal</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn">
+                    <span class="lang-en">Course Directory</span>
+                    <span class="lang-th">สารบัญบทเรียน</span>
+                </a>
+                <a href="formula_sheet.html" class="nav-btn">
+                    <span class="lang-en">Formula Sheet</span>
+                    <span class="lang-th">สรุปสูตรสอบ</span>
+                </a>
+                <a href="practice.html" class="nav-btn">
+                    <span class="lang-en">Practice Bank</span>
+                    <span class="lang-th">คลังแบบฝึกหัด</span>
+                </a>
+                <a href="homework.html" class="nav-btn active">
+                    <span class="lang-en">All Homeworks</span>
+                    <span class="lang-th">การบ้านทั้งหมด</span>
+                </a>
+                <a href="hw1.html" class="nav-btn">HW 1</a>
+                <a href="hw2.html" class="nav-btn">HW 2</a>
+                <a href="hw3.html" class="nav-btn">HW 3</a>
+                <a href="hw4.html" class="nav-btn">HW 4</a>
+            </div>
+        </nav>
+
+        <!-- Hero Header -->
+        <header class="hero-section-clean">
+            <div>
+                <h1 class="hero-title">
+                    <span class="lang-en">Official Homework Directory &amp; Solutions</span>
+                    <span class="lang-th">สารบัญการบ้านและเฉลยรายวิชา (Homework Directory)</span>
+                </h1>
+                <p class="hero-subtitle">
+                    <span class="lang-en">Select a homework set below to view step-by-step mathematical solutions, parameter tables, vector diagrams, and LaTeX derivations for Course 207203.</span>
+                    <span class="lang-th">เลือกชุดการบ้านด้านล่างเพื่อเข้าดูเฉลยวิธีทำอย่างเป็นขั้นตอน ตารางตัวแปร แผนภาพเวกเตอร์ และการแสดงวิธีทำทางคณิตศาสตร์อย่างละเอียด</span>
+                </p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-chip">
+                    <span class="lang-en">Total HW Sets:</span>
+                    <span class="lang-th">ชุดการบ้าน:</span>
+                    <span class="val">4 Sets</span>
+                </div>
+                <div class="stat-chip">
+                    <span class="lang-en">Total Problems:</span>
+                    <span class="lang-th">จำนวนข้อ:</span>
+                    <span class="val">12 Problems</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Homework Sets Grid Directory -->
+        <main class="hw-grid">
+            <!-- HW 1 Card -->
+            <article class="hw-card">
+                <div>
+                    <span class="hw-card-badge" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe;">
+                        Homework 1
+                    </span>
+                    <h2 class="hw-card-title">
+                        <a href="hw1.html">
+                            <span class="lang-en">HW 1: SHM &amp; Complex Representation</span>
+                            <span class="lang-th">HW 1: การสั่น SHM และจำนวนเชิงซ้อน</span>
+                        </a>
+                    </h2>
+                    <p class="hw-card-desc">
+                        <span class="lang-en">Simple Harmonic Motion kinematics, energy relations, reference circle phasors, and complex exponential solutions $z(t) = A e^{i(\omega t + \phi)}$.</span>
+                        <span class="lang-th">จลนศาสตร์การสั่น SHM, การอนุรักษ์พลังงาน, เวกเตอร์หมุน Phasor บนวงกลมอ้างอิง, และผลเฉลยในรูปจำนวนเชิงซ้อน $z(t) = A e^{i(\omega t + \phi)}$</span>
+                    </p>
+
+                    <div class="hw-topics-list">
+                        <strong>📌
+                            <span class="lang-en">Problems Included (3 Problems):</span>
+                            <span class="lang-th">โจทย์ในชุดนี้ (3 ข้อ):</span>
+                        </strong>
+                        <ul>
+                            <li><span class="lang-en">Problem 1: Speed &amp; Acceleration at $x = 0.160\text{ m}$</span><span class="lang-th">ข้อ 1: อัตราเร็วและความเร่ง ณ $x = 0.160\text{ m}$</span></li>
+                            <li><span class="lang-en">Problem 2: Phase Angle $\phi = 90^\circ$ &amp; Phasor Diagram</span><span class="lang-th">ข้อ 2: มุมเฟสเริ่มต้น $\phi = 90^\circ$ และแผนภาพ Phasor</span></li>
+                            <li><span class="lang-en">Problem 3: Complex Form Proofs ($v$, $a$, $z z^* = A^2$)</span><span class="lang-th">ข้อ 3: การพิสูจน์จำนวนเชิงซ้อน ($v$, $a$, $z z^* = A^2$)</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="hw1.html" class="btn-open-hw">
+                    <span class="lang-en">Open HW 1 Solutions →</span>
+                    <span class="lang-th">เปิดดูเฉลย HW 1 →</span>
+                </a>
+            </article>
+
+            <!-- HW 2 Card -->
+            <article class="hw-card">
+                <div>
+                    <span class="hw-card-badge" style="background:#ecfdf5; color:#047857; border:1px solid #a7f3d0;">
+                        Homework 2
+                    </span>
+                    <h2 class="hw-card-title">
+                        <a href="hw2.html">
+                            <span class="lang-en">HW 2: Torsion &amp; Rotational Dynamics</span>
+                            <span class="lang-th">HW 2: เพนดูลัมการบิดและพลศาสตร์การหมุน</span>
+                        </a>
+                    </h2>
+                    <p class="hw-card-desc">
+                        <span class="lang-en">Torsional stiffness of wire, moment of inertia of solid sphere, stretched string SHM frequency, and pivoted rod with horizontal spring.</span>
+                        <span class="lang-th">ค่าคงตัวการบิดของเส้นลวด, โมเมนต์ความเฉื่อยของทรงกลมตัน, การสั่นของมวลบนเชือกขึงตึง, และคาบการหมุนของแท่งวัตถุพร้อมสปริง</span>
+                    </p>
+
+                    <div class="hw-topics-list">
+                        <strong>📌
+                            <span class="lang-en">Problems Included (3 Problems):</span>
+                            <span class="lang-th">โจทย์ในชุดนี้ (3 ข้อ):</span>
+                        </strong>
+                        <ul>
+                            <li><span class="lang-en">Problem 1: Torsion Pendulum Period of Solid Sphere ($12.0\text{ s}$)</span><span class="lang-th">ข้อ 1: คาบเพนดูลัมการบิดทรงกลมตัน ($12.0\text{ s}$)</span></li>
+                            <li><span class="lang-en">Problem 2: Frequency of Mass on Stretched String ($\omega = \sqrt{\frac{2T}{mL}}$)</span><span class="lang-th">ข้อ 2: ความถี่มวลบนเชือกขึงตึง ($\omega = \sqrt{\frac{2T}{mL}}$)</span></li>
+                            <li><span class="lang-en">Problem 3: Pivoted Rod with Spring Period ($T = 0.0653\text{ s}$)</span><span class="lang-th">ข้อ 3: คาบแท่งวัตถุหมุนรอบศูนย์กลางพร้อมสปริง</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="hw2.html" class="btn-open-hw" style="background:#047857;">
+                    <span class="lang-en">Open HW 2 Solutions →</span>
+                    <span class="lang-th">เปิดดูเฉลย HW 2 →</span>
+                </a>
+            </article>
+
+            <!-- HW 3 Card -->
+            <article class="hw-card">
+                <div>
+                    <span class="hw-card-badge" style="background:#f3e8ff; color:#6b21a8; border:1px solid #d8b4fe;">
+                        Homework 3
+                    </span>
+                    <h2 class="hw-card-title">
+                        <a href="hw3.html">
+                            <span class="lang-en">HW 3: Damped Free Oscillations &amp; RLC</span>
+                            <span class="lang-th">HW 3: การสั่นแบบมีความหน่วงและวงจร RLC</span>
+                        </a>
+                    </h2>
+                    <p class="hw-card-desc">
+                        <span class="lang-en">Damped mechanical envelope decay, number of cycles calculation, RLC circuit damping classification (overdamped vs underdamped), and time constant $\tau$.</span>
+                        <span class="lang-th">ซองการลดลงของแอมพลิจูดความหน่วง, การคำนวณจำนวนรอบของการสั่น, การจำแนกสภาพความหน่วงในวงจร RLC, และค่าคงตัวเวลา $\tau$</span>
+                    </p>
+
+                    <div class="hw-topics-list">
+                        <strong>📌
+                            <span class="lang-en">Problems Included (3 Problems):</span>
+                            <span class="lang-th">โจทย์ในชุดนี้ (3 ข้อ):</span>
+                        </strong>
+                        <ul>
+                            <li><span class="lang-en">Problem 1: Cycles for Decay to $1/3$ Amplitude ($n = 30$ cycles)</span><span class="lang-th">ข้อ 1: จำนวนรอบเมื่อแอมพลิจูดลดเหลือ $1/3$ ($n = 30$ รอบ)</span></li>
+                            <li><span class="lang-en">Problem 2: Damping Constant $b$ after 4 Cycles ($0.0256\text{ kg/s}$)</span><span class="lang-th">ข้อ 2: ค่าคงตัวการหน่วง $b$ หลังแกว่งครบ 4 รอบ</span></li>
+                            <li><span class="lang-en">Problem 3: RLC Damping Regimes, Frequency $\omega$, &amp; Time Constant $\tau$</span><span class="lang-th">ข้อ 3: สภาพความหน่วงวงจร RLC, ความถี่ $\omega$, และ $\tau$</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="hw3.html" class="btn-open-hw" style="background:#6b21a8;">
+                    <span class="lang-en">Open HW 3 Solutions →</span>
+                    <span class="lang-th">เปิดดูเฉลย HW 3 →</span>
+                </a>
+            </article>
+
+            <!-- HW 4 Card -->
+            <article class="hw-card">
+                <div>
+                    <span class="hw-card-badge" style="background:#fff7ed; color:#c2410c; border:1px solid #ffedd5;">
+                        Homework 4
+                    </span>
+                    <h2 class="hw-card-title">
+                        <a href="hw4.html">
+                            <span class="lang-en">HW 4: Forced Oscillations &amp; Resonance</span>
+                            <span class="lang-th">HW 4: การสั่นด้วยแรงภายนอกและการสั่นพ้อง</span>
+                        </a>
+                    </h2>
+                    <p class="hw-card-desc">
+                        <span class="lang-en">Driven oscillations, resonance frequency, amplitude-damping relationship, and steady-state solutions.</span>
+                        <span class="lang-th">การสั่นที่มีแรงภายนอกขับเคลื่อน, ความถี่สั่นพ้อง, ความสัมพันธ์ระหว่างแอมพลิจูดกับความหน่วง, และผลเฉลยสภาวะคงตัว</span>
+                    </p>
+
+                    <div class="hw-topics-list">
+                        <strong>📌
+                            <span class="lang-en">Problems Included (3 Problems):</span>
+                            <span class="lang-th">โจทย์ในชุดนี้ (3 ข้อ):</span>
+                        </strong>
+                        <ul>
+                            <li><span class="lang-en">Problem 1: Forced Oscillation without Damping</span><span class="lang-th">ข้อ 1: แอมพลิจูดการสั่นถูกบังคับแบบไม่มีความหน่วง</span></li>
+                            <li><span class="lang-en">Problem 2: Amplitude with Varying Damping</span><span class="lang-th">ข้อ 2: การเปลี่ยนแปลงแอมพลิจูดเมื่อค่าการหน่วงเปลี่ยนไป</span></li>
+                            <li><span class="lang-en">Problem 3: Steady-State Solution of Undamped Driven</span><span class="lang-th">ข้อ 3: ผลเฉลยสภาวะคงตัวของตัวแกว่งกวัดที่ไม่หน่วงและมีแรงขับ</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="hw4.html" class="btn-open-hw" style="background:#ea580c;">
+                    <span class="lang-en">Open HW 4 Solutions →</span>
+                    <span class="lang-th">เปิดดูเฉลย HW 4 →</span>
+                </a>
+            </article>
+        </main>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
+                <span class="lang-en">Physics of Waves and Oscillations (Course 207203) — Academic Year 1/2026</span>
+                <span class="lang-th">วิชาฟิสิกส์ของคลื่นและการสั่น (207203) — ภาคเรียนที่ 1/2569</span>
+            </p>
+            <p style="margin: 0;">
+                <a href="index.html">Course Directory</a> &bull; 
+                <a href="formula_sheet.html">Exam Formula Sheet</a> &bull; 
+                <a href="practice.html">Practice Problem Bank</a> &bull; 
+                <a href="homework.html">Homework Directory</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

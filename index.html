@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th" data-lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics &amp; Wave Equations - Course Directory</title>
+    <title>Physics &amp; Wave Equations — Course Directory 207203</title>
     <!-- MathJax Configuration & Script -->
     <script>
         window.MathJax = {
@@ -15,396 +15,559 @@
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Global Language Toggle Controller -->
-    <script src="lang-toggle.js"></script>
     
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: #ffffff;
-            color: #111111;
-            margin: 0;
-            padding: 40px 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .home-section {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 32px;
-        }
-
-        .home-title {
-            font-size: 28px;
-            margin-top: 0;
-            margin-bottom: 8px;
-            color: #111827;
-        }
-
-        .home-subtitle {
-            font-size: 15px;
-            color: #4b5563;
-            margin-bottom: 28px;
-        }
-
-        .lecture-toc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .toc-card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-        }
-
-        .toc-card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.12);
-            transform: translateY(-2px);
-        }
-
-        .toc-card h2 {
-            font-size: 17px;
-            margin-top: 0;
-            margin-bottom: 12px;
-        }
-
-        .toc-card h2 a {
-            color: #1d4ed8;
-            text-decoration: none;
-        }
-
-        .toc-card h2 a:hover {
-            text-decoration: underline;
-        }
-
-        .toc-card ul {
-            margin: 0;
-            padding-left: 20px;
-            font-size: 13px;
-        }
-
-        .toc-card li {
-            margin-bottom: 6px;
-        }
-
-        .toc-card li a {
-            color: #374151;
-            text-decoration: none;
-        }
-
-        .toc-card li a:hover {
-            color: #2563eb;
-            text-decoration: underline;
-        }
-
-        .btn-view-lecture {
-            display: inline-block;
-            margin-top: 14px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #2563eb;
-            text-decoration: none;
-            background: #eff6ff;
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 1px solid #bfdbfe;
-            transition: all 0.2s ease;
-        }
-
-        .btn-view-lecture:hover {
-            background: #2563eb;
-            color: #ffffff;
-            border-color: #2563eb;
-        }
-    </style>
+    <!-- Theme Stylesheet & Language Toggle -->
+    <link rel="stylesheet" href="theme.css">
+    <script src="lang-toggle.js"></script>
 </head>
 <body>
 
-    <div class="container">
-        <div class="home-section">
-            <h1 class="home-title">
-                <span class="lang-en">Wave Equations Course Directory</span>
-                <span class="lang-th">สารบัญรายวิชาฟิสิกส์ของคลื่นและการสั่น</span>
-            </h1>
-            <p class="home-subtitle">
-                <span class="lang-en">Select a lecture page or specific topic to view its mathematical derivations and equations.</span>
-                <span class="lang-th">เลือกบทเรียนหรือหัวข้อที่ต้องการ เพื่อดูการพิสูจน์ทางคณิตศาสตร์และสมการฟิสิกส์</span>
-            </p>
-            
-            <div class="lecture-toc-grid">
-                <!-- Exam Formula Reference Sheet (Featured) -->
-                <div class="toc-card" style="grid-column: 1 / -1; background: #f8fafc; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                        <div>
-                            <span style="background:#e2e8f0; color:#334155; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px;">
-                                <span class="lang-en">Master Exam Reference</span>
-                                <span class="lang-th">สรุปสูตรเตรียมสอบ</span>
-                            </span>
-                            <h2 style="font-size:19px; margin:8px 0 4px 0;">
-                                <a href="formula_sheet.html" style="color:#1d4ed8;">
-                                    <span class="lang-en">Official Physics Exam Equation Reference Sheet</span>
-                                    <span class="lang-th">แผ่นรวมสูตรสอบวิชาฟิสิกส์ฉบับเป็นทางการ</span>
-                                </a>
-                            </h2>
-                            <p style="margin:0; font-size:13px; color:#475569;">
-                                <span class="lang-en">Complete Exam Formula Reference Sheet containing all 51 key equations, parameters, and Thai/English explanations across all 8 lectures.</span>
-                                <span class="lang-th">สรุปสูตรสอบฉบับสมบูรณ์ ครอบคลุม 51 สมการสำคัญ ตัวแปร และคำอธิบายทั้งภาษาไทยและอังกฤษ จากทั้ง 8 บทเรียน</span>
-                            </p>
-                        </div>
-                        <a href="formula_sheet.html" class="btn-view-lecture" style="background:#2563eb; color:#ffffff; border-color:#2563eb; padding:8px 16px; font-weight:600;">
-                            <span class="lang-en">Open Exam Sheet →</span>
-                            <span class="lang-th">เปิดแผ่นสูตรสอบ →</span>
-                        </a>
+    <!-- Sticky Navigation Header -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="nav-bar">
+                <a href="index.html" class="nav-brand">
+                    <div class="nav-brand-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12s3-7 7-7 7 7 13 7 3-7 3-7"></path>
+                        </svg>
                     </div>
+                    <span>Physics 207203</span>
+                    <span class="nav-badge">Wave &amp; Oscillations</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="index.html" class="nav-btn active">
+                        <span class="lang-th">สารบัญบทเรียน</span>
+                        <span class="lang-en">Course Directory</span>
+                    </a>
+                    
+                    <!-- Lecture Quick Dropdown -->
+                    <div class="nav-dropdown">
+                        <a href="#lectures-section" class="nav-btn">
+                            <span class="lang-th">บทเรียน (Lectures 0–8) ▾</span>
+                            <span class="lang-en">Lectures 0–8 ▾</span>
+                        </a>
+                        <div class="nav-dropdown-content">
+                            <a href="lecture0.html" class="nav-dropdown-item">L0: Mathematical Prerequisites</a>
+                            <a href="lecture1.html" class="nav-dropdown-item">L1: SHM &amp; Complex Numbers</a>
+                            <a href="lecture2.html" class="nav-dropdown-item">L2: Superposition of Oscillations</a>
+                            <a href="lecture3.html" class="nav-dropdown-item">L3: Pendulums &amp; Rotational Dynamics</a>
+                            <a href="lecture4.html" class="nav-dropdown-item">L4: Elasticity &amp; Advanced Oscillators</a>
+                            <a href="lecture5.html" class="nav-dropdown-item">L5: LC Circuit Oscillations</a>
+                            <a href="lecture6.html" class="nav-dropdown-item">L6: Damped Free Oscillations</a>
+                            <a href="lecture7.html" class="nav-dropdown-item">L7: Forced Oscillations &amp; Resonance</a>
+                            <a href="lecture8.html" class="nav-dropdown-item">L8: Coupled Oscillations</a>
+                        </div>
+                    </div>
+
+                    <a href="formula_sheet.html" class="nav-btn">
+                        <span class="lang-th">สรุปสูตรสอบ</span>
+                        <span class="lang-en">Exam Formula Sheet</span>
+                    </a>
+                    <a href="practice.html" class="nav-btn">
+                        <span class="lang-th">คลังแบบฝึกหัด</span>
+                        <span class="lang-en">Practice Bank</span>
+                    </a>
+                    <a href="homework.html" class="nav-btn">
+                        <span class="lang-th">การบ้านและเฉลย</span>
+                        <span class="lang-en">Homeworks</span>
+                    </a>
                 </div>
 
-                <!-- Practice Problem Bank (Featured) -->
-                <div class="toc-card" style="grid-column: 1 / -1; background: #f8fafc; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                        <div>
-                            <span style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px;">
-                                <span class="lang-en">Practice Module</span>
-                                <span class="lang-th">แบบฝึกหัดรายวิชา</span>
-                            </span>
-                            <h2 style="font-size:19px; margin:8px 0 4px 0;">
-                                <a href="practice.html" style="color:#1d4ed8;">
-                                    <span class="lang-en">Comprehensive Physics Practice Problem Bank (110 Problems)</span>
-                                    <span class="lang-th">คลังแบบฝึกหัดและโจทย์ฝึกทักษะวิชาฟิสิกส์ (110 ข้อ)</span>
-                                </a>
-                            </h2>
-                            <p style="margin:0; font-size:13px; color:#475569;">
-                                <span class="lang-en">Complete practice bank for Lectures 1 to 8 containing 110 problems with formula hints, step-by-step solutions, and interactive progress checks.</span>
-                                <span class="lang-th">คลังโจทย์แบบฝึกหัดครบถ้วนสำหรับ Lecture 1 - 8 รวม 110 ข้อ พร้อมสูตรคำนวณ เฉลยขั้นตอนอย่างละเอียด และระบบติดตามความคืบหน้า</span>
-                            </p>
-                        </div>
-                        <a href="practice.html" class="btn-view-lecture" style="background:#2563eb; color:#ffffff; border-color:#2563eb; padding:8px 16px; font-weight:600;">
-                            <span class="lang-en">Start Practice →</span>
-                            <span class="lang-th">เริ่มทำโจทย์ →</span>
-                        </a>
-                    </div>
+                <!-- Language Switcher Container (Populated by lang-toggle.js) -->
+                <div class="nav-lang-container"></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Clean & Simple Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 6v6l4 2"></path>
+                    </svg>
+                    <span>Academic Year 1/2569 (Year 1/2026) • Course 207203</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="lang-th">วิชาฟิสิกส์ของคลื่นและการสั่น</span>
+                    <span class="lang-en">Physics of Waves and Oscillations</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    <span class="lang-th">ศูนย์รวมบทเรียน บทพิสูจน์ทางคณิตศาสตร์ แผ่นสรุปสูตรสอบเตรียมพร้อม คลังแบบฝึกหัด และเฉลยการบ้านอย่างเป็นขั้นตอน</span>
+                    <span class="lang-en">Comprehensive course portal featuring mathematical derivations, exam formula reference sheets, practice problem banks, and detailed homework solutions.</span>
+                </p>
+
+                <div class="hero-ctas">
+                    <a href="formula_sheet.html" class="btn-primary">
+                        <span class="lang-th">เปิดแผ่นสูตรเตรียมสอบ →</span>
+                        <span class="lang-en">Open Exam Formula Sheet →</span>
+                    </a>
+                    <a href="practice.html" class="btn-secondary">
+                        <span class="lang-th">ทำแบบฝึกหัด (110 ข้อ)</span>
+                        <span class="lang-en">Practice Problems (110)</span>
+                    </a>
+                    <a href="homework.html" class="btn-secondary">
+                        <span class="lang-th">ดูการบ้าน HW 1–4</span>
+                        <span class="lang-en">View Homework HW 1–4</span>
+                    </a>
                 </div>
 
+                <!-- 4 Metric Stats Strip -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">
+                            <span class="lang-th">บทเรียนย่อย (Lectures)</span>
+                            <span class="lang-en">Lecture Modules</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">51</div>
+                        <div class="stat-label">
+                            <span class="lang-th">สมการสอบสำคัญ (Formulas)</span>
+                            <span class="lang-en">Key Exam Formulas</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">110</div>
+                        <div class="stat-label">
+                            <span class="lang-th">โจทย์ฝึกฝน (Problems)</span>
+                            <span class="lang-en">Practice Problems</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">
+                            <span class="lang-th">ชุดการบ้าน &amp; เฉลย (HWs)</span>
+                            <span class="lang-en">Homework Sets</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- Featured Learning Hub Grid -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="lang-th">สื่อการเรียนรู้แนะนำ (Featured Learning Modules)</span>
+                <span class="lang-en">Featured Learning Modules</span>
+            </h2>
+
+            <div class="featured-hub-grid">
+                <!-- Exam Formula Reference Sheet -->
+                <div class="hub-card" style="border-top: 4px solid #2563eb;">
+                    <div>
+                        <span class="hub-tag" style="background: #eff6ff; color: #1d4ed8;">
+                            <span class="lang-th">เตรียมสอบกลางภาค-ปลายภาค</span>
+                            <span class="lang-en">Master Exam Reference</span>
+                        </span>
+                        <h3 class="hub-title">
+                            <a href="formula_sheet.html">
+                                <span class="lang-th">แผ่นรวมสูตรสอบวิชาฟิสิกส์ฉบับสมบูรณ์</span>
+                                <span class="lang-en">Official Physics Exam Equation Reference Sheet</span>
+                            </a>
+                        </h3>
+                        <p class="hub-desc">
+                            <span class="lang-th">รวบรวม 51 สมการสำคัญ ตัวแปร และคำอธิบายทางฟิสิกส์ทั้งภาษาไทยและอังกฤษ ครอบคลุมบทเรียน 1 ถึง 8 พร้อมฟังก์ชันค้นหาและพิมพ์</span>
+                            <span class="lang-en">Complete Exam Formula Reference Sheet containing all 51 key equations, parameters, and Thai/English explanations across all 8 lectures.</span>
+                        </p>
+                    </div>
+                    <a href="formula_sheet.html" class="btn-view-lecture">
+                        <span class="lang-th">เปิดแผ่นสูตรสอบ →</span>
+                        <span class="lang-en">Open Exam Sheet →</span>
+                    </a>
+                </div>
+
+                <!-- Practice Problem Bank -->
+                <div class="hub-card" style="border-top: 4px solid #0284c7;">
+                    <div>
+                        <span class="hub-tag" style="background: #e0f2fe; color: #0369a1;">
+                            <span class="lang-th">ฝึกทักษะการคำนวณ</span>
+                            <span class="lang-en">Practice Module</span>
+                        </span>
+                        <h3 class="hub-title">
+                            <a href="practice.html">
+                                <span class="lang-th">คลังแบบฝึกหัดและโจทย์ฝึกทักษะ (110 ข้อ)</span>
+                                <span class="lang-en">Comprehensive Physics Practice Bank (110 Problems)</span>
+                            </a>
+                        </h3>
+                        <p class="hub-desc">
+                            <span class="lang-th">คลังโจทย์แบบฝึกหัดสำหรับ Lecture 1–8 รวม 110 ข้อ พร้อมสูตรคำนวณ คำแนะนำ เฉลยขั้นตอนอย่างละเอียด และระบบเช็คความคืบหน้า</span>
+                            <span class="lang-en">Complete practice bank for Lectures 1 to 8 containing 110 problems with formula hints, step-by-step solutions, and progress tracking.</span>
+                        </p>
+                    </div>
+                    <a href="practice.html" class="btn-view-lecture">
+                        <span class="lang-th">เริ่มทำโจทย์ฝึกฝน →</span>
+                        <span class="lang-en">Start Practice →</span>
+                    </a>
+                </div>
+
+                <!-- Homeworks & Solutions -->
+                <div class="hub-card" style="border-top: 4px solid #10b981;">
+                    <div>
+                        <span class="hub-tag" style="background: #ecfdf5; color: #047857;">
+                            <span class="lang-th">การบ้านและเฉลยละเอียด</span>
+                            <span class="lang-en">Homework Solutions</span>
+                        </span>
+                        <h3 class="hub-title">
+                            <a href="homework.html">
+                                <span class="lang-th">การบ้านและเฉลยแบบขั้นตอน (HW 1–4)</span>
+                                <span class="lang-en">Homework Assignments &amp; Solutions (HW 1–4)</span>
+                            </a>
+                        </h3>
+                        <p class="hub-desc">
+                            <span class="lang-th">เฉลยการบ้านฉบับทางการ แสดงการพิสูจน์สมการ เวกเตอร์หมุน Phasor วงจร RLC และขั้นตอนการคำนวณครบถ้วนทั้ง HW 1, 2, 3, 4</span>
+                            <span class="lang-en">Official homework assignments with complete LaTeX step-by-step solutions, RLC circuit &amp; phasor diagrams, and derivations.</span>
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;">
+                        <a href="hw1.html" style="background:#eff6ff; color:#2563eb; font-size:12px; font-weight:700; padding:2px 8px; border-radius:4px; text-decoration:none;">HW 1</a>
+                        <a href="hw2.html" style="background:#ecfdf5; color:#047857; font-size:12px; font-weight:700; padding:2px 8px; border-radius:4px; text-decoration:none;">HW 2</a>
+                        <a href="hw3.html" style="background:#f3e8ff; color:#6b21a8; font-size:12px; font-weight:700; padding:2px 8px; border-radius:4px; text-decoration:none;">HW 3</a>
+                        <a href="hw4.html" style="background:#fff7ed; color:#c2410c; font-size:12px; font-weight:700; padding:2px 8px; border-radius:4px; text-decoration:none;">HW 4</a>
+                    </div>
+                    <a href="homework.html" class="btn-view-lecture">
+                        <span class="lang-th">เปิดสารบัญการบ้าน →</span>
+                        <span class="lang-en">Open Homework Portal →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topic Search & Filter Bar -->
+        <section class="search-container">
+            <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="topic-search" class="search-input" 
+                       data-placeholder-th="ค้นหาบทเรียนหรือหัวข้อ เช่น Euler, Phasor, การสั่นพ้อง, เพนดูลัม, RLC, Coupled..."
+                       data-placeholder-en="Search topics e.g. Euler, Phasor, Resonance, Pendulum, RLC, Coupled..."
+                       placeholder="ค้นหาบทเรียนหรือหัวข้อ...">
+            </div>
+        </section>
+
+        <!-- Curriculum Grid Section -->
+        <section id="lectures-section" style="margin-bottom: 60px;">
+            <h2 class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span class="lang-th">เนื้อหาบทเรียน (Course Curriculum &amp; Lectures)</span>
+                <span class="lang-en">Course Curriculum &amp; Lectures</span>
+            </h2>
+
+            <div class="lecture-toc-grid" id="lecture-grid">
+                
                 <!-- Lecture 0 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture0.html">
-                            <span class="lang-en">Lecture 0: Mathematical Prerequisites</span>
-                            <span class="lang-th">บทที่ 0: พื้นฐานทางคณิตศาสตร์ที่จำเป็น</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture0.html#topic-0-1"><span class="lang-en">Topic 0.1: Quadratic Equations &amp; Root Finding</span><span class="lang-th">หัวข้อ 0.1: สมการกำลังสองและการหาคำตอบ</span></a></li>
-                        <li><a href="lecture0.html#topic-0-2"><span class="lang-en">Topic 0.2: Trigonometric Foundations &amp; Euler</span><span class="lang-th">หัวข้อ 0.2: พื้นฐานตรีโกณมิติและสูตรของออยเลอร์</span></a></li>
-                        <li><a href="lecture0.html#topic-0-3"><span class="lang-en">Topic 0.3: The Ansatz Technique (Trial Solutions)</span><span class="lang-th">หัวข้อ 0.3: เทคนิคการตั้งคำตอบสมมติ (Ansatz)</span></a></li>
-                        <li><a href="lecture0.html#topic-0-4"><span class="lang-en">Topic 0.4: Useful Trigonometric Identities</span><span class="lang-th">หัวข้อ 0.4: เอกลักษณ์ตรีโกณมิติที่สำคัญ</span></a></li>
-                        <li><a href="lecture0.html#topic-0-5"><span class="lang-en">Topic 0.5: Coordinate Systems &amp; Axes ($x$-$y$, $\text{Re}$-$\text{Im}$, $\cos$-$\sin$)</span><span class="lang-th">หัวข้อ 0.5: ระบบพิกัดและแกน ($x$-$y$, $\text{Re}$-$\text{Im}$, $\cos$-$\sin$)</span></a></li>
-                        <li><a href="lecture0.html#topic-0-6"><span class="lang-en">Topic 0.6: The Unit Circle &amp; Trigonometric Mapping</span><span class="lang-th">หัวข้อ 0.6: วงกลมหนึ่งหน่วยและการส่งแปลงทางตรีโกณมิติ</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="quadratic trigonometry euler ansatz unit circle สมการกำลังสอง ตรีโกณมิติ ออยเลอร์">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge">Module 0 • Prerequisites</span>
+                            <span style="font-size:12px; color:#64748b;">6 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture0.html">
+                                <span class="lang-th">บทที่ 0: พื้นฐานทางคณิตศาสตร์ที่จำเป็น</span>
+                                <span class="lang-en">Lecture 0: Mathematical Prerequisites</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture0.html#topic-0-1"><span class="lang-th">หัวข้อ 0.1: สมการกำลังสองและการหาคำตอบ</span><span class="lang-en">Topic 0.1: Quadratic Equations &amp; Root Finding</span></a></li>
+                            <li><a href="lecture0.html#topic-0-2"><span class="lang-th">หัวข้อ 0.2: พื้นฐานตรีโกณมิติและสูตรของออยเลอร์</span><span class="lang-en">Topic 0.2: Trigonometric Foundations &amp; Euler</span></a></li>
+                            <li><a href="lecture0.html#topic-0-3"><span class="lang-th">หัวข้อ 0.3: เทคนิคการตั้งคำตอบสมมติ (Ansatz)</span><span class="lang-en">Topic 0.3: The Ansatz Technique</span></a></li>
+                            <li><a href="lecture0.html#topic-0-4"><span class="lang-th">หัวข้อ 0.4: เอกลักษณ์ตรีโกณมิติที่สำคัญ</span><span class="lang-en">Topic 0.4: Useful Trigonometric Identities</span></a></li>
+                            <li><a href="lecture0.html#topic-0-5"><span class="lang-th">หัวข้อ 0.5: ระบบพิกัดและแกน ($x$-$y$, $\text{Re}$-$\text{Im}$)</span><span class="lang-en">Topic 0.5: Coordinate Systems &amp; Axes</span></a></li>
+                            <li><a href="lecture0.html#topic-0-6"><span class="lang-th">หัวข้อ 0.6: วงกลมหนึ่งหน่วยและการส่งแปลง</span><span class="lang-en">Topic 0.6: Unit Circle &amp; Trigonometric Mapping</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture0.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 0 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 0 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 0 →</span>
+                        <span class="lang-en">Open Lecture 0 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 1 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture1.html">
-                            <span class="lang-en">Lecture 1: SHM &amp; Complex Numbers</span>
-                            <span class="lang-th">บทที่ 1: การสั่นแบบฮาร์มอนิกอย่างง่ายและจำนวนเชิงซ้อน</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture1.html#topic-1-1"><span class="lang-en">Topic 1.1: Periodic Motion &amp; Waveforms</span><span class="lang-th">หัวข้อ 1.1: การเคลื่อนที่แบบคาบและรูปคลื่น</span></a></li>
-                        <li><a href="lecture1.html#topic-1-2"><span class="lang-en">Topic 1.2: Hooke's Law &amp; Newtonian Equations</span><span class="lang-th">หัวข้อ 1.2: กฎของฮุกและสมการการเคลื่อนที่ของนิวตัน</span></a></li>
-                        <li><a href="lecture1.html#topic-1-3"><span class="lang-en">Topic 1.3: Physical Parameters of Oscillation</span><span class="lang-th">หัวข้อ 1.3: พารามิเตอร์ทางกายภาพของการสั่น</span></a></li>
-                        <li><a href="lecture1.html#topic-1-4"><span class="lang-en">Topic 1.4: SHM Waveforms &amp; Solutions</span><span class="lang-th">หัวข้อ 1.4: รูปแบบคลื่น SHM และคำตอบของสมการ</span></a></li>
-                        <li><a href="lecture1.html#topic-1-5"><span class="lang-en">Topic 1.5: Velocity &amp; Acceleration Relations</span><span class="lang-th">หัวข้อ 1.5: ความสัมพันธ์ระหว่างความเร็วและความเร่ง</span></a></li>
-                        <li><a href="lecture1.html#topic-1-6"><span class="lang-en">Topic 1.6: Complex Numbers &amp; Euler's Relations</span><span class="lang-th">หัวข้อ 1.6: จำนวนเชิงซ้อนและสูตรของออยเลอร์</span></a></li>
-                        <li><a href="lecture1.html#topic-1-7"><span class="lang-en">Topic 1.7: Rotating Vectors in Complex Notation</span><span class="lang-th">หัวข้อ 1.7: เวคเตอร์หมุน (Phasor) ในรูปแบบเชิงซ้อน</span></a></li>
-                        <li><a href="lecture1.html#topic-1-8"><span class="lang-en">Topic 1.8: Mathematical Derivation of Solution</span><span class="lang-th">หัวข้อ 1.8: การพิสูจน์คำตอบของสมการทางคณิตศาสตร์</span></a></li>
-                        <li><a href="lecture1.html#topic-1-9"><span class="lang-en">Topic 1.9: Euler Transformations (Worked Exercises)</span><span class="lang-th">หัวข้อ 1.9: การแปลงออยเลอร์ (โจทย์แบบฝึกหัด)</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="shm hooke hooke's law periodic euler complex numbers phasor ฮาร์มอนิกอย่างง่าย กฎของฮุก จำนวนเชิงซ้อน">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge" style="background:#eff6ff; color:#1d4ed8;">Module 1 • Simple Harmonic</span>
+                            <span style="font-size:12px; color:#64748b;">9 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture1.html">
+                                <span class="lang-th">บทที่ 1: การสั่นแบบฮาร์มอนิกอย่างง่ายและจำนวนเชิงซ้อน</span>
+                                <span class="lang-en">Lecture 1: SHM &amp; Complex Numbers</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture1.html#topic-1-1"><span class="lang-th">หัวข้อ 1.1: การเคลื่อนที่แบบคาบและรูปคลื่น</span><span class="lang-en">Topic 1.1: Periodic Motion &amp; Waveforms</span></a></li>
+                            <li><a href="lecture1.html#topic-1-2"><span class="lang-th">หัวข้อ 1.2: กฎของฮุกและสมการการเคลื่อนที่ของนิวตัน</span><span class="lang-en">Topic 1.2: Hooke's Law &amp; Newtonian Equations</span></a></li>
+                            <li><a href="lecture1.html#topic-1-3"><span class="lang-th">หัวข้อ 1.3: พารามิเตอร์ทางกายภาพของการสั่น</span><span class="lang-en">Topic 1.3: Physical Parameters of Oscillation</span></a></li>
+                            <li><a href="lecture1.html#topic-1-4"><span class="lang-th">หัวข้อ 1.4: รูปแบบคลื่น SHM และคำตอบของสมการ</span><span class="lang-en">Topic 1.4: SHM Waveforms &amp; Solutions</span></a></li>
+                            <li><a href="lecture1.html#topic-1-5"><span class="lang-th">หัวข้อ 1.5: ความสัมพันธ์ระหว่างความเร็วและความเร่ง</span><span class="lang-en">Topic 1.5: Velocity &amp; Acceleration Relations</span></a></li>
+                            <li><a href="lecture1.html#topic-1-6"><span class="lang-th">หัวข้อ 1.6: จำนวนเชิงซ้อนและสูตรของออยเลอร์</span><span class="lang-en">Topic 1.6: Complex Numbers &amp; Euler's Relations</span></a></li>
+                            <li><a href="lecture1.html#topic-1-7"><span class="lang-th">หัวข้อ 1.7: เวคเตอร์หมุน (Phasor) ในรูปแบบเชิงซ้อน</span><span class="lang-en">Topic 1.7: Rotating Vectors in Complex Notation</span></a></li>
+                            <li><a href="lecture1.html#topic-1-8"><span class="lang-th">หัวข้อ 1.8: การพิสูจน์คำตอบของสมการทางคณิตศาสตร์</span><span class="lang-en">Topic 1.8: Mathematical Derivation of Solution</span></a></li>
+                            <li><a href="lecture1.html#topic-1-9"><span class="lang-th">หัวข้อ 1.9: การแปลงออยเลอร์ (โจทย์แบบฝึกหัด)</span><span class="lang-en">Topic 1.9: Euler Transformations (Exercises)</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture1.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 1 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 1 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 1 →</span>
+                        <span class="lang-en">Open Lecture 1 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 2 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture2.html">
-                            <span class="lang-en">Lecture 2: Superposition of Periodic Motions</span>
-                            <span class="lang-th">บทที่ 2: การซ้อนทับกันของการเคลื่อนที่แบบคาบ</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture2.html#topic-2-1"><span class="lang-en">Topic 2.1: Superposition of Two 1D SHMs</span><span class="lang-th">หัวข้อ 2.1: การซ้อนทับของการสั่น 1 มิติ 2 ขบวน</span></a></li>
-                        <li><a href="lecture2.html#topic-2-2"><span class="lang-en">Topic 2.2: Equal Amplitudes Special Case</span><span class="lang-th">หัวข้อ 2.2: กรณีพิเศษแอมพลิจูดเท่ากัน</span></a></li>
-                        <li><a href="lecture2.html#topic-2-3"><span class="lang-en">Topic 2.3: Different Frequencies (Beats)</span><span class="lang-th">หัวข้อ 2.3: ความถี่ต่างกันนิดหน่อย (ปรากฏการณ์บีตส์)</span></a></li>
-                        <li><a href="lecture2.html#topic-2-4"><span class="lang-en">Topic 2.4: 2D Perpendicular Vibrations</span><span class="lang-th">หัวข้อ 2.4: การสั่นใน 2 มิติตั้งฉากกัน (รูป ลิสซาฌูส์)</span></a></li>
-                        <li><a href="lecture2.html#topic-2-5"><span class="lang-en">Topic 2.5: Parallel vs. Perpendicular</span><span class="lang-th">หัวข้อ 2.5: เปรียบเทียบการสั่นแบบขนานกับการสั่นแบบตั้งฉาก</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="superposition beats lissajous 1d 2d การซ้อนทับ บีตส์ ลิสซาฌูส์">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge">Module 2 • Superposition</span>
+                            <span style="font-size:12px; color:#64748b;">5 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture2.html">
+                                <span class="lang-th">บทที่ 2: การซ้อนทับกันของการเคลื่อนที่แบบคาบ</span>
+                                <span class="lang-en">Lecture 2: Superposition of Periodic Motions</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture2.html#topic-2-1"><span class="lang-th">หัวข้อ 2.1: การซ้อนทับของการสั่น 1 มิติ 2 ขบวน</span><span class="lang-en">Topic 2.1: Superposition of Two 1D SHMs</span></a></li>
+                            <li><a href="lecture2.html#topic-2-2"><span class="lang-th">หัวข้อ 2.2: กรณีพิเศษแอมพลิจูดเท่ากัน</span><span class="lang-en">Topic 2.2: Equal Amplitudes Special Case</span></a></li>
+                            <li><a href="lecture2.html#topic-2-3"><span class="lang-th">หัวข้อ 2.3: ความถี่ต่างกันนิดหน่อย (ปรากฏการณ์บีตส์)</span><span class="lang-en">Topic 2.3: Different Frequencies (Beats)</span></a></li>
+                            <li><a href="lecture2.html#topic-2-4"><span class="lang-th">หัวข้อ 2.4: การสั่นใน 2 มิติตั้งฉากกัน (รูป ลิสซาฌูส์)</span><span class="lang-en">Topic 2.4: 2D Perpendicular Vibrations (Lissajous)</span></a></li>
+                            <li><a href="lecture2.html#topic-2-5"><span class="lang-th">หัวข้อ 2.5: เปรียบเทียบการสั่นแบบขนานกับการสั่นแบบตั้งฉาก</span><span class="lang-en">Topic 2.5: Parallel vs. Perpendicular</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture2.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 2 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 2 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 2 →</span>
+                        <span class="lang-en">Open Lecture 2 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 3 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture3.html">
-                            <span class="lang-en">Lecture 3: Pendulums &amp; Rotational Dynamics</span>
-                            <span class="lang-th">บทที่ 3: เพนดูลัมและพลศาสตร์การหมุน</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture3.html#topic-3-1"><span class="lang-en">Topic 3.1: Small Angle Approximation</span><span class="lang-th">หัวข้อ 3.1: การประมาณค่ามุมขนาดเล็ก ($\sin\theta\approx\theta$)</span></a></li>
-                        <li><a href="lecture3.html#topic-3-2"><span class="lang-en">Topic 3.2: Energy of a Simple Pendulum</span><span class="lang-th">หัวข้อ 3.2: พลังงานของลูกตุ้มนาฬิกาอย่างง่าย</span></a></li>
-                        <li><a href="lecture3.html#topic-3-3"><span class="lang-en">Topic 3.3: Rotational Inertia ($I$)</span><span class="lang-th">หัวข้อ 3.3: โมเมนต์ความเฉื่อยของการหมุน ($I$)</span></a></li>
-                        <li><a href="lecture3.html#topic-3-4"><span class="lang-en">Topic 3.4: Physical Pendulum</span><span class="lang-th">หัวข้อ 3.4: เพนดูลัมกายภาพ (Physical Pendulum)</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="pendulum simple pendulum physical pendulum inertia rotational dynamics เพนดูลัม โมเมนต์ความเฉื่อย ลูกตุ้มนาฬิกา">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge">Module 3 • Pendulums</span>
+                            <span style="font-size:12px; color:#64748b;">4 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture3.html">
+                                <span class="lang-th">บทที่ 3: เพนดูลัมและพลศาสตร์การหมุน</span>
+                                <span class="lang-en">Lecture 3: Pendulums &amp; Rotational Dynamics</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture3.html#topic-3-1"><span class="lang-th">หัวข้อ 3.1: การประมาณค่ามุมขนาดเล็ก ($\sin\theta\approx\theta$)</span><span class="lang-en">Topic 3.1: Small Angle Approximation</span></a></li>
+                            <li><a href="lecture3.html#topic-3-2"><span class="lang-th">หัวข้อ 3.2: พลังงานของลูกตุ้มนาฬิกาอย่างง่าย</span><span class="lang-en">Topic 3.2: Energy of a Simple Pendulum</span></a></li>
+                            <li><a href="lecture3.html#topic-3-3"><span class="lang-th">หัวข้อ 3.3: โมเมนต์ความเฉื่อยของการหมุน ($I$)</span><span class="lang-en">Topic 3.3: Rotational Inertia ($I$)</span></a></li>
+                            <li><a href="lecture3.html#topic-3-4"><span class="lang-th">หัวข้อ 3.4: เพนดูลัมกายภาพ (Physical Pendulum)</span><span class="lang-en">Topic 3.4: Physical Pendulum</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture3.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 3 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 3 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 3 →</span>
+                        <span class="lang-en">Open Lecture 3 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 4 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture4.html">
-                            <span class="lang-en">Lecture 4: Elasticity &amp; Advanced Oscillators</span>
-                            <span class="lang-th">บทที่ 4: สภาพยืดหยุ่นและระบบการสั่นระดับสูง</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture4.html#topic-4-1"><span class="lang-en">Topic 4.1: Elasticity, Stress, and Strain</span><span class="lang-th">หัวข้อ 4.1: สภาพยืดหยุ่น ความเค้น และความเครียด</span></a></li>
-                        <li><a href="lecture4.html#topic-4-2"><span class="lang-en">Topic 4.2: Oscillation of Elastic Wire</span><span class="lang-th">หัวข้อ 4.2: การสั่นของเส้นลวดยืดหยุ่น</span></a></li>
-                        <li><a href="lecture4.html#topic-4-3"><span class="lang-en">Topic 4.3: Torsion Pendulum</span><span class="lang-th">หัวข้อ 4.3: เพนดูลัมการบิด (Torsion Pendulum)</span></a></li>
-                        <li><a href="lecture4.html#topic-4-4"><span class="lang-en">Topic 4.4: Spring of Air (Adiabatic)</span><span class="lang-th">หัวข้อ 4.4: สปริงอากาศแบบอดิอาแบติก</span></a></li>
-                        <li><a href="lecture4.html#topic-4-5"><span class="lang-en">Topic 4.5: Liquid Column in U-Tube</span><span class="lang-th">หัวข้อ 4.5: การแกว่งของลำของเหลวในหลอดแก้วรูปตัวยู</span></a></li>
-                        <li><a href="lecture4.html#topic-4-6"><span class="lang-en">Topic 4.6: Cylinder Rolling on Springs</span><span class="lang-th">หัวข้อ 4.6: ทรงกระบอกกลิ้งบนสปริง</span></a></li>
-                        <li><a href="lecture4.html#topic-4-7"><span class="lang-en">Topic 4.7: Pivoted Rod with Spring</span><span class="lang-th">หัวข้อ 4.7: แท่งวัตถุหมุนรอบจุดหมุนพร้อมสปริง</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="elasticity stress strain torsion pendulum spring air u-tube cylinder สภาพยืดหยุ่น ความเค้น ความเครียด เพนดูลัมการบิด">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge">Module 4 • Elastic Systems</span>
+                            <span style="font-size:12px; color:#64748b;">7 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture4.html">
+                                <span class="lang-th">บทที่ 4: สภาพยืดหยุ่นและระบบการสั่นระดับสูง</span>
+                                <span class="lang-en">Lecture 4: Elasticity &amp; Advanced Oscillators</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture4.html#topic-4-1"><span class="lang-th">หัวข้อ 4.1: สภาพยืดหยุ่น ความเค้น และความเครียด</span><span class="lang-en">Topic 4.1: Elasticity, Stress, and Strain</span></a></li>
+                            <li><a href="lecture4.html#topic-4-2"><span class="lang-th">หัวข้อ 4.2: การสั่นของเส้นลวดยืดหยุ่น</span><span class="lang-en">Topic 4.2: Oscillation of Elastic Wire</span></a></li>
+                            <li><a href="lecture4.html#topic-4-3"><span class="lang-th">หัวข้อ 4.3: เพนดูลัมการบิด (Torsion Pendulum)</span><span class="lang-en">Topic 4.3: Torsion Pendulum</span></a></li>
+                            <li><a href="lecture4.html#topic-4-4"><span class="lang-th">หัวข้อ 4.4: สปริงอากาศแบบอดิอาแบติก</span><span class="lang-en">Topic 4.4: Spring of Air (Adiabatic)</span></a></li>
+                            <li><a href="lecture4.html#topic-4-5"><span class="lang-th">หัวข้อ 4.5: การแกว่งของลำของเหลวในหลอดแก้วรูปตัวยู</span><span class="lang-en">Topic 4.5: Liquid Column in U-Tube</span></a></li>
+                            <li><a href="lecture4.html#topic-4-6"><span class="lang-th">หัวข้อ 4.6: ทรงกระบอกกลิ้งบนสปริง</span><span class="lang-en">Topic 4.6: Cylinder Rolling on Springs</span></a></li>
+                            <li><a href="lecture4.html#topic-4-7"><span class="lang-th">หัวข้อ 4.7: แท่งวัตถุหมุนรอบจุดหมุนพร้อมสปริง</span><span class="lang-en">Topic 4.7: Pivoted Rod with Spring</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture4.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 4 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 4 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 4 →</span>
+                        <span class="lang-en">Open Lecture 4 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 5 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture5.html">
-                            <span class="lang-en">Lecture 5: LC Circuit Oscillations</span>
-                            <span class="lang-th">บทที่ 5: การสั่นในวงจรไฟฟ้า LC</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture5.html#topic-5-1"><span class="lang-en">Topic 5.1: DE &amp; Natural Frequency</span><span class="lang-th">หัวข้อ 5.1: สมการเชิงอนุพันธ์และความถี่ธรรมชาติ</span></a></li>
-                        <li><a href="lecture5.html#topic-5-2"><span class="lang-en">Topic 5.2: LC Circuit Energy Conservation</span><span class="lang-th">หัวข้อ 5.2: การอนุรักษ์พลังงานในวงจร LC</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="lc circuit inductor capacitor electrical oscillations วงจรไฟฟ้า LC ความถี่ธรรมชาติ การอนุรักษ์พลังงาน">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge" style="background:#f0fdf4; color:#166534;">Module 5 • Circuits</span>
+                            <span style="font-size:12px; color:#64748b;">2 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture5.html">
+                                <span class="lang-th">บทที่ 5: การสั่นในวงจรไฟฟ้า LC</span>
+                                <span class="lang-en">Lecture 5: LC Circuit Oscillations</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture5.html#topic-5-1"><span class="lang-th">หัวข้อ 5.1: สมการเชิงอนุพันธ์และความถี่ธรรมชาติ</span><span class="lang-en">Topic 5.1: DE &amp; Natural Frequency</span></a></li>
+                            <li><a href="lecture5.html#topic-5-2"><span class="lang-th">หัวข้อ 5.2: การอนุรักษ์พลังงานในวงจร LC</span><span class="lang-en">Topic 5.2: LC Circuit Energy Conservation</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture5.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 5 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 5 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 5 →</span>
+                        <span class="lang-en">Open Lecture 5 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 6 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture6.html">
-                            <span class="lang-en">Lecture 6: Damped Free Oscillations</span>
-                            <span class="lang-th">บทที่ 6: การสั่นแบบมีความหน่วงอิสระ</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture6.html#topic-6-1"><span class="lang-en">Topic 6.1: Viscous Damping &amp; Motion</span><span class="lang-th">หัวข้อ 6.1: แรงหน่วงหนืดและการเคลื่อนที่</span></a></li>
-                        <li><a href="lecture6.html#topic-6-2"><span class="lang-en">Topic 6.2: Underdamped Solution</span><span class="lang-th">หัวข้อ 6.2: การสั่นแบบหน่วงน้อย (Underdamped)</span></a></li>
-                        <li><a href="lecture6.html#topic-6-3"><span class="lang-en">Topic 6.3: Critically Damped Solution</span><span class="lang-th">หัวข้อ 6.3: การสั่นแบบหน่วงวิกฤต (Critically Damped)</span></a></li>
-                        <li><a href="lecture6.html#topic-6-4"><span class="lang-en">Topic 6.4: Overdamped Solution</span><span class="lang-th">หัวข้อ 6.4: การสั่นแบบหน่วงมาก (Overdamped)</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="damped underdamped critically damped overdamped viscous damping logarithmic decrement energy decay power dissipation time constant quality factor q-factor แรงหน่วง หน่วงน้อย หน่วงวิกฤต หน่วงมาก อัตราส่วนแอมพลิจูด พลังงาน">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge" style="background:#fff7ed; color:#c2410c;">Module 6 • Damped Free</span>
+                            <span style="font-size:12px; color:#64748b;">8 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture6.html">
+                                <span class="lang-th">บทที่ 6: การสั่นแบบมีความหน่วงอิสระ</span>
+                                <span class="lang-en">Lecture 6: Damped Free Oscillations</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture6.html#topic-6-1"><span class="lang-th">หัวข้อ 6.1: แรงหน่วงหนืดและการเคลื่อนที่</span><span class="lang-en">Topic 6.1: Viscous Damping &amp; Motion</span></a></li>
+                            <li><a href="lecture6.html#topic-6-2"><span class="lang-th">หัวข้อ 6.2: การสั่นแบบหน่วงน้อย (Underdamped)</span><span class="lang-en">Topic 6.2: Underdamped Solution</span></a></li>
+                            <li><a href="lecture6.html#topic-6-3"><span class="lang-th">หัวข้อ 6.3: การวิเคราะห์อัตราส่วนแอมพลิจูด (Logarithmic Decrement)</span><span class="lang-en">Topic 6.3: Logarithmic Decrement</span></a></li>
+                            <li><a href="lecture6.html#topic-6-4"><span class="lang-th">หัวข้อ 6.4: การสลายตัวของพลังงาน (Energy Decay &amp; Power)</span><span class="lang-en">Topic 6.4: Energy Decay &amp; Power Dissipation</span></a></li>
+                            <li><a href="lecture6.html#topic-6-5"><span class="lang-th">หัวข้อ 6.5: ค่าคงตัวเวลา ($\tau$) และ ปัจจัยคุณภาพ ($Q$)</span><span class="lang-en">Topic 6.5: Time Constant &amp; Quality Factor</span></a></li>
+                            <li><a href="lecture6.html#topic-6-6"><span class="lang-th">หัวข้อ 6.6: การสั่นแบบหน่วงวิกฤต (Critically Damped)</span><span class="lang-en">Topic 6.6: Critically Damped Solution</span></a></li>
+                            <li><a href="lecture6.html#topic-6-7"><span class="lang-th">หัวข้อ 6.7: การสั่นแบบหน่วงมาก (Overdamped)</span><span class="lang-en">Topic 6.7: Overdamped Solution</span></a></li>
+                            <li><a href="lecture6.html#topic-6-8"><span class="lang-th">หัวข้อ 6.8: เปรียบเทียบพฤติกรรมการสั่นตามระดับ $Q$</span><span class="lang-en">Topic 6.8: Comparison of Regimes &amp; Q-Factor</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture6.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 6 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 6 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 6 →</span>
+                        <span class="lang-en">Open Lecture 6 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 7 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture7.html">
-                            <span class="lang-en">Lecture 7: Forced Oscillations &amp; Resonance</span>
-                            <span class="lang-th">บทที่ 7: การสั่นถูกบังคับและการสั่นพ้อง</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture7.html#topic-7-1"><span class="lang-en">Topic 7.1: Forced Mechanical Oscillations</span><span class="lang-th">หัวข้อ 7.1: การสั่นถูกบังคับทางกลศาสตร์</span></a></li>
-                        <li><a href="lecture7.html#topic-7-2"><span class="lang-en">Topic 7.2: Series RLC Circuit</span><span class="lang-th">หัวข้อ 7.2: วงจรไฟฟ้า RLC แบบอนุกรม</span></a></li>
-                        <li><a href="lecture7.html#topic-7-3"><span class="lang-en">Topic 7.3: Complex Impedance Analysis</span><span class="lang-th">หัวข้อ 7.3: การวิเคราะห์ความต้านทานเชิงซ้อน (Impedance)</span></a></li>
-                        <li><a href="lecture7.html#topic-7-4"><span class="lang-en">Topic 7.4: Electrical Resonance</span><span class="lang-th">หัวข้อ 7.4: การสั่นพ้องทางไฟฟ้า (Resonance &amp; Q-Factor)</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="forced resonance rlc impedance q-factor การสั่นพ้อง แรงภายนอก ความต้านทานเชิงซ้อน">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge" style="background:#fef3c7; color:#b45309;">Module 7 • Resonance</span>
+                            <span style="font-size:12px; color:#64748b;">4 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture7.html">
+                                <span class="lang-th">บทที่ 7: การสั่นด้วยแรงภายนอกและการสั่นพ้อง</span>
+                                <span class="lang-en">Lecture 7: Forced Oscillations &amp; Resonance</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture7.html#topic-7-1"><span class="lang-th">หัวข้อ 7.1: การสั่นถูกบังคับทางกลศาสตร์</span><span class="lang-en">Topic 7.1: Forced Mechanical Oscillations</span></a></li>
+                            <li><a href="lecture7.html#topic-7-2"><span class="lang-th">หัวข้อ 7.2: วงจรไฟฟ้า RLC แบบอนุกรม</span><span class="lang-en">Topic 7.2: Series RLC Circuit</span></a></li>
+                            <li><a href="lecture7.html#topic-7-3"><span class="lang-th">หัวข้อ 7.3: การวิเคราะห์ความต้านทานเชิงซ้อน (Impedance)</span><span class="lang-en">Topic 7.3: Complex Impedance Analysis</span></a></li>
+                            <li><a href="lecture7.html#topic-7-4"><span class="lang-th">หัวข้อ 7.4: การสั่นพ้องทางไฟฟ้า (Resonance &amp; Q-Factor)</span><span class="lang-en">Topic 7.4: Electrical Resonance &amp; Q-Factor</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture7.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 7 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 7 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 7 →</span>
+                        <span class="lang-en">Open Lecture 7 →</span>
                     </a>
                 </div>
 
                 <!-- Lecture 8 -->
-                <div class="toc-card">
-                    <h2>
-                        <a href="lecture8.html">
-                            <span class="lang-en">Lecture 8: Coupled Oscillations</span>
-                            <span class="lang-th">บทที่ 8: การสั่นแบบพัวพัน (Coupled Oscillations)</span>
-                        </a>
-                    </h2>
-                    <ul>
-                        <li><a href="lecture8.html#topic-8-1"><span class="lang-en">Topic 8.1: Single Pendulum Reference</span><span class="lang-th">หัวข้อ 8.1: เพนดูลัมเดี่ยวอ้างอิง</span></a></li>
-                        <li><a href="lecture8.html#topic-8-2"><span class="lang-en">Topic 8.2: Coupled Pendulums &amp; Forces</span><span class="lang-th">หัวข้อ 8.2: เพนดูลัมคู่และแรงพัวพัน</span></a></li>
-                        <li><a href="lecture8.html#topic-8-3"><span class="lang-en">Topic 8.3: Coordinate Decoupling Method</span><span class="lang-th">หัวข้อ 8.3: วิธีการแยกพิกัด (Coordinate Decoupling)</span></a></li>
-                        <li><a href="lecture8.html#topic-8-4"><span class="lang-en">Topic 8.4: Normal Coordinates &amp; Superposition</span><span class="lang-th">หัวข้อ 8.4: พิกัดปกติและการซ้อนทับ (Normal Modes)</span></a></li>
-                        <li><a href="lecture8.html#topic-8-5"><span class="lang-en">Topic 8.5: Matrix Method &amp; Eigenvalues</span><span class="lang-th">หัวข้อ 8.5: วิธีเมทริกซ์และค่าไอเกน (Eigenvalues)</span></a></li>
-                        <li><a href="lecture8.html#topic-8-6"><span class="lang-en">Topic 8.6: Eigenvectors &amp; Mode Behaviors</span><span class="lang-th">หัวข้อ 8.6: ไอเกนเวกเตอร์และพฤติกรรมของโหมด</span></a></li>
-                        <li><a href="lecture8.html#topic-8-7"><span class="lang-en">Topic 8.7: Initial Excitation &amp; Energy Beats</span><span class="lang-th">หัวข้อ 8.7: เงื่อนไขเริ่มต้นและการส่งถ่ายพลังงาน</span></a></li>
-                        <li><a href="lecture8.html#topic-8-8"><span class="lang-en">Topic 8.8: Exercise 1: Horizontal Mass-Spring</span><span class="lang-th">หัวข้อ 8.8: โจทย์ข้อ 1: มวล-สปริงคู่ในแนวนอน</span></a></li>
-                        <li><a href="lecture8.html#topic-8-9"><span class="lang-en">Topic 8.9: Exercise 2: Vertical Mass-Spring</span><span class="lang-th">หัวข้อ 8.9: โจทย์ข้อ 2: มวล-สปริงคู่ในแนวดิ่ง</span></a></li>
-                    </ul>
+                <div class="toc-card" data-topics="coupled oscillations normal modes eigenvalues eigenvectors matrix decoupling การสั่นแบบพัวพัน ไอเกนเวกเตอร์ เมทริกซ์">
+                    <div>
+                        <div class="toc-card-header">
+                            <span class="toc-badge" style="background:#f3e8ff; color:#6b21a8;">Module 8 • Coupled Modes</span>
+                            <span style="font-size:12px; color:#64748b;">9 Topics</span>
+                        </div>
+                        <h2>
+                            <a href="lecture8.html">
+                                <span class="lang-th">บทที่ 8: การสั่นแบบพัวพัน (Coupled Oscillations)</span>
+                                <span class="lang-en">Lecture 8: Coupled Oscillations</span>
+                            </a>
+                        </h2>
+                        <ul>
+                            <li><a href="lecture8.html#topic-8-1"><span class="lang-th">หัวข้อ 8.1: เพนดูลัมเดี่ยวอ้างอิง</span><span class="lang-en">Topic 8.1: Single Pendulum Reference</span></a></li>
+                            <li><a href="lecture8.html#topic-8-2"><span class="lang-th">หัวข้อ 8.2: เพนดูลัมคู่และแรงพัวพัน</span><span class="lang-en">Topic 8.2: Coupled Pendulums &amp; Forces</span></a></li>
+                            <li><a href="lecture8.html#topic-8-3"><span class="lang-th">หัวข้อ 8.3: วิธีการแยกพิกัด (Coordinate Decoupling)</span><span class="lang-en">Topic 8.3: Coordinate Decoupling Method</span></a></li>
+                            <li><a href="lecture8.html#topic-8-4"><span class="lang-th">หัวข้อ 8.4: พิกัดปกติและการซ้อนทับ (Normal Modes)</span><span class="lang-en">Topic 8.4: Normal Coordinates &amp; Superposition</span></a></li>
+                            <li><a href="lecture8.html#topic-8-5"><span class="lang-th">หัวข้อ 8.5: วิธีเมทริกซ์และค่าไอเกน (Eigenvalues)</span><span class="lang-en">Topic 8.5: Matrix Method &amp; Eigenvalues</span></a></li>
+                            <li><a href="lecture8.html#topic-8-6"><span class="lang-th">หัวข้อ 8.6: ไอเกนเวกเตอร์และพฤติกรรมของโหมด</span><span class="lang-en">Topic 8.6: Eigenvectors &amp; Mode Behaviors</span></a></li>
+                            <li><a href="lecture8.html#topic-8-7"><span class="lang-th">หัวข้อ 8.7: เงื่อนไขเริ่มต้นและการส่งถ่ายพลังงาน</span><span class="lang-en">Topic 8.7: Initial Excitation &amp; Energy Beats</span></a></li>
+                            <li><a href="lecture8.html#topic-8-8"><span class="lang-th">หัวข้อ 8.8: โจทย์ข้อ 1: มวล-สปริงคู่ในแนวนอน</span><span class="lang-en">Topic 8.8: Exercise 1: Horizontal Mass-Spring</span></a></li>
+                            <li><a href="lecture8.html#topic-8-9"><span class="lang-th">หัวข้อ 8.9: โจทย์ข้อ 2: มวล-สปริงคู่ในแนวดิ่ง</span><span class="lang-en">Topic 8.9: Exercise 2: Vertical Mass-Spring</span></a></li>
+                        </ul>
+                    </div>
                     <a href="lecture8.html" class="btn-view-lecture">
-                        <span class="lang-en">Open Lecture 8 Page →</span>
-                        <span class="lang-th">เปิดหน้าบทเรียนที่ 8 →</span>
+                        <span class="lang-th">เปิดเนื้อหาบทที่ 8 →</span>
+                        <span class="lang-en">Open Lecture 8 →</span>
                     </a>
                 </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Standard Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p style="margin: 0 0 8px 0; font-weight: 600; color: #334155;">
+                <span class="lang-th">เนื้อหาและสื่อการเรียนการสอนทั้งหมดมาจากวิชา <strong>ฟิสิกส์ของคลื่นและการสั่น (207203) ภาคเรียนที่ 1/2569</strong></span>
+                <span class="lang-en">Course contents and materials are from <strong>Physics of Waves and Oscillations (Course 207203) — Year 1/2026</strong></span>
+            </p>
+            <div class="footer-links">
+                <a href="index.html"><span class="lang-th">สารบัญรายวิชา</span><span class="lang-en">Course Directory</span></a> &bull; 
+                <a href="formula_sheet.html"><span class="lang-th">แผ่นรวมสูตรสอบ</span><span class="lang-en">Exam Formula Sheet</span></a> &bull; 
+                <a href="practice.html"><span class="lang-th">คลังแบบฝึกหัด</span><span class="lang-en">Practice Bank</span></a> &bull; 
+                <a href="homework.html"><span class="lang-th">การบ้านและเฉลย</span><span class="lang-en">Homeworks</span></a>
             </div>
         </div>
-    </div>
+    </footer>
 
-<footer class="site-footer">
-    <div class="container" style="text-align: center; padding: 24px 0; margin-top: 40px; border-top: 1px solid #e5e7eb; color: #64748b; font-size: 13px; line-height: 1.6;">
-        <p style="margin: 0 0 8px 0; font-weight: 500; color: #334155;">
-            <span class="lang-en">All course contents and materials are from <strong>Physics of Waves and Oscillations (Course 207203) — Year 1/2026</strong>.</span>
-            <span class="lang-th">เนื้อหาและสื่อการเรียนการสอนทั้งหมดมาจากวิชา <strong>ฟิสิกส์ของคลื่นและการสั่น (207203) ภาคเรียนที่ 1/2569 (Year 1/2026)</strong></span>
-        </p>
-        <p style="margin: 0; font-size: 12.5px; color: #94a3b8;">
-            <a href="index.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Course Directory</a> &bull; 
-            <a href="formula_sheet.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Official Exam Formula Sheet</a> &bull; 
-            <a href="practice.html" style="color: #2563eb; text-decoration: none; font-weight: 500;">Practice Problem Bank</a>
-        </p>
-    </div>
-</footer>
+    <!-- Topic Search Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var searchInput = document.getElementById('topic-search');
+            var cards = document.querySelectorAll('#lecture-grid .toc-card');
+
+            if (searchInput && cards.length > 0) {
+                searchInput.addEventListener('input', function() {
+                    var query = searchInput.value.toLowerCase().trim();
+                    cards.forEach(function(card) {
+                        var cardText = card.innerText.toLowerCase();
+                        var topics = (card.getAttribute('data-topics') || '').toLowerCase();
+                        if (!query || cardText.indexOf(query) !== -1 || topics.indexOf(query) !== -1) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
