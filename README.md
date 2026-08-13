@@ -1,14 +1,15 @@
 # Physics of Waves and Vibrations - Course Material & Equations Directory
 
 🌐 **Live Website (GitHub Pages)**: [https://narongrit1053.github.io/Physics-of-wave-and-vibrations-equations/](https://narongrit1053.github.io/Physics-of-wave-and-vibrations-equations/)
+▶️ **YouTube Video Playlist**: [Physics of Wave and Vibration (207203)](https://www.youtube.com/playlist?list=PLHw6oW2TLXrk)
 
 ---
 
 ## 📚 Overview
 
-This repository contains interactive web pages detailing mathematical derivations, physical concepts, equations, practice problems, and homework solutions for the **Physics of Waves and Vibrations** course.
+This repository contains interactive web pages detailing mathematical derivations, physical concepts, equations, practice problems, embedded video lectures, and homework solutions for the **Physics of Waves and Vibrations** course.
 
-All pages feature LaTeX mathematical rendering (MathJax), dark/light mode toggle, and structured navigation.
+All pages feature embedded responsive video lectures, LaTeX mathematical rendering (MathJax), dark/light mode toggle, and structured navigation.
 
 ---
 
@@ -17,6 +18,7 @@ All pages feature LaTeX mathematical rendering (MathJax), dark/light mode toggle
 | Section | Description | Online Link |
 | :--- | :--- | :--- |
 | **Course Home** | **Main Index & Navigation Directory** | [Open Index Page](https://narongrit1053.github.io/Physics-of-wave-and-vibrations-equations/index.html) |
+| **YouTube Playlist** | **Full Lecture & Review Video Playlist** | [Open Playlist](https://www.youtube.com/playlist?list=PLHw6oW2TLXrk) |
 | **Formula Sheet** | Comprehensive Wave Equations & Reference Sheet | [Open Formula Sheet](https://narongrit1053.github.io/Physics-of-wave-and-vibrations-equations/formula_sheet.html) |
 | **Practice Portal** | Interactive Practice Problems & Step-by-Step Solutions | [Open Practice Portal](https://narongrit1053.github.io/Physics-of-wave-and-vibrations-equations/practice.html) |
 | **Homework Hub** | Main Homework & Assignment Directory | [Open Homework Hub](https://narongrit1053.github.io/Physics-of-wave-and-vibrations-equations/homework.html) |
